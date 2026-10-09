@@ -35,9 +35,10 @@ to source editing and Git operations.
 
 ## Current release
 
-The initial release candidate is `0.0.1 — DOT Research Prompt System`. Release
+Release `0.0.1 — DOT Research Prompt System` establishes the initial curated
+source, documentation, Pages, validation, and release contracts. Release
 records use bare semantic tags and GitHub-generated source archives; no binary
-assets are planned.
+assets are attached.
 
 ## Rights
 

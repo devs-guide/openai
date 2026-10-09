@@ -19,10 +19,10 @@
     {"source":"dot/prompts/research/overview.prompt","route":"dot/prompts/research/overview/","raw_route":"raw/dot/prompts/research/overview.prompt","title":"Reusable research overview","kind":"research-template","status":"current","reviewed_on":"2026-10-09"},
     {"source":"dot/prompts/research/template.prompt","route":"dot/prompts/research/template/","raw_route":"raw/dot/prompts/research/template.prompt","title":"Reusable research template","kind":"research-template","status":"current","reviewed_on":"2026-10-09"},
     {"source":"dot/prompts/research/starter-data-only.md","route":"dot/prompts/research/starter-data-only/","raw_route":"raw/dot/prompts/research/starter-data-only.md","title":"Data-only research starter","kind":"research-template","status":"current","reviewed_on":"2026-10-09"},
-    {"source":"docs/features/readme.md","route":"dot/features/","raw_route":"raw/docs/features/readme.md","title":"DOT features","kind":"feature-index","status":"candidate","reviewed_on":"2026-10-09"},
+    {"source":"docs/features/readme.md","route":"dot/features/","raw_route":"raw/docs/features/readme.md","title":"DOT features","kind":"feature-index","status":"current","reviewed_on":"2026-10-09"},
     {"source":"docs/history/readme.md","route":"dot/history/","raw_route":"raw/docs/history/readme.md","title":"DOT history","kind":"history","status":"current","reviewed_on":"2026-10-09"},
     {"source":"docs/history/initial-import.md","route":"dot/history/initial-import/","raw_route":"raw/docs/history/initial-import.md","title":"Initial DOT source import","kind":"history","status":"current","reviewed_on":"2026-10-09"},
     {"source":"docs/releases/readme.md","route":"dot/releases/","raw_route":"raw/docs/releases/readme.md","title":"DOT releases","kind":"release-index","status":"current","reviewed_on":"2026-10-09"},
-    {"source":"docs/releases/0.0.1.md","route":"dot/releases/0.0.1/","raw_route":"raw/docs/releases/0.0.1.md","title":"0.0.1 — DOT Research Prompt System","kind":"release","status":"candidate","reviewed_on":"2026-10-09"}
+    {"source":"docs/releases/0.0.1.md","route":"dot/releases/0.0.1/","raw_route":"raw/docs/releases/0.0.1.md","title":"0.0.1 — DOT Research Prompt System","kind":"release","status":"current","reviewed_on":"2026-10-09"}
   ]
 }
