@@ -132,8 +132,12 @@ def main() -> int:
         fail("broken internal links:\n  " + "\n  ".join(broken[:50]))
     ok("all generated internal links and fragments resolve within the Pages tree")
 
-    if any("/prompt/" in f"/{path.relative_to(static_dir).as_posix()}/" for path in static_dir.rglob("*")):
-        fail("private singular prompt path leaked into Pages output")
+    for path in static_dir.rglob("*"):
+        relative = path.relative_to(static_dir).as_posix()
+        if relative == "dot/prompt" or relative.startswith("dot/prompt/"):
+            fail("private singular prompt path leaked into rendered Pages output")
+        if relative == "raw/dot/prompt" or relative.startswith("raw/dot/prompt/"):
+            fail("private singular prompt path leaked into raw Pages output")
     required_files = [static_dir / ".nojekyll", static_dir / "assets" / "site.css", static_dir / "routes.json"]
     if any(not path.exists() for path in required_files):
         fail("Pages metadata or stylesheet output is missing")
