@@ -1,0 +1,173 @@
+# DOT2 / AGENT2 — Reusable Research Starter
+
+**Purpose:** A topic-neutral handoff based on the owner's research instructions and the methods developed in this session. Replace the placeholders before starting a different project. This is a workflow template, not research evidence, an assertion of tool access, or a transfer of account permissions.
+
+**Version:** October 8, 2026. **Owner priority:** rigor, coverage and traceable evidence over speed. The final PDF comes last.
+
+## 1. Fill in the new brief
+
+| Field | What DOT2 needs | Rule |
+|---|---|---|
+| Project | `[PROJECT_NAME]` and `[TOPIC_OR_QUESTION]` | Do not carry over any prior project's topic, institutions, figures or geography. |
+| Decision and audience | `[DECISION_OR_OUTCOME]`; `[AUDIENCE]` | Define what the evidence must help the reader decide. |
+| Boundaries | `[INCLUSIONS]`; `[EXCLUSIONS]`; `[ENTITY_OR_POPULATION_TYPES]` | Explicitly cover small, obscure and poorly documented entities when relevant. |
+| Geography, if relevant | `[REGION]`, `[ANCHOR_OR_BOUNDARY]`, `[DISTANCE_AND_UNITS]`, `[INCLUSION_RULE]` | Use authoritative boundaries and reproducible distances; resolve conflicting anchors before aggregation. |
+| Time | `[HISTORICAL_PERIOD]`; `[INFORMATION_CUTOFF]`; `[FORECAST_HORIZON_OR_NONE]` | Publication date, event date, fiscal/measurement period and retrieval time are separate. |
+| Measures | `[REQUIRED_MEASURES]`, units, denominators, categories and comparison criteria | Define the counting unit before collecting or summing records. |
+| Inputs | `[FILES]`; `[CONNECTED_SOURCES_OR_NONE]`; `[REQUIRED_PRIMARY_SOURCES]` | Confirm actual access. A new conversation does not automatically inherit files, permissions or prior context. |
+| Constraints | `[DEADLINE_OR_NONE]`; `[BUDGET]`; `[LEGAL_OR_TECHNICAL_CONSTRAINTS]` | Ask only questions that materially change the work; otherwise state reasonable assumptions. |
+| Output | `[REPORT_STRUCTURE]`; `[TABLES]`; `[CSV/XLSX]`; `[PAGE_DESTINATION]`; `[PDF_REQUIREMENTS]` | Agree on the deliverables and their acceptance tests before rendering. |
+| Start condition | Owner supplies the brief and authorizes research | An unfilled starter template is not a reason to invent a topic or begin external actions. |
+
+## 2. Operating instructions and restrictions
+
+| Area | Instruction for DOT2 | Evidence or safeguard |
+|---|---|---|
+| Model requirement | Use **GPT-5.6 Sol High** for research-related ChatGPT chats and for prompt/query drafting, optimization and review, as specified by the owner. Verify the actual selected and available model for each relevant chat or task before submitting. | A project title, old conversation or requested label is not proof of the current model. If unavailable or unverifiable, report it and obtain a revised instruction before substituting a model. Never claim hidden tool/model routing was verified. |
+| Capability check | Verify the actual browser, account session, tools, connected sources, file access, Pages and research features available to DOT2. | Do not assume capabilities or access transfer from this session. Do not promise unattended multi-day execution unless the environment supports it. |
+| Deep research | Use Deep research only when available and consistent with the owner's model/access requirements. Treat it as one investigative aid, not the entire evidence-gathering process. | State the verified limitation before proposing a narrower method. Do not guess that a plan, quota or permission caused a failure. |
+| Prompt workspace | Use `agent:prompts` or an owner-approved equivalent for submitted prompts, optimization responses, revisions and research-method guidance. | Keep evidence datasets, raw captures, financial records and the working report in the research project, not the prompt workspace. |
+| Research workspace | Maintain `[PROJECT_NAME]` Pages, source files, query logs, evidence tables and a readable WIP document. | The owner should be able to inspect progress without waiting for the PDF. |
+| Uncertainty | Send methodological uncertainty to the prompt workspace for a focused clarification or smaller task. | Optimizer output is advice, not a verified fact. If the consultation cannot run, record the blocker; do not invent a response. |
+| Human decisions | Ask the owner about material scope, permission, cost or risk choices. | An optimizer cannot grant permission, resolve the owner's preferences, or replace a qualified domain expert. |
+| Task handoffs | Give each research task its complete bounded question, constraints, explicit inputs, output schema and stopping condition. | Do not assume inherited memory, attachments or access. Request source-backed findings and useful updates as soon as ready. |
+| Search breadth | Use multiple discovery paths and both ordinary general-web/HTML searches and PDF-focused searches. | A PDF-only filter can miss HTML evidence. A single federal directory or large agency website is not an exhaustive census. |
+| Local coverage | When geography matters, search every systematically identified place and relevant local institution, including its own official website. | Generate the place universe from authoritative geographic data; do not start and stop with familiar cities. |
+| Expert query techniques | Test advanced operators, exact phrases, identifiers, official indexes, meeting packets, registries, archives and file formats. | Reddit and other search tips are leads to test, not evidence or guarantees of operator support. |
+| Search-engine fallback | An alternate search engine can be used when permitted and useful. | Do not claim a partnership among Google, Bing, OpenAI or another search provider without current primary evidence. No claimed relationship removes rate limits or grants extra access. Do not use another route to evade an access denial. |
+| Restricted sources | Record paywalls, permission failures, missing files, rate limits, robots restrictions and blocked routes honestly. | Never imply inaccessible material was reviewed. Request access only when essential; do not bypass warnings or restrictions. |
+| CAPTCHA handling | Establish the owner's permission for this project before handling challenges when required. Maintain an encounter tally. | Previous-project approval is not automatically transferable. Log site, time, rendered/redirect status, attempts and outcome. Do not store answers, selections or security tokens; stop unresolved loops rather than repeatedly retrying. |
+| Media/transcripts | Prefer official minutes, transcripts and accessible text. Use audio/video transcription only through permitted access and use. | Do not spend time on unusable video results. Public funding alone should not be treated as blanket permission to download, redistribute or bypass restrictions. |
+| Privacy | Use only relevant authorized information. Prefer aggregate data for children and sensitive populations; preserve suppression. | No borrower/student accounts, credentials, unnecessary private contacts, reidentification or unrelated personal investigation. Redact secret-bearing URL parameters before sharing logs. |
+| External actions | Keep collection read-only unless separately authorized. | Do not contact people, submit records requests, modify connected data, publish publicly, install software, incur costs or change sharing permissions merely because research would benefit. Follow the applicable approval requirements. |
+| Persistence and efficiency | Work in finite batches; preserve checkpoints and continue useful permitted work when one route fails. | Quality over speed does not mean endless query variations, repeated blocked requests or polishing an unvalidated result. |
+| Progress reporting | Report completed evidence milestones, blockers, changes and next steps. | Do not equate file count, downloaded bytes, URLs or completed task messages with project completion. Any overall percentage needs explicit weights and a denominator; otherwise report milestone percentages. |
+| Completion alert | When a requested deliverable passes its checks, add a dated completion notice to the relevant Page and send the owner its link. | Name the exact deliverable. A Page edit is not proof of a push notification. Do not label the entire research project complete when only a subtask is complete. |
+
+## 3. Research workflow and completion gates
+
+| Stage | Required work | Gate before moving on |
+|---|---|---|
+| 1 — Scope | Confirm the question, decision, audience, boundaries, measures, date and approved amendments. | One controlling brief; conflicting instructions resolved and amendments traceable. |
+| 2 — Plan | Break the master question into independent subquestions and expert roles. Define sources, comparisons, gaps and finite task batches. | Every batch has an output schema, source strategy and stopping condition. |
+| 3 — Discovery | Build a canonical universe from multiple authoritative directories/datasets, supplemented by independent discovery. | Every discovered entity has an inclusion, exclusion or unresolved disposition; difficult cases are not silently omitted. |
+| 4 — Queries | Optimize paired ordinary/PDF queries and targeted entity, locality, program, year and document searches. | Exact query and execution history recorded; generated-but-unrun searches remain labeled as such. |
+| 5 — Capture | Retain accessible source documents or appropriate extracts, direct URLs, document identifiers and hashes. | Original source, access status, relevant page/table/record and retrieval date are traceable. |
+| 6 — Extract | Convert material claims and measurements into structured rows. Separate facts, declared coverage, interpretations and estimates. | Values retain units, period, scope, source precision and provenance. Missing is not zero. |
+| 7 — Resolve entities | Crosswalk legal organizations, reporting units, providers, sites, programs, aliases and historical identities. | Each included unit has one controlled primary relationship or an explicit provisional key; uncertainty is visible. |
+| 8 — Analyze | Normalize comparable units/periods and use explicit criteria, assumptions and allocation drivers. | No unsupported scope transfer, mixed-denominator comparison or invented precision. |
+| 9 — Integrate continuously | Update canonical ledgers after each reviewed batch and specify overlay precedence. | One current controlled view; source-year history and alternative models remain preserved. Do not postpone all integration until the end. |
+| 10 — Reconcile | Test identity counts, components, parent/child allocations, partitions, transfers and duplicate source lineage. | Numerical reconciliation and semantic eligibility both pass, or the failure and effect are disclosed. |
+| 11 — Fact-check separately | Extract the material claims from the draft; test exact support, contradictions, dates, quantities and source independence. | Claims are verified, narrowed, labeled or removed; completion of a task is not proof of correctness. |
+| 12 — Assemble report | Build the narrative, tables, uncertainty register, recommendations and implementation steps from current controlled data. | All counts, citations, scope labels and figures agree; recommendations do not exceed evidence. |
+| 13 — Freeze and render | Freeze the data and claim ledger; then produce the final PDF and requested charts. | Rendering tools are authorized; all chart values bind to final tables; visual and link checks pass. |
+| 14 — Deliver and preserve | Save downloadable tables and reproducibility materials; post the precise Page completion notice and deliver the report for review. | The owner can open files; remaining unknowns, coverage and expert-review needs are explicit. |
+
+## 4. Query patterns to adapt and test
+
+These are **templates, not executed searches**. Substitute the new project's vocabulary and verified domains. Operator behavior and date filters must be checked for the actual search engine; a search filter is not evidence of a document's publication date.
+
+| Purpose | Complete query template | Companion/control |
+|---|---|---|
+| Official overview | `site:[OFFICIAL_DOMAIN] "[ENTITY]" "[TOPIC]"` | Run without a file-type restriction to retain HTML and other results. |
+| PDF companion | `site:[OFFICIAL_DOMAIN] "[ENTITY]" "[TOPIC]" filetype:pdf` | Pair with the unrestricted query rather than replacing it. |
+| Exact report | `"[ENTITY]" "[DOCUMENT_TITLE_OR_TYPE]" "[YEAR]"` | Verify the strongest candidate at its underlying source. |
+| Locality coverage | `"[PLACE]" "[PROGRAM_OR_ENTITY_TYPE]" "[TOPIC]"` | Repeat systematically for the canonical place list, not only large cities. |
+| Official local records | `site:[LOCAL_OFFICIAL_DOMAIN] "[TOPIC]" (budget OR grant OR contract OR program)` | Adapt terms to the project; preserve municipal versus independent-entity roles. |
+| Board/meeting records | `site:[OFFICIAL_DOMAIN] "[ENTITY_OR_PROGRAM]" (agenda OR minutes OR packet)` | Open the actual attachment; an agenda item is not proof of approval. |
+| Finance, when relevant | `site:[OFFICIAL_DOMAIN] "[ENTITY]" (audit OR "financial statements" OR "annual report")` | Keep revenue, expenses, budgets, assets, debt and authorizations distinct. |
+| Public datasets | `site:[DATA_ISSUER_DOMAIN] "[DATASET_OR_MEASURE]" "[YEAR]"` | Check release, definitions, fields and exact record identifiers. |
+| Names and history | `"[EXACT_LEGAL_OR_FORMER_NAME]" "[LOCATION_OR_PUBLIC_IDENTIFIER]"` | Do not merge same-name entities or current successors without evidence. |
+| Contradictory evidence | `"[ENTITY_OR_CLAIM]" (correction OR amendment OR closure OR revised OR dispute)` | Review credible counterevidence, not just confirming results. |
+| Targeted document discovery | `site:[OFFICIAL_DOMAIN] intitle:"[REPORT_TERM]" "[ENTITY]"` | Test support on the chosen engine and against a known relevant document. |
+| Source-specific fallback | `"[EXACT_DOCUMENT_TITLE]" "[PUBLISHER]"` | Seek an accessible authorized original or independent corroboration; do not evade a blocked source. |
+| Google URL template | `https://www.google.com/search?q=[URL_ENCODED_QUERY]` | Log an actual observed/executed URL, not this placeholder as a visited page. |
+| Bing URL template | `https://www.bing.com/search?q=[URL_ENCODED_QUERY]` | Same rule; preserve actual filters and parameters used. |
+
+## 5. Reusable prompt bank
+
+Paste the relevant complete brief and named inputs with each prompt. Do not assume DOT2 or another task has unseen context.
+
+| ID / use | Copy-ready prompt |
+|---|---|
+| P01 — Bootstrap | **Act as my research coordinator for `[PROJECT]`. Use the attached/pasted brief only as the starting scope, and identify which files, sources, browser/account access and requested model/features you can actually use. Do not invent access or findings. Restate the decision, audience, scope, cutoff and outputs. Ask only materially necessary questions; otherwise state assumptions. Return a bounded research plan and acceptance tests. Do not take external actions or begin an unfilled topic.** |
+| P02 — Decompose the master brief | **Convert this master research brief into independently executable modules. For each, give the principal question, subquestions, expert perspective, entity/geographic/time scope, dependencies, primary-source strategy, exact output fields, validation tests, likely gaps and stopping condition. Identify overlaps that could cause double counting. Return a dependency-ordered table, not research conclusions. Brief: `[BRIEF]`.** |
+| P03 — Clarify uncertainty | **I am uncertain about `[SPECIFIC_METHOD_OR_CONFLICT]`. Relevant evidence and constraints: `[INPUTS]`. Explain the viable interpretations, what evidence would distinguish them, the minimum next checks, and which choice needs the owner or a qualified expert. State what must remain unknown. Do not choose an unsupported answer merely to complete a table.** |
+| P04 — Optimize searches | **Create a bounded search batch for `[SUBQUESTION]` covering `[ENTITIES/PLACES/YEARS]`. Give complete exact queries for unrestricted web and PDF searches, verified official-domain targets or discovery steps, relevant synonyms/former names, primary datasets/registries, and permitted fallback routes. Distinguish engine-specific operators. Include negative-result controls and stopping rules. Treat Reddit/search tips as hypotheses. Queries are GENERATED, not executed; do not fabricate results or URLs.** |
+| P05 — Execute one batch | **Investigate only `[EXACT_BATCH]` under `[BRIEF_AND_CONSTRAINTS]`. Inputs you may use: `[FILES_AND_SOURCES]`. Produce `[SCHEMA]` with source-backed findings, exact URL/use/returned-data logs, access failures and unresolved cases. Prefer originals and corroborate consequential claims. Respect the stop list and privacy limits. Stop when each selected case has a supported finding or a bounded documented gap. Report material results and blockers promptly.** |
+| P06 — Extract a source | **Extract only what `[DOCUMENT_OR_DATASET]` directly supports. For each claim/value provide entity, measure, amount/text, units, denominator, period, status/basis, scope, exact page/table/field/record, source URL and retrieval evidence. Separate source-reported facts, declared source coverage and your inferences. Preserve missing values and conflicting figures; do not repair them silently.** |
+| P07 — Resolve identity and scope | **Resolve `[ENTITY/ALIAS/SITE/PROGRAM]` using `[EVIDENCE]`. Distinguish legal organization, fiscal/reporting unit, operator, contact, brand, host, subsidiary and physical site. Separate current and source-year identities. A registry hit or shared address is not enough by itself to prove operator/reporting scope. Return verified relationships, qualified candidates, nonmerge controls and bounded unresolved questions.** |
+| P08 — Allocate or estimate | **For `[MEASURE]`, use this hierarchy: direct unit-level records; authoritative unit-level reporting; documented program/staffing drivers; supported weighted allocation; simple allocation only as a labeled last resort. Identify every observed input and assumption, assign restricted/direct costs first, retain central/unallocated amounts, and reconcile to the parent perimeter. Provide low/central/high only where defensible. Otherwise return unknown, not invented precision.** |
+| P09 — Challenge the analysis | **Act as a skeptical reviewer of `[DRAFT_OR_TABLES]`. Identify alternative explanations, source incentives, incompatible populations/periods/bases, duplicated source lineage, selection bias and credible contradictory evidence. Distinguish correlation from causation and evidence absence from absence of the phenomenon. Recommend narrower claims or additional finite checks.** |
+| P10 — Claim-level fact-check | **Extract every material factual claim from `[DRAFT]`. Classify it Verified, Partially verified, Disputed, Unverified or Inference. For each, bind exact supporting evidence and relevant passage/table/record; verify names, dates, units, currency, denominators and versions; seek contradictions and trace shared lineage. Narrow/remove unsupported wording. Explain single-authority cases and expert-review needs. Do not call the report fully verified or guaranteed accurate.** |
+| P11 — Integrate reviewed batches | **Integrate `[REVIEWED_PACKAGES]` using explicit precedence and stable IDs. Preserve original/source-year views, provisional identities, unknowns and alternative model families. Produce one canonical current ledger plus provenance, mismatches and exact reconciliation tests. Do not add parent totals to child allocations or combine incompatible periods/bases. Pin consumed files/hashes and verify a clean rebuild without mutating prior outputs.** |
+| P12 — Readiness and progress | **Map each required deliverable, field, table and validation to actual current evidence. Classify Ready with qualifications, Partial, Blocked or Unsupported. Identify finite next actions and stopping conditions. Report milestone coverage using explicit denominators and dates. Give an overall percentage only if an explicit defensible weighting exists; label planning estimates as estimates. Do not use activity volume as completion.** |
+| P13 — Report assembly | **Assemble `[REPORT_STRUCTURE]` from the controlled current ledger and fact-check results. Lead with supported conclusions, separate evidence/interpretation/recommendations, place citations beside material claims, retain contradictory evidence and unknowns, and quantify coverage. Keep exact tables downloadable. The PDF is the last step after reconciliation and claim review; do not imply partial subtotals are a complete population total.** |
+| P14 — Bounded failure recovery | **The attempted step `[ACTION]` returned `[ACTUAL_FAILURE]`. Identify what is established, what remains inaccessible, whether a permitted independent source or cached record can answer the question, and the smallest next action. Do not infer the cause, invent access, repeat a stopped route, or evade restrictions. Update the gap and request logs.** |
+
+## 6. Minimum records and files
+
+| Record / artifact | Minimum fields or contents | Important control |
+|---|---|---|
+| Brief and amendments | Objective, audience, boundaries, cutoff, definitions, outputs, approved changes and dates | Later approved amendments control; do not repeatedly reopen an already resolved choice. |
+| Entity registry | Stable ID, names/aliases, type, parent/operator/reporting roles, location, operational dates, inclusion and confidence | Provider, site, program, facility and legal organization counts are different units. |
+| Query log | Query ID, engine/tool, exact query, parameters, scope, actual execution time, results and next step | Generated, executed, empty, failed and blocked queries are different statuses. |
+| URL log | **URL; what it was used for; what data it returned**; also event ID, time, action/role, access status and source/claim references | Save CSV and viewable Markdown in Pages. Log returned/cited/discovered URLs separately from opened URLs; never call every URL a visit. |
+| URL markers | `URL_NOT_EXPOSED`, `URL_NOT_RECORDED`, or a clear not-applicable marker where justified | Do not invent a search-engine URL when the tool did not expose one. Do not confuse an unknown URL with an empty search result. |
+| Source ledger | Document/dataset title, issuer, version, publication/update date, direct URL, retrieval date, page/table/record, access limits, local capture and hash | Preserve raw evidence safely; shared exports redact secrets and unnecessary personal data. |
+| Claim ledger | Material claim, claim status, exact support, contradictory evidence, source lineage, confidence, notes | A source about the topic does not necessarily support the claim as written. |
+| Measurement ledger | Entity/unit, measure, value, units/currency, denominator, period, basis/status, source precision, scope and source | Stocks, flows, authorizations, receipts and expenses are not interchangeable. |
+| Estimates | Formula, observed inputs, assumptions, low/central/high if supported, percentage estimated, confidence and reconciliation | An observed parent amount can still require an estimated local or subgroup allocation. |
+| Missing-data register | Entity/field, searches actually performed, sources checked, access issues, estimate accepted/rejected, reason and next step | Use “not located after these searches” when that is all the evidence establishes; do not claim nonpublication from an unexecuted search. |
+| Boundary/exclusion register | Candidate, measured location/scope, operational status, decision, reason, evidence and review date | Shared premises do not revive a closed provider; administrative addresses do not automatically identify instructional/activity sites. |
+| Stop/CAPTCHA register | Exact host/route scope, reason, observations, time, attempts, outcome and permitted next step | Count actual episodes consistently; cached challenge text, ordinary errors and reloads are not automatically new CAPTCHA episodes. |
+| Integration manifest | Exact selected files/hashes, overlay order, source-year preservation, superseded alternatives and unresolved dependencies | Keep publication receipts outside directories that builders regenerate. |
+| Validation ledger | Test, expected rule, observed result, affected rows, PASS/FAIL/not-testable status, effect and remediation | Arithmetic conservation does not prove correct beneficiary, location or legal scope. |
+| WIP Pages | Current status, source/query links, controlled tables, gaps, changes and next finite tasks | Draft status must be visible; do not display a completion notice prematurely. |
+| Reproducibility package | Scripts/pseudocode, dependencies, data dictionary, source pins, manifests, tests and replay instructions | A rebuild should reproduce the selected outputs and detect missing or changed inputs. |
+| Publication receipts | Page/file IDs and links, access confirmation, hashes, row counts and readback verification | A successful upload alone does not prove the file link was inserted or is accessible from the Page. |
+
+## 7. Source quality, estimates and analytical safeguards
+
+| Topic | Rule |
+|---|---|
+| Source order | Prefer original official records, laws/standards, government data, audited statements, filings, documentation and first-party datasets; then peer-reviewed/institutional research; then high-quality independent reporting; use weaker sources only with limitations. |
+| Independence | Two articles repeating one press release or dataset are one underlying evidence lineage, not independent corroboration. |
+| Dates and versions | Keep document publication, event, measurement/fiscal period, retrieval, analysis and cutoff dates distinct. A later download does not prove the same content existed at the cutoff. |
+| Generalization limits | Treat legal rules, analytical heuristics and source-specific findings as jurisdiction- and context-bound unless cited authoritative evidence establishes a broader scope. Do not present a project rule as a universal law. |
+| Claim status | Use Verified / Partially verified / Disputed / Unverified / Inference. These describe support for the exact claim. |
+| Quality rating | Use separate dimensions where useful: A direct authoritative same-period evidence; B strong evidence with minor reconciliation; C defensible observed-input estimate; D weak/substantial gaps; U unavailable. Do not collapse source quality and allocation quality into one label. |
+| Financial topics | Keep budgets, amended budgets, actuals, revenue, operating expense, capital, debt service, transfers, fund balance, assets, borrowing and grant awards separate. Do not add revenue to expense or count bond authorization as annual spending. |
+| Hierarchical totals | Parent totals and their site/program allocations are two views of the same amount, not additive layers. Remove transfers/pass-through overlap only when source evidence establishes the duplicated flow. |
+| Joint-service scope | A sponsor's reporting total may include services for other organizations. Do not allocate the entire joint component over the sponsor's own denominator without a supported beneficiary driver. Hold unallocated amounts when necessary. |
+| Time cohorts | Maintain a latest-available view and an exactly defined common-period view. Label mixed-year totals and retain nominal values if inflation adjustments are added. |
+| Comparisons and rankings | State criteria, weights, assumptions, sample, missingness, sensitivity and incompatible measures. Do not rank unknowns as zero. |
+| Forecasts | Use base/upside/downside scenarios with explicit assumptions only when the topic requires forecasting. Avoid false precision. |
+| Statistics | Prespecify adequacy and comparability checks. If a scope correction removes a valid observation, recompute affected analyses; withhold unsupported claims rather than substitute an incomplete denominator or amount. |
+| Completeness | Separate discovery/census completeness, financial or factual disclosure coverage, local/subgroup attribution coverage and final-report readiness. Quantify known coverage and state unquantifiable unknowns honestly. |
+| Copyright and expert review | Quote briefly only when necessary, cite direct sources, and flag conclusions needing legal, medical, financial, safety or other qualified review. Do not describe the output as guaranteed accurate, fully verified or hallucination-free. |
+
+## 8. Final report and delivery checklist
+
+| Component | Required content or verification |
+|---|---|
+| Executive summary | Direct supported answer, strongest evidence, principal uncertainty and prioritized action. |
+| Scope/methodology | Controlling question, definitions, audience, assumptions, dates, search/source strategy, comparisons and limitations. |
+| Findings/analysis | Evidence organized by subquestion, exact citations, alternative explanations and practical implications. |
+| Comparison/scenarios | Exact tables with units, dates, definitions, estimate flags, represented entities/population and unavailable coverage. |
+| Recommendations | Specific actions tied to findings and confidence; implementation steps and decision points. |
+| Audit appendices | Full entity/source/claim tables, unavailable-data register, exclusions, contradictions, validation results and expert-review needs. |
+| Source list | Primary and secondary sources separately; title, issuer, date/version, direct URL, retrieval date and exact locator. |
+| Machine-readable data | CSV and/or requested workbook, data dictionary, formulas/scripts and selected-input manifest; no missing-to-zero conversion. |
+| Human-readable Pages | Markdown tables, links to complete downloads, clear snapshots and scoped later supplements. Split large tables without omitting rows. |
+| PDF, last | Reader-oriented title page, TOC, executive summary, chapters, headings and evidence-backed callouts. Use report layouts as inspiration, not copied imagery or unsupported quotations. |
+| Charts/diagrams | Use Mermaid or the requested format when useful and available. Bind every figure to final data, label estimates, and obtain any required renderer/install approval. |
+| Final QA | Check unsupported claims, mismatched citations, stale evidence, source-lineage duplication, inconsistent numbers, hidden assumptions, omitted counterevidence, links and visual rendering. |
+| Completion notice | State exactly what is complete, its date/version and Page/download links; distinguish remaining research from the completed artifact. |
+| Resume handoff | Leave the controlling brief, current manifests, completed/blocked task ledger, finite next actions and the latest verified checkpoint. Do not claim a new DOT automatically inherits access. |
+
+## 9. Ready-to-fill launch instruction
+
+| Item | Text to give DOT2 |
+|---|---|
+| Launch | **DOT2 / AGENT2: Use this research workflow for `[NEW_PROJECT]`. Topic: `[QUESTION]`. Decision: `[DECISION]`. Audience: `[AUDIENCE]`. Scope: `[GEOGRAPHY/ENTITIES/PERIOD]`. Cutoff: `[DATE]`. Required measures and dimensions: `[LIST]`. Exclusions: `[LIST]`. Files and sources actually supplied: `[LIST]`. Destination: `[PROJECT/PAGES]`. Deadline: `[DATE_OR_NONE]`. Use the verified required model and keep prompt optimization separate from evidence storage. Break the work into bounded modules, log every used URL with purpose and returned data in CSV and Markdown, build canonical ledgers from the start, and perform a distinct claim-level fact check. Ask only material questions. Do not assume permissions, invent missing data, or perform unauthorized external actions. Keep the WIP visible, report honest milestone coverage, and render the final PDF last. Post a precise completion notice to the Page when each requested deliverable is actually verified and ready.** |
