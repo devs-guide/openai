@@ -1,0 +1,82 @@
+name: Build and publish reviewed release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Bare semantic version
+        required: true
+        default: '0.0.1'
+        type: string
+      source_sha:
+        description: Exact 40-character commit SHA at main
+        required: true
+        type: string
+      mode:
+        description: Create/verify a draft, or publish the verified draft
+        required: true
+        default: draft
+        type: choice
+        options:
+          - draft
+          - publish
+      confirmation:
+        description: Type release VERSION@SHA MODE
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  build-validate-release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact release candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.source_sha }}
+
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install build dependency
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends pandoc
+          pandoc --version | head -n 1
+
+      - name: Validate source and release record
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: |
+          bash actions/validate.repository.sh
+          bash actions/validate.release.sh
+
+      - name: Build and validate release Pages tree
+        env:
+          EXPECTED_SOURCE_SHA: ${{ inputs.source_sha }}
+          PUBLISH_DIR: static
+          RELEASE_VERSION: ${{ inputs.version }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          STATIC_DIR: static
+        run: |
+          bash actions/www.pages.sh
+          bash actions/validate.pages.sh
+
+      - name: Create or publish reviewed GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_CONFIRMATION: ${{ inputs.confirmation }}
+          RELEASE_MODE: ${{ inputs.mode }}
+          RELEASE_VERSION: ${{ inputs.version }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+        run: bash actions/release.sh

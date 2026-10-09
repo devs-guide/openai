@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "site_base": "openai",
+  "entries": [
+    {"source":"readme.md","route":"","raw_route":"raw/readme.md","title":"devs-guide/openai","kind":"hub","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"COPYRIGHT.md","route":"rights/","raw_route":"raw/COPYRIGHT.md","title":"Copyright and permissions","kind":"policy","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"dot/readme.md","route":"dot/","raw_route":"raw/dot/readme.md","title":"DOT","kind":"product","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"dot/agents/readme.md","route":"dot/agents/","raw_route":"raw/dot/agents/readme.md","title":"DOT agent guides","kind":"index","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"dot/agents/browser.md","route":"dot/agents/browser/","raw_route":"raw/dot/agents/browser.md","title":"Browser agent guide","kind":"agent-guide","status":"dated-evidence","reviewed_on":"2026-10-09"},
+    {"source":"dot/agents/computer.md","route":"dot/agents/computer/","raw_route":"raw/dot/agents/computer.md","title":"Computer agent guide","kind":"agent-guide","status":"dated-evidence","reviewed_on":"2026-10-09"},
+    {"source":"dot/agents/doc.md","route":"dot/agents/doc/","raw_route":"raw/dot/agents/doc.md","title":"Document agent contract","kind":"agent-guide","status":"dated-evidence","reviewed_on":"2026-10-09"},
+    {"source":"dot/agents/prompt.md","route":"dot/agents/prompt/","raw_route":"raw/dot/agents/prompt.md","title":"Prompt agent test contract","kind":"agent-guide","status":"dated-evidence","reviewed_on":"2026-10-09"},
+    {"source":"dot/prompts/readme.md","route":"dot/prompts/","raw_route":"raw/dot/prompts/readme.md","title":"DOT prompts","kind":"index","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"dot/prompts/core/readme.md","route":"dot/prompts/core/","raw_route":"raw/dot/prompts/core/readme.md","title":"Core DOT prompts","kind":"index","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"dot/prompts/core/dot.prompt","route":"dot/prompts/core/dot/","raw_route":"raw/dot/prompts/core/dot.prompt","title":"DOT baseline prompt","kind":"prompt","status":"reference","reviewed_on":"2026-10-09"},
+    {"source":"dot/prompts/core/master.prompt","route":"dot/prompts/core/master/","raw_route":"raw/dot/prompts/core/master.prompt","title":"DOT master prompt","kind":"prompt","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"dot/prompts/core/reference.prompt","route":"dot/prompts/core/reference/","raw_route":"raw/dot/prompts/core/reference.prompt","title":"DOT reference prompt","kind":"prompt","status":"reference","reviewed_on":"2026-10-09"},
+    {"source":"dot/prompts/research/readme.md","route":"dot/prompts/research/","raw_route":"raw/dot/prompts/research/readme.md","title":"DOT research starters","kind":"index","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"dot/prompts/research/overview.prompt","route":"dot/prompts/research/overview/","raw_route":"raw/dot/prompts/research/overview.prompt","title":"Reusable research overview","kind":"research-template","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"dot/prompts/research/template.prompt","route":"dot/prompts/research/template/","raw_route":"raw/dot/prompts/research/template.prompt","title":"Reusable research template","kind":"research-template","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"dot/prompts/research/starter-data-only.md","route":"dot/prompts/research/starter-data-only/","raw_route":"raw/dot/prompts/research/starter-data-only.md","title":"Data-only research starter","kind":"research-template","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"docs/features/readme.md","route":"dot/features/","raw_route":"raw/docs/features/readme.md","title":"DOT features","kind":"feature-index","status":"candidate","reviewed_on":"2026-10-09"},
+    {"source":"docs/history/readme.md","route":"dot/history/","raw_route":"raw/docs/history/readme.md","title":"DOT history","kind":"history","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"docs/history/initial-import.md","route":"dot/history/initial-import/","raw_route":"raw/docs/history/initial-import.md","title":"Initial DOT source import","kind":"history","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"docs/releases/readme.md","route":"dot/releases/","raw_route":"raw/docs/releases/readme.md","title":"DOT releases","kind":"release-index","status":"current","reviewed_on":"2026-10-09"},
+    {"source":"docs/releases/0.0.1.md","route":"dot/releases/0.0.1/","raw_route":"raw/docs/releases/0.0.1.md","title":"0.0.1 — DOT Research Prompt System","kind":"release","status":"candidate","reviewed_on":"2026-10-09"}
+  ]
+}

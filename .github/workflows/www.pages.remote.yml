@@ -1,0 +1,36 @@
+name: Validate published Pages artifacts
+
+on:
+  workflow_call:
+    inputs:
+      source_sha:
+        description: Exact source commit represented by the live Pages tree
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact source commit expected on the live Pages site
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  validate-published-pages:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout expected source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          ref: ${{ inputs.source_sha }}
+
+      - name: Validate live Pages source and routes
+        env:
+          EXPECTED_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: bash actions/validate.pages.remote.sh
