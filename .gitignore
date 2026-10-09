@@ -1,0 +1,31 @@
+# Operating-system metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.fseventsd
+
+# Generated publication output and local caches
+/static/
+__pycache__/
+*.py[cod]
+.cache/
+
+# Private lifecycle workspace link
+/dot/prompt
+
+# Retained local duplicate from the pre-Git import
+/dot/dot.master.00.prompt
+
+# Local credentials and environment files
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
