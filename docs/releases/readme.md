@@ -14,6 +14,8 @@ reviewed GitHub release body.
   sequential publication safeguards, and immutable manual-test handoff.
 - `0.0.5.md` — evidence-completing Summary behavior, required Fact matrix,
   bounded official-source gap filling, and versioned completion controls.
+- `0.0.6.md` — configured shared browser tabs, worker ownership, resumable
+  queues, blocker monitoring, and recovery controls.
 
 Tags use bare semantic versions. Published tags are immutable; corrections use
 a later version. Compatible corrections and clarifications accumulate in the

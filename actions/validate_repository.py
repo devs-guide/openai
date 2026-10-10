@@ -45,6 +45,7 @@ REQUIRED = {
     "docs/releases/0.0.3.md",
     "docs/releases/0.0.4.md",
     "docs/releases/0.0.5.md",
+    "docs/releases/0.0.6.md",
     "docs/releases/readme.md",
     "dot/ingest.json",
     "dot/readme.md",
@@ -96,9 +97,6 @@ IMPORT_HASHES = {
 }
 BROWSER_004_SHA256 = "90b1e4af09e0454208d0b0bd4e7d74c2d031c8b87c7fdd68ffb65927a620520c"
 PRESERVED_AGENT_HASHES = {
-    "dot/agent/browser.prompt": "b080862884e2e8a88a5d1ff06b7119617decd1a46e85d42493f1b89f4c702ba4",
-    "dot/agent/config.json": "940a1b65106af4a2f6e190f414897e55013c108243f0b59b17defd3eefbc5a71",
-    "dot/agent/config.schema.json": "9c38de39ec3d2b9db5b7922788d7a8b503c3cdd9151d638c8995877a7ac60815",
     "dot/agent/runtime.json": "d00a0769b220929fea17fbb1dc17e5fa9c07cf3b7e4147a2ae2d55a39095743f",
 }
 DATA_CATALOG = (
@@ -152,6 +150,20 @@ SUMMARY_SCENARIOS = {
         "reconcile the eligible entity or subject universe",
         "sampling cannot support a claim that every requested entity was checked",
     ),
+}
+TABS_SCENARIOS = {
+    "default-four": ("four counted tabs open", "a fifth request"),
+    "override-two": ("a project limit of two", "a third request remains queued"),
+    "override-six": ("a project limit of six", "not six per worker"),
+    "contended-slot": ("two workers requesting the final slot", "one reservation and one queued request"),
+    "unknown-inventory": ("an `unknown` global count", "prevents another tab from opening"),
+    "protected-tab": ("an authentication, unsaved-form, active-download, takeover, or leased tab", "not closed for capacity"),
+    "scheduled-check": ("15-minute receipt is verified", "active only after"),
+    "event-fallback": ("disclosed event-driven checks", "no automation claim"),
+    "pause-or-end": ("schedule is paused or removed", "resumable state is retained"),
+    "observed-cause": ("does not invent a memory, cpu, browser, or website cause",),
+    "sensitive-state": ("exported records omit credentials", "sensitive authentication routes"),
+    "captcha": ("actual captcha encounter follows unchanged `browser-004`",),
 }
 INGEST_INSTRUCTIONS = (
     ("dot/agent/master.prompt", "AGENT_CONTRACT", "REQUIRED", None),
@@ -229,7 +241,108 @@ def validate_preserved_agent_sources() -> None:
     for required in ("derived and fallible extraction layer", "source-provided transcripts distinctly"):
         if required not in media_text:
             fail(f"Media contract lacks required transcript distinction: {required}")
-    ok("Agent configuration, Browser behavior, Page delivery, and media distinctions are preserved")
+    ok("Agent runtime, intentional BROWSER-004 behavior, Page delivery, and media distinctions are preserved")
+
+
+def validate_tabs_contract() -> None:
+    master = (ROOT / "dot" / "agent" / "master.prompt").read_text(encoding="utf-8")
+    browser = (ROOT / "dot" / "agent" / "browser.prompt").read_text(encoding="utf-8")
+    config = json.loads((ROOT / "dot" / "agent" / "config.json").read_text(encoding="utf-8"))
+    schema = json.loads((ROOT / "dot" / "agent" / "config.schema.json").read_text(encoding="utf-8"))
+
+    if config.get("schema") != "dot-agent-config/2":
+        fail("Agent configuration is not dot-agent-config/2")
+    expected_tabs = {
+        "default_max_open": 4,
+        "limit_scope": "ALL_WINDOWS_AND_WORKERS",
+        "project_override_allowed": True,
+        "blocker_checks": {
+            "scheduled_interval_minutes": 15,
+            "scheduler_policy": "WHEN_AVAILABLE_AND_AUTHORIZED",
+            "fallback": "EVENT_DRIVEN",
+        },
+    }
+    if config.get("browser", {}).get("tabs") != expected_tabs:
+        fail("Agent Browser/Tabs defaults differ from the approved configuration")
+
+    if schema.get("properties", {}).get("schema", {}).get("const") != "dot-agent-config/2":
+        fail("Agent configuration schema does not require dot-agent-config/2")
+    if "browser" not in schema.get("required", []):
+        fail("Agent configuration schema does not require Browser configuration")
+    browser_schema = schema.get("properties", {}).get("browser", {})
+    tabs_schema = browser_schema.get("properties", {}).get("tabs", {})
+    if browser_schema.get("required") != ["tabs"]:
+        fail("Agent configuration schema does not require exactly one Browser/Tabs domain")
+    expected_tab_fields = [
+        "default_max_open", "limit_scope", "project_override_allowed", "blocker_checks"
+    ]
+    if tabs_schema.get("required") != expected_tab_fields:
+        fail("Agent configuration schema does not require every Browser/Tabs field")
+    max_schema = tabs_schema.get("properties", {}).get("default_max_open", {})
+    if max_schema.get("type") != "integer" or max_schema.get("minimum") != 1:
+        fail("Agent configuration schema does not constrain tab limits to positive integers")
+    blocker_schema = tabs_schema.get("properties", {}).get("blocker_checks", {})
+    if blocker_schema.get("required") != [
+        "scheduled_interval_minutes", "scheduler_policy", "fallback"
+    ]:
+        fail("Agent configuration schema does not require every blocker-check field")
+    check_schema = blocker_schema.get("properties", {})
+    schema_constants = {
+        "limit_scope": tabs_schema.get("properties", {}).get("limit_scope", {}).get("const"),
+        "project_override_allowed": tabs_schema.get("properties", {}).get("project_override_allowed", {}).get("const"),
+        "scheduled_interval_minutes": check_schema.get("scheduled_interval_minutes", {}).get("const"),
+        "scheduler_policy": check_schema.get("scheduler_policy", {}).get("const"),
+        "fallback": check_schema.get("fallback", {}).get("const"),
+    }
+    if schema_constants != {
+        "limit_scope": "ALL_WINDOWS_AND_WORKERS",
+        "project_override_allowed": True,
+        "scheduled_interval_minutes": 15,
+        "scheduler_policy": "WHEN_AVAILABLE_AND_AUTHORIZED",
+        "fallback": "EVENT_DRIVEN",
+    }:
+        fail("Agent configuration schema does not enforce the approved Tabs branch")
+
+    master_terms = re.sub(r"\s+", " ", master).lower()
+    for required in (
+        "`#tabs` | the configured shared capacity",
+        "effective `#tabs` settings",
+        "observable open-tab inventory",
+        "`#tabs` ownership and queued-work state",
+    ):
+        if required not in master_terms:
+            fail(f"Agent contract lacks required Tabs integration: {required}")
+
+    observed_rules = re.findall(r"^## (TABS-[0-9]{3})\b", browser, re.MULTILINE)
+    expected_rules = [f"TABS-{number:03d}" for number in range(1, 8)]
+    if observed_rules != expected_rules:
+        fail("Browser contract must define TABS-001 through TABS-007 in order")
+
+    required_by_rule = {
+        "TABS-001": ("config.browser.tabs", "another positive integer", "all agent-controlled"),
+        "TABS-002": ("one shared inventory", "only one worker may hold a tab lease", "open no additional tab"),
+        "TABS-003": ("reserve capacity", "place the task in a resumable queue", "closing protected state"),
+        "TABS-004": ("before reuse, handoff, or closure", "sensitive authentication routes"),
+        "TABS-005": ("apply exactly one monitoring branch", "15-minute", "event-driven checks"),
+        "TABS-006": ("require new evidence", "do not attribute a failure", "apply `browser-004`"),
+        "TABS-007": ("pause or remove", "release worker leases", "final monitoring branch"),
+    }
+    for rule_id, phrases in required_by_rule.items():
+        section = re.sub(r"\s+", " ", prompt_section(browser, rule_id)).lower()
+        for phrase in phrases:
+            if phrase not in section:
+                fail(f"Browser contract lacks required {rule_id} behavior: {phrase}")
+
+    normalized_browser = re.sub(r"\s+", " ", browser).lower()
+    for scenario_id, phrases in TABS_SCENARIOS.items():
+        for phrase in phrases:
+            if phrase not in normalized_browser:
+                fail(f"Tabs acceptance scenario {scenario_id} lacks required behavior: {phrase}")
+
+    prohibited = ("agent:" + "prompts", "gpt-5.6 sol high", "8 gb of ram", "eight cpu cores")
+    if any(term in browser.lower() for term in prohibited):
+        fail("stale route, model, or hardware advice entered the Browser/Tabs contract")
+    ok("Tabs configuration v2 and TABS-001 through TABS-007 define shared capacity, monitoring, and recovery")
 
 
 def validate_fact_pair_example(template_text: str) -> None:
@@ -609,9 +722,9 @@ def validate_ingest_contract() -> None:
 
     expected_identity = {
         "schema": "dot-ingest/1",
-        "release": "0.0.5",
+        "release": "0.0.6",
         "baseline_tag": "0.0.1",
-        "prior_release_tag": "0.0.4",
+        "prior_release_tag": "0.0.5",
         "entrypoint": "dot/readme.md",
         "manifest_authority": "ROUTING_METADATA_ONLY",
         "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
@@ -703,6 +816,7 @@ def validate_release_workflow() -> None:
         "is not an ancestor of",
         "Repository Release Contract",
         "Evidence-Completing Research Summaries",
+        "Coordinated Browser Tabs",
         "release_text.py",
         "existing release is already published",
         "existing draft target differs",
@@ -736,7 +850,7 @@ def main() -> int:
             continue
         if stale_candidate in text:
             fail(f"stale candidate version remains in source: {path}")
-    ok("candidate release identity is consistently 0.0.5 and contains no stale candidate-version reference")
+    ok("candidate release identity is consistently 0.0.6 and contains no stale candidate-version reference")
 
     if any(path.startswith("static/") for path in paths):
         fail("generated static output must not be included on main")
@@ -766,6 +880,21 @@ def main() -> int:
             continue
         if retired_summary_draft in content:
             fail(f"retired Summary draft is referenced by current source: {path}")
+    retired_tabs_draft = "dot/agent/" + "tabs.prompt"
+    if retired_tabs_draft in path_set:
+        fail("standalone Tabs draft remains in current source")
+    for path in paths:
+        full = ROOT / path
+        if path == "actions/validate_repository.py" or not full.is_file():
+            continue
+        if full.suffix.lower() not in {".json", ".md", ".prompt", ".py", ".sh", ".yml", ".yaml"}:
+            continue
+        try:
+            content = full.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            continue
+        if retired_tabs_draft in content:
+            fail(f"standalone Tabs draft is referenced by current source: {path}")
     if any(Path(path).name.lower() in {"license", "license.md", "license.txt", "copying"} for path in paths):
         fail("a license file conflicts with the selected no-license policy")
     if any(":" in Path(path).name for path in paths):
@@ -864,6 +993,7 @@ def main() -> int:
     ok("agent configuration preserves ordered models and browser-first tool boundaries")
 
     validate_preserved_agent_sources()
+    validate_tabs_contract()
     validate_data_contract()
     validate_summary_contract()
     validate_release_contract()

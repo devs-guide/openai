@@ -32,8 +32,8 @@ if record.get("repository") != "devs-guide/openai":
     raise SystemExit("unexpected repository identity")
 if record.get("source_sha") != expected:
     raise SystemExit(f"live source is {record.get('source_sha')}, expected {expected}")
-if record.get("release") != "0.0.5":
-    raise SystemExit(f"live release is {record.get('release')}, expected 0.0.5")
+if record.get("release") != "0.0.6":
+    raise SystemExit(f"live release is {record.get('release')}, expected 0.0.6")
 PY
 
   local route=""
@@ -58,15 +58,23 @@ PY
     '/dot/releases/0.0.3/' \
     '/dot/releases/0.0.4/' \
     '/dot/releases/0.0.5/' \
+    '/dot/releases/0.0.6/' \
     '/raw/docs/release.prompt' \
-    '/raw/docs/releases/0.0.5.md' \
+    '/raw/docs/releases/0.0.6.md' \
     '/raw/dot/ingest.json' \
+    '/raw/dot/agent/browser.prompt' \
+    '/raw/dot/agent/config.json' \
+    '/raw/dot/agent/config.schema.json' \
     '/raw/dot/research/internet.prompt' \
     '/raw/dot/research/data.prompt' \
     '/raw/dot/research/summary.prompt' \
     '/raw/dot/prompts/core/master.prompt'; do
     curl -fsS -o /dev/null "${BASE_URL}${route}" || return 1
   done
+
+  if curl -fsS -o /dev/null "${BASE_URL}/dot/agent/tabs/"; then
+    return 1
+  fi
 
   raw_file="$(mktemp)"
   if ! curl -fsS "${BASE_URL}/raw/docs/release.prompt" -o "${raw_file}"; then
@@ -78,6 +86,20 @@ PY
     return 1
   fi
   rm -f "${raw_file}"
+
+  local agent_relative=""
+  for agent_relative in browser.prompt config.json config.schema.json; do
+    raw_file="$(mktemp)"
+    if ! curl -fsS "${BASE_URL}/raw/dot/agent/${agent_relative}" -o "${raw_file}"; then
+      rm -f "${raw_file}"
+      return 1
+    fi
+    if ! cmp -s "${ROOT}/dot/agent/${agent_relative}" "${raw_file}"; then
+      rm -f "${raw_file}"
+      return 1
+    fi
+    rm -f "${raw_file}"
+  done
 
   local relative=""
   for relative in project internet data template summary; do

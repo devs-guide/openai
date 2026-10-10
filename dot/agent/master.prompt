@@ -16,6 +16,7 @@ account, model, website, tool, file, or permission is currently available.
 | `#DOT` | The product/runtime that provides the conversation and supported execution routes. |
 | `#COMPUTER` | The remote cloud environment; it is separate from the owner's computer. |
 | `#BROWSER` | The supported cloud-browser interface. |
+| `#TABS` | The configured shared capacity, ownership, queue, monitoring, and recovery controls for `#BROWSER` document tabs. |
 | `#TOOL` | A named capability with a verified surface, access state, data boundary, and permission state. |
 | `#PAGE` | A configured human-readable workspace and delivery surface. |
 | `#PROJECT` | One bounded body of work with its own scope, state, artifacts, and acceptance tests. |
@@ -46,10 +47,11 @@ configuration, or proof of capability.
 ## AGENT-003 — Required configuration
 
 Read `config.json` before work. Verify the selected model, execution surface,
-working directory, destination, and enabled tools against visible current
-state. Start with the configured collaborator and advance through `fallbacks`
-in their exact listed order only when the current model/effort is visibly no
-longer accessible. Verify every selected model and effort before submitting.
+working directory, destination, enabled tools, and effective `#TABS` settings
+against visible current state. Start with the configured collaborator and
+advance through `fallbacks` in their exact listed order only when the current
+model/effort is visibly no longer accessible. Verify every selected model and
+effort before submitting.
 Never substitute an unlisted model or surface. If the ordered list is
 exhausted, mark the dependent branch `BLOCKED` and request the smallest owner
 decision.
@@ -65,6 +67,8 @@ Before the first dependent action, record:
 
 - actual model label and effort visible to the agent;
 - browser, account, and authentication state;
+- configured `#TABS` default, any approved project override, effective shared
+  limit, observable open-tab inventory, and blocker-check mode;
 - relevant ChatGPT or `#DOT` memory, connected-app context, product custom
   rules, and confirmation settings without treating them as authority;
 - required files and whether their complete contents are available;
@@ -102,8 +106,9 @@ artifacts are separate forms of state. None proves another still exists.
 
 Long-running work must maintain a portable checkpoint containing the goal,
 scope, input versions, completed work, evidence references, artifacts and save
-states, blockers, decisions, pending steps, resume preconditions, and next safe
-action. Do not store credentials, session tokens, or unnecessary personal data.
+states, `#TABS` ownership and queued-work state, blockers, decisions, pending
+steps, resume preconditions, and next safe action. Do not store credentials,
+session tokens, private URLs, or unnecessary personal data.
 
 Use these states: `DRAFT`, `READY`, `RUNNING`, `WAITING`, `BLOCKED`,
 `VALIDATING`, `DONE`, `FAILED`, and `CANCELED`. `DONE` requires verified

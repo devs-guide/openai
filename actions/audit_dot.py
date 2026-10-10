@@ -206,10 +206,17 @@ def main() -> int:
     if any(rules[rule_id] != "dot/research/summary.prompt" for rule_id in expected_summary_rules):
         fail("canonical SUMMARY rule IDs must be owned by dot/research/summary.prompt")
 
+    expected_tabs_rules = {f"TABS-{number:03d}" for number in range(1, 8)}
+    observed_tabs_rules = {rule_id for rule_id in rules if rule_id.startswith("TABS-")}
+    if observed_tabs_rules != expected_tabs_rules:
+        fail("canonical Browser contract must define TABS-001 through TABS-007 exactly once")
+    if any(rules[rule_id] != "dot/agent/browser.prompt" for rule_id in expected_tabs_rules):
+        fail("canonical TABS rule IDs must be owned by dot/agent/browser.prompt")
+
     canonical_text = "\n".join(path.read_text(encoding="utf-8") for path in CANONICAL_PROMPTS)
     if "#RESERACH" in canonical_text:
         fail("misspelled #RESERACH remains in canonical prompts")
-    for term in ("#AGENT", "#PROJECT", "#RESEARCH", "#INTERNET", "#DATA", "#TEMPLATE", "#SUMMARY", "#PAGE", "#FACT", "#CAPTCHA", "#TOOL", "#VIDEO", "#TRANSCRIPTION"):
+    for term in ("#AGENT", "#PROJECT", "#RESEARCH", "#INTERNET", "#DATA", "#TEMPLATE", "#SUMMARY", "#PAGE", "#FACT", "#CAPTCHA", "#TOOL", "#TABS", "#VIDEO", "#TRANSCRIPTION"):
         if term not in canonical_text:
             fail(f"canonical terminology is missing {term}")
 

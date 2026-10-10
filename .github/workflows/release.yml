@@ -6,7 +6,7 @@ on:
       version:
         description: Bare semantic version
         required: true
-        default: '0.0.5'
+        default: '0.0.6'
         type: string
       source_sha:
         description: Exact 40-character commit SHA at main
