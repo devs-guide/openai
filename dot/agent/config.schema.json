@@ -3,9 +3,9 @@
   "$id": "https://devs-guide.github.io/openai/raw/dot/agent/config.schema.json",
   "title": "DOT agent configuration",
   "type": "object",
-  "required": ["schema", "status", "reviewed_on", "models", "execution", "tools", "storage"],
+  "required": ["schema", "status", "reviewed_on", "models", "execution", "tools", "browser", "storage"],
   "properties": {
-    "schema": {"const": "dot-agent-config/1"},
+    "schema": {"const": "dot-agent-config/2"},
     "status": {"enum": ["current", "candidate", "archived"]},
     "reviewed_on": {"type": "string", "format": "date"},
     "models": {
@@ -26,6 +26,33 @@
     },
     "execution": {"type": "object"},
     "tools": {"type": "object"},
+    "browser": {
+      "type": "object",
+      "required": ["tabs"],
+      "properties": {
+        "tabs": {
+          "type": "object",
+          "required": ["default_max_open", "limit_scope", "project_override_allowed", "blocker_checks"],
+          "properties": {
+            "default_max_open": {"type": "integer", "minimum": 1},
+            "limit_scope": {"const": "ALL_WINDOWS_AND_WORKERS"},
+            "project_override_allowed": {"const": true},
+            "blocker_checks": {
+              "type": "object",
+              "required": ["scheduled_interval_minutes", "scheduler_policy", "fallback"],
+              "properties": {
+                "scheduled_interval_minutes": {"const": 15},
+                "scheduler_policy": {"const": "WHEN_AVAILABLE_AND_AUTHORIZED"},
+                "fallback": {"const": "EVENT_DRIVEN"}
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
     "storage": {"type": "object"}
   },
   "$defs": {

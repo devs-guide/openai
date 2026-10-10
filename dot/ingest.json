@@ -1,8 +1,8 @@
 {
   "schema": "dot-ingest/1",
-  "release": "0.0.5",
+  "release": "0.0.6",
   "baseline_tag": "0.0.1",
-  "prior_release_tag": "0.0.4",
+  "prior_release_tag": "0.0.5",
   "entrypoint": "dot/readme.md",
   "manifest_authority": "ROUTING_METADATA_ONLY",
   "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
@@ -15,7 +15,7 @@
       "authority_class": "AGENT_CONTRACT",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "58e2074770854929f52b55f8bfa262712cf60cd01e7f96b4d07b22c1faf72a5a"
+      "sha256": "79da8576fbf8081919b1bf125dc84a0f20a38c9861c2c8270165832700b07554"
     },
     {
       "order": 2,
@@ -23,7 +23,7 @@
       "authority_class": "CONFIGURATION",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "940a1b65106af4a2f6e190f414897e55013c108243f0b59b17defd3eefbc5a71"
+      "sha256": "0b1e8826f39ccde43831730a9e400f3acb5df543b5e668d34050860e03b807cf"
     },
     {
       "order": 3,
@@ -39,7 +39,7 @@
       "authority_class": "CAPABILITY_MODULE",
       "activation": "REQUIRED",
       "condition": "INTERNET_RESEARCH",
-      "sha256": "b080862884e2e8a88a5d1ff06b7119617decd1a46e85d42493f1b89f4c702ba4"
+      "sha256": "4520647a59feb37fa437f176d24efb46c17e7c9de883355d83bbb576f2e88454"
     },
     {
       "order": 5,

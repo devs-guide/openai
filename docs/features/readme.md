@@ -4,15 +4,25 @@ This public index describes accepted or release-candidate product behavior.
 Private implementation plans and operational evidence remain in the separate
 `devs-guide/prompts` lifecycle workspace.
 
+## 0.0.6
+
+| Feature | Status | Public owners |
+|---|---|---|
+| Configured `#TABS` domain inside Browser | Candidate | Agent configuration and Browser contract |
+| Shared tab inventory, leases, and project queue | Candidate | `TABS-001` through `TABS-004` |
+| Scheduled-or-event-driven blocker monitoring | Candidate | `TABS-005` |
+| Evidence-based recovery and material notifications | Candidate | `TABS-006` and `TABS-007` |
+| Agent configuration schema v2 | Candidate | Agent configuration and schema |
+
 ## 0.0.5
 
 | Feature | Status | Public owners |
 |---|---|---|
-| Evidence-completing on-demand Summary | Candidate | Summary contract and Project controls |
-| Required subject-by-fact coverage matrix | Candidate | Summary and Template contracts |
-| Default bounded public-source gap filling | Candidate | Summary and Internet contracts |
-| Immutable parent inputs and successor evidence/data versions | Candidate | Summary and Data contracts |
-| Summary v2 request, matrix, and completion validation | Candidate | Template contract and GitHub Actions |
+| Evidence-completing on-demand Summary | Accepted | Summary contract and Project controls |
+| Required subject-by-fact coverage matrix | Accepted | Summary and Template contracts |
+| Default bounded public-source gap filling | Accepted | Summary and Internet contracts |
+| Immutable parent inputs and successor evidence/data versions | Accepted | Summary and Data contracts |
+| Summary v2 request, matrix, and completion validation | Accepted | Template contract and GitHub Actions |
 
 ## 0.0.4
 

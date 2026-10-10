@@ -80,8 +80,18 @@ def main() -> int:
     summary_entry = summary_entries[0]
     if summary_entry.get("route") != "dot/research/summary/" or summary_entry.get("raw_route") != "raw/dot/research/summary.prompt":
         fail("Summary contract rendered or raw route is incorrect")
-    if summary_entry.get("title") != "Evidence-Completing Research Summary" or summary_entry.get("status") != "candidate":
+    if summary_entry.get("title") != "Evidence-Completing Research Summary" or summary_entry.get("status") != "current":
         fail("Summary publication identity is incorrect")
+    browser_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "dot/agent/browser.prompt"]
+    if len(browser_entries) != 1:
+        fail("publication manifest must contain exactly one Browser/Tabs contract source")
+    browser_entry = browser_entries[0]
+    if (
+        browser_entry.get("route") != "dot/agent/browser/"
+        or browser_entry.get("raw_route") != "raw/dot/agent/browser.prompt"
+        or browser_entry.get("title") != "Browser, Tabs, and tool contract"
+    ):
+        fail("Browser/Tabs contract publication identity is incorrect")
     ingest_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "dot/ingest.json"]
     if len(ingest_entries) != 1:
         fail("publication manifest must contain exactly one DOT ingestion manifest")
@@ -94,16 +104,16 @@ def main() -> int:
     release_entry = release_entries[0]
     if release_entry.get("route") != "release/" or release_entry.get("raw_route") != "raw/docs/release.prompt":
         fail("Release contract rendered or raw route is incorrect")
-    candidate_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "docs/releases/0.0.5.md"]
+    candidate_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "docs/releases/0.0.6.md"]
     if len(candidate_entries) != 1:
-        fail("publication manifest must contain exactly one 0.0.5 release record")
+        fail("publication manifest must contain exactly one 0.0.6 release record")
     candidate_entry = candidate_entries[0]
     if (
-        candidate_entry.get("route") != "dot/releases/0.0.5/"
-        or candidate_entry.get("raw_route") != "raw/docs/releases/0.0.5.md"
+        candidate_entry.get("route") != "dot/releases/0.0.6/"
+        or candidate_entry.get("raw_route") != "raw/docs/releases/0.0.6.md"
         or candidate_entry.get("status") != "candidate"
     ):
-        fail("0.0.5 release record publication identity is incorrect")
+        fail("0.0.6 release record publication identity is incorrect")
     static_value = os.environ.get("STATIC_DIR", "static")
     static_dir = Path(static_value)
     if not static_dir.is_absolute():
@@ -122,8 +132,8 @@ def main() -> int:
         fail(f"source SHA is {source_record.get('source_sha')}, expected {expected_sha}")
     if source_record.get("repository") != "devs-guide/openai":
         fail("source.json repository identity is incorrect")
-    if source_record.get("release") != "0.0.5":
-        fail("source.json release identity is not 0.0.5")
+    if source_record.get("release") != "0.0.6":
+        fail("source.json release identity is not 0.0.6")
     ok(f"source marker identifies {source_record.get('source_sha')}")
 
     html_parsers: dict[Path, PageParser] = {}
@@ -146,6 +156,15 @@ def main() -> int:
         parser = PageParser()
         parser.feed(rendered)
         html_parsers[page.resolve()] = parser
+        if entry["source"] == "dot/agent/browser.prompt":
+            for anchor_prefix in (
+                "tabs-001",
+                "tabs-005",
+                "tabs-007",
+                "browser-004",
+            ):
+                if not any(anchor.startswith(anchor_prefix) for anchor in parser.ids):
+                    fail(f"Browser/Tabs rendered anchor is missing: {anchor_prefix}")
         if entry["route"].startswith("dot/research/"):
             if '<nav class="workflow-nav" aria-label="Research workflow">' not in rendered:
                 fail(f"Research workflow navigation is missing: {page.relative_to(static_dir)}")
@@ -220,6 +239,7 @@ def main() -> int:
         relative = path.relative_to(static_dir).as_posix()
         retired_route = "dot/" + "handoff"
         retired_raw_route = "raw/" + retired_route
+        standalone_tabs_raw = "raw/dot/agent/" + "tabs.prompt"
         if relative == "dot/prompt" or relative.startswith("dot/prompt/"):
             fail("private singular prompt path leaked into rendered Pages output")
         if relative == "raw/dot/prompt" or relative.startswith("raw/dot/prompt/"):
@@ -228,6 +248,10 @@ def main() -> int:
             fail("retired handoff path leaked into rendered Pages output")
         if relative == retired_raw_route or relative.startswith(retired_raw_route + "/"):
             fail("retired handoff path leaked into raw Pages output")
+        if relative == "dot/agent/tabs" or relative.startswith("dot/agent/tabs/"):
+            fail("standalone Tabs route leaked into rendered Pages output")
+        if relative == standalone_tabs_raw:
+            fail("standalone Tabs source leaked into raw Pages output")
     routes_file = static_dir / "routes.json"
     try:
         routes_record = json.loads(routes_file.read_text(encoding="utf-8"))

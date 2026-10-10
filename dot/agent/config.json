@@ -1,7 +1,7 @@
 {
-  "schema": "dot-agent-config/1",
+  "schema": "dot-agent-config/2",
   "status": "current",
-  "reviewed_on": "2026-10-09",
+  "reviewed_on": "2026-10-10",
   "models": {
     "policy": "ORDERED_FALLBACK",
     "primary": {
@@ -63,6 +63,18 @@
     "project_allowlist_required": true,
     "installation_allowed": false,
     "public_browser_tool_default": "allowed-with-data-and-side-effect-guards"
+  },
+  "browser": {
+    "tabs": {
+      "default_max_open": 4,
+      "limit_scope": "ALL_WINDOWS_AND_WORKERS",
+      "project_override_allowed": true,
+      "blocker_checks": {
+        "scheduled_interval_minutes": 15,
+        "scheduler_policy": "WHEN_AVAILABLE_AND_AUTHORIZED",
+        "fallback": "EVENT_DRIVEN"
+      }
+    }
   },
   "storage": {
     "working_root": "/workspace/scratch/<project-id>/",

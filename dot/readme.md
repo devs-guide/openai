@@ -20,7 +20,8 @@ explicitly requested, evidence-completing subtopic executive brief without
 changing the four-stage workflow or overwriting its parent report.
 
 - [`agent/`](agent/) defines the runtime, exact models, permissions, browser,
-  tools, workspace, Pages, video, and transcription behavior.
+  shared tab capacity, tools, workspace, Pages, video, and transcription
+  behavior.
 - [`research/`](research/) builds a project around that Agent, supplies the
   pure internet-research rules, converts reviewed evidence into controlled
   datasets, and provides reusable templates.
@@ -64,6 +65,8 @@ Exact current sources are published beneath `/openai/raw/dot/`.
 |---|---|
 | Models | Assigned collaborator followed by an explicit, accessibility-gated fallback order |
 | Execution | Cloud browser by default; existing VM tools require project opt-in |
+| Browser tabs | Four shared tabs by default across all windows and workers; an approved project may configure another positive limit |
+| Blocker checks | Verified 15-minute scheduling when available and authorized; otherwise disclosed event-driven checks |
 | Codex and installation | Prohibited |
 | Working files | `/workspace/scratch/<project-id>/` after verification; durability unknown |
 | Durable output | Configured Page or owner-approved destination with readback |
@@ -75,9 +78,10 @@ Exact current sources are published beneath `/openai/raw/dot/`.
 
 Release `0.0.2` consolidates the original prompts and dated guides. Release
 `0.0.3` adds the optional Summary deliverable without changing the core
-workflow. Release `0.0.4` adds the repository-wide Release contract. Candidate
+workflow. Release `0.0.4` adds the repository-wide Release contract. Release
 `0.0.5` makes Summary evidence-completing by default without changing the DOT
-instruction order. The
+instruction order. Candidate `0.0.6` adds coordinated, configurable `#TABS`
+behavior inside the Browser module. The
 [`two-lane migration record`](../docs/history/two-lane-migration.md) maps every
 `0.0.1` source to its current owner. Historical rendered routes redirect;
 historical raw routes identify both the immutable original and current

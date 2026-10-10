@@ -465,7 +465,7 @@ def main() -> int:
     source_sha = os.environ.get("SOURCE_SHA", "0" * 40)
     if not re.fullmatch(r"[0-9a-f]{40}", source_sha):
         fail("SOURCE_SHA must be a lowercase 40-character commit SHA")
-    release_version = os.environ.get("RELEASE_VERSION", "0.0.5")
+    release_version = os.environ.get("RELEASE_VERSION", "0.0.6")
     if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", release_version):
         fail("RELEASE_VERSION must be a bare semantic version")
     build(manifest, entries, publish_dir.resolve(), source_sha, release_version)
