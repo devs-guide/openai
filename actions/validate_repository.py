@@ -543,7 +543,7 @@ def validate_release_workflow() -> None:
     for required in (
         "0.0.1 is the published immutable baseline",
         "0.0.2 must be published before 0.0.3",
-        "0.0.3 — DOT On-Demand Research Summary",
+        "DOT On-Demand Research Summary",
         "release_text.py",
         "existing release is already published",
         "existing draft target differs",
