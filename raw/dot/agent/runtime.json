@@ -1,0 +1,50 @@
+{
+  "schema": "dot-runtime-observations/1",
+  "status": "dated-observation",
+  "observed_at": "2026-10-08T18:54:17Z/2026-10-08T20:11:00Z",
+  "source": "release-0.0.1 agent guides; includes explicitly labeled user-supplied observations",
+  "revalidate_before_use": true,
+  "computer": {
+    "operating_system": {"value": "Debian GNU/Linux 13 (trixie)", "state": "OBSERVED"},
+    "architecture": {"value": "x86_64", "state": "OBSERVED"},
+    "visible_cpus": {"value": 9, "state": "OBSERVED", "guaranteed_quota": "UNKNOWN"},
+    "reported_ram_bytes": {"value": 10451464192, "state": "OBSERVED", "guaranteed_usable": "UNKNOWN"},
+    "swap_bytes": {"value": 0, "state": "OBSERVED"},
+    "workspace_total_bytes": {"value": 33770192896, "state": "OBSERVED"},
+    "workspace_free_bytes": {"value": 31880318976, "state": "OBSERVED"},
+    "gpu": {"value": null, "state": "UNKNOWN"},
+    "background_runtime_guarantee": {"value": null, "state": "UNKNOWN"},
+    "filesystem_retention": {"value": null, "state": "UNKNOWN"}
+  },
+  "observed_runtimes": {
+    "python": "3.12.14",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "openjdk": "21.0.12.1",
+    "git": "2.52.0",
+    "bash": "5.2.37"
+  },
+  "workspace_entries": {
+    "/workspace/.agents": "listed; consumer and write policy UNKNOWN",
+    "/workspace/.codex": "listed; not authorized for this contract",
+    "/workspace/.git": "listed; role UNKNOWN",
+    "/workspace/library-files": "listed; retention and scope UNKNOWN",
+    "/workspace/scratch": "configured working-root parent; verify before use",
+    "/workspace/shared": "listed; audience and durability UNKNOWN"
+  },
+  "unknown_limits": [
+    "context capacity",
+    "response limit",
+    "tool rate limits",
+    "account quotas",
+    "maximum process duration",
+    "session lifetime",
+    "idle timeout",
+    "restart policy",
+    "durable storage capacity",
+    "browser tab limit",
+    "upload and download limits",
+    "outbound bandwidth"
+  ]
+}
+

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="0.0.7 — Continuous Progress and Recoverable Agent Storage · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="3c081ad6a42a4271c052adae522486355178626d">
+  <title>0.0.7 — Continuous Progress and Recoverable Agent Storage · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/releases/">Releases</a><span aria-hidden="true">/</span>0.0.7</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>release</span>
+      <span>candidate</span>
+      <span>reviewed 2026-10-10</span>
+    </div>
+    <article>
+<section id="007" class="level2">
+<h2>0.0.7</h2>
+<p>DOT agents now preserve work through verified persistent checkpoints and keep authorized projects moving through one evidence-based health monitor. The Agent saves and reads back work as it is produced, detects avoidable inactivity without mistaking slow or blocked work for failure, and recovers from the last verified state.</p>
+<p>Research projects also gain immutable ZIP checkpoints, complete Markdown data views beside canonical CSV/JSON pairs, and need-based functional storage such as <code>agent:pdf</code>. These behaviors ship together so no partial storage or progress contract is released early.</p>
+<section id="scope" class="level3">
+<h3>Scope</h3>
+<ul>
+<li>Release range: <code>0.0.6..0.0.7</code>.</li>
+<li>Product boundary: DOT Agent persistence/progress and Research recovery/data integration.</li>
+<li>Published entrypoints: Agent, Storage, Progress, Browser, Project, Internet, Data, Template, Summary, configuration, schema, feature, and release routes.</li>
+<li>Included release identity: DOT <code>0.0.7</code>, prior release <code>0.0.6</code>, migration baseline <code>0.0.1</code>.</li>
+<li>Excluded: starting an actual project schedule, creating a real storage location during release publication, running a Research topic, changing model selection, changing <code>BROWSER-004</code>, attaching generated artifacts, or granting new recipients, permissions, deletion, Codex, or software work.</li>
+</ul>
+</section>
+<section id="highlights" class="level3">
+<h3>Highlights</h3>
+<ul>
+<li>Defines required <code>#STORAGE</code> and <code>#FILES</code> controls for verified persistence, recovery manifests, capacity, archives, and delivery evidence.</li>
+<li>Defines required <code>#PROGRESS</code> and evidence-based <code>#LAZY</code> recovery for the complete project rather than Browser state alone.</li>
+<li>Uses one verified 15-minute cron-style monitor when supported and authorized, with truthful event-driven fallback and no overlapping project run.</li>
+<li>Allows need-based shared <code>agent:&lt;term&gt;</code> locations or Projects while keeping WIP storage, final delivery, access, sharing, and deletion separate.</li>
+<li>Packages every completed Research batch or interruption checkpoint as an immutable, readback-verified ZIP successor.</li>
+</ul>
+</section>
+<section id="added" class="level3">
+<h3>Added</h3>
+<ul>
+<li><code>STORAGE-001</code> through <code>STORAGE-012</code> and <code>PROGRESS-001</code> through <code>PROGRESS-008</code>.</li>
+<li>Destination registry, artifact preservation, recovery manifest, health check, consultation, capacity, and archive manifest Templates.</li>
+<li>Agent configuration schema v3 with <code>agent:storage</code>, purpose-location rules, archive verification, central health checks, cron metadata, and <code>#LAZY</code> classification controls.</li>
+<li>Acceptance coverage for scheduling, overlap, stalls, storage failure, provisioning, delivery, substantive research, archive integrity, data parity, security, and project lifecycle cases.</li>
+</ul>
+</section>
+<section id="changed" class="level3">
+<h3>Changed</h3>
+<ul>
+<li>Browser Tabs now consumes the project-wide Progress monitor instead of defining an independent schedule; the four-tab behavior remains intact.</li>
+<li>Project, Internet, Data, Page, and Summary require verified persistent inputs and register their outputs before dependent work or review.</li>
+<li>Each applicable Data basename retains its CSV/JSON machine pair and adds a complete readable Markdown view from the same logical records.</li>
+<li>Advanced ingestion, Pages, workflow, feature, and release metadata to <code>0.0.7</code>, with <code>0.0.6</code> as the immediate predecessor.</li>
+</ul>
+</section>
+<section id="fixed" class="level3">
+<h3>Fixed</h3>
+<ul>
+<li>Prevented plans, open tabs, repeated blockers, and unsaved generated files from being counted as substantive progress.</li>
+<li>Prevented a slow healthy action, authorized wait, or genuine external dependency from being mislabeled <code>#LAZY</code>.</li>
+<li>Prevented local paths, upload acknowledgements, filenames, or WIP locations from being presented as verified persistence or delivery.</li>
+<li>Prevented duplicate purpose locations, overlapping monitors, self-hashing archives, silent overwrites, and compression-driven deletion.</li>
+</ul>
+</section>
+<section id="operator-workflow-and-safety" class="level3">
+<h3>Operator workflow and safety</h3>
+<p>Verify the persistent destination with a save/reopen probe before substantive work. Save each useful artifact immediately, update the recovery manifest, and create a Research ZIP successor at every completed batch or interruption checkpoint. Create or reuse an <code>agent:&lt;term&gt;</code> location only when capacity, format, or separation requires it; creation never grants sharing, publication, permission changes, deletion, or final-delivery status.</p>
+<p>When authorized scheduling exists, verify the Project ID, schedule ID, timezone, enabled state, and next run. Otherwise use the declared event-driven checks. Routine all-clear results remain in the persistent log; only meaningful progress, blockers, decisions, or missed commitments notify the owner.</p>
+</section>
+<section id="interfaces-and-compatibility" class="level3">
+<h3>Interfaces and compatibility</h3>
+<ul>
+<li><code>dot-agent/2</code>, <code>dot-agent-config/3</code>, <code>dot-research-project/2</code>, <code>dot-research-data/2</code>, and <code>dot-research-summary/3</code> supersede their prior contract versions for new <code>0.0.7</code> activations.</li>
+<li><code>agent:storage</code> is the default identifier but never proof of access, persistence, or capacity. Project-approved overrides remain supported.</li>
+<li><code>agent:&lt;term&gt;</code> names use lowercase action/outcome terms and are shared by function with Project-level artifact separation.</li>
+<li>The current model/fallback order, runtime observations, four-tab default, Research sequence, and intentional <code>BROWSER-004</code> behavior remain compatible.</li>
+</ul>
+</section>
+<section id="migration-and-recovery" class="level3">
+<h3>Migration and recovery</h3>
+<p>Existing work must first identify and read back its latest verified artifact. The Agent creates a versioned recovery manifest rather than relabeling local or historical material as preserved. Reconstructed records remain distinct from newly revalidated records. Accepted dataset releases and prior verified archives remain immutable; changes create successors.</p>
+</section>
+<section id="validation-evidence" class="level3">
+<h3>Validation evidence</h3>
+<p>GitHub Actions must verify canonical rule ownership, exact configuration, unchanged models and CAPTCHA behavior, scheduling and <code>#LAZY</code> cases, storage and provisioning cases, archive integrity, CSV/JSON/Markdown parity, complete publication routes, and the single frozen edge-case ledger. No local build, compile, formatting, or test result is used as release evidence.</p>
+</section>
+<section id="edge-case-acceptance-ledger" class="level3">
+<h3>Edge-case acceptance ledger</h3>
+<p>Every row is a release gate. Its result must be <code>PASS</code> in the required GitHub workflow for the frozen candidate; the tracked ledger does not claim a run passed before that evidence exists.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Domain</th>
+<th>Required cases</th>
+<th>Canonical owner</th>
+<th>Configuration or Template</th>
+<th>Validator and required evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Progress</td>
+<td>Verified or missing scheduler, disabled schedule, overlap, healthy/unknown long task, confirmed <code>#LAZY</code>, unchanged blocker, external dependency</td>
+<td><code>PROGRESS-002</code>–<code>PROGRESS-008</code></td>
+<td><code>progress.health_checks</code>; Progress Health Check</td>
+<td>Repository and Pages workflow <code>PASS</code></td>
+</tr>
+<tr class="even">
+<td>Storage</td>
+<td>Failed probe/readback, native document, checksum file, unsaved draft, interruption, manifest recovery, full destination</td>
+<td><code>STORAGE-002</code>–<code>STORAGE-008</code>, <code>STORAGE-010</code>, <code>STORAGE-012</code></td>
+<td>Storage v3; Artifact Preservation and Recovery Manifest</td>
+<td>Repository and Pages workflow <code>PASS</code></td>
+</tr>
+<tr class="odd">
+<td>Provisioning</td>
+<td>Existing match, missing location, collision, unsupported format, insufficient capacity, failed creation, cross-project separation</td>
+<td><code>STORAGE-011</code></td>
+<td><code>storage.purpose_locations</code>; Purpose Location record</td>
+<td>Repository and Pages workflow <code>PASS</code></td>
+</tr>
+<tr class="even">
+<td>Delivery</td>
+<td>WIP versus delivered, destination acceptance, recipient access unknown, corrected successor</td>
+<td><code>STORAGE-004</code>, <code>STORAGE-008</code>, <code>STORAGE-011</code></td>
+<td>Artifact Preservation; Summary Completion</td>
+<td>Repository and Pages workflow <code>PASS</code></td>
+</tr>
+<tr class="odd">
+<td>Browser</td>
+<td>Four-tab capacity, contention, protected tab, event fallback, unchanged CAPTCHA behavior</td>
+<td><code>TABS-001</code>–<code>TABS-007</code>, <code>BROWSER-004</code></td>
+<td>Browser v3 inheritance; tab scenarios</td>
+<td>Repository and Pages workflow <code>PASS</code></td>
+</tr>
+<tr class="even">
+<td>Research</td>
+<td>One failed query, aliases, renamed entity, blocked source, advisory consultation, contradictory primary evidence</td>
+<td><code>INTERNET-003</code>, <code>INTERNET-004</code>, <code>INTERNET-008</code></td>
+<td>Method Consultation and research records</td>
+<td>Repository and Pages workflow <code>PASS</code></td>
+</tr>
+<tr class="odd">
+<td>Data</td>
+<td>Three-format parity, null semantics, stable IDs, recovered/revalidated distinction, immutable correction</td>
+<td><code>DATA-001</code>, <code>DATA-007</code>–<code>DATA-009</code></td>
+<td>Manifest File and recovery records</td>
+<td>Repository and Pages workflow <code>PASS</code></td>
+</tr>
+<tr class="even">
+<td>Archives</td>
+<td>Missing member, bad hash, extraction failure, post-upload mismatch, self-hash prevention, inaccessible ZIP contents</td>
+<td><code>STORAGE-007</code>, <code>STORAGE-009</code>, <code>STORAGE-010</code></td>
+<td>Research Archive Manifest</td>
+<td>Repository and Pages workflow <code>PASS</code></td>
+</tr>
+<tr class="odd">
+<td>Security</td>
+<td>Credentials, tokens, private URLs, sensitive parameters, personal data, denial evasion</td>
+<td><code>AGENT-009</code>, <code>STORAGE-006</code>, <code>PROGRESS-005</code>, <code>PROGRESS-007</code></td>
+<td>Recovery and health logs</td>
+<td>Repository and Pages workflow <code>PASS</code></td>
+</tr>
+<tr class="even">
+<td>Lifecycle</td>
+<td>Pause, resume, crash, handoff, cancellation, genuine blocker, completion, schedule cleanup</td>
+<td><code>PROJECT-005</code>, <code>PROJECT-007</code>, <code>PROGRESS-008</code></td>
+<td>Project Control, Checkpoint, and Health Check</td>
+<td>Repository and Pages workflow <code>PASS</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="known-boundaries" class="level3">
+<h3>Known boundaries</h3>
+<ul>
+<li>The contract cannot create a scheduler or persistent destination unless the active runtime exposes and authorizes that operation.</li>
+<li>The owner-stated single-Agent-per-account condition is dated context, so leases still protect against worker and scheduled-run overlap.</li>
+<li>Local-only work during a storage outage remains incomplete and at risk.</li>
+<li>The release defines recovery behavior; it does not claim a later real-world project, schedule, archive upload, or recipient access test succeeded.</li>
+</ul>
+</section>
+<section id="commit" class="level3">
+<h3>#COMMIT</h3>
+<p><code>release: 0.0.7 - add continuous progress and recoverable storage</code></p>
+</section>
+<section id="notable-commits-since-006" class="level3">
+<h3>Notable commits since 0.0.6</h3>
+<p>None beyond the release commit recorded above.</p>
+</section>
+<section id="assets" class="level3">
+<h3>Assets</h3>
+<ul>
+<li>GitHub-generated source archives for tag <code>0.0.7</code>.</li>
+<li>Rendered documentation and byte-exact current raw sources through GitHub Pages.</li>
+<li>No additional binary assets.</li>
+</ul>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/3c081ad6a42a4271c052adae522486355178626d/docs/releases/0.0.7.md">Repository source</a> · <a href="/openai/raw/docs/releases/0.0.7.md">Raw source</a></p>
+  </footer>
+</body>
+</html>

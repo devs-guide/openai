@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DOT release ingestion manifest · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="3c081ad6a42a4271c052adae522486355178626d">
+  <title>DOT release ingestion manifest · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span>Ingest</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>ingestion-manifest</span>
+      <span>current</span>
+      <span>reviewed 2026-10-10</span>
+    </div>
+    <article>
+<pre class="source-json"><code>{
+  &quot;activation_gate&quot;: &quot;PROJECT_CONTROL_PACKET_READY&quot;,
+  &quot;baseline_tag&quot;: &quot;0.0.1&quot;,
+  &quot;entrypoint&quot;: &quot;dot/readme.md&quot;,
+  &quot;instruction_files&quot;: [
+    {
+      &quot;activation&quot;: &quot;REQUIRED&quot;,
+      &quot;authority_class&quot;: &quot;AGENT_CONTRACT&quot;,
+      &quot;condition&quot;: null,
+      &quot;order&quot;: 1,
+      &quot;path&quot;: &quot;dot/agent/master.prompt&quot;,
+      &quot;sha256&quot;: &quot;353f602caac23f299463e0712fdfc1a1b31dc6705fa33e04c1b4845e192515a7&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;REQUIRED&quot;,
+      &quot;authority_class&quot;: &quot;CONFIGURATION&quot;,
+      &quot;condition&quot;: null,
+      &quot;order&quot;: 2,
+      &quot;path&quot;: &quot;dot/agent/config.json&quot;,
+      &quot;sha256&quot;: &quot;16775929ec6f5370f9a2d2d64a860edea97e794fdd2b78f3a8afd81a0163ed61&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;REQUIRED&quot;,
+      &quot;authority_class&quot;: &quot;DATED_OBSERVATION&quot;,
+      &quot;condition&quot;: null,
+      &quot;order&quot;: 3,
+      &quot;path&quot;: &quot;dot/agent/runtime.json&quot;,
+      &quot;sha256&quot;: &quot;d00a0769b220929fea17fbb1dc17e5fa9c07cf3b7e4147a2ae2d55a39095743f&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;REQUIRED&quot;,
+      &quot;authority_class&quot;: &quot;CAPABILITY_MODULE&quot;,
+      &quot;condition&quot;: null,
+      &quot;order&quot;: 4,
+      &quot;path&quot;: &quot;dot/agent/storage.prompt&quot;,
+      &quot;sha256&quot;: &quot;8c06516359acfe43d9869cd05b2d341d8f0f0e4fe3b28051b66f7fa219813d34&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;REQUIRED&quot;,
+      &quot;authority_class&quot;: &quot;CAPABILITY_MODULE&quot;,
+      &quot;condition&quot;: null,
+      &quot;order&quot;: 5,
+      &quot;path&quot;: &quot;dot/agent/progress.prompt&quot;,
+      &quot;sha256&quot;: &quot;8e990f7072306ae1fd5ad0481f0c3a6ae74f77d069f7c8f586313a8b7c9f9c15&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;REQUIRED&quot;,
+      &quot;authority_class&quot;: &quot;CAPABILITY_MODULE&quot;,
+      &quot;condition&quot;: &quot;INTERNET_RESEARCH&quot;,
+      &quot;order&quot;: 6,
+      &quot;path&quot;: &quot;dot/agent/browser.prompt&quot;,
+      &quot;sha256&quot;: &quot;fe6f8f904c908b911b8b9ca9cc7a18cc4a01371a99a89c33234c0e8f464d085b&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;CONDITIONAL&quot;,
+      &quot;authority_class&quot;: &quot;CAPABILITY_MODULE&quot;,
+      &quot;condition&quot;: &quot;PAGE_ACTION_OR_DESTINATION&quot;,
+      &quot;order&quot;: 7,
+      &quot;path&quot;: &quot;dot/agent/page.prompt&quot;,
+      &quot;sha256&quot;: &quot;28c841ce66487d483b11e95e7058c61529a77a1e3ad317a3ad1dc7079e28f56d&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;CONDITIONAL&quot;,
+      &quot;authority_class&quot;: &quot;CAPABILITY_MODULE&quot;,
+      &quot;condition&quot;: &quot;AUDIOVISUAL_EVIDENCE&quot;,
+      &quot;order&quot;: 8,
+      &quot;path&quot;: &quot;dot/agent/media.prompt&quot;,
+      &quot;sha256&quot;: &quot;c97e9222b8d3f81a15b7cd0c9623c0b761bfedec6161043e6dae9731c69b1161&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;REQUIRED&quot;,
+      &quot;authority_class&quot;: &quot;RESEARCH_CONTRACT&quot;,
+      &quot;condition&quot;: null,
+      &quot;order&quot;: 9,
+      &quot;path&quot;: &quot;dot/research/project.prompt&quot;,
+      &quot;sha256&quot;: &quot;de228442b871b5354afeb39826bc95fa89e6910b0cc8162e7168ad7166700a4d&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;REQUIRED&quot;,
+      &quot;authority_class&quot;: &quot;RESEARCH_CONTRACT&quot;,
+      &quot;condition&quot;: null,
+      &quot;order&quot;: 10,
+      &quot;path&quot;: &quot;dot/research/internet.prompt&quot;,
+      &quot;sha256&quot;: &quot;f5c1684d6f7da90482fe5f150b353f3b568a1765ca7fd9bc5b7eb4c3f80052cd&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;REQUIRED&quot;,
+      &quot;authority_class&quot;: &quot;RESEARCH_CONTRACT&quot;,
+      &quot;condition&quot;: null,
+      &quot;order&quot;: 11,
+      &quot;path&quot;: &quot;dot/research/data.prompt&quot;,
+      &quot;sha256&quot;: &quot;5a36ca43469cf308c43590d1f08420ef65a491c6920090062c76e4381b0f1893&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;REQUIRED&quot;,
+      &quot;authority_class&quot;: &quot;TEMPLATE&quot;,
+      &quot;condition&quot;: null,
+      &quot;order&quot;: 12,
+      &quot;path&quot;: &quot;dot/research/template.prompt&quot;,
+      &quot;sha256&quot;: &quot;4ab39385b747d93c775f8ec89cf543d5fff5acd5da55cf44b6267b3cbc7b10af&quot;
+    },
+    {
+      &quot;activation&quot;: &quot;CONDITIONAL&quot;,
+      &quot;authority_class&quot;: &quot;RESEARCH_CONTRACT&quot;,
+      &quot;condition&quot;: &quot;ON_DEMAND_SUBTOPIC_EXECUTIVE_BRIEF&quot;,
+      &quot;order&quot;: 13,
+      &quot;path&quot;: &quot;dot/research/summary.prompt&quot;,
+      &quot;sha256&quot;: &quot;f9ba63f3d70fb4d4b9265f3380a0d83985073cb01234484ee2b85ab83989295d&quot;
+    }
+  ],
+  &quot;manifest_authority&quot;: &quot;ROUTING_METADATA_ONLY&quot;,
+  &quot;non_instruction_prefixes&quot;: [
+    &quot;.github/&quot;,
+    &quot;actions/&quot;,
+    &quot;docs/&quot;,
+    &quot;www/&quot;
+  ],
+  &quot;prior_release_tag&quot;: &quot;0.0.6&quot;,
+  &quot;release&quot;: &quot;0.0.7&quot;,
+  &quot;rights&quot;: &quot;OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY&quot;,
+  &quot;schema&quot;: &quot;dot-ingest/1&quot;,
+  &quot;superseded_prefixes&quot;: [
+    &quot;dot/agents/&quot;,
+    &quot;dot/prompts/&quot;
+  ],
+  &quot;supporting_files&quot;: [
+    {
+      &quot;path&quot;: &quot;dot/readme.md&quot;,
+      &quot;role&quot;: &quot;PRODUCT_ENTRYPOINT&quot;
+    },
+    {
+      &quot;path&quot;: &quot;dot/agent/readme.md&quot;,
+      &quot;role&quot;: &quot;AGENT_NAVIGATION&quot;
+    },
+    {
+      &quot;path&quot;: &quot;dot/agent/config.schema.json&quot;,
+      &quot;role&quot;: &quot;CONFIGURATION_SCHEMA&quot;
+    },
+    {
+      &quot;path&quot;: &quot;dot/research/readme.md&quot;,
+      &quot;role&quot;: &quot;RESEARCH_NAVIGATION&quot;
+    }
+  ],
+  &quot;topic_input&quot;: &quot;OWNER_SUPPLIED_PROJECT_BRIEF&quot;
+}</code></pre>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/3c081ad6a42a4271c052adae522486355178626d/dot/ingest.json">Repository source</a> · <a href="/openai/raw/dot/ingest.json">Raw source</a></p>
+  </footer>
+</body>
+</html>

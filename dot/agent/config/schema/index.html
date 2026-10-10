@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Agent configuration schema · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="3c081ad6a42a4271c052adae522486355178626d">
+  <title>Agent configuration schema · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/agent/">Agent</a><span aria-hidden="true">/</span><a href="/openai/dot/agent/config/">Config</a><span aria-hidden="true">/</span>Schema</nav>
+    <nav class="workflow-nav" aria-label="Agent workflow">
+      <a href="/openai/dot/agent/contract/">Agent</a>
+      <span aria-hidden="true">→</span>
+      <a href="/openai/dot/agent/storage/">Storage</a>
+      <span aria-hidden="true">→</span>
+      <a href="/openai/dot/agent/progress/">Progress</a>
+      <span aria-hidden="true">→</span>
+      <a href="/openai/dot/agent/browser/">Browser</a>
+    </nav>
+    <div class="document-meta" aria-label="Document status">
+      <span>schema</span>
+      <span>current</span>
+      <span>reviewed 2026-10-10</span>
+    </div>
+    <article>
+<pre class="source-json"><code>{
+  &quot;$defs&quot;: {
+    &quot;model&quot;: {
+      &quot;additionalProperties&quot;: false,
+      &quot;properties&quot;: {
+        &quot;effort&quot;: {
+          &quot;minLength&quot;: 1,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;model&quot;: {
+          &quot;minLength&quot;: 1,
+          &quot;type&quot;: &quot;string&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;model&quot;,
+        &quot;effort&quot;
+      ],
+      &quot;type&quot;: &quot;object&quot;
+    }
+  },
+  &quot;$id&quot;: &quot;https://devs-guide.github.io/openai/raw/dot/agent/config.schema.json&quot;,
+  &quot;$schema&quot;: &quot;https://json-schema.org/draft/2020-12/schema&quot;,
+  &quot;additionalProperties&quot;: false,
+  &quot;properties&quot;: {
+    &quot;browser&quot;: {
+      &quot;additionalProperties&quot;: false,
+      &quot;properties&quot;: {
+        &quot;tabs&quot;: {
+          &quot;additionalProperties&quot;: false,
+          &quot;properties&quot;: {
+            &quot;blocker_checks&quot;: {
+              &quot;additionalProperties&quot;: false,
+              &quot;properties&quot;: {
+                &quot;inherit_from&quot;: {
+                  &quot;const&quot;: &quot;progress.health_checks&quot;
+                }
+              },
+              &quot;required&quot;: [
+                &quot;inherit_from&quot;
+              ],
+              &quot;type&quot;: &quot;object&quot;
+            },
+            &quot;default_max_open&quot;: {
+              &quot;minimum&quot;: 1,
+              &quot;type&quot;: &quot;integer&quot;
+            },
+            &quot;limit_scope&quot;: {
+              &quot;const&quot;: &quot;ALL_WINDOWS_AND_WORKERS&quot;
+            },
+            &quot;project_override_allowed&quot;: {
+              &quot;const&quot;: true
+            }
+          },
+          &quot;required&quot;: [
+            &quot;default_max_open&quot;,
+            &quot;limit_scope&quot;,
+            &quot;project_override_allowed&quot;,
+            &quot;blocker_checks&quot;
+          ],
+          &quot;type&quot;: &quot;object&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;tabs&quot;
+      ],
+      &quot;type&quot;: &quot;object&quot;
+    },
+    &quot;execution&quot;: {
+      &quot;type&quot;: &quot;object&quot;
+    },
+    &quot;models&quot;: {
+      &quot;additionalProperties&quot;: false,
+      &quot;properties&quot;: {
+        &quot;collaborator&quot;: {
+          &quot;$ref&quot;: &quot;#/$defs/model&quot;
+        },
+        &quot;fallbacks&quot;: {
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/$defs/model&quot;
+          },
+          &quot;maxItems&quot;: 7,
+          &quot;minItems&quot;: 7,
+          &quot;type&quot;: &quot;array&quot;
+        },
+        &quot;policy&quot;: {
+          &quot;const&quot;: &quot;ORDERED_FALLBACK&quot;
+        },
+        &quot;primary&quot;: {
+          &quot;$ref&quot;: &quot;#/$defs/model&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;policy&quot;,
+        &quot;primary&quot;,
+        &quot;collaborator&quot;,
+        &quot;fallbacks&quot;
+      ],
+      &quot;type&quot;: &quot;object&quot;
+    },
+    &quot;progress&quot;: {
+      &quot;additionalProperties&quot;: false,
+      &quot;properties&quot;: {
+        &quot;health_checks&quot;: {
+          &quot;additionalProperties&quot;: false,
+          &quot;properties&quot;: {
+            &quot;event_triggers&quot;: {
+              &quot;const&quot;: [
+                &quot;TASK_START_OR_RESUME&quot;,
+                &quot;WORKER_HANDOFF&quot;,
+                &quot;BEFORE_RISKY_OPERATION&quot;,
+                &quot;AFTER_CRASH_OR_TOOL_FAILURE&quot;
+              ]
+            },
+            &quot;fallback&quot;: {
+              &quot;const&quot;: &quot;EVENT_DRIVEN&quot;
+            },
+            &quot;overlap_policy&quot;: {
+              &quot;const&quot;: &quot;INSPECT_HEALTHY_RUN&quot;
+            },
+            &quot;project_schedule_limit&quot;: {
+              &quot;const&quot;: 1
+            },
+            &quot;scheduled_interval_minutes&quot;: {
+              &quot;const&quot;: 15
+            },
+            &quot;scheduler_policy&quot;: {
+              &quot;const&quot;: &quot;WHEN_AVAILABLE_AND_AUTHORIZED&quot;
+            },
+            &quot;scope&quot;: {
+              &quot;const&quot;: &quot;ACTIVE_PROJECT&quot;
+            },
+            &quot;suggested_cron&quot;: {
+              &quot;const&quot;: &quot;*/15 * * * *&quot;
+            },
+            &quot;timezone_required&quot;: {
+              &quot;const&quot;: true
+            }
+          },
+          &quot;required&quot;: [
+            &quot;scheduled_interval_minutes&quot;,
+            &quot;suggested_cron&quot;,
+            &quot;timezone_required&quot;,
+            &quot;scheduler_policy&quot;,
+            &quot;fallback&quot;,
+            &quot;scope&quot;,
+            &quot;project_schedule_limit&quot;,
+            &quot;overlap_policy&quot;,
+            &quot;event_triggers&quot;
+          ],
+          &quot;type&quot;: &quot;object&quot;
+        },
+        &quot;lazy&quot;: {
+          &quot;additionalProperties&quot;: false,
+          &quot;properties&quot;: {
+            &quot;elapsed_time_alone_is_sufficient&quot;: {
+              &quot;const&quot;: false
+            },
+            &quot;owner&quot;: {
+              &quot;const&quot;: &quot;#PROGRESS&quot;
+            },
+            &quot;requires_executable_authorized_action&quot;: {
+              &quot;const&quot;: true
+            },
+            &quot;requires_observed_inactivity&quot;: {
+              &quot;const&quot;: true
+            }
+          },
+          &quot;required&quot;: [
+            &quot;owner&quot;,
+            &quot;requires_observed_inactivity&quot;,
+            &quot;requires_executable_authorized_action&quot;,
+            &quot;elapsed_time_alone_is_sufficient&quot;
+          ],
+          &quot;type&quot;: &quot;object&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;health_checks&quot;,
+        &quot;lazy&quot;
+      ],
+      &quot;type&quot;: &quot;object&quot;
+    },
+    &quot;reviewed_on&quot;: {
+      &quot;format&quot;: &quot;date&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;schema&quot;: {
+      &quot;const&quot;: &quot;dot-agent-config/3&quot;
+    },
+    &quot;status&quot;: {
+      &quot;enum&quot;: [
+        &quot;current&quot;,
+        &quot;candidate&quot;,
+        &quot;archived&quot;
+      ]
+    },
+    &quot;storage&quot;: {
+      &quot;additionalProperties&quot;: false,
+      &quot;properties&quot;: {
+        &quot;delivery_states&quot;: {
+          &quot;const&quot;: [
+            &quot;NOT DELIVERED&quot;,
+            &quot;DELIVERED&quot;,
+            &quot;DELIVERY ACCEPTED&quot;
+          ]
+        },
+        &quot;durable_destination&quot;: {
+          &quot;const&quot;: &quot;agent:storage&quot;
+        },
+        &quot;file_integrity&quot;: {
+          &quot;additionalProperties&quot;: false,
+          &quot;properties&quot;: {
+            &quot;byte_count_required&quot;: {
+              &quot;const&quot;: true
+            },
+            &quot;checksum&quot;: {
+              &quot;const&quot;: &quot;SHA-256&quot;
+            }
+          },
+          &quot;required&quot;: [
+            &quot;byte_count_required&quot;,
+            &quot;checksum&quot;
+          ],
+          &quot;type&quot;: &quot;object&quot;
+        },
+        &quot;native_document_integrity&quot;: {
+          &quot;const&quot;: &quot;REVISION_AND_CONTENT_READBACK&quot;
+        },
+        &quot;preservation_states&quot;: {
+          &quot;const&quot;: [
+            &quot;LOCAL ONLY&quot;,
+            &quot;SAVED BUT UNVERIFIED&quot;,
+            &quot;PERSISTENTLY SAVED AND VERIFIED&quot;,
+            &quot;VALIDATED&quot;
+          ]
+        },
+        &quot;project_override_allowed&quot;: {
+          &quot;const&quot;: true
+        },
+        &quot;purpose_locations&quot;: {
+          &quot;additionalProperties&quot;: false,
+          &quot;properties&quot;: {
+            &quot;creation_policy&quot;: {
+              &quot;const&quot;: &quot;NEED_BASED_AUTOMATIC&quot;
+            },
+            &quot;destination_kinds&quot;: {
+              &quot;const&quot;: [
+                &quot;LOCATION&quot;,
+                &quot;PROJECT&quot;
+              ]
+            },
+            &quot;registry_required&quot;: {
+              &quot;const&quot;: true
+            },
+            &quot;reuse_policy&quot;: {
+              &quot;const&quot;: &quot;REUSE_VERIFIED_MATCH_FIRST&quot;
+            },
+            &quot;scope&quot;: {
+              &quot;const&quot;: &quot;SHARED_BY_FUNCTION_ACROSS_PROJECTS&quot;
+            },
+            &quot;sharing_or_deletion_authorized&quot;: {
+              &quot;const&quot;: false
+            },
+            &quot;title_pattern&quot;: {
+              &quot;const&quot;: &quot;^agent:[a-z][a-z0-9-]*$&quot;
+            }
+          },
+          &quot;required&quot;: [
+            &quot;creation_policy&quot;,
+            &quot;reuse_policy&quot;,
+            &quot;destination_kinds&quot;,
+            &quot;title_pattern&quot;,
+            &quot;scope&quot;,
+            &quot;registry_required&quot;,
+            &quot;sharing_or_deletion_authorized&quot;
+          ],
+          &quot;type&quot;: &quot;object&quot;
+        },
+        &quot;readback_required&quot;: {
+          &quot;const&quot;: true
+        },
+        &quot;recovery_manifest_required&quot;: {
+          &quot;const&quot;: true
+        },
+        &quot;research_archives&quot;: {
+          &quot;additionalProperties&quot;: false,
+          &quot;properties&quot;: {
+            &quot;format&quot;: {
+              &quot;const&quot;: &quot;ZIP&quot;
+            },
+            &quot;planning_reserve_slots&quot;: {
+              &quot;const&quot;: 2
+            },
+            &quot;post_upload_download_required&quot;: {
+              &quot;const&quot;: true
+            },
+            &quot;pre_upload_extraction_required&quot;: {
+              &quot;const&quot;: true
+            },
+            &quot;required&quot;: {
+              &quot;const&quot;: true
+            }
+          },
+          &quot;required&quot;: [
+            &quot;required&quot;,
+            &quot;format&quot;,
+            &quot;pre_upload_extraction_required&quot;,
+            &quot;post_upload_download_required&quot;,
+            &quot;planning_reserve_slots&quot;
+          ],
+          &quot;type&quot;: &quot;object&quot;
+        },
+        &quot;verify_before_use&quot;: {
+          &quot;const&quot;: true
+        },
+        &quot;version_policy&quot;: {
+          &quot;const&quot;: &quot;IMMUTABLE_SUCCESSORS&quot;
+        },
+        &quot;working_retention&quot;: {
+          &quot;const&quot;: &quot;UNKNOWN&quot;
+        },
+        &quot;working_root&quot;: {
+          &quot;const&quot;: &quot;/workspace/scratch/&lt;project-id&gt;/&quot;
+        },
+        &quot;working_storage_class&quot;: {
+          &quot;const&quot;: &quot;EPHEMERAL_UNTRUSTED&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;working_root&quot;,
+        &quot;working_storage_class&quot;,
+        &quot;working_retention&quot;,
+        &quot;durable_destination&quot;,
+        &quot;project_override_allowed&quot;,
+        &quot;verify_before_use&quot;,
+        &quot;readback_required&quot;,
+        &quot;file_integrity&quot;,
+        &quot;native_document_integrity&quot;,
+        &quot;recovery_manifest_required&quot;,
+        &quot;version_policy&quot;,
+        &quot;research_archives&quot;,
+        &quot;purpose_locations&quot;,
+        &quot;preservation_states&quot;,
+        &quot;delivery_states&quot;
+      ],
+      &quot;type&quot;: &quot;object&quot;
+    },
+    &quot;tools&quot;: {
+      &quot;type&quot;: &quot;object&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;schema&quot;,
+    &quot;status&quot;,
+    &quot;reviewed_on&quot;,
+    &quot;models&quot;,
+    &quot;execution&quot;,
+    &quot;tools&quot;,
+    &quot;browser&quot;,
+    &quot;storage&quot;,
+    &quot;progress&quot;
+  ],
+  &quot;title&quot;: &quot;DOT agent configuration&quot;,
+  &quot;type&quot;: &quot;object&quot;
+}</code></pre>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/3c081ad6a42a4271c052adae522486355178626d/dot/agent/config.schema.json">Repository source</a> · <a href="/openai/raw/dot/agent/config.schema.json">Raw source</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,147 @@
+{
+  "schema": "dot-agent-config/3",
+  "status": "current",
+  "reviewed_on": "2026-10-10",
+  "models": {
+    "policy": "ORDERED_FALLBACK",
+    "primary": {
+      "model": "GPT-6 Astra",
+      "effort": "assigned"
+    },
+    "collaborator": {
+      "model": "GPT-5.6 Sol",
+      "effort": "High"
+    },
+    "fallbacks": [
+      {
+        "model": "GPT-5.6 Sol",
+        "effort": "Extra High"
+      },
+      {
+        "model": "GPT-5.6 Sol",
+        "effort": "Max"
+      },
+      {
+        "model": "GPT-5.6 Luna",
+        "effort": "Extra High"
+      },
+      {
+        "model": "GPT-5.6 Luna",
+        "effort": "High"
+      },
+      {
+        "model": "GPT-5.6 Luna",
+        "effort": "Max"
+      },
+      {
+        "model": "GPT-6.1 Sol",
+        "effort": "Medium"
+      },
+      {
+        "model": "GPT-6.1 Sol",
+        "effort": "High"
+      }
+    ]
+  },
+  "execution": {
+    "default_surface": "cloud-browser",
+    "allowed_surfaces": [
+      "cloud-browser"
+    ],
+    "project_opt_in_surface": "existing-cloud-computer-tool",
+    "prohibited": [
+      "codex",
+      "coding-project",
+      "local-computer",
+      "software-installation",
+      "unassigned-model",
+      "access-control-bypass"
+    ]
+  },
+  "tools": {
+    "cloud_computer_default": "disabled",
+    "project_allowlist_required": true,
+    "installation_allowed": false,
+    "public_browser_tool_default": "allowed-with-data-and-side-effect-guards"
+  },
+  "browser": {
+    "tabs": {
+      "default_max_open": 4,
+      "limit_scope": "ALL_WINDOWS_AND_WORKERS",
+      "project_override_allowed": true,
+      "blocker_checks": {
+        "inherit_from": "progress.health_checks"
+      }
+    }
+  },
+  "storage": {
+    "working_root": "/workspace/scratch/<project-id>/",
+    "working_storage_class": "EPHEMERAL_UNTRUSTED",
+    "working_retention": "UNKNOWN",
+    "durable_destination": "agent:storage",
+    "project_override_allowed": true,
+    "verify_before_use": true,
+    "readback_required": true,
+    "file_integrity": {
+      "byte_count_required": true,
+      "checksum": "SHA-256"
+    },
+    "native_document_integrity": "REVISION_AND_CONTENT_READBACK",
+    "recovery_manifest_required": true,
+    "version_policy": "IMMUTABLE_SUCCESSORS",
+    "research_archives": {
+      "required": true,
+      "format": "ZIP",
+      "pre_upload_extraction_required": true,
+      "post_upload_download_required": true,
+      "planning_reserve_slots": 2
+    },
+    "purpose_locations": {
+      "creation_policy": "NEED_BASED_AUTOMATIC",
+      "reuse_policy": "REUSE_VERIFIED_MATCH_FIRST",
+      "destination_kinds": [
+        "LOCATION",
+        "PROJECT"
+      ],
+      "title_pattern": "^agent:[a-z][a-z0-9-]*$",
+      "scope": "SHARED_BY_FUNCTION_ACROSS_PROJECTS",
+      "registry_required": true,
+      "sharing_or_deletion_authorized": false
+    },
+    "preservation_states": [
+      "LOCAL ONLY",
+      "SAVED BUT UNVERIFIED",
+      "PERSISTENTLY SAVED AND VERIFIED",
+      "VALIDATED"
+    ],
+    "delivery_states": [
+      "NOT DELIVERED",
+      "DELIVERED",
+      "DELIVERY ACCEPTED"
+    ]
+  },
+  "progress": {
+    "health_checks": {
+      "scheduled_interval_minutes": 15,
+      "suggested_cron": "*/15 * * * *",
+      "timezone_required": true,
+      "scheduler_policy": "WHEN_AVAILABLE_AND_AUTHORIZED",
+      "fallback": "EVENT_DRIVEN",
+      "scope": "ACTIVE_PROJECT",
+      "project_schedule_limit": 1,
+      "overlap_policy": "INSPECT_HEALTHY_RUN",
+      "event_triggers": [
+        "TASK_START_OR_RESUME",
+        "WORKER_HANDOFF",
+        "BEFORE_RISKY_OPERATION",
+        "AFTER_CRASH_OR_TOOL_FAILURE"
+      ]
+    },
+    "lazy": {
+      "owner": "#PROGRESS",
+      "requires_observed_inactivity": true,
+      "requires_executable_authorized_action": true,
+      "elapsed_time_alone_is_sufficient": false
+    }
+  }
+}

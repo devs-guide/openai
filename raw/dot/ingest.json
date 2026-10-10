@@ -1,0 +1,145 @@
+{
+  "schema": "dot-ingest/1",
+  "release": "0.0.7",
+  "baseline_tag": "0.0.1",
+  "prior_release_tag": "0.0.6",
+  "entrypoint": "dot/readme.md",
+  "manifest_authority": "ROUTING_METADATA_ONLY",
+  "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
+  "activation_gate": "PROJECT_CONTROL_PACKET_READY",
+  "topic_input": "OWNER_SUPPLIED_PROJECT_BRIEF",
+  "instruction_files": [
+    {
+      "order": 1,
+      "path": "dot/agent/master.prompt",
+      "authority_class": "AGENT_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "353f602caac23f299463e0712fdfc1a1b31dc6705fa33e04c1b4845e192515a7"
+    },
+    {
+      "order": 2,
+      "path": "dot/agent/config.json",
+      "authority_class": "CONFIGURATION",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "16775929ec6f5370f9a2d2d64a860edea97e794fdd2b78f3a8afd81a0163ed61"
+    },
+    {
+      "order": 3,
+      "path": "dot/agent/runtime.json",
+      "authority_class": "DATED_OBSERVATION",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "d00a0769b220929fea17fbb1dc17e5fa9c07cf3b7e4147a2ae2d55a39095743f"
+    },
+    {
+      "order": 4,
+      "path": "dot/agent/storage.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "8c06516359acfe43d9869cd05b2d341d8f0f0e4fe3b28051b66f7fa219813d34"
+    },
+    {
+      "order": 5,
+      "path": "dot/agent/progress.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "8e990f7072306ae1fd5ad0481f0c3a6ae74f77d069f7c8f586313a8b7c9f9c15"
+    },
+    {
+      "order": 6,
+      "path": "dot/agent/browser.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "REQUIRED",
+      "condition": "INTERNET_RESEARCH",
+      "sha256": "fe6f8f904c908b911b8b9ca9cc7a18cc4a01371a99a89c33234c0e8f464d085b"
+    },
+    {
+      "order": 7,
+      "path": "dot/agent/page.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "CONDITIONAL",
+      "condition": "PAGE_ACTION_OR_DESTINATION",
+      "sha256": "28c841ce66487d483b11e95e7058c61529a77a1e3ad317a3ad1dc7079e28f56d"
+    },
+    {
+      "order": 8,
+      "path": "dot/agent/media.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "CONDITIONAL",
+      "condition": "AUDIOVISUAL_EVIDENCE",
+      "sha256": "c97e9222b8d3f81a15b7cd0c9623c0b761bfedec6161043e6dae9731c69b1161"
+    },
+    {
+      "order": 9,
+      "path": "dot/research/project.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "de228442b871b5354afeb39826bc95fa89e6910b0cc8162e7168ad7166700a4d"
+    },
+    {
+      "order": 10,
+      "path": "dot/research/internet.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "f5c1684d6f7da90482fe5f150b353f3b568a1765ca7fd9bc5b7eb4c3f80052cd"
+    },
+    {
+      "order": 11,
+      "path": "dot/research/data.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "5a36ca43469cf308c43590d1f08420ef65a491c6920090062c76e4381b0f1893"
+    },
+    {
+      "order": 12,
+      "path": "dot/research/template.prompt",
+      "authority_class": "TEMPLATE",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "4ab39385b747d93c775f8ec89cf543d5fff5acd5da55cf44b6267b3cbc7b10af"
+    },
+    {
+      "order": 13,
+      "path": "dot/research/summary.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "CONDITIONAL",
+      "condition": "ON_DEMAND_SUBTOPIC_EXECUTIVE_BRIEF",
+      "sha256": "f9ba63f3d70fb4d4b9265f3380a0d83985073cb01234484ee2b85ab83989295d"
+    }
+  ],
+  "supporting_files": [
+    {
+      "path": "dot/readme.md",
+      "role": "PRODUCT_ENTRYPOINT"
+    },
+    {
+      "path": "dot/agent/readme.md",
+      "role": "AGENT_NAVIGATION"
+    },
+    {
+      "path": "dot/agent/config.schema.json",
+      "role": "CONFIGURATION_SCHEMA"
+    },
+    {
+      "path": "dot/research/readme.md",
+      "role": "RESEARCH_NAVIGATION"
+    }
+  ],
+  "non_instruction_prefixes": [
+    ".github/",
+    "actions/",
+    "docs/",
+    "www/"
+  ],
+  "superseded_prefixes": [
+    "dot/agents/",
+    "dot/prompts/"
+  ]
+}
