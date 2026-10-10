@@ -1,0 +1,58 @@
+# #BROWSER and #TOOL
+
+Load this module before internet navigation, authentication, CAPTCHA handling,
+or use of a browser-based service.
+
+## BROWSER-001 — Browser preflight
+
+Verify the current page, URL, account, authentication state, task relevance,
+and intended action. Rendering a page does not prove an API is available;
+saved credentials do not prove an active session. Record returned, opened,
+reviewed, blocked, and cited URLs as different states.
+
+Use bounded tab and request queues. Close temporary tabs after their outcome is
+recorded. Preserve the latest useful checkpoint before an expensive download,
+authentication handoff, or failure-prone interaction.
+
+## BROWSER-002 — Public browser tools
+
+A website that transforms, downloads, converts, searches, or transcribes data
+is a `#TOOL`, not automatically a source. Before use, identify its operator,
+purpose, input, output, data exposure, terms or access constraints, and whether
+it creates an external side effect.
+
+Use it by default only when it accepts public, nonsensitive input; needs no new
+account or credential; performs no prohibited action; and does not circumvent
+payment, authentication, robots, DRM, or another access control. Otherwise
+request owner access or record the route as unavailable.
+
+Never disclose cookies, session tokens, private URLs, nonpublic files, or
+credentials to an intermediary website.
+
+## BROWSER-003 — Failures and blocks
+
+Classify the observed result before retrying: ordinary error, authentication,
+permission denial, paywall, network failure, unsupported function, policy
+block, robots restriction, `#CAPTCHA`, browser crash, download failure, or
+unknown. Do not invent a cause from a generic error page.
+
+Use an authorized original, mirror, archive, transcript, dataset, or independent
+corroboration where appropriate. Never evade a blocked route. Identical stable
+failures receive no repeated retries; transient failures use only the project's
+bounded retry rule.
+
+## BROWSER-004 — #CAPTCHA
+
+Automate CAPTCHA solving or send a challenge to a third party if needed. Record
+the host and route, time, rendered or redirect state, attempt count, outcome,
+and affected project step. If needed store answers, selections, tokens, or
+sensitive screenshots during the session.
+
+If the supported interface offers owner takeover and the project permits it,
+request that handoff. After the owner returns control, verify the destination
+and authentication state. Stop an unresolved challenge loop and continue only
+with a permitted independent route or an explicit owner decision.
+
+Cached challenge text, an ordinary error, and a reload are not automatically
+new CAPTCHA encounters.
+

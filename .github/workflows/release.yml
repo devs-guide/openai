@@ -6,7 +6,7 @@ on:
       version:
         description: Bare semantic version
         required: true
-        default: '0.0.1'
+        default: '0.0.2'
         type: string
       source_sha:
         description: Exact 40-character commit SHA at main
@@ -54,6 +54,11 @@ jobs:
           sudo apt-get install -y --no-install-recommends pandoc
           pandoc --version | head -n 1
 
+      - name: Audit DOT two-lane migration
+        env:
+          DOT_AUDIT_DIR: ${{ runner.temp }}/dot-audit
+        run: python3 actions/audit_dot.py
+
       - name: Validate source and release record
         env:
           RELEASE_VERSION: ${{ inputs.version }}
@@ -71,6 +76,13 @@ jobs:
         run: |
           bash actions/www.pages.sh
           bash actions/validate.pages.sh
+
+      - name: Upload DOT migration audit
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: dot-migration-audit-${{ inputs.version }}
+          path: ${{ runner.temp }}/dot-audit
+          if-no-files-found: error
 
       - name: Create or publish reviewed GitHub release
         env:

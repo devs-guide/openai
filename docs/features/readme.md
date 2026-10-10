@@ -4,6 +4,19 @@ This public index describes accepted or release-candidate product behavior.
 Private implementation plans and operational evidence remain in the separate
 `devs-guide/prompts` lifecycle workspace.
 
+## 0.0.2
+
+| Feature | Status | Public owners |
+|---|---|---|
+| Agent operating contract | Candidate | `dot/agent/` |
+| Tagged-release ingestion and activation gate | Candidate | `dot/ingest.json`, Agent, Project, and Template |
+| Project → Internet → Data → Template research flow | Candidate | `dot/research/` |
+| Evidence-to-dataset release lifecycle | Candidate | Data contract, reusable structures, and GitHub validation |
+| Ordered assigned models and project-opt-in VM tools | Candidate | Agent configuration and Project contract |
+| Page, Fact, browser, CAPTCHA, video and transcription contracts | Candidate | Agent modules and Research contracts |
+| Clause-level migration audit | Candidate | History ledger and GitHub Actions |
+| Legacy route compatibility | Candidate | Publication manifest and Pages builder |
+
 ## 0.0.1
 
 | Feature | Status | Public owners |

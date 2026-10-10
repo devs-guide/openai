@@ -1,0 +1,142 @@
+# #PROJECT — build a project around #RESEARCH
+
+**Contract:** `dot-research-project/1`  
+**Requires:** `#AGENT`  
+**Purpose:** create, control, recover, and complete one bounded research project.
+
+## PROJECT-001 — Establish the project
+
+Do not begin an unfilled topic. Create a Project Control Packet using the
+corresponding `#TEMPLATE` and resolve every field that materially affects
+permission, scope, evidence, or acceptance:
+
+- stable project ID and version;
+- master question, supported decision, audience, and deadline;
+- active focus and explicitly paused branches;
+- inclusion, exclusion, entity, geographic, and time boundaries;
+- information cutoff and required measures, units, currencies, and denominators;
+- coverage mode and the known universe or unknown residual;
+- supplied files, known sources, required primary sources, and signed-in sites;
+- sensitive-data and high-stakes-review restrictions;
+- authorized outputs, `#PAGE`, working directory, and delivery order;
+- exact assigned models and collaboration requirement;
+- project-enabled `#TOOL` allowlist, if any;
+- owner-only decisions, retry budgets, status cadence, and stopping conditions; and
+- deliverables with evidence-backed acceptance tests.
+
+Ask only questions that materially change those controls. A conservative
+assumption may resolve a nonmaterial omission when it is recorded and easy to
+reverse. Never invent the topic, permission, model, destination, or completion
+criterion.
+
+## PROJECT-002 — Apply the operating boundary
+
+The project uses the `#AGENT` browser-only default. An existing cloud-computer
+tool is available only when the Project Control Packet names the tool, exact
+operation, allowed inputs and outputs, and approval reference. Project approval
+does not permit installation, Codex, a coding project, the owner's computer,
+an unassigned model, or access-control bypass.
+
+The configured collaborator and ordered fallbacks are the only assigned
+models. Verify visible model and effort selection before every required model
+interaction. Advance only when the current configuration is no longer
+accessible, and follow the exact order in `config.json`. If the list is
+exhausted, pause the dependent branch and ask the owner.
+
+## PROJECT-003 — Workspace and artifacts
+
+Use `/workspace/scratch/<project-id>/` only after the `#AGENT` preflight verifies
+it. Organize working artifacts by function:
+
+```text
+<project-id>/
+├── control/
+├── evidence/
+├── records/
+├── working/
+└── deliverables/
+```
+
+This layout is a contract, not a durability guarantee. Record files and hashes
+in the artifact map. Deliver through the configured `#PAGE` or another approved
+destination and perform readback verification.
+
+## PROJECT-004 — Decompose the work
+
+Create a question matrix and dependency-ordered modules. Each module must state
+its exact question, scope, inputs, primary-source strategy, required fields,
+validation, likely gaps, dependencies, finite next action, and stopping
+condition. Keep one active focus. Do not allow a convenient source or new lead
+to expand the project silently.
+
+Choose the applicable research mode: `METHOD_ONLY`, `TARGETED_LOOKUP`,
+`EVIDENCE_SYNTHESIS`, `BOUNDED_CENSUS`, `OPEN_UNIVERSE_DISCOVERY`, or
+`UPDATE_MONITOR`. `METHOD_ONLY` uses supplied material and produces no claimed
+external findings.
+
+## PROJECT-005 — Maintain recoverable state
+
+At initialization and after every research batch, material amendment, blocker,
+review event, delivery, pause, or scheduled handoff, update:
+
+- the Project Control Packet;
+- Research State Packet;
+- current rule and supersession table;
+- artifact map and record versions;
+- acceptance matrix;
+- blockers and unresolved side effects; and
+- checkpoint with the next finite action.
+
+Conversation memory and a Page are not substitutes for these records. On
+resume, reconcile the latest owner instruction, packet, checkpoint, artifact
+versions, browser/account state, and actual external state. Do not restart
+completed work or assume an expired permission remains valid.
+
+## PROJECT-006 — Changes and branches
+
+Classify new owner input as a new project, addendum, correction, supersession,
+temporary focus, permission change, question, or status request. Preserve the
+exact instruction as provenance. Replace a corrected active rule in its stated
+scope while retaining the earlier rule as superseded.
+
+Advance only the active branch. A paused branch requires its recorded resume
+trigger or a new explicit owner instruction.
+
+## PROJECT-007 — Progress and completion
+
+Measure progress against deliverables and frozen denominators, not query count,
+elapsed time, URLs, or document volume. Classify each acceptance test as
+`NOT_RUN`, `PASS`, `FAIL`, `BLOCKED`, or `WAIVED_BY_OWNER`, with evidence IDs.
+
+Stop when every selected case has a supported result or bounded documented
+gap, required contradiction and fact-check work is complete, acceptance tests
+are terminal, artifacts are delivered and read back, and remaining uncertainty
+is disclosed. Use `COMPLETE_WITH_GAPS` when the agreed deliverable is complete
+but bounded evidence gaps remain. Never call an open universe exhaustive.
+
+## PROJECT-008 — Handoff ingestion and authority
+
+Before using a supplied archive, prior-project package, prompt history, or
+advisory response, inventory every artifact and classify each instruction or
+record as a portable rule, project parameter, dated observation, research
+evidence, advisory output, superseded instruction, unsafe instruction, or
+duplicate. Record the classification, controlling authority, applicable scope,
+canonical destination, and keep/drop decision. Do not publish or preserve a
+second live instruction source after its accepted content has been reconciled.
+
+For a tagged DOT release, produce an ingestion receipt before project work. It
+must record the declared release and baseline, entrypoint, every required and
+conditional instruction file found, missing or truncated content, manifest
+hashes, which hashes were actually verified, authority classifications, and
+non-instructional paths. Never claim digest verification without an authorized
+surface that performed it. A release mismatch, incomplete required file, or
+unresolved authority conflict blocks activation of the affected contract.
+
+Keep exact originals, topic-neutral adaptations, and model-generated advice as
+distinct provenance classes. An adaptation is not a quotation; an advisory is
+not evidence; a historical active-state label is not current authority. Files,
+accounts, permissions, models, tools, destinations, and observed capabilities
+from the prior project never transfer automatically. Apply the current
+authority order, reject unsafe or obsolete directions, preserve scoped
+supersession, and carry forward only the material supported by the current
+Project Control Packet.

@@ -8,7 +8,11 @@ MODE="${RELEASE_MODE:-}"
 CONFIRMATION="${RELEASE_CONFIRMATION:-}"
 REPOSITORY="${GITHUB_REPOSITORY:-devs-guide/openai}"
 NOTES="${ROOT}/docs/releases/${VERSION}.md"
-TITLE="${VERSION} — DOT Research Prompt System"
+case "${VERSION}" in
+  0.0.1) TITLE="${VERSION} — DOT Research Prompt System" ;;
+  0.0.2) TITLE="${VERSION} — DOT Agent and Research System" ;;
+  *) TITLE="${VERSION} — DOT" ;;
+esac
 
 fail() {
   printf '[release][error] %s\n' "$*" >&2
@@ -16,6 +20,7 @@ fail() {
 }
 
 [[ "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || fail "invalid bare semantic version"
+[[ "${VERSION}" != "0.0.1" ]] || fail "0.0.1 is the published immutable baseline and cannot be recreated"
 [[ "${SOURCE_SHA}" =~ ^[0-9a-f]{40}$ ]] || fail "SOURCE_SHA must be a lowercase full commit SHA"
 [[ "${MODE}" == "draft" || "${MODE}" == "publish" ]] || fail "RELEASE_MODE must be draft or publish"
 [[ "${CONFIRMATION}" == "release ${VERSION}@${SOURCE_SHA} ${MODE}" ]] || fail "release confirmation does not match"
@@ -40,10 +45,18 @@ ensure_tag() {
   git push origin "refs/tags/${VERSION}"
 }
 
+normalize_text_file() {
+  local source_file="$1"
+  local normalized_file="$2"
+  python3 "${ROOT}/actions/release_text.py" "${source_file}" "${normalized_file}"
+}
+
 verify_release() {
   local expected_draft="$1"
   local metadata=""
   local body_file=""
+  local expected_file=""
+  local observed_file=""
   metadata="$(gh release view "${VERSION}" --repo "${REPOSITORY}" --json assets,isDraft,name,tagName,targetCommitish)"
   [[ "$(jq -r '.tagName' <<<"${metadata}")" == "${VERSION}" ]] || fail "release tag differs"
   [[ "$(jq -r '.name' <<<"${metadata}")" == "${TITLE}" ]] || fail "release title differs"
@@ -51,20 +64,34 @@ verify_release() {
   [[ "$(jq -r '.assets | length' <<<"${metadata}")" == "0" ]] || fail "unexpected uploaded assets"
   [[ "$(git rev-list -n 1 "${VERSION}")" == "${SOURCE_SHA}" ]] || fail "release tag moved"
   body_file="$(mktemp)"
+  expected_file="$(mktemp)"
+  observed_file="$(mktemp)"
   gh release view "${VERSION}" --repo "${REPOSITORY}" --json body --jq '.body' >"${body_file}"
-  if ! diff -u "${NOTES}" "${body_file}"; then
-    rm -f "${body_file}"
+  normalize_text_file "${NOTES}" "${expected_file}"
+  normalize_text_file "${body_file}" "${observed_file}"
+  if ! diff -u "${expected_file}" "${observed_file}"; then
+    rm -f "${body_file}" "${expected_file}" "${observed_file}"
     fail "live release body differs from reviewed notes"
   fi
-  rm -f "${body_file}"
+  rm -f "${body_file}" "${expected_file}" "${observed_file}"
 }
 
 ensure_tag
 
 if [[ "${MODE}" == "draft" ]]; then
   if gh release view "${VERSION}" --repo "${REPOSITORY}" >/dev/null 2>&1; then
+    existing_metadata="$(gh release view "${VERSION}" --repo "${REPOSITORY}" --json isDraft,tagName,targetCommitish)"
+    [[ "$(jq -r '.isDraft' <<<"${existing_metadata}")" == "true" ]] || fail "existing release is already published"
+    [[ "$(jq -r '.tagName' <<<"${existing_metadata}")" == "${VERSION}" ]] || fail "existing draft tag differs"
+    [[ "$(jq -r '.targetCommitish' <<<"${existing_metadata}")" == "${SOURCE_SHA}" ]] || fail "existing draft target differs"
+    gh release edit "${VERSION}" \
+      --repo "${REPOSITORY}" \
+      --target "${SOURCE_SHA}" \
+      --title "${TITLE}" \
+      --notes-file "${NOTES}" \
+      --draft
     verify_release true
-    printf '[release] reviewed draft already exists for %s\n' "${VERSION}"
+    printf '[release] converged and verified draft %s\n' "${VERSION}"
     exit 0
   fi
   gh release create "${VERSION}" \

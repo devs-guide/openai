@@ -20,6 +20,8 @@ from urllib.parse import quote, unquote, urlsplit, urlunsplit
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = ROOT / "actions" / "publication.manifest.json"
 REQUIRED_FIELDS = {
+    "aliases",
+    "content_type",
     "source",
     "route",
     "raw_route",
@@ -29,7 +31,8 @@ REQUIRED_FIELDS = {
     "reviewed_on",
 }
 ALLOWED_STATUS = {"current", "reference", "dated-evidence", "candidate", "archived"}
-SOURCE_SUFFIXES = {".md", ".prompt"}
+ALLOWED_CONTENT_TYPES = {"json", "markdown", "prompt"}
+SOURCE_SUFFIXES = {".json", ".md", ".prompt"}
 ATTR_RE = re.compile(r'(?P<prefix>\b(?:href|src)=")(?P<url>[^"]*)(?P<suffix>")')
 
 
@@ -78,8 +81,8 @@ def load_manifest() -> tuple[dict, list[dict]]:
     except (OSError, json.JSONDecodeError) as exc:
         fail(f"cannot read publication manifest: {exc}")
 
-    if manifest.get("schema_version") != 1:
-        fail("publication manifest schema_version must be 1")
+    if manifest.get("schema_version") != 2:
+        fail("publication manifest schema_version must be 2")
     site_base = manifest.get("site_base")
     if not isinstance(site_base, str) or not re.fullmatch(r"[a-z0-9][a-z0-9-]*", site_base):
         fail("site_base must be one lowercase URL segment")
@@ -90,6 +93,7 @@ def load_manifest() -> tuple[dict, list[dict]]:
     sources: set[str] = set()
     routes: set[str] = set()
     raw_routes: set[str] = set()
+    aliases: set[str] = set()
     normalized: list[dict] = []
     for index, raw_entry in enumerate(entries):
         if not isinstance(raw_entry, dict):
@@ -103,13 +107,35 @@ def load_manifest() -> tuple[dict, list[dict]]:
         raw_route = normalize_relative(entry["raw_route"], allow_empty=False, directory=False)
         if source in sources:
             fail(f"duplicate source in manifest: {source}")
-        if route in routes:
+        if route in routes or route in aliases:
             fail(f"duplicate rendered route in manifest: {route or '/'}")
         if raw_route in raw_routes:
             fail(f"duplicate raw route in manifest: {raw_route}")
+        content_type = entry["content_type"]
+        if content_type not in ALLOWED_CONTENT_TYPES:
+            fail(f"unsupported content type for {source}: {content_type}")
+        expected_suffix = {"json": ".json", "markdown": ".md", "prompt": ".prompt"}[content_type]
+        if not source.endswith(expected_suffix):
+            fail(f"content type and suffix disagree for {source}")
+        entry_aliases = entry["aliases"]
+        if not isinstance(entry_aliases, list):
+            fail(f"aliases must be an array for {source}")
+        normalized_aliases: list[str] = []
+        for raw_alias in entry_aliases:
+            alias = normalize_relative(raw_alias, allow_empty=False, directory=True)
+            if alias == route or alias in routes or alias in aliases:
+                fail(f"duplicate or canonical alias route: {alias}")
+            aliases.add(alias)
+            normalized_aliases.append(alias)
+        entry["aliases"] = normalized_aliases
         source_path = ROOT / source
         if not source_path.is_file() or source_path.is_symlink() or source_path.stat().st_size == 0:
             fail(f"manifest source is missing, empty, or a symlink: {source}")
+        if content_type == "json":
+            try:
+                json.loads(source_path.read_text(encoding="utf-8"))
+            except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+                fail(f"manifest JSON source is invalid: {source}: {exc}")
         if not isinstance(entry["title"], str) or not entry["title"].strip():
             fail(f"manifest title is empty: {source}")
         if entry["status"] not in ALLOWED_STATUS:
@@ -122,6 +148,23 @@ def load_manifest() -> tuple[dict, list[dict]]:
         routes.add(route)
         raw_routes.add(raw_route)
         normalized.append(entry)
+
+    raw_migrations = manifest.get("raw_migrations")
+    if not isinstance(raw_migrations, list):
+        fail("raw_migrations must be an array")
+    migration_routes: set[str] = set()
+    for index, migration in enumerate(raw_migrations):
+        if not isinstance(migration, dict) or set(migration) != {"route", "historical_url", "replacement"}:
+            fail(f"raw migration {index} has invalid fields")
+        migration_route = normalize_relative(migration["route"], allow_empty=False, directory=False)
+        replacement = normalize_relative(migration["replacement"], allow_empty=False, directory=False)
+        if migration_route in raw_routes or migration_route in migration_routes:
+            fail(f"duplicate raw migration route: {migration_route}")
+        if replacement not in raw_routes:
+            fail(f"raw migration replacement is not a canonical raw route: {replacement}")
+        if not migration["historical_url"].startswith("https://github.com/devs-guide/openai/blob/0.0.1/"):
+            fail(f"raw migration does not use immutable 0.0.1 source: {migration_route}")
+        migration_routes.add(migration_route)
 
     discovered = discover_publishable_sources()
     unlisted = sorted(discovered - sources)
@@ -192,6 +235,17 @@ def render_page(entry: dict, body: str, source_sha: str, site_base: str) -> str:
     source_url = f"https://github.com/devs-guide/openai/blob/{ref}/{quote(source)}"
     raw_url = f"/{site_base}/{entry['raw_route']}"
     breadcrumbs = breadcrumb_html(entry["route"], site_base)
+    workflow_nav = ""
+    if entry["route"].startswith("dot/research/"):
+        workflow_nav = f'''<nav class="workflow-nav" aria-label="Research workflow">
+      <a href="/{site_base}/dot/research/project/">Project</a>
+      <span aria-hidden="true">→</span>
+      <a href="/{site_base}/dot/research/internet/">Internet</a>
+      <span aria-hidden="true">→</span>
+      <a href="/{site_base}/dot/research/data/">Data</a>
+      <span aria-hidden="true">→</span>
+      <a href="/{site_base}/dot/research/template/">Template</a>
+    </nav>'''
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -209,8 +263,8 @@ def render_page(entry: dict, body: str, source_sha: str, site_base: str) -> str:
       <a class="site-brand" href="/{site_base}/">devs-guide/openai</a>
       <nav aria-label="Primary">
         <a href="/{site_base}/dot/">DOT</a>
-        <a href="/{site_base}/dot/prompts/">Prompts</a>
-        <a href="/{site_base}/dot/agents/">Agents</a>
+        <a href="/{site_base}/dot/agent/">Agent</a>
+        <a href="/{site_base}/dot/research/">Research</a>
         <a href="/{site_base}/dot/features/">Features</a>
         <a href="/{site_base}/dot/history/">History</a>
         <a href="/{site_base}/dot/releases/">Releases</a>
@@ -219,6 +273,7 @@ def render_page(entry: dict, body: str, source_sha: str, site_base: str) -> str:
   </header>
   <main id="content" class="page-shell">
     {breadcrumbs}
+    {workflow_nav}
     <div class="document-meta" aria-label="Document status">
       <span>{html.escape(entry['kind'])}</span>
       <span>{html.escape(entry['status'])}</span>
@@ -232,6 +287,28 @@ def render_page(entry: dict, body: str, source_sha: str, site_base: str) -> str:
     <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
     <p><a href="{html.escape(source_url, quote=True)}">Repository source</a> · <a href="{html.escape(raw_url, quote=True)}">Raw source</a></p>
   </footer>
+</body>
+</html>
+"""
+
+
+def render_redirect(route: str, target: str, title: str, source_sha: str, site_base: str) -> str:
+    destination = f"/{site_base}/{target}"
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="source-commit" content="{html.escape(source_sha)}">
+  <meta http-equiv="refresh" content="0; url={html.escape(destination, quote=True)}">
+  <link rel="canonical" href="{html.escape(destination, quote=True)}">
+  <title>Moved · {html.escape(title)}</title>
+</head>
+<body>
+  <main id="content">
+    <h1>Document moved</h1>
+    <p>This route moved to <a href="{html.escape(destination, quote=True)}">{html.escape(title)}</a>.</p>
+  </main>
 </body>
 </html>
 """
@@ -253,6 +330,19 @@ def run_pandoc(source: Path) -> str:
     return result.stdout
 
 
+def render_source(source: Path, content_type: str) -> str:
+    if content_type in {"markdown", "prompt"}:
+        return run_pandoc(source)
+    if content_type == "json":
+        try:
+            value = json.loads(source.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            fail(f"invalid JSON in {source.relative_to(ROOT)}: {exc}")
+        rendered = json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True)
+        return f'<pre class="source-json"><code>{html.escape(rendered)}</code></pre>'
+    fail(f"unsupported content type: {content_type}")
+
+
 def output_index_path(publish_dir: Path, route: str) -> Path:
     return publish_dir / route / "index.html" if route else publish_dir / "index.html"
 
@@ -271,7 +361,7 @@ def build(manifest: dict, entries: list[dict], publish_dir: Path, source_sha: st
     route_records: list[dict] = []
     for entry in entries:
         source_path = ROOT / entry["source"]
-        body = run_pandoc(source_path)
+        body = render_source(source_path, entry["content_type"])
         body = rewrite_internal_links(body, entry["source"], entries_by_source, site_base)
         output_path = output_index_path(publish_dir, entry["route"])
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -290,6 +380,42 @@ def build(manifest: dict, entries: list[dict], publish_dir: Path, source_sha: st
             }
         )
 
+        for alias in entry["aliases"]:
+            alias_path = output_index_path(publish_dir, alias)
+            alias_path.parent.mkdir(parents=True, exist_ok=True)
+            alias_path.write_text(
+                render_redirect(alias, entry["route"], entry["title"], source_sha, site_base),
+                encoding="utf-8",
+            )
+            route_records.append(
+                {
+                    "kind": "redirect",
+                    "redirect_to": entry["route"],
+                    "route": alias,
+                    "source": entry["source"],
+                    "status": "archived",
+                }
+            )
+
+    for migration in manifest["raw_migrations"]:
+        migration_path = publish_dir / migration["route"]
+        migration_path.parent.mkdir(parents=True, exist_ok=True)
+        replacement_url = f"/{site_base}/{migration['replacement']}"
+        migration_path.write_text(
+            "This 0.0.1 source moved during the DOT two-lane migration.\n"
+            f"Historical source: {migration['historical_url']}\n"
+            f"Current replacement: {replacement_url}\n",
+            encoding="utf-8",
+        )
+        route_records.append(
+            {
+                "kind": "raw-migration",
+                "raw_route": migration["route"],
+                "redirect_to": migration["replacement"],
+                "status": "archived",
+            }
+        )
+
     assets = ROOT / "www" / "assets"
     shutil.copytree(assets, publish_dir / "assets")
     (publish_dir / ".nojekyll").write_text("", encoding="utf-8")
@@ -303,7 +429,7 @@ def build(manifest: dict, entries: list[dict], publish_dir: Path, source_sha: st
         json.dumps(source_record, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
     (publish_dir / "routes.json").write_text(
-        json.dumps({"routes": route_records, "schema_version": 1}, indent=2, sort_keys=True) + "\n",
+        json.dumps({"routes": route_records, "schema_version": 2}, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
 
@@ -334,7 +460,7 @@ def main() -> int:
     source_sha = os.environ.get("SOURCE_SHA", "0" * 40)
     if not re.fullmatch(r"[0-9a-f]{40}", source_sha):
         fail("SOURCE_SHA must be a lowercase 40-character commit SHA")
-    release_version = os.environ.get("RELEASE_VERSION", "0.0.1")
+    release_version = os.environ.get("RELEASE_VERSION", "0.0.2")
     if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", release_version):
         fail("RELEASE_VERSION must be a bare semantic version")
     build(manifest, entries, publish_dir.resolve(), source_sha, release_version)

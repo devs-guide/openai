@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devs-guide.github.io/openai/raw/dot/agent/config.schema.json",
+  "title": "DOT agent configuration",
+  "type": "object",
+  "required": ["schema", "status", "reviewed_on", "models", "execution", "tools", "storage"],
+  "properties": {
+    "schema": {"const": "dot-agent-config/1"},
+    "status": {"enum": ["current", "candidate", "archived"]},
+    "reviewed_on": {"type": "string", "format": "date"},
+    "models": {
+      "type": "object",
+      "required": ["policy", "primary", "collaborator", "fallbacks"],
+      "properties": {
+        "policy": {"const": "ORDERED_FALLBACK"},
+        "primary": {"$ref": "#/$defs/model"},
+        "collaborator": {"$ref": "#/$defs/model"},
+        "fallbacks": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/model"},
+          "minItems": 7,
+          "maxItems": 7
+        }
+      },
+      "additionalProperties": false
+    },
+    "execution": {"type": "object"},
+    "tools": {"type": "object"},
+    "storage": {"type": "object"}
+  },
+  "$defs": {
+    "model": {
+      "type": "object",
+      "required": ["model", "effort"],
+      "properties": {
+        "model": {"type": "string", "minLength": 1},
+        "effort": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
