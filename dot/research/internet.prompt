@@ -61,6 +61,19 @@ For every material subquestion, create a route bundle that assesses:
 - historical names, archives, amendments, and superseding material; and
 - contradiction, correction, closure, or dispute searches.
 
+For an entity-level website route, establish the official domain and follow the
+relevant navigation rather than stopping at a search result or homepage.
+Inspect applicable desktop or mobile menus, submenus, footers, internal search,
+sitemaps, buttons, embedded resources, finite document indexes, linked PDFs,
+and pertinent parent, branch, vendor, or external resource links. Record the
+actual navigation trail. A planned route is not a performed action, and reading
+a landing page is not reviewing the documents it links.
+
+Use unrestricted web discovery and a distinct document/PDF search where each
+is material. Adapt exact names, aliases, former names, municipalities, parent
+organizations, and topic synonyms. One route may find the other, but neither
+silently substitutes for it.
+
 Generated queries are not executed queries. Log engine/tool, exact query,
 parameters, target scope, execution time, returned result, and next decision.
 Do not fabricate a URL that the interface did not expose.
@@ -88,6 +101,14 @@ claim, and evidence link. A generated URL, discovered URL, returned result,
 opened resource, reviewed source, cited source, and blocked route are different
 states. Record only the state actually observed; a URL or download does not
 prove review, citation, or support.
+
+Keep official identity, official linkage, successful retrieval, public search
+functionality, login requirements, service evidence, physical presence, and
+inventory completeness as separate assertions. A page that loads does not
+prove its search or inventory function works. A shared resource is not
+exclusive to one entity, a parent policy is not automatically implemented at a
+child site, and a historical or planned condition is not a current completed
+event without supporting evidence.
 
 ## INTERNET-005 — #FACT
 
@@ -157,6 +178,11 @@ Classify failures without inventing causes. Preserve the action, observed
 result, time, affected record IDs, permitted alternative, and next step. Follow
 the Agent module for browser, CAPTCHA, tool, media, or delivery failures.
 
+A blank JavaScript search shell, incomplete result page, unexecuted form,
+access warning, browser failure, or blocked route is not a zero-result search
+and does not establish that the requested fact, entity, service, or document is
+absent. Preserve the observed state and try permitted independent routes.
+
 A branch may stop for saturation only after materially different routes,
 terminology, official sources, historical identities, and contradiction checks
 have been attempted within the project bounds and another iteration is
@@ -174,6 +200,13 @@ negative searches support it.
 Before final assembly, extract every material claim and verify its identity,
 date, value, unit, currency, denominator, version, locator, and lineage. Narrow
 or remove unsupported wording and preserve disputes and unknowns.
+
+When a deliverable claims full entity coverage, reconcile the eligible
+universe and review every entity's required fields; a sample cannot support an
+all-entities claim. Use an independent reviewer when authorized and available,
+or perform and disclose a distinct self-review pass. A checksum establishes
+file integrity and a visual review establishes presentation quality; neither
+establishes factual completeness.
 
 Build reports from the controlled records. Lead with the supported answer,
 separate evidence from interpretation and recommendation, place citations near

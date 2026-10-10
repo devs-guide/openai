@@ -12,6 +12,8 @@ reviewed GitHub release body.
   and completion records, PDF quality controls, and publication routes.
 - `0.0.4.md` — repository-wide Release contract, adaptive release notes,
   sequential publication safeguards, and immutable manual-test handoff.
+- `0.0.5.md` — evidence-completing Summary behavior, required Fact matrix,
+  bounded official-source gap filling, and versioned completion controls.
 
 Tags use bare semantic versions. Published tags are immutable; corrections use
 a later version. Compatible corrections and clarifications accumulate in the

@@ -242,11 +242,13 @@ FACT-EX-002,observation,OBS-EX-002,ENTITY-EX-001,catalog_item_count,,integer,ite
 ### Produce one on-demand executive brief
 
 > Activate `#SUMMARY` for `[EXECUTIVE_BRIEF_REQUEST_ID]` against the frozen
-> parent research and data versions. Select and recheck the relevant `#FACT`
-> records, create only the requested subtopic brief, validate and visually inspect the
-> self-contained PDF, and return its completion receipt. Do not overwrite the
-> main report, expand into an undeclared research project, or claim delivery
-> without a native attachment and readback.
+> parent research and data versions. Build the required Fact matrix, complete
+> missing material Facts through `#INTERNET` and applicable `#DATA` inside the
+> approved scope, then freeze the final evidence versions. Create only the
+> requested subtopic brief, validate and visually inspect the self-contained
+> PDF, and return its completion receipt. Do not overwrite the main report,
+> expand into an undeclared research project, or claim delivery without a
+> native attachment and readback.
 
 ## TEMPLATE-008 — Final delivery
 
@@ -525,27 +527,33 @@ expert review is still required.
 }
 ```
 
-## TEMPLATE-016 — Executive Brief Request and Completion Receipt
+## TEMPLATE-016 — Executive Brief Request, Fact Matrix, and Completion Receipt
 
 Use this request only when the owner explicitly activates the conditional
-`#SUMMARY` contract.
+`#SUMMARY` contract. The Fact Matrix is a Summary control view over canonical
+Facts and evidence; it is not a new `#DATA` basename or a competing evidence
+store.
 
 ```json
 {
-  "schema": "dot-executive-brief-request/1",
+  "schema": "dot-executive-brief-request/2",
   "summary_request_id": "SUMMARY_REQUEST_ID",
   "parent_project_id": "PROJECT_ID",
   "parent_project_version": "PROJECT_VERSION",
   "parent_report_artifact_id": "ARTIFACT_ID",
   "dataset_release_ids": [],
+  "research_mode": "PUBLIC_SOURCE_GAP_FILLING",
   "requested_subtopic": "SUBTOPIC",
   "audience": "READERS",
   "supported_decision_or_discussion": "PURPOSE",
   "geographic_population_and_entity_scope": "SCOPE",
   "relevant_dates_and_research_cutoff": "DATES_AND_CUTOFF",
   "input_files_pages_datasets_and_urls": [],
+  "required_fact_fields": [],
   "required_questions_or_comparisons": [],
+  "requested_entity_chapters_and_order": [],
   "excluded_topics": [],
+  "requested_data_companions": [],
   "desired_length": "8_TO_16_CORE_PAGES_PLUS_READABLE_APPENDIX_IF_NEEDED",
   "output_title": "TITLE",
   "output_artifact_id": "ARTIFACT_ID",
@@ -560,23 +568,59 @@ Use this request only when the owner explicitly activates the conditional
 
 ```json
 {
-  "schema": "dot-executive-brief-completion/1",
+  "schema": "dot-summary-fact-matrix-row/1",
+  "summary_request_id": "SUMMARY_REQUEST_ID",
+  "matrix_row_id": "MATRIX_ROW_ID",
+  "subject_id": null,
+  "subject_id_null_reason": "REQUIRED_FOR_A_NONENTITY_SUBJECT_OR_UNRESOLVED_IDENTITY",
+  "inclusion_disposition": "INCLUDED_EXCLUDED_OR_UNRESOLVED",
+  "required_fact_key": "CONTROLLED_FIELD_OR_QUESTION_KEY",
+  "required_grain": "SUBJECT_ENTITY_SITE_PROGRAM_OR_OTHER_GRAIN",
+  "required_population": "POPULATION_OR_NOT_APPLICABLE",
+  "required_period": "PERIOD_OR_NOT_APPLICABLE",
+  "fact_id": null,
+  "fact_id_null_reason": "REQUIRED_WHEN_NO_CONTROLLED_FACT_IS_LINKED",
+  "evidence_link_ids": [],
+  "research_state": "NOT_STARTED_IN_PROGRESS_AWAITING_REVIEW_BLOCKED_OR_TERMINAL",
+  "coverage_disposition": "SUPPORTED_DISPUTED_BOUNDED_NEGATIVE_ACCESS_BLOCKED_AUTHORIZATION_REQUIRED_NOT_APPLICABLE_OR_UNRESOLVED",
+  "missing_reason": "CONTROLLED_REASON_OR_NULL",
+  "reviewer_type": "HUMAN_MODEL_ASSISTED_OR_NONE",
+  "next_action": "FINITE_ACTION_OR_NULL"
+}
+```
+
+```json
+{
+  "schema": "dot-executive-brief-completion/2",
   "summary_request_id": "SUMMARY_REQUEST_ID",
   "output_artifact_id": "ARTIFACT_ID",
   "output_filename": "VERSIONED_FILENAME.pdf",
   "output_version": "VERSION",
   "parent_project_id_and_version": "PROJECT_ID_AND_VERSION",
   "parent_report_artifact_id": "ARTIFACT_ID",
+  "initial_dataset_release_ids": [],
   "dataset_release_ids": [],
   "evidence_cutoff": "DECLARED_CUTOFF",
   "fact_and_evidence_versions": [],
+  "fact_matrix_version": "VERSION",
+  "fact_matrix_sha256": "FILE_HASH_OR_NULL",
+  "entity_denominator": 0,
+  "matrix_expected_row_count": 0,
+  "matrix_terminal_row_count": 0,
+  "matrix_blocked_row_count": 0,
+  "matrix_unresolved_row_count": 0,
   "page_count": 0,
   "sha256": "FILE_HASH_OR_NULL",
+  "gap_completion_check": "PASS_FAIL_OR_BLOCKED",
+  "official_site_path_check": "PASS_FAIL_NOT_APPLICABLE_OR_BLOCKED",
   "material_claim_check": "PASS_FAIL_OR_BLOCKED",
   "calculation_and_measurement_check": "PASS_FAIL_OR_BLOCKED",
   "citation_and_link_check": "PASS_FAIL_OR_BLOCKED",
   "appendix_and_supporting_value_check": "PASS_FAIL_OR_BLOCKED",
   "privacy_and_suppression_check": "PASS_FAIL_OR_BLOCKED",
+  "fact_check_reviewer_type": "HUMAN_MODEL_ASSISTED_OR_NONE",
+  "fact_check_independence": "INDEPENDENT_SELF_REVIEW_OR_NOT_PERFORMED",
+  "requested_export_parity_check": "PASS_FAIL_NOT_APPLICABLE_OR_BLOCKED",
   "visual_page_inspection": "PASS_FAIL_OR_BLOCKED",
   "native_attachment_state": "GENERATED_VALIDATED_DELIVERED_READ_BACK_OR_BLOCKED",
   "delivery_reference": null,

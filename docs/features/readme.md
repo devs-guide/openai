@@ -4,15 +4,25 @@ This public index describes accepted or release-candidate product behavior.
 Private implementation plans and operational evidence remain in the separate
 `devs-guide/prompts` lifecycle workspace.
 
+## 0.0.5
+
+| Feature | Status | Public owners |
+|---|---|---|
+| Evidence-completing on-demand Summary | Candidate | Summary contract and Project controls |
+| Required subject-by-fact coverage matrix | Candidate | Summary and Template contracts |
+| Default bounded public-source gap filling | Candidate | Summary and Internet contracts |
+| Immutable parent inputs and successor evidence/data versions | Candidate | Summary and Data contracts |
+| Summary v2 request, matrix, and completion validation | Candidate | Template contract and GitHub Actions |
+
 ## 0.0.4
 
 | Feature | Status | Public owners |
 |---|---|---|
-| Repository-wide release contract | Candidate | `docs/release.prompt` |
-| Compact core plus conditional release modules | Candidate | Release contract and release validator |
-| Sequential stacked-release publication | Candidate | Release workflow and GitHub Actions |
-| Release contract rendered and raw routes | Candidate | Publication manifest and Pages validation |
-| Immutable archive handoff for manual Agent testing | Candidate | Release record and DOT ingestion entrypoint |
+| Repository-wide release contract | Accepted | `docs/release.prompt` |
+| Compact core plus conditional release modules | Accepted | Release contract and release validator |
+| Sequential stacked-release publication | Accepted | Release workflow and GitHub Actions |
+| Release contract rendered and raw routes | Accepted | Publication manifest and Pages validation |
+| Immutable archive handoff for manual Agent testing | Accepted | Release record and DOT ingestion entrypoint |
 
 ## 0.0.3
 
