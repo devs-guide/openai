@@ -1,8 +1,8 @@
 {
   "schema": "dot-ingest/1",
-  "release": "0.0.3",
+  "release": "0.0.4",
   "baseline_tag": "0.0.1",
-  "prior_release_tag": "0.0.2",
+  "prior_release_tag": "0.0.3",
   "entrypoint": "dot/readme.md",
   "manifest_authority": "ROUTING_METADATA_ONLY",
   "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",

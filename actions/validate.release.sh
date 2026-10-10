@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-VERSION="${RELEASE_VERSION:-0.0.3}"
+VERSION="${RELEASE_VERSION:-0.0.4}"
 NOTES="${ROOT}/docs/releases/${VERSION}.md"
 
 fail() {
@@ -20,12 +20,13 @@ for heading in \
   '### Added' \
   '### Changed' \
   '### Fixed' \
-  '### Safety and publication model' \
   '### #COMMIT' \
-  '### Notable commits' \
   '### Assets'; do
   grep -Fqx "${heading}" "${NOTES}" || fail "release notes lack heading: ${heading}"
 done
+
+grep -Eq '^### Notable commits( since .+)?$' "${NOTES}" || \
+  fail "release notes lack a Notable commits heading"
 
 if grep -Eqi '(^|[^[:alnum:]])(TBD|TODO|PLACEHOLDER)([^[:alnum:]]|$)|`0000000`' "${NOTES}"; then
   fail "release notes contain an unresolved placeholder"

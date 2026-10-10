@@ -39,9 +39,11 @@ REQUIRED = {
     "docs/history/readme.md",
     "docs/history/two-lane-migration.json",
     "docs/history/two-lane-migration.md",
+    "docs/release.prompt",
     "docs/releases/0.0.1.md",
     "docs/releases/0.0.2.md",
     "docs/releases/0.0.3.md",
+    "docs/releases/0.0.4.md",
     "docs/releases/readme.md",
     "dot/ingest.json",
     "dot/readme.md",
@@ -443,6 +445,80 @@ def validate_summary_contract() -> None:
     ok("Summary owns one conditional, self-contained, Fact-bound executive-brief lifecycle")
 
 
+def validate_release_contract() -> None:
+    release_path = ROOT / "docs" / "release.prompt"
+    release = release_path.read_text(encoding="utf-8")
+    observed_rules = re.findall(r"^## (RELEASE-[0-9]{3})\b", release, re.MULTILINE)
+    expected_rules = [f"RELEASE-{number:03d}" for number in range(1, 11)]
+    if observed_rules != expected_rules:
+        fail("Release contract must define RELEASE-001 through RELEASE-010 in order")
+
+    required_by_rule = {
+        "RELEASE-001": (
+            "repository releases, not the immutable dataset releases owned by `#data`",
+            "does not authorize a tag, merge, upload, publication, or external announcement",
+        ),
+        "RELEASE-002": (
+            "complete previous-tag-to-candidate commit range",
+            "at least one prior well-structured release",
+            "never infer completion from a branch name",
+        ),
+        "RELEASE-003": (
+            "bare numeric tags",
+            "published tag and its target commit as immutable",
+            "behavioral correction creates a new version",
+        ),
+        "RELEASE-004": (
+            "practical outcome and why it matters",
+            "reusable behavior",
+            "do not pad notes",
+        ),
+        "RELEASE-005": (
+            "compact core",
+            "operator workflow and safety",
+            "interfaces and compatibility",
+            "migration and recovery",
+            "validation evidence",
+            "known boundaries",
+        ),
+        "RELEASE-006": (
+            "hashes verified from the actual release range",
+            "github-generated source archives",
+            "never claim that source-only documentation is an executable or binary asset",
+        ),
+        "RELEASE-007": (
+            "publication-manifest entry",
+            "byte-exact raw sources",
+            "live route represents another commit",
+        ),
+        "RELEASE-008": (
+            "stacked releases",
+            "publish each predecessor before retargeting",
+            "failed check",
+        ),
+        "RELEASE-009": (
+            "complete proposed body in a normal tracked markdown file",
+            "create or converge a draft first",
+            "read the public release back through the github api",
+        ),
+        "RELEASE-010": (
+            "supported source archives",
+            "separate manual acceptance test",
+            "do not claim the downstream test passed",
+        ),
+    }
+    for rule_id, phrases in required_by_rule.items():
+        section = re.sub(r"\s+", " ", prompt_section(release, rule_id)).lower()
+        for phrase in phrases:
+            if phrase not in section:
+                fail(f"Release contract lacks required {rule_id} behavior: {phrase}")
+
+    rule_ids = re.findall(r"^## ([A-Z]+-[0-9]{3})\b", release, re.MULTILINE)
+    if len(rule_ids) != len(set(rule_ids)):
+        fail("Release contract contains duplicate canonical rule IDs")
+    ok("Release owns one adaptive repository-wide review and publication contract")
+
+
 def validate_ingest_contract() -> None:
     ingest_path = ROOT / "dot" / "ingest.json"
     try:
@@ -452,9 +528,9 @@ def validate_ingest_contract() -> None:
 
     expected_identity = {
         "schema": "dot-ingest/1",
-        "release": "0.0.3",
+        "release": "0.0.4",
         "baseline_tag": "0.0.1",
-        "prior_release_tag": "0.0.2",
+        "prior_release_tag": "0.0.3",
         "entrypoint": "dot/readme.md",
         "manifest_authority": "ROUTING_METADATA_ONLY",
         "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
@@ -542,12 +618,15 @@ def validate_release_workflow() -> None:
     release_script = (ROOT / "actions" / "release.sh").read_text(encoding="utf-8")
     for required in (
         "0.0.1 is the published immutable baseline",
-        "0.0.2 must be published before 0.0.3",
-        "DOT On-Demand Research Summary",
+        "must be published before",
+        "is not an ancestor of",
+        "Repository Release Contract",
         "release_text.py",
         "existing release is already published",
         "existing draft target differs",
         "converged and verified draft",
+        "release prerelease state differs",
+        "release target differs",
     ):
         if required not in release_script:
             fail(f"release workflow lacks required safeguard: {required}")
@@ -575,7 +654,7 @@ def main() -> int:
             continue
         if stale_candidate in text:
             fail(f"stale candidate version remains in source: {path}")
-    ok("candidate release identity is consistently 0.0.3")
+    ok("candidate release identity is consistently 0.0.4 and contains no stale candidate-version reference")
 
     if any(path.startswith("static/") for path in paths):
         fail("generated static output must not be included on main")
@@ -690,6 +769,7 @@ def main() -> int:
     validate_preserved_agent_sources()
     validate_data_contract()
     validate_summary_contract()
+    validate_release_contract()
     validate_ingest_contract()
     validate_release_workflow()
 

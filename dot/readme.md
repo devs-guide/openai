@@ -25,6 +25,11 @@ the four-stage workflow or overwriting its parent report.
   pure internet-research rules, converts reviewed evidence into controlled
   datasets, and provides reusable templates.
 
+Repository release style, review, and publication are governed separately by
+the repo-wide [`#RELEASE`](../docs/release.prompt) contract. Because `docs/` is
+a non-instructional prefix in `ingest.json`, it never becomes Agent or Research
+authority when DOT is loaded.
+
 Load the Agent contract first. A Research project may narrow it but cannot
 silently add a model, tool, account, permission, execution surface, or
 destination.
@@ -68,9 +73,10 @@ Exact current sources are published beneath `/openai/raw/dot/`.
 
 ## History and compatibility
 
-Release `0.0.2` consolidates the original prompts and dated guides. Candidate
+Release `0.0.2` consolidates the original prompts and dated guides. Release
 `0.0.3` adds the optional Summary deliverable without changing the core
-workflow. The
+workflow. Release `0.0.4` adds the repository-wide Release contract without
+changing the DOT instruction order. The
 [`two-lane migration record`](../docs/history/two-lane-migration.md) maps every
 `0.0.1` source to its current owner. Historical rendered routes redirect;
 historical raw routes identify both the immutable original and current

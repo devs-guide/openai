@@ -8,7 +8,7 @@ if [[ -z "${SOURCE_SHA:-}" ]]; then
   SOURCE_SHA="$(git rev-parse HEAD 2>/dev/null || printf '%040d' 0)"
 fi
 export SOURCE_SHA
-export RELEASE_VERSION="${RELEASE_VERSION:-0.0.3}"
+export RELEASE_VERSION="${RELEASE_VERSION:-0.0.4}"
 export PUBLISH_DIR="${PUBLISH_DIR:-static}"
 
 printf '[www.pages] source: %s\n' "${SOURCE_SHA}"

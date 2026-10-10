@@ -86,6 +86,12 @@ def main() -> int:
     ingest_entry = ingest_entries[0]
     if ingest_entry.get("route") != "dot/ingest/" or ingest_entry.get("raw_route") != "raw/dot/ingest.json":
         fail("DOT ingestion manifest rendered or raw route is incorrect")
+    release_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "docs/release.prompt"]
+    if len(release_entries) != 1:
+        fail("publication manifest must contain exactly one repository Release contract")
+    release_entry = release_entries[0]
+    if release_entry.get("route") != "release/" or release_entry.get("raw_route") != "raw/docs/release.prompt":
+        fail("Release contract rendered or raw route is incorrect")
     static_value = os.environ.get("STATIC_DIR", "static")
     static_dir = Path(static_value)
     if not static_dir.is_absolute():
@@ -104,8 +110,8 @@ def main() -> int:
         fail(f"source SHA is {source_record.get('source_sha')}, expected {expected_sha}")
     if source_record.get("repository") != "devs-guide/openai":
         fail("source.json repository identity is incorrect")
-    if source_record.get("release") != "0.0.3":
-        fail("source.json release identity is not 0.0.3")
+    if source_record.get("release") != "0.0.4":
+        fail("source.json release identity is not 0.0.4")
     ok(f"source marker identifies {source_record.get('source_sha')}")
 
     html_parsers: dict[Path, PageParser] = {}
@@ -123,6 +129,8 @@ def main() -> int:
                 fail(f"semantic HTML marker {required!r} is missing: {page.relative_to(static_dir)}")
         if f'<meta name="source-commit" content="{source_record["source_sha"]}">' not in rendered:
             fail(f"page source metadata does not match source.json: {page.relative_to(static_dir)}")
+        if f'href="/{SITE_BASE}/release/"' not in rendered:
+            fail(f"repository Release navigation is missing: {page.relative_to(static_dir)}")
         parser = PageParser()
         parser.feed(rendered)
         html_parsers[page.resolve()] = parser

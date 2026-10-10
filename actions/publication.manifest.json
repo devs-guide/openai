@@ -4,6 +4,7 @@
   "entries": [
     {"source":"readme.md","route":"","raw_route":"raw/readme.md","title":"devs-guide/openai","kind":"hub","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
     {"source":"COPYRIGHT.md","route":"rights/","raw_route":"raw/COPYRIGHT.md","title":"Copyright and permissions","kind":"policy","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
+    {"source":"docs/release.prompt","route":"release/","raw_route":"raw/docs/release.prompt","title":"Repository Release Contract","kind":"repository-contract","status":"current","reviewed_on":"2026-10-09","content_type":"prompt","aliases":[]},
     {"source":"dot/readme.md","route":"dot/","raw_route":"raw/dot/readme.md","title":"DOT","kind":"product","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
     {"source":"dot/ingest.json","route":"dot/ingest/","raw_route":"raw/dot/ingest.json","title":"DOT release ingestion manifest","kind":"ingestion-manifest","status":"current","reviewed_on":"2026-10-09","content_type":"json","aliases":[]},
 
@@ -31,7 +32,8 @@
     {"source":"docs/releases/readme.md","route":"dot/releases/","raw_route":"raw/docs/releases/readme.md","title":"DOT releases","kind":"release-index","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
     {"source":"docs/releases/0.0.1.md","route":"dot/releases/0.0.1/","raw_route":"raw/docs/releases/0.0.1.md","title":"0.0.1 — DOT Research Prompt System","kind":"release","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
     {"source":"docs/releases/0.0.2.md","route":"dot/releases/0.0.2/","raw_route":"raw/docs/releases/0.0.2.md","title":"0.0.2 — DOT Agent and Research System","kind":"release","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
-    {"source":"docs/releases/0.0.3.md","route":"dot/releases/0.0.3/","raw_route":"raw/docs/releases/0.0.3.md","title":"0.0.3 — DOT On-Demand Research Summary","kind":"release","status":"candidate","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]}
+    {"source":"docs/releases/0.0.3.md","route":"dot/releases/0.0.3/","raw_route":"raw/docs/releases/0.0.3.md","title":"0.0.3 — DOT On-Demand Research Summary","kind":"release","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
+    {"source":"docs/releases/0.0.4.md","route":"dot/releases/0.0.4/","raw_route":"raw/docs/releases/0.0.4.md","title":"0.0.4 — Repository Release Contract","kind":"release","status":"candidate","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]}
   ],
   "raw_migrations": [
     {"route":"raw/dot/agents/readme.md","historical_url":"https://github.com/devs-guide/openai/blob/0.0.1/dot/agents/readme.md","replacement":"raw/dot/agent/readme.md"},

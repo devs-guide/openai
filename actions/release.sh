@@ -9,10 +9,11 @@ CONFIRMATION="${RELEASE_CONFIRMATION:-}"
 REPOSITORY="${GITHUB_REPOSITORY:-devs-guide/openai}"
 NOTES="${ROOT}/docs/releases/${VERSION}.md"
 case "${VERSION}" in
-  0.0.1) TITLE="${VERSION} — DOT Research Prompt System" ;;
-  0.0.2) TITLE="${VERSION} — DOT Agent and Research System" ;;
-  0.0.3) TITLE="${VERSION} — DOT On-Demand Research Summary" ;;
-  *) TITLE="${VERSION} — DOT" ;;
+  0.0.1) TITLE="${VERSION} — DOT Research Prompt System"; PRIOR_VERSION="" ;;
+  0.0.2) TITLE="${VERSION} — DOT Agent and Research System"; PRIOR_VERSION="0.0.1" ;;
+  0.0.3) TITLE="${VERSION} — DOT On-Demand Research Summary"; PRIOR_VERSION="0.0.2" ;;
+  0.0.4) TITLE="${VERSION} — Repository Release Contract"; PRIOR_VERSION="0.0.3" ;;
+  *) TITLE=""; PRIOR_VERSION="" ;;
 esac
 
 fail() {
@@ -20,6 +21,7 @@ fail() {
   exit 1
 }
 
+[[ -n "${TITLE}" ]] || fail "unsupported release version: ${VERSION}"
 [[ "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || fail "invalid bare semantic version"
 [[ "${VERSION}" != "0.0.1" ]] || fail "0.0.1 is the published immutable baseline and cannot be recreated"
 [[ "${SOURCE_SHA}" =~ ^[0-9a-f]{40}$ ]] || fail "SOURCE_SHA must be a lowercase full commit SHA"
@@ -32,15 +34,19 @@ cd "${ROOT}"
 remote_main="$(git ls-remote --exit-code --heads origin refs/heads/main | awk 'NR == 1 {print $1}')"
 [[ "${remote_main}" == "${SOURCE_SHA}" ]] || fail "main is ${remote_main:-missing}, expected ${SOURCE_SHA}"
 
-if [[ "${VERSION}" == "0.0.3" ]]; then
-  git rev-parse --verify "refs/tags/0.0.2^{tag}" >/dev/null || \
-    fail "0.0.2 must be published before 0.0.3: annotated tag is missing"
-  prior_metadata="$(gh release view 0.0.2 --repo "${REPOSITORY}" --json isDraft,tagName)" || \
-    fail "0.0.2 must be published before 0.0.3: GitHub release is missing"
-  [[ "$(jq -r '.tagName' <<<"${prior_metadata}")" == "0.0.2" ]] || \
-    fail "0.0.2 must be published before 0.0.3: release tag differs"
+if [[ -n "${PRIOR_VERSION}" ]]; then
+  git rev-parse --verify "refs/tags/${PRIOR_VERSION}^{tag}" >/dev/null || \
+    fail "${PRIOR_VERSION} must be published before ${VERSION}: annotated tag is missing"
+  git merge-base --is-ancestor "${PRIOR_VERSION}^{commit}" "${SOURCE_SHA}" || \
+    fail "${PRIOR_VERSION} is not an ancestor of ${VERSION} candidate ${SOURCE_SHA}"
+  prior_metadata="$(gh release view "${PRIOR_VERSION}" --repo "${REPOSITORY}" --json isDraft,isPrerelease,tagName)" || \
+    fail "${PRIOR_VERSION} must be published before ${VERSION}: GitHub release is missing"
+  [[ "$(jq -r '.tagName' <<<"${prior_metadata}")" == "${PRIOR_VERSION}" ]] || \
+    fail "${PRIOR_VERSION} must be published before ${VERSION}: release tag differs"
   [[ "$(jq -r '.isDraft' <<<"${prior_metadata}")" == "false" ]] || \
-    fail "0.0.2 must be published before 0.0.3: release remains a draft"
+    fail "${PRIOR_VERSION} must be published before ${VERSION}: release remains a draft"
+  [[ "$(jq -r '.isPrerelease' <<<"${prior_metadata}")" == "false" ]] || \
+    fail "${PRIOR_VERSION} must be published before ${VERSION}: release remains a prerelease"
 fi
 
 EXPECTED_SOURCE_SHA="${SOURCE_SHA}" bash actions/validate.pages.remote.sh
@@ -69,10 +75,12 @@ verify_release() {
   local body_file=""
   local expected_file=""
   local observed_file=""
-  metadata="$(gh release view "${VERSION}" --repo "${REPOSITORY}" --json assets,isDraft,name,tagName,targetCommitish)"
+  metadata="$(gh release view "${VERSION}" --repo "${REPOSITORY}" --json assets,isDraft,isPrerelease,name,tagName,targetCommitish)"
   [[ "$(jq -r '.tagName' <<<"${metadata}")" == "${VERSION}" ]] || fail "release tag differs"
   [[ "$(jq -r '.name' <<<"${metadata}")" == "${TITLE}" ]] || fail "release title differs"
   [[ "$(jq -r '.isDraft' <<<"${metadata}")" == "${expected_draft}" ]] || fail "release draft state differs"
+  [[ "$(jq -r '.isPrerelease' <<<"${metadata}")" == "false" ]] || fail "release prerelease state differs"
+  [[ "$(jq -r '.targetCommitish' <<<"${metadata}")" == "${SOURCE_SHA}" ]] || fail "release target differs"
   [[ "$(jq -r '.assets | length' <<<"${metadata}")" == "0" ]] || fail "unexpected uploaded assets"
   [[ "$(git rev-list -n 1 "${VERSION}")" == "${SOURCE_SHA}" ]] || fail "release tag moved"
   body_file="$(mktemp)"
