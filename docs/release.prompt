@@ -1,0 +1,148 @@
+# #RELEASE — Repository Release Contract
+
+Use this prompt to plan, document, review, publish, correct, and hand off a
+GitHub release for any product or feature in `devs-guide/openai`. It governs
+repository releases, not the immutable dataset releases owned by `#DATA`.
+
+## RELEASE-001 — Authority and activation
+
+Activate `#RELEASE` only for an owner-authorized repository release or release
+reconciliation. Record the repository, candidate version, previous published
+tag, candidate commit, included products, intended audience, and publication
+authority. A request to draft notes does not authorize a tag, merge, upload,
+publication, or external announcement.
+
+Apply repository and product contracts in their existing authority order.
+Release work may describe accepted behavior but must not silently change that
+behavior, expand permissions, or turn historical notes into live instructions.
+
+## RELEASE-002 — Review the complete release range
+
+Before writing, inspect the complete previous-tag-to-candidate commit range,
+diff summary, operator-facing sources, schemas, configuration, publication
+manifest, runtime dependencies, migrations, and validation evidence. Read at
+least one prior well-structured release from the same repository for tone and
+layout.
+
+Build a release inventory that separates included behavior, supporting
+changes, important exclusions, compatibility effects, safety effects, and
+unresolved limitations. Every material release claim must be traceable to the
+reviewed range or recorded validation; never infer completion from a branch
+name, pull-request title, or draft note.
+
+## RELEASE-003 — Version, tag, and correction integrity
+
+Use the repository's approved semantic-version policy and bare numeric tags.
+Treat every published tag and its target commit as immutable. Never move,
+delete, recreate, or silently retarget a published tag, and never replace its
+assets under the same version.
+
+A reviewed title or body may be corrected in place only when the tag, target,
+release state, and assets remain unchanged. A behavioral correction creates a
+new version. Preserve declared migration baselines and distinguish the current
+release, immediate predecessor, and older historical baselines.
+
+## RELEASE-004 — Reader-focused language
+
+Lead with the practical outcome and why it matters. Use plain, specific
+language for the affected operator, developer, researcher, or reader. Describe
+reusable behavior rather than centering a hostname, account, workstation,
+private incident, or one deployment. Define uncommon terms and keep claims
+proportional to the evidence.
+
+Prefer a compact release that can be understood quickly. Do not pad notes with
+raw diff statistics, exhaustive mechanical changes, private process history,
+credentials, unverifiable superlatives, or generic celebration. Use tables,
+diagrams, examples, and longer explanations only when they materially improve
+operation, migration, or review.
+
+## RELEASE-005 — Adaptive release body
+
+Every body contains, in this order: `## X.Y.Z`; one or two summary paragraphs;
+`### Scope`; `### Highlights`; `### Added`; `### Changed`; `### Fixed`;
+`### #COMMIT`; `### Notable commits since <previous-tag>`; and `### Assets`.
+Write `None` under an applicable change category with no entries rather than
+removing its heading.
+
+Add only the modules triggered by the release:
+
+- `Who should use this release` and `Quick start` for a new user workflow.
+- `Operator workflow and safety` for privileged, destructive, storage,
+  authentication, network, purchase, or external-sharing behavior.
+- `Interfaces and compatibility` for APIs, schemas, configuration, routes,
+  file formats, or changed defaults.
+- `Migration and recovery` when existing users must transition or can fail
+  partway through an upgrade.
+- `Validation evidence` when runtime, hardware, data, or human acceptance
+  materially supports the claims.
+- `Known boundaries` when exclusions or unsupported cases could otherwise be
+  mistaken for supported behavior.
+
+Keep the compact core when none of these modules is triggered. Never add a
+module merely to make the release look larger.
+
+## RELEASE-006 — Scope, history, and assets
+
+Scope states the reviewed release range, product or feature boundary,
+published entrypoints, and important exclusions. Highlights contain only the
+highest-signal outcomes. Added, Changed, and Fixed explain behavior and impact,
+not filenames without context.
+
+The commit section records the approved release commit subject. Notable commits
+use hashes verified from the actual release range and exact subjects; select
+meaningful commits rather than dumping mechanical history. Assets distinguish
+GitHub-generated source archives, Pages-published material, attached artifacts,
+and artifacts intentionally absent. Never claim that source-only documentation
+is an executable or binary asset.
+
+## RELEASE-007 — Documentation and publication graph
+
+Update every applicable source index, version record, feature record,
+publication-manifest entry, rendered route, raw route, dependency declaration,
+and validator in the same candidate. Keep source and rendered documentation
+distinct, and publish byte-exact raw sources where the repository contract
+requires them.
+
+Do not publish generated build output on the source branch. A release is not
+ready while a required entrypoint is absent from the publication graph, a live
+route represents another commit, or documentation promises behavior that the
+tagged source does not contain.
+
+## RELEASE-008 — Pull request and candidate gate
+
+Use a reviewable release branch and pull request. Freeze the exact candidate
+commit, confirm the effective diff and dependency ancestry, and require the
+repository's GitHub checks. For stacked releases, merge, deploy, tag, and
+publish each predecessor before retargeting and advancing its dependent pull
+request.
+
+Use the approved merge strategy and release commit subject. Do not publish
+from an unmerged branch, a moving reference, a dirty worktree, a failed check,
+or a candidate whose reviewed notes describe another source state.
+
+## RELEASE-009 — Draft, approval, and publication
+
+Store the complete proposed body in a normal tracked Markdown file. Present
+the exact title and body for human review before changing GitHub release state.
+After approval, use that file without publication-time rewriting.
+
+Deploy and validate the exact candidate before creating its tag. Create or
+converge a draft first, verify its annotated tag, target commit, title, body,
+draft and prerelease state, and asset list, then publish the same reviewed
+draft. Read the public release back through the GitHub API. An idempotent retry
+must fail closed when an existing release or tag points somewhere else.
+
+## RELEASE-010 — Completion, handoff, and later changes
+
+Complete only when the pull request is merged, required checks pass, Pages or
+other publication surfaces match the tagged commit, the release is public,
+and the live title, body, tag, target, state, and assets match the approved
+record. Return links for the pull request, validation runs, deployment, tag,
+release, and supported source archives plus any material limitation.
+
+When the release enables a separate manual acceptance test, hand off the exact
+tag, commit, immutable input, entrypoint, expected identities, bootstrap
+instruction, and test boundary. Do not claim the downstream test passed until
+its own evidence exists. Later behavioral fixes, refreshed artifacts, or
+changed release inputs require a successor release.
+

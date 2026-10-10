@@ -19,6 +19,7 @@ fail() {
 
 check_live() {
   local source_json=""
+  local raw_file=""
   source_json="$(curl -fsS "${BASE_URL}/source.json")" || return 1
   SOURCE_JSON="${source_json}" python3 - "${EXPECTED_SOURCE_SHA}" <<'PY'
 import json
@@ -31,13 +32,14 @@ if record.get("repository") != "devs-guide/openai":
     raise SystemExit("unexpected repository identity")
 if record.get("source_sha") != expected:
     raise SystemExit(f"live source is {record.get('source_sha')}, expected {expected}")
-if record.get("release") != "0.0.3":
-    raise SystemExit(f"live release is {record.get('release')}, expected 0.0.3")
+if record.get("release") != "0.0.4":
+    raise SystemExit(f"live release is {record.get('release')}, expected 0.0.4")
 PY
 
   local route=""
   for route in \
     '/' \
+    '/release/' \
     '/dot/' \
     '/dot/ingest/' \
     '/dot/agent/' \
@@ -54,6 +56,8 @@ PY
     '/dot/history/two-lane-migration/' \
     '/dot/releases/0.0.2/' \
     '/dot/releases/0.0.3/' \
+    '/dot/releases/0.0.4/' \
+    '/raw/docs/release.prompt' \
     '/raw/dot/ingest.json' \
     '/raw/dot/research/internet.prompt' \
     '/raw/dot/research/data.prompt' \
@@ -62,8 +66,18 @@ PY
     curl -fsS -o /dev/null "${BASE_URL}${route}" || return 1
   done
 
+  raw_file="$(mktemp)"
+  if ! curl -fsS "${BASE_URL}/raw/docs/release.prompt" -o "${raw_file}"; then
+    rm -f "${raw_file}"
+    return 1
+  fi
+  if ! cmp -s "${ROOT}/docs/release.prompt" "${raw_file}"; then
+    rm -f "${raw_file}"
+    return 1
+  fi
+  rm -f "${raw_file}"
+
   local relative=""
-  local raw_file=""
   for relative in internet data summary; do
     raw_file="$(mktemp)"
     if ! curl -fsS "${BASE_URL}/raw/dot/research/${relative}.prompt" -o "${raw_file}"; then

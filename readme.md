@@ -20,6 +20,10 @@ releases plus an optional on-demand Summary deliverable.
 - History: [`docs/history/`](docs/history/)
 - Releases: [`docs/releases/`](docs/releases/)
 
+Repository releases use the reusable [`#RELEASE`](docs/release.prompt)
+contract for reader-focused notes, exact review gates, immutable tags, and
+verified publication across every product in this repository.
+
 Future products should add a product directory with its own `readme.md` and
 create `docs/`, `prompts/`, `examples/`, `config/`, `src/`, or `tests/` only
 when accepted content exists.
@@ -38,9 +42,11 @@ to source editing and Git operations.
 
 Release `0.0.1 — DOT Research Prompt System` is the published immutable
 migration baseline. Release `0.0.2 — DOT Agent and Research System` consolidates
-that corpus into canonical Agent and Research lanes. Candidate `0.0.3 — DOT
+that corpus into canonical Agent and Research lanes. Release `0.0.3 — DOT
 On-Demand Research Summary` adds a conditional, evidence-bound executive-brief
-deliverable. Release records use bare semantic tags and GitHub-generated source
+deliverable. Candidate `0.0.4 — Repository Release Contract` adds reusable
+release style, documentation, and publication safeguards for the entire
+repository. Release records use bare semantic tags and GitHub-generated source
 archives; no binary assets are attached.
 
 ## Rights
