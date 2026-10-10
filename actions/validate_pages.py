@@ -66,6 +66,20 @@ def target_for_url(static_dir: Path, page: Path, url: str) -> tuple[Path | None,
 
 
 def main() -> int:
+    if MANIFEST.get("schema_version") != 2:
+        fail("publication manifest schema_version must be 2")
+    data_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "dot/research/data.prompt"]
+    if len(data_entries) != 1:
+        fail("publication manifest must contain exactly one Data contract source")
+    data_entry = data_entries[0]
+    if data_entry.get("route") != "dot/research/data/" or data_entry.get("raw_route") != "raw/dot/research/data.prompt":
+        fail("Data contract rendered or raw route is incorrect")
+    ingest_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "dot/ingest.json"]
+    if len(ingest_entries) != 1:
+        fail("publication manifest must contain exactly one DOT ingestion manifest")
+    ingest_entry = ingest_entries[0]
+    if ingest_entry.get("route") != "dot/ingest/" or ingest_entry.get("raw_route") != "raw/dot/ingest.json":
+        fail("DOT ingestion manifest rendered or raw route is incorrect")
     static_value = os.environ.get("STATIC_DIR", "static")
     static_dir = Path(static_value)
     if not static_dir.is_absolute():
@@ -104,7 +118,45 @@ def main() -> int:
         parser = PageParser()
         parser.feed(rendered)
         html_parsers[page.resolve()] = parser
+        if entry["route"].startswith("dot/research/"):
+            if '<nav class="workflow-nav" aria-label="Research workflow">' not in rendered:
+                fail(f"Research workflow navigation is missing: {page.relative_to(static_dir)}")
+            workflow_links = [
+                f'/{SITE_BASE}/dot/research/project/',
+                f'/{SITE_BASE}/dot/research/internet/',
+                f'/{SITE_BASE}/dot/research/data/',
+                f'/{SITE_BASE}/dot/research/template/',
+            ]
+            positions = [rendered.find(f'href="{link}"') for link in workflow_links]
+            if any(position < 0 for position in positions) or positions != sorted(positions):
+                fail(f"four-stage Research navigation is missing or out of order: {page.relative_to(static_dir)}")
     ok("every manifest entry has matching rendered and byte-exact raw output")
+
+    for entry in MANIFEST["entries"]:
+        for alias in entry["aliases"]:
+            page = rendered_path(static_dir, alias)
+            if not page.is_file():
+                fail(f"redirect route is missing: {alias}")
+            rendered = page.read_text(encoding="utf-8")
+            destination = f'/{SITE_BASE}/{entry["route"]}'
+            if f'<link rel="canonical" href="{destination}">' not in rendered:
+                fail(f"redirect canonical target is incorrect: {alias}")
+            if f'<meta name="source-commit" content="{source_record["source_sha"]}">' not in rendered:
+                fail(f"redirect source metadata is incorrect: {alias}")
+            parser = PageParser()
+            parser.feed(rendered)
+            html_parsers[page.resolve()] = parser
+    ok("every legacy rendered route redirects to its canonical replacement")
+
+    for migration in MANIFEST["raw_migrations"]:
+        pointer = static_dir / migration["route"]
+        if not pointer.is_file():
+            fail(f"raw migration pointer is missing: {migration['route']}")
+        text = pointer.read_text(encoding="utf-8")
+        expected_replacement = f"/{SITE_BASE}/{migration['replacement']}"
+        if migration["historical_url"] not in text or expected_replacement not in text:
+            fail(f"raw migration pointer has incorrect targets: {migration['route']}")
+    ok("every legacy raw route identifies its historical source and replacement")
 
     broken: list[str] = []
     for page, parser in list(html_parsers.items()):
@@ -134,11 +186,28 @@ def main() -> int:
 
     for path in static_dir.rglob("*"):
         relative = path.relative_to(static_dir).as_posix()
+        retired_route = "dot/" + "handoff"
+        retired_raw_route = "raw/" + retired_route
         if relative == "dot/prompt" or relative.startswith("dot/prompt/"):
             fail("private singular prompt path leaked into rendered Pages output")
         if relative == "raw/dot/prompt" or relative.startswith("raw/dot/prompt/"):
             fail("private singular prompt path leaked into raw Pages output")
-    required_files = [static_dir / ".nojekyll", static_dir / "assets" / "site.css", static_dir / "routes.json"]
+        if relative == retired_route or relative.startswith(retired_route + "/"):
+            fail("retired handoff path leaked into rendered Pages output")
+        if relative == retired_raw_route or relative.startswith(retired_raw_route + "/"):
+            fail("retired handoff path leaked into raw Pages output")
+    routes_file = static_dir / "routes.json"
+    try:
+        routes_record = json.loads(routes_file.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        fail(f"invalid routes.json: {exc}")
+    if routes_record.get("schema_version") != 2:
+        fail("routes.json schema_version must be 2")
+    route_rows = routes_record.get("routes")
+    expected_rows = len(MANIFEST["entries"]) + sum(len(entry["aliases"]) for entry in MANIFEST["entries"]) + len(MANIFEST["raw_migrations"])
+    if not isinstance(route_rows, list) or len(route_rows) != expected_rows:
+        fail("routes.json does not enumerate every canonical, redirect, and raw migration route")
+    required_files = [static_dir / ".nojekyll", static_dir / "assets" / "site.css", routes_file]
     if any(not path.exists() for path in required_files):
         fail("Pages metadata or stylesheet output is missing")
     ok("Pages metadata, stylesheet, and public/private boundaries hold")

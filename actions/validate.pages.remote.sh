@@ -37,21 +37,47 @@ PY
   for route in \
     '/' \
     '/dot/' \
+    '/dot/ingest/' \
+    '/dot/agent/' \
+    '/dot/agent/browser/' \
+    '/dot/research/' \
+    '/dot/research/project/' \
+    '/dot/research/internet/' \
+    '/dot/research/data/' \
+    '/dot/research/template/' \
     '/dot/prompts/core/master/' \
     '/dot/agents/browser/' \
     '/dot/history/initial-import/' \
-    '/dot/releases/0.0.1/' \
+    '/dot/history/two-lane-migration/' \
+    '/dot/releases/0.0.2/' \
+    '/raw/dot/ingest.json' \
+    '/raw/dot/research/internet.prompt' \
+    '/raw/dot/research/data.prompt' \
     '/raw/dot/prompts/core/master.prompt'; do
     curl -fsS -o /dev/null "${BASE_URL}${route}" || return 1
   done
 
+  local relative=""
   local raw_file=""
+  for relative in internet data; do
+    raw_file="$(mktemp)"
+    if ! curl -fsS "${BASE_URL}/raw/dot/research/${relative}.prompt" -o "${raw_file}"; then
+      rm -f "${raw_file}"
+      return 1
+    fi
+    if ! cmp -s "${ROOT}/dot/research/${relative}.prompt" "${raw_file}"; then
+      rm -f "${raw_file}"
+      return 1
+    fi
+    rm -f "${raw_file}"
+  done
+
   raw_file="$(mktemp)"
-  if ! curl -fsS "${BASE_URL}/raw/dot/prompts/core/master.prompt" -o "${raw_file}"; then
+  if ! curl -fsS "${BASE_URL}/raw/dot/ingest.json" -o "${raw_file}"; then
     rm -f "${raw_file}"
     return 1
   fi
-  if ! cmp -s "${ROOT}/dot/prompts/core/master.prompt" "${raw_file}"; then
+  if ! cmp -s "${ROOT}/dot/ingest.json" "${raw_file}"; then
     rm -f "${raw_file}"
     return 1
   fi

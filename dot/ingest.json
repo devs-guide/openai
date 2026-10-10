@@ -1,0 +1,120 @@
+{
+  "schema": "dot-ingest/1",
+  "release": "0.0.2",
+  "baseline_tag": "0.0.1",
+  "entrypoint": "dot/readme.md",
+  "manifest_authority": "ROUTING_METADATA_ONLY",
+  "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
+  "activation_gate": "PROJECT_CONTROL_PACKET_READY",
+  "topic_input": "OWNER_SUPPLIED_PROJECT_BRIEF",
+  "instruction_files": [
+    {
+      "order": 1,
+      "path": "dot/agent/master.prompt",
+      "authority_class": "AGENT_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "58e2074770854929f52b55f8bfa262712cf60cd01e7f96b4d07b22c1faf72a5a"
+    },
+    {
+      "order": 2,
+      "path": "dot/agent/config.json",
+      "authority_class": "CONFIGURATION",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "940a1b65106af4a2f6e190f414897e55013c108243f0b59b17defd3eefbc5a71"
+    },
+    {
+      "order": 3,
+      "path": "dot/agent/runtime.json",
+      "authority_class": "DATED_OBSERVATION",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "d00a0769b220929fea17fbb1dc17e5fa9c07cf3b7e4147a2ae2d55a39095743f"
+    },
+    {
+      "order": 4,
+      "path": "dot/agent/browser.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "REQUIRED",
+      "condition": "INTERNET_RESEARCH",
+      "sha256": "b080862884e2e8a88a5d1ff06b7119617decd1a46e85d42493f1b89f4c702ba4"
+    },
+    {
+      "order": 5,
+      "path": "dot/agent/page.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "CONDITIONAL",
+      "condition": "PAGE_ACTION_OR_DESTINATION",
+      "sha256": "a14951f97e003a25eaae630ad9b71334f148cc517cbb3c1961daf5c5d6fc2be9"
+    },
+    {
+      "order": 6,
+      "path": "dot/agent/media.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "CONDITIONAL",
+      "condition": "AUDIOVISUAL_EVIDENCE",
+      "sha256": "c97e9222b8d3f81a15b7cd0c9623c0b761bfedec6161043e6dae9731c69b1161"
+    },
+    {
+      "order": 7,
+      "path": "dot/research/project.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "69bc36150760fcbfe9c7a071d45be21c079db63d183296602645ea498d823b1e"
+    },
+    {
+      "order": 8,
+      "path": "dot/research/internet.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "1419fadb23d938221e4f6e6210fa78b4455e2a4e085b86c849b4903394ba4859"
+    },
+    {
+      "order": 9,
+      "path": "dot/research/data.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "6c067e8ca9e079a713d52aae187bc64e7a6c3b2e4a77895116c1efda520344b0"
+    },
+    {
+      "order": 10,
+      "path": "dot/research/template.prompt",
+      "authority_class": "TEMPLATE",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "16263bcfae3e1bafe9aa3178e4cc926ed51e1fb58810cba209b1094337af826d"
+    }
+  ],
+  "supporting_files": [
+    {
+      "path": "dot/readme.md",
+      "role": "PRODUCT_ENTRYPOINT"
+    },
+    {
+      "path": "dot/agent/readme.md",
+      "role": "AGENT_NAVIGATION"
+    },
+    {
+      "path": "dot/agent/config.schema.json",
+      "role": "CONFIGURATION_SCHEMA"
+    },
+    {
+      "path": "dot/research/readme.md",
+      "role": "RESEARCH_NAVIGATION"
+    }
+  ],
+  "non_instruction_prefixes": [
+    ".github/",
+    "actions/",
+    "docs/",
+    "www/"
+  ],
+  "superseded_prefixes": [
+    "dot/agents/",
+    "dot/prompts/"
+  ]
+}

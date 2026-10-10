@@ -1,0 +1,210 @@
+# #DATA — convert evidence into controlled datasets
+
+**Contract:** `dot-research-data/1`  
+**Requires:** reviewed `#INTERNET` records under an approved `#PROJECT`  
+**Purpose:** transform evidence into paired, reviewable CSV and JSON release
+artifacts before filling the reusable `#TEMPLATE` structures.
+
+## DATA-001 — Intake and applicable-file decision
+
+Start from the current Project Control Packet, reviewed research records,
+acceptance matrix, and declared delivery authorization. Inventory the candidate
+inputs by stable ID and version; reject excerpts presented as complete files,
+unreviewed advisory output presented as evidence, inherited permissions, and
+unresolved instruction conflicts.
+
+Select the smallest set of basenames whose row grains are required by the
+project. The catalog is an allowlist, not a requirement to manufacture empty
+tables or fragment every attribute. For each selected basename, record its
+purpose, “one row represents” definition, fields, logical types, primary and
+foreign keys, relationships, null rules, ordering, provenance, applicability,
+review owner, and release dependency. Produce both `.csv` and `.json`; produce
+neither form for an inapplicable basename.
+
+## DATA-002 — Paired-file catalog
+
+`#DATA` owns the following 22 unique basenames and their selection rules.
+`#TEMPLATE` supplies fillable records but does not create a second catalog.
+
+| Order | Basename | One row represents | Primary key | Applicable when |
+|---:|---|---|---|---|
+| 1 | `datasets` | one enduring dataset | `dataset_id` | a dataset is being released or refreshed |
+| 2 | `releases` | one immutable dataset snapshot | `release_id` | a dataset release exists |
+| 3 | `sources` | one source identity or publication system | `source_id` | substantive evidence has a source |
+| 4 | `entities` | one resolved real-world subject | `entity_id` | research tracks entities or stable subjects |
+| 5 | `geographies` | one resolved geographic unit | `geography_id` | geography affects meaning, scope, or filtering |
+| 6 | `categories` | one controlled classification value | `category_id` | reusable classifications exist |
+| 7 | `aliases` | one source-specific label or identifier for an entity | `alias_id` | names or external identifiers require resolution |
+| 8 | `entity_relationships` | one typed, optionally dated relation between two entities | `entity_relationship_id` | hierarchy, membership, succession, or shared operation exists |
+| 9 | `category_assignments` | one optionally dated entity-category association | `category_assignment_id` | entities may hold classifications by source or time |
+| 10 | `documents` | one enduring intellectual document | `document_id` | documentary evidence is used |
+| 11 | `document_versions` | one identifiable edition or version of a document | `document_version_id` | a document has a cited or reviewed representation |
+| 12 | `url_occurrences` | one observed URL for one document version or source resource | `url_occurrence_id` | an online location is discovered or generated |
+| 13 | `access_events` | one observed URL-state event at a time | `access_event_id` | discovery, return, open, review, citation, block, or generation is logged |
+| 14 | `source_assertions` | one source-specific assertion or source row | `source_assertion_id` | a source supports substantive content |
+| 15 | `observations` | one measured value at its exact subject, population, place, period, and assertion grain | `observation_id` | quantitative or structured facts exist |
+| 16 | `claims` | one precisely scoped textual proposition | `claim_id` | qualitative or synthesized propositions exist |
+| 17 | `evidence_links` | one record-to-document-version evidence location and role | `evidence_link_id` | an assertion, observation, or claim needs traceable support |
+| 18 | `review_queue` | one unresolved issue or required decision | `review_item_id` | unresolved or reviewable items exist, including an empty released queue when required |
+| 19 | `corrections` | one approved correction first applied in a release | `correction_id` | a release packet records corrections, including an empty log when required |
+| 20 | `release_changes` | one row-level comparison between two releases | `release_change_id` | a refresh or corrected successor is compared with a prior release |
+| 21 | `validation_results` | one validation check result for a release and optional file | `validation_result_id` | release validation is recorded |
+| 22 | `manifest` | one physical file included or expected in a release | `manifest_file_id` | a release packet inventories its artifacts |
+
+## DATA-003 — Grain, keys, and cardinality
+
+Freeze each selected file's grain before defining fields. Primary keys are
+nonnull and unique; composite uniqueness rules are explicit; foreign keys name
+one target file and field. A nullable foreign key must have a companion reason
+or status that explains why the relationship is absent. Do not store IDs from
+unrelated tables in one undeclared polymorphic field.
+
+State and validate every one-to-one, one-to-many, and many-to-many relation.
+Use bridge records for categories and entity relations rather than packed lists
+or repeated child columns. Temporal relationships carry a precisely defined
+start, end, as-of value, or declared unknown precision as applicable. Shared
+sites, multiple operators, renames, splits, mergers, and successors must not be
+forced into permanent one-to-many assumptions.
+
+Place a value only at the grain it measures. Keep a parent total at the parent
+grain, and never copy it onto every child. When a Fact is not entity-centered,
+declare a stable subject key or a dedicated observation family rather than
+overloading `entity_id`.
+
+## DATA-004 — Stable identity and entity resolution
+
+Use nonsemantic string identifiers in both formats, preserve leading zeros,
+and never recycle a retired ID. Keep raw labels and external identifiers in
+`aliases`; do not merge solely on case-folded or normalized names. Record the
+match method, evidence, confidence, resolution status, reviewer type, and any
+superseding or split identity.
+
+Distinguish legal organization, fiscal or reporting unit, operator, site,
+program, service area, geography, and other project-defined subject types.
+Low-confidence matches and material duplicates remain in `review_queue` until
+accepted. An unresolved identity may retain a provisional stable key without
+silently becoming an accepted entity.
+
+## DATA-005 — Provenance layers and #FACT storage
+
+Keep these layers separately addressable: source identity; enduring document;
+document version; URL occurrence; access event; source assertion; observation;
+claim; and evidence link. One document may have many versions, one version may
+occur at many URLs, and one URL may have many observed events. Mirrors,
+redirects, archives, and canonical locations are not collapsed without
+evidence.
+
+Use `GENERATED`, `DISCOVERED`, `RETURNED`, `OPENED`, `REVIEWED`, `CITED`, and
+`BLOCKED` only for the corresponding observed URL or access state. A generated
+URL is not an executed query; a returned link is not opened content; an opened
+document is not automatically reviewed; and review does not by itself make a
+source cited. Unknown historical publication, discovery, access, or review
+times remain null with a reason instead of receiving the current timestamp.
+
+`#FACT` remains the human-facing atomic research concept. Its released storage
+is an `observation` or `claim` linked to its `source_assertions` and exact
+`evidence_links`; it is not a second denormalized fact table. Evidence links
+use explicit nullable `source_assertion_id`, `observation_id`, and `claim_id`
+columns with exactly one target set, plus a `document_version_id`, locator, and
+evidence role.
+
+## DATA-006 — Measurements, derivation, and missingness
+
+Store `OBSERVED`, `DERIVED`, and `INFERRED` as derivation classes separate from
+verification status, confidence, and reviewer type. Preserve a source value,
+label, unit, scale, currency, denominator, scope, basis, and precision before
+adding any standardized value. A derived value identifies its inputs and
+transformation; an inference states its rationale, uncertainty, and required
+review.
+
+Null means no value is present. Declare controlled missing reasons, including
+`not_reported`, `not_applicable`, `not_available`, `inaccessible_source`,
+`outside_scope`, `suppressed`, `conflicting_sources`, `unresolved_entity`,
+`not_yet_reviewed`, and `unknown_historical_time`. Never substitute zero,
+false, an empty string, a sentinel, or a source token such as “N/A” for null;
+retain meaningful source tokens in a separate raw-value field.
+
+Represent event/effective, period start/end, as-of, publication/update,
+access, analysis-cutoff, and release time separately. Record date precision and
+fiscal, academic, calendar, quarter, rolling, or custom period type without
+inventing a month or day. Document decimal scale, rounding, comparison method,
+and whether the logical value is a decimal number or a precision-preserving
+numeric string.
+
+For mixed-age, mixed-period, mixed-scope, or joint-service values, retain
+eligible and ineligible components, allocation driver, formula, residual, and
+conditional bounds. Do not invent a central estimate from an unknown share.
+For interentity payments, preserve payer, nullable recipient plus reason,
+amount, period, accounting basis, reporting perimeter, reversals or netting,
+and recipient-resolution status. Keep consolidation, funding flow,
+final-service expenditure, and geographic attribution as separate views.
+
+## DATA-007 — CSV and JSON semantic parity
+
+Every selected basename produces `<basename>.csv` and `<basename>.json` from
+one logical record set. CSV contains one header and one logical row per record;
+JSON contains one top-level array with one flat object per CSV row. Both forms
+use identical field names, field sets, primary-key values, logical values, and
+null meanings. Every JSON object includes nullable keys with `null`; the CSV
+counterpart uses an empty cell only where the dictionary declares null.
+
+The data dictionary declares each field as string, identifier, integer,
+decimal, precision-preserving numeric string, boolean, calendar date, partial
+date/reporting period, timestamp, URL, or enum. IDs and postal codes are
+strings. Booleans are lowercase `true`/`false` in CSV and native booleans in
+JSON. Dates and timestamps use declared canonical forms. Decimal comparison is
+performed with decimal semantics, never binary-float approximation; scale,
+rounding, and raw precision are documented.
+
+Use stable deterministic row ordering in both files for review, while treating
+keys rather than position as identity. CSV header order and JSON key order
+follow the dictionary. Document Unicode normalization used for matching and
+preserve meaningful original text.
+
+## DATA-008 — Validation, acceptance scenarios, and review
+
+Before release, record structural, parity, primary/composite-key, foreign-key,
+cardinality, deduplication, hierarchy, period, unit, provenance, evidence,
+missingness, count-reconciliation, and source-lineage results. Spot-check every
+high-impact row, inference, correction, manual transcription, and low-confidence
+identity plus a declared sample across sources, periods, and entity types.
+
+Model-assisted review and human review are separate reviewer types with their
+own identity, time, scope, and evidence. A model cannot accept a material
+exception merely by labeling it reviewed. Each result is `PASS`, `FAIL`,
+`WARNING`, `NOT_APPLICABLE`, `BLOCKED`, or `ACCEPTED_EXCEPTION`; only the
+designated human may accept an exception classified as material or blocking.
+
+The release validation set must exercise these topic-neutral cases:
+
+| Scenario ID | Required representation and expected result |
+|---|---|
+| `blocked-source` | A blocked access event remains uncited and does not create reviewed evidence. |
+| `discovered-unreviewed-url` | A discovered URL occurrence has no opened, reviewed, or cited state unless later events establish each one. |
+| `temporal-many-to-many` | Two entities may share a dated relation without collapsing either identity or losing the period. |
+| `nullable-foreign-key` | A nullable foreign key stays null with a controlled reason and does not fail referential integrity. |
+| `mixed-age-allocation` | An unknown eligible share yields disclosed bounds or scenarios and no invented central estimate. |
+| `unresolved-interentity-payment` | The payer and payment remain recorded while the recipient ID is null with `unresolved_entity`. |
+| `human-model-review` | Human and model-assisted review events remain distinguishable; only authorized human acceptance closes a material gate. |
+| `post-release-correction` | A correction after acceptance creates a successor release and leaves the accepted snapshot unchanged. |
+
+## DATA-009 — Immutable release, correction, and refresh
+
+Assign a stable dataset ID and unique release ID. The release record and
+manifest state cutoffs, dictionary and format versions, file hashes, row
+counts, status, known gaps, validation outcome, and acceptance identity. A
+candidate becomes accepted only after blocking checks pass and the authorized
+human approves the packet and documented exceptions.
+
+Never mutate or overwrite an accepted release. A correction or refresh creates
+a new immutable release, preserves prior artifacts, records affected file,
+row, field, old and new logical values, reason, evidence, decision owner, and
+first corrected release, and marks superseded assertions without erasing their
+history. `release_changes` classifies rows as added, changed, superseded,
+unchanged, removed from scope, or unresolved.
+
+A refresh rechecks scope, cutoffs, dictionary compatibility, inaccessible
+sources, document versions, URL events, aliases, entity relationships, and all
+affected validation gates. Publish only the selected paired files and approved
+documentation through the configured destination, then retain its publication
+receipt and readback result separately from dataset acceptance.

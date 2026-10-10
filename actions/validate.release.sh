@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-VERSION="${RELEASE_VERSION:-0.0.1}"
+VERSION="${RELEASE_VERSION:-0.0.2}"
 NOTES="${ROOT}/docs/releases/${VERSION}.md"
 
 fail() {
@@ -33,8 +33,7 @@ fi
 
 grep -Fq 'GitHub-generated source archives' "${NOTES}" || fail "source archives are not declared"
 grep -Fq 'No additional binary assets' "${NOTES}" || fail "binary asset policy is not declared"
-grep -Fq 'release: 0.0.1 - publish DOT research prompt system' "${NOTES}" || \
-  fail "chosen release commit message is missing"
+grep -Fq "release: ${VERSION} - " "${NOTES}" || fail "chosen release commit message is missing"
 
 cd "${ROOT}"
 if git rev-parse --verify HEAD >/dev/null 2>&1; then

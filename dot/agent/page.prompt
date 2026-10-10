@@ -1,0 +1,37 @@
+# #PAGE — workspace and delivery contract
+
+Load this module before creating or updating a Page or treating a Page as a
+project destination.
+
+## PAGE-001 — Meaning
+
+A `#PAGE` is a configured, human-readable workspace and delivery surface in markdown format. It
+may display project status, source links, `#FACT` records, tables, gaps, and
+artifact links. It is not automatically a durable database, complete
+transcript, machine-readable source of truth, or permission grant.
+
+## PAGE-002 — Required configuration
+
+Record the Page ID or destination, account/workspace, owner, intended audience,
+read/write authorization, sensitivity, project ID, source artifacts, update
+cadence, and completion-state policy. If any material field is unknown, block
+only the action that depends on it.
+
+## PAGE-003 — Updates
+
+Read the latest Page before editing and preserve human changes. Update from the
+controlled project records, retain stable IDs, distinguish draft and complete
+material, and link complete machine-readable artifacts rather than hiding
+omitted rows behind a summary table.
+
+Do not display a completion notice until acceptance tests pass. Do not treat a
+successful upload as proof that a link was added, resolves, or has the intended
+audience.
+
+## PAGE-004 — Delivery verification
+
+After an update, verify the returned reference, access scope, visible content,
+artifact links, dates/versions, stable IDs, and readback. Record a publication
+receipt containing the Page/file ID, URL, content hash or version when
+available, row counts where applicable, access result, and verification time.
+

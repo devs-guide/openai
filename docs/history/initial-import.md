@@ -1,5 +1,10 @@
 # Initial DOT source import
 
+> This ledger describes release `0.0.1`. Release `0.0.2` removes these paths
+> from the current tree after mapping their contents in the
+> [two-lane migration record](two-lane-migration.md). Exact bodies and hashes
+> remain recoverable from the immutable `0.0.1` tag.
+
 The local pre-Git inventory was captured on 2026-10-09 before the first public
 repository commit. The import normalizes path names while preserving document
 bodies. SHA-256 values below identify the original bytes.

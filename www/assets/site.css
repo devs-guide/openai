@@ -67,6 +67,18 @@ a:focus-visible, .skip-link:focus { outline: 3px solid #f59e0b; outline-offset: 
 }
 
 .breadcrumbs { display: flex; flex-wrap: wrap; gap: .45rem; color: var(--muted); font-size: .92rem; }
+.workflow-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  margin: 1rem 0;
+  padding: .65rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: .5rem;
+  background: var(--code);
+  font-weight: 650;
+}
 .document-meta { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 2rem; }
 .document-meta span { padding: .2rem .55rem; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-size: .8rem; }
 

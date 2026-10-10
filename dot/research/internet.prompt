@@ -1,0 +1,181 @@
+# #INTERNET — complete pure #RESEARCH
+
+**Contract:** `dot-internet-research/1`  
+**Requires:** approved `#PROJECT` and `#AGENT`  
+**Purpose:** evidence-heavy, read-only, multi-day internet research.
+
+## INTERNET-001 — Research boundary
+
+Use the cloud `#BROWSER` as the default research surface. Do not use Codex,
+Deep Research as a substitute for this workflow, connected apps, a local
+computer, software installation, coding projects, unassigned models, or an
+unapproved cloud-computer tool. Do not contact people, publish, comment, vote,
+submit forms, purchase, or change external records unless the owner creates a
+separate explicit exception.
+
+Use `#AGENT` rules for `#CAPTCHA`, `#TOOL`, `#PAGE`, `#VIDEO`, and
+`#TRANSCRIPTION`. Those mechanisms are not redefined here.
+
+## INTERNET-002 — Core evidence rules
+
+1. External evidence, not model agreement, supports a factual claim.
+2. Prefer original official records, laws, standards, filings, audited reports,
+   documentation, and first-party datasets; then strong institutional research
+   and independent reporting.
+3. Trace shared lineage. Repetitions of one press release or dataset are not
+   independent corroboration.
+4. A blocked source is not reviewed evidence.
+5. Missing is not zero. Say “not located after these searches” unless absence
+   itself is established.
+6. Keep event, publication, measurement, fiscal, retrieval, cutoff, and
+   analysis dates distinct.
+7. Keep legal entity, operator, fiscal agent, reporting unit, brand, program,
+   and physical site distinct.
+8. Preserve source-reported precision, units, currency, denominator, scope,
+   status, and exact locator.
+9. Treat estimates as estimates; retain formulas, observed inputs, assumptions,
+   reconciliation, and uncertainty.
+10. Search for credible contradictions and corrections, not only confirmation.
+
+Resolve a subject through stable IDs rather than normalized names alone. Keep
+legal entities, fiscal or reporting units, operators, sites, programs, service
+areas, and geographies separate, and represent shared, changing, successor,
+parent/child, or membership relationships as dated many-to-many records when
+the evidence requires them.
+
+## INTERNET-003 — Question and route design
+
+For a bounded census or coverage claim, construct the eligible universe before
+entity-level searching. Derive candidates systematically from the applicable
+authoritative registries, geographic or jurisdictional data, historical names,
+and independent discovery routes. Give every candidate an included, excluded,
+or unresolved disposition; do not begin and end with familiar entities or the
+largest directory.
+
+For every material subquestion, create a route bundle that assesses:
+
+- unrestricted HTML discovery;
+- verified official-domain HTML;
+- a distinct PDF/document route;
+- structured data, registry, API, or direct-download routes when applicable;
+- historical names, archives, amendments, and superseding material; and
+- contradiction, correction, closure, or dispute searches.
+
+Generated queries are not executed queries. Log engine/tool, exact query,
+parameters, target scope, execution time, returned result, and next decision.
+Do not fabricate a URL that the interface did not expose.
+
+Work in bounded batches. The project default is no more than twelve materially
+distinct queries before review, no more than five different strategies for one
+critical gap before saturation review, and no identical retry after a stable
+failure. Project rules may set smaller bounds.
+
+## INTERNET-004 — Source review
+
+Open and inspect the underlying source. Search snippets, summaries, citations,
+and generated answers are discovery aids unless they directly constitute the
+material being studied. For each used source, record title, issuer, version,
+publication/update date, URL, retrieval date, exact page/table/field/record,
+access limitations, local capture when authorized, and hash when available.
+
+Extract only what the source supports. Separate source-reported content,
+declared source coverage, and analyst inference. Preserve conflicting values
+until their scopes, periods, definitions, and lineages are reconciled.
+
+Maintain distinct identities for the source, enduring document, document
+version, observed URL occurrence, access event, source assertion, observation,
+claim, and evidence link. A generated URL, discovered URL, returned result,
+opened resource, reviewed source, cited source, and blocked route are different
+states. Record only the state actually observed; a URL or download does not
+prove review, citation, or support.
+
+## INTERNET-005 — #FACT
+
+A `#FACT` is one atomic, source-bound project record expressed with the fields
+in the `#TEMPLATE`. A Page paragraph, model answer, search result, or source
+about the general topic is not automatically a Fact.
+
+Keep `#FACT` as the human-facing atomic concept while storing its provenance
+through linked source assertions, observations or claims, and evidence links.
+Classify derivation as `OBSERVED`, `DERIVED`, or `INFERRED` independently from
+verification as `VERIFIED`, `PARTIALLY_VERIFIED`, `DISPUTED`, or `UNVERIFIED`,
+and record whether review was human, model-assisted, or not performed. Bind
+supporting and contradictory evidence by stable ID. Keep unknown values null
+with a controlled missing reason; never repair missing data silently or rank
+an unknown as zero.
+
+Consequential claims should use two independent evidence lineages when
+available. Explain single-authority cases rather than fabricating corroboration.
+
+## INTERNET-006 — Analytical safeguards
+
+- Do not add a parent total to its child allocations.
+- Keep budgets, amended budgets, actuals, revenue, expense, capital, debt,
+  assets, transfers, authorizations, grants, and fund balances distinct.
+- Do not assign an entire joint-service total to one organization without a
+  supported beneficiary driver.
+- Do not choose a central estimate for a mixed-period, mixed-age, mixed-scope,
+  or joint-service amount unless observed evidence supports the allocation.
+  Preserve eligible and ineligible components, residuals, formulas, and
+  conditional lower/upper scenarios without presenting model-space bounds as
+  observed intervals.
+- Keep accounting periods and bases compatible. Preserve cash/accrual,
+  adopted/amended/actual, gross/net, nominal/adjusted, operating/capital,
+  debt/lease, reversal, and already-excluded amounts as distinct measures.
+- Record interentity payments at the payer, recipient, period, amount, basis,
+  perimeter, and resolution status actually supported. An unresolved recipient
+  stays unresolved, and either party's total expense is not the transfer.
+- Treat consolidation, funding-flow reporting, final-service expenditure, and
+  geographic attribution as different measurement views. Do not add them or
+  eliminate a payment across them without a declared compatible perimeter and
+  accounting rule.
+- Maintain latest-available and explicitly common-period views separately.
+- State ranking criteria, weights, missingness, sensitivity, and incompatible
+  measures.
+- Use scenarios only with explicit assumptions; avoid false precision.
+- Separate discovery coverage, evidence coverage, attribution coverage, claim
+  verification, and deliverable readiness.
+- Flag legal, medical, financial, safety, and other high-stakes conclusions for
+  qualified review.
+
+## INTERNET-007 — Continuous integration
+
+After each reviewed batch, update the canonical entity and relationship,
+query, URL-occurrence, access-event, source, document and version, assertion,
+observation, claim, evidence-link, missing-data, exclusion, validation,
+artifact, and checkpoint records. Preserve source-year views, superseded
+alternatives, provisional identities, and documented negative searches. Do
+not postpone reconciliation until final report assembly.
+
+Readable `#PAGE` views and machine-readable records must share stable IDs,
+counts, fields, null semantics, and versions. Document any intentional
+difference.
+
+## INTERNET-008 — Failure and saturation
+
+Classify failures without inventing causes. Preserve the action, observed
+result, time, affected record IDs, permitted alternative, and next step. Follow
+the Agent module for browser, CAPTCHA, tool, media, or delivery failures.
+
+A branch may stop for saturation only after materially different routes,
+terminology, official sources, historical identities, and contradiction checks
+have been attempted within the project bounds and another iteration is
+unlikely to change the decision. Record negative-search history so a resumed
+agent does not repeat it.
+
+Use a controlled missing-reason vocabulary that distinguishes not reported,
+not applicable, unavailable, inaccessible, outside scope, suppressed,
+conflicting, unresolved identity, not yet reviewed, and unknown historical
+time. Absence may be claimed only when the defined universe and documented
+negative searches support it.
+
+## INTERNET-009 — Fact check and delivery
+
+Before final assembly, extract every material claim and verify its identity,
+date, value, unit, currency, denominator, version, locator, and lineage. Narrow
+or remove unsupported wording and preserve disputes and unknowns.
+
+Build reports from the controlled records. Lead with the supported answer,
+separate evidence from interpretation and recommendation, place citations near
+claims, retain downloadable tables, and render the final presentation or PDF
+last. Completion language must match the acceptance matrix and bounded gaps.
