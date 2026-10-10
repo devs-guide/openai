@@ -199,10 +199,17 @@ def main() -> int:
     if any(rules[rule_id] != "dot/research/data.prompt" for rule_id in expected_data_rules):
         fail("canonical DATA rule IDs must be owned by dot/research/data.prompt")
 
+    expected_summary_rules = {f"SUMMARY-{number:03d}" for number in range(1, 11)}
+    observed_summary_rules = {rule_id for rule_id in rules if rule_id.startswith("SUMMARY-")}
+    if observed_summary_rules != expected_summary_rules:
+        fail("canonical Summary contract must define SUMMARY-001 through SUMMARY-010 exactly once")
+    if any(rules[rule_id] != "dot/research/summary.prompt" for rule_id in expected_summary_rules):
+        fail("canonical SUMMARY rule IDs must be owned by dot/research/summary.prompt")
+
     canonical_text = "\n".join(path.read_text(encoding="utf-8") for path in CANONICAL_PROMPTS)
     if "#RESERACH" in canonical_text:
         fail("misspelled #RESERACH remains in canonical prompts")
-    for term in ("#AGENT", "#PROJECT", "#RESEARCH", "#INTERNET", "#DATA", "#TEMPLATE", "#PAGE", "#FACT", "#CAPTCHA", "#TOOL", "#VIDEO", "#TRANSCRIPTION"):
+    for term in ("#AGENT", "#PROJECT", "#RESEARCH", "#INTERNET", "#DATA", "#TEMPLATE", "#SUMMARY", "#PAGE", "#FACT", "#CAPTCHA", "#TOOL", "#VIDEO", "#TRANSCRIPTION"):
         if term not in canonical_text:
             fail(f"canonical terminology is missing {term}")
 

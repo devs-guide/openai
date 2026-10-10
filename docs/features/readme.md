@@ -4,18 +4,28 @@ This public index describes accepted or release-candidate product behavior.
 Private implementation plans and operational evidence remain in the separate
 `devs-guide/prompts` lifecycle workspace.
 
+## 0.0.3
+
+| Feature | Status | Public owners |
+|---|---|---|
+| On-demand subtopic executive brief | Candidate | Summary contract and Project controls |
+| Self-contained, Fact-bound PDF narrative | Candidate | Summary and controlled Research records |
+| Executive Brief Request and Completion Receipt | Candidate | Template contract |
+| Summary ingestion and Pages routes | Candidate | Ingestion and publication manifests |
+| Summary contract and delivery validation | Candidate | GitHub Actions |
+
 ## 0.0.2
 
 | Feature | Status | Public owners |
 |---|---|---|
-| Agent operating contract | Candidate | `dot/agent/` |
-| Tagged-release ingestion and activation gate | Candidate | `dot/ingest.json`, Agent, Project, and Template |
-| Project → Internet → Data → Template research flow | Candidate | `dot/research/` |
-| Evidence-to-dataset release lifecycle | Candidate | Data contract, reusable structures, and GitHub validation |
-| Ordered assigned models and project-opt-in VM tools | Candidate | Agent configuration and Project contract |
-| Page, Fact, browser, CAPTCHA, video and transcription contracts | Candidate | Agent modules and Research contracts |
-| Clause-level migration audit | Candidate | History ledger and GitHub Actions |
-| Legacy route compatibility | Candidate | Publication manifest and Pages builder |
+| Agent operating contract | Accepted | `dot/agent/` |
+| Tagged-release ingestion and activation gate | Accepted | `dot/ingest.json`, Agent, Project, and Template |
+| Project → Internet → Data → Template research flow | Accepted | `dot/research/` |
+| Evidence-to-dataset release lifecycle | Accepted | Data contract, reusable structures, and GitHub validation |
+| Ordered assigned models and project-opt-in VM tools | Accepted | Agent configuration and Project contract |
+| Page, Fact, browser, CAPTCHA, video and transcription contracts | Accepted | Agent modules and Research contracts |
+| Clause-level migration audit | Accepted | History ledger and GitHub Actions |
+| Legacy route compatibility | Accepted | Publication manifest and Pages builder |
 
 ## 0.0.1
 

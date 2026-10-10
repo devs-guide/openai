@@ -1,7 +1,8 @@
 {
   "schema": "dot-ingest/1",
-  "release": "0.0.2",
+  "release": "0.0.3",
   "baseline_tag": "0.0.1",
+  "prior_release_tag": "0.0.2",
   "entrypoint": "dot/readme.md",
   "manifest_authority": "ROUTING_METADATA_ONLY",
   "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
@@ -62,7 +63,7 @@
       "authority_class": "RESEARCH_CONTRACT",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "69bc36150760fcbfe9c7a071d45be21c079db63d183296602645ea498d823b1e"
+      "sha256": "2952883fcc737ead216f366202d72bef772a529b8ed90702d47636f2f4c98a5c"
     },
     {
       "order": 8,
@@ -86,7 +87,15 @@
       "authority_class": "TEMPLATE",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "16263bcfae3e1bafe9aa3178e4cc926ed51e1fb58810cba209b1094337af826d"
+      "sha256": "dff4138e30e4e9134f5225db7699e0d67d205947b08ebab91f02cf5a8ff2b03c"
+    },
+    {
+      "order": 11,
+      "path": "dot/research/summary.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "CONDITIONAL",
+      "condition": "ON_DEMAND_SUBTOPIC_EXECUTIVE_BRIEF",
+      "sha256": "6f06355874d2cea5f0332f2678bc07a4f88ba3ae1cb47d7ac4f306acbb097b87"
     }
   ],
   "supporting_files": [

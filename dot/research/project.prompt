@@ -125,9 +125,10 @@ canonical destination, and keep/drop decision. Do not publish or preserve a
 second live instruction source after its accepted content has been reconciled.
 
 For a tagged DOT release, produce an ingestion receipt before project work. It
-must record the declared release and baseline, entrypoint, every required and
-conditional instruction file found, missing or truncated content, manifest
-hashes, which hashes were actually verified, authority classifications, and
+must record the declared release, prior release when supplied, baseline,
+entrypoint, every required and conditional instruction file found, missing or
+truncated content, manifest hashes, which hashes were actually verified,
+authority classifications, and
 non-instructional paths. Never claim digest verification without an authorized
 surface that performed it. A release mismatch, incomplete required file, or
 unresolved authority conflict blocks activation of the affected contract.
@@ -140,3 +141,20 @@ from the prior project never transfer automatically. Apply the current
 authority order, reject unsafe or obsolete directions, preserve scoped
 supersession, and carry forward only the material supported by the current
 Project Control Packet.
+
+## PROJECT-009 — Control conditional deliverables
+
+Activate an optional research deliverable only when the owner requests its
+named output and the Project Control Packet records its scope, parent project
+version, evidence cutoff, inputs, destination, acceptance tests, and delivery
+order. Give each activation its own request ID and artifact ID. Do not infer a
+request for adjacent deliverables or allow a derivative output to overwrite its
+parent report or an accepted data release.
+
+Use `#SUMMARY` for an on-demand subtopic executive brief derived from existing
+research. Freeze the parent evidence and data versions before drafting. If the
+requested output materially expands the question, population, geography,
+period, evidence universe, permission, or destination, classify and approve
+that change under PROJECT-006 before continuing. Complete the deliverable only
+when its separate acceptance tests, publication receipt, and readback are
+terminal.

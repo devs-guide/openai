@@ -41,6 +41,7 @@ REQUIRED = {
     "docs/history/two-lane-migration.md",
     "docs/releases/0.0.1.md",
     "docs/releases/0.0.2.md",
+    "docs/releases/0.0.3.md",
     "docs/releases/readme.md",
     "dot/ingest.json",
     "dot/readme.md",
@@ -56,6 +57,7 @@ REQUIRED = {
     "dot/research/data.prompt",
     "dot/research/project.prompt",
     "dot/research/readme.md",
+    "dot/research/summary.prompt",
     "dot/research/template.prompt",
     "readme.md",
     "tools/link.prompt.sh",
@@ -141,6 +143,7 @@ INGEST_INSTRUCTIONS = (
     ("dot/research/internet.prompt", "RESEARCH_CONTRACT", "REQUIRED", None),
     ("dot/research/data.prompt", "RESEARCH_CONTRACT", "REQUIRED", None),
     ("dot/research/template.prompt", "TEMPLATE", "REQUIRED", None),
+    ("dot/research/summary.prompt", "RESEARCH_CONTRACT", "CONDITIONAL", "ON_DEMAND_SUBTOPIC_EXECUTIVE_BRIEF"),
 )
 INGEST_SUPPORTING = (
     ("dot/readme.md", "PRODUCT_ENTRYPOINT"),
@@ -304,6 +307,142 @@ def validate_data_contract() -> None:
     ok("Data owns 22 unique paired basenames, distinct provenance layers, and all acceptance scenarios")
 
 
+def validate_summary_contract() -> None:
+    summary_path = ROOT / "dot" / "research" / "summary.prompt"
+    project_path = ROOT / "dot" / "research" / "project.prompt"
+    template_path = ROOT / "dot" / "research" / "template.prompt"
+    summary = summary_path.read_text(encoding="utf-8")
+    project = project_path.read_text(encoding="utf-8")
+    template = template_path.read_text(encoding="utf-8")
+
+    observed_rules = re.findall(r"^## (SUMMARY-[0-9]{3})\b", summary, re.MULTILINE)
+    expected_rules = [f"SUMMARY-{number:03d}" for number in range(1, 11)]
+    if observed_rules != expected_rules:
+        fail("Summary contract must define SUMMARY-001 through SUMMARY-010 in order")
+
+    required_by_rule = {
+        "SUMMARY-001": (
+            "only when the owner requests",
+            "never rewrite, replace, rename, or overwrite the main research report",
+            "freeze the parent project version",
+        ),
+        "SUMMARY-002": (
+            "8–16 core pages",
+            "ask only about omissions whose answers would materially alter",
+            "approved destination",
+        ),
+        "SUMMARY-003": (
+            "bind each material statement and comparison to controlled `#fact` records",
+            "inaccessible, missing, suppressed, conflicting, or noncomparable",
+            "new comprehensive investigation",
+        ),
+        "SUMMARY-004": (
+            "inside the pdf",
+            "links provide traceability but never substitute",
+            "privacy, suppression, and audience controls",
+        ),
+        "SUMMARY-005": (
+            "education or subject-matter consultant, research editor, and information designer",
+            "three to five strongest findings",
+            "edutainment means strong narrative pacing",
+            "must not imply affiliation with ted",
+            "what remains uncertain",
+        ),
+        "SUMMARY-006": (
+            "embedded data appendix",
+            "do not add filler",
+            "one main idea per page or spread",
+        ),
+        "SUMMARY-007": (
+            "values behind every material chart",
+            "bar chart's numeric axis at zero",
+            "never rely on color alone",
+        ),
+        "SUMMARY-008": (
+            "derivation_class: observed",
+            "derivation_class: derived",
+            "derivation_class: inferred",
+            "null plus a controlled missing reason",
+            "never reconstruct protected small groups",
+        ),
+        "SUMMARY-009": (
+            "k–6 as a working assumption",
+            "k–12 or pk–8",
+            "does not establish quality",
+        ),
+        "SUMMARY-010": (
+            "visually inspect every page",
+            "mark delivery `blocked`",
+            "versioned native pdf attachment",
+            "do not build an application, database, website, or code product",
+            "codex is not required or authorized",
+        ),
+    }
+    for rule_id, phrases in required_by_rule.items():
+        section = re.sub(r"\s+", " ", prompt_section(summary, rule_id)).lower()
+        for phrase in phrases:
+            if phrase not in section:
+                fail(f"Summary contract lacks required {rule_id} behavior: {phrase}")
+
+    project_section = re.sub(r"\s+", " ", prompt_section(project, "PROJECT-009")).lower()
+    for phrase in ("owner requests its named output", "use `#summary`", "overwrite its parent report"):
+        if phrase not in project_section:
+            fail(f"Project lacks conditional Summary control: {phrase}")
+
+    template_section = prompt_section(template, "TEMPLATE-016")
+    json_blocks = re.findall(r"```json\n(.*?)\n```", template_section, re.DOTALL)
+    if len(json_blocks) != 2:
+        fail("Template must define one Executive Brief Request and one Completion Receipt")
+    try:
+        request, completion = (json.loads(block) for block in json_blocks)
+    except json.JSONDecodeError as exc:
+        fail(f"Template Executive Brief record is invalid JSON: {exc}")
+    required_request_fields = {
+        "summary_request_id",
+        "parent_project_id",
+        "parent_project_version",
+        "requested_subtopic",
+        "audience",
+        "supported_decision_or_discussion",
+        "geographic_population_and_entity_scope",
+        "relevant_dates_and_research_cutoff",
+        "input_files_pages_datasets_and_urls",
+        "required_questions_or_comparisons",
+        "excluded_topics",
+        "desired_length",
+        "output_title",
+        "output_version",
+        "output_filename",
+        "approved_destination",
+        "recorded_assumptions",
+        "acceptance_test_ids",
+    }
+    if not required_request_fields.issubset(request):
+        fail("Executive Brief Request lacks required input fields")
+    required_completion_fields = {
+        "summary_request_id",
+        "output_filename",
+        "output_version",
+        "dataset_release_ids",
+        "fact_and_evidence_versions",
+        "page_count",
+        "sha256",
+        "material_claim_check",
+        "calculation_and_measurement_check",
+        "appendix_and_supporting_value_check",
+        "privacy_and_suppression_check",
+        "visual_page_inspection",
+        "native_attachment_state",
+        "delivery_reference",
+        "readback_at",
+        "material_limitations",
+        "completion_status",
+    }
+    if not required_completion_fields.issubset(completion):
+        fail("Executive Brief Completion Receipt lacks required validation or delivery fields")
+    ok("Summary owns one conditional, self-contained, Fact-bound executive-brief lifecycle")
+
+
 def validate_ingest_contract() -> None:
     ingest_path = ROOT / "dot" / "ingest.json"
     try:
@@ -313,8 +452,9 @@ def validate_ingest_contract() -> None:
 
     expected_identity = {
         "schema": "dot-ingest/1",
-        "release": "0.0.2",
+        "release": "0.0.3",
         "baseline_tag": "0.0.1",
+        "prior_release_tag": "0.0.2",
         "entrypoint": "dot/readme.md",
         "manifest_authority": "ROUTING_METADATA_ONLY",
         "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
@@ -376,8 +516,9 @@ def validate_ingest_contract() -> None:
     for term in ("connected-app context", "not project evidence"):
         if term not in master:
             fail(f"Agent contract lacks ingestion boundary: {term}")
+    normalized_project = re.sub(r"\s+", " ", project)
     for term in ("ingestion receipt", "missing or truncated content", "actually verified"):
-        if term not in project:
+        if term not in normalized_project:
             fail(f"Project contract lacks ingestion receipt requirement: {term}")
     for term in ("Ingest a tagged release and initialize", "dot/ingest.json", "OWNER_TOPIC_BRIEF"):
         if term not in template:
@@ -401,6 +542,8 @@ def validate_release_workflow() -> None:
     release_script = (ROOT / "actions" / "release.sh").read_text(encoding="utf-8")
     for required in (
         "0.0.1 is the published immutable baseline",
+        "0.0.2 must be published before 0.0.3",
+        "DOT On-Demand Research Summary",
         "release_text.py",
         "existing release is already published",
         "existing draft target differs",
@@ -432,7 +575,7 @@ def main() -> int:
             continue
         if stale_candidate in text:
             fail(f"stale candidate version remains in source: {path}")
-    ok("candidate release identity is consistently 0.0.2")
+    ok("candidate release identity is consistently 0.0.3")
 
     if any(path.startswith("static/") for path in paths):
         fail("generated static output must not be included on main")
@@ -442,6 +585,8 @@ def main() -> int:
         fail("byte-identical local master duplicate is included in public source")
     if any(path.startswith(("dot/agents/", "dot/prompts/")) for path in paths):
         fail("superseded pre-0.0.2 DOT prompt or agent tree is included in current source")
+    if any(Path(path).suffix.lower() == ".pdf" for path in paths):
+        fail("generated Summary PDFs must not be tracked as repository or release assets")
     retired_intake_prefix = "dot/" + "handoff" + "/"
     if any(path.startswith(retired_intake_prefix) for path in paths):
         fail("retired research intake artifacts are included in current source")
@@ -544,6 +689,7 @@ def main() -> int:
 
     validate_preserved_agent_sources()
     validate_data_contract()
+    validate_summary_contract()
     validate_ingest_contract()
     validate_release_workflow()
 

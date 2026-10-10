@@ -31,6 +31,8 @@ if record.get("repository") != "devs-guide/openai":
     raise SystemExit("unexpected repository identity")
 if record.get("source_sha") != expected:
     raise SystemExit(f"live source is {record.get('source_sha')}, expected {expected}")
+if record.get("release") != "0.0.3":
+    raise SystemExit(f"live release is {record.get('release')}, expected 0.0.3")
 PY
 
   local route=""
@@ -45,21 +47,24 @@ PY
     '/dot/research/internet/' \
     '/dot/research/data/' \
     '/dot/research/template/' \
+    '/dot/research/summary/' \
     '/dot/prompts/core/master/' \
     '/dot/agents/browser/' \
     '/dot/history/initial-import/' \
     '/dot/history/two-lane-migration/' \
     '/dot/releases/0.0.2/' \
+    '/dot/releases/0.0.3/' \
     '/raw/dot/ingest.json' \
     '/raw/dot/research/internet.prompt' \
     '/raw/dot/research/data.prompt' \
+    '/raw/dot/research/summary.prompt' \
     '/raw/dot/prompts/core/master.prompt'; do
     curl -fsS -o /dev/null "${BASE_URL}${route}" || return 1
   done
 
   local relative=""
   local raw_file=""
-  for relative in internet data; do
+  for relative in internet data summary; do
     raw_file="$(mktemp)"
     if ! curl -fsS "${BASE_URL}/raw/dot/research/${relative}.prompt" -o "${raw_file}"; then
       rm -f "${raw_file}"

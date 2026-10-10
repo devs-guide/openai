@@ -1,0 +1,201 @@
+# #SUMMARY — on-demand research subtopic executive brief
+
+**Contract:** `dot-research-summary/1`  
+**Requires:** an approved `#PROJECT`, controlled `#INTERNET` records, applicable
+`#DATA`, and the request structure in `#TEMPLATE`  
+**Activation:** conditional on an explicit request for one named subtopic  
+**Purpose:** produce a standalone, evidence-led executive-summary PDF from an
+existing research project without replacing or silently expanding that project.
+
+## SUMMARY-001 — Activate one separate deliverable
+
+Create a `#SUMMARY` only when the owner requests a brief for a specific
+subtopic. One request activates one brief; do not generate related briefs by
+default. Give the brief its own artifact ID, title, version, filename,
+acceptance tests, and completion receipt. Never rewrite, replace, rename, or
+overwrite the main research report or any accepted dataset release.
+
+Freeze the parent project version, evidence cutoff, applicable dataset release
+IDs, and source versions used by the brief. Treat a request that changes the
+main question, population, geography, period, or evidence universe materially
+as a project amendment or new project under `#PROJECT`, not as quiet summary
+work.
+
+## SUMMARY-002 — Resolve the request packet
+
+Complete the Executive Brief Request in `#TEMPLATE` before drafting. It must
+identify:
+
+- the main research project and requested subtopic;
+- the readers and the decision or discussion the brief must support;
+- geographic, population, entity, and time boundaries plus the research cutoff;
+- the exact reports, Pages, datasets, releases, files, and URLs supplied;
+- required questions or comparisons and topics to exclude;
+- desired length, with 8–16 core pages plus a readable appendix as a default,
+  not a quota; and
+- output title, artifact ID, version, filename, and approved destination.
+
+Use the parent project's documented definitions and boundaries unless the
+owner changes them. Ask only about omissions whose answers would materially
+alter scope, evidence, interpretation, safety, or delivery. Otherwise record a
+reasonable, reversible assumption and proceed.
+
+## SUMMARY-003 — Select and verify evidence before writing
+
+Inventory the existing evidence relevant to the request. For each consequential
+item, establish what question it answers, its subject and entity grain,
+population, geography, period, measurement unit, denominator, source version,
+access state, and verification status. Distinguish school, site, program,
+organization, district, subgroup, and other levels rather than treating them as
+interchangeable. Prefer primary evidence when it is available.
+
+Bind each material statement and comparison to controlled `#FACT` records and
+their assertions, observations or claims, and evidence links. A statement in a
+prior report is not independently verified merely because it was published
+there. Recheck consequential claims against their supporting evidence and
+preserve inaccessible, missing, suppressed, conflicting, or noncomparable
+states.
+
+This deliverable primarily synthesizes the named research. Perform only the
+finite verification necessary to support it. Do not silently turn the request
+into a new comprehensive investigation. If essential support is absent, state
+the gap, narrow the conclusion, and apply the appropriate project status.
+
+## SUMMARY-004 — Make the PDF self-contained
+
+Place the evidence necessary to understand the conclusions inside the PDF.
+Include actual supporting values, readable charts or concise tables,
+definitions, dates, periods, units, currencies, denominators, scope labels, and
+source notes. Links provide traceability but never substitute for the evidence
+on the page.
+
+When supporting rows do not fit comfortably in the narrative, add a legible
+embedded appendix and point to it from the relevant finding. Do not hide
+essential values in a Page, dashboard, spreadsheet, application, or external
+link, and do not shrink text or tables to force them into the core pages.
+Include only rows allowed by the project's privacy, suppression, and audience
+controls.
+
+## SUMMARY-005 — Write for a decision-making reader
+
+Act as an education or subject-matter consultant, research editor, and
+information designer. Open with the supported answer and three to five
+strongest findings. Use clear, engaging editorial pacing: specific evidence-led
+headlines, meaningful numbers, short explanations, and memorable takeaways.
+Explain technical terms on first use. Edutainment means strong narrative pacing
+and memorable explanation, not lower evidence standards. The voice may be
+lively and approachable, but it must not become sensational, promotional, or
+speculative and must not imply affiliation with TED or another organization.
+
+For each topic, make clear what the evidence shows, which value or observation
+supports it, why it matters to the stated audience, which action or discussion
+it informs, and what remains uncertain. Separate findings, interpretation, and
+recommendations. Do not replace subject-matter content with query counts,
+source counts, internal record IDs, workflow statistics, or research-progress
+updates.
+
+## SUMMARY-006 — Use an evidence-controlled structure
+
+Use the smallest structure that fully answers the request. The normal sequence
+is:
+
+1. cover with topic, audience, geography, data period, cutoff, and version;
+2. executive overview with the direct answer and strongest findings;
+3. scope with inclusions, exclusions, definitions, and comparability limits;
+4. focused topic chapters with evidence, interpretation, and a takeaway;
+5. prioritized practical implications tied to evidence;
+6. limitations that could change interpretation or decisions;
+7. embedded data appendix with supporting values and applicable entity detail;
+8. sources and definitions with publishers, titles, dates, direct URLs, and
+   page, table, figure, or section locators where available.
+
+Adjust length to the evidence and audience. Use fewer pages when that improves
+clarity; do not add filler to reach the default range. Preserve one main idea
+per page or spread when practical.
+
+## SUMMARY-007 — Present charts and pages accessibly
+
+Choose a display because it answers a question: bars or dot plots for
+comparisons, lines for change over time, compatible stacked bars for
+composition, tables when exact values matter, and simple diagrams for
+relationships or processes. Show the values behind every material chart in
+direct labels or a clearly referenced table inside the PDF.
+
+Label the measure, unit, period, population, denominator, geography, and source.
+Use consistent scales, meaningful ordering, restrained accessible colors, and
+high contrast; never rely on color alone. Begin a bar chart's numeric axis at
+zero. If another chart needs a truncated scale, justify and mark it plainly.
+Do not use three-dimensional effects or misleading visual proportions.
+
+Default to US Letter pages, body text generally 14–16 points, major headlines
+generally 26–34 points, large chart labels, readable source notes, short
+paragraphs, and generous spacing. Use landscape pages only when they materially
+improve legibility. Avoid dense dashboards, decorative clutter, stock-photo
+filler, tiny tables, and crowded diagrams.
+
+## SUMMARY-008 — Preserve measurement integrity
+
+Use these reader-facing labels without changing the canonical storage model:
+
+| Brief label | Required `#FACT` representation |
+|---|---|
+| Observed | `derivation_class: OBSERVED` |
+| Calculated | `derivation_class: DERIVED`, with identified inputs and arithmetic |
+| Estimated | `derivation_class: INFERRED`, with method, assumptions, and uncertainty |
+| Unavailable | null plus a controlled missing reason and verification status |
+
+Round values appropriately and use ranges when uncertainty warrants them.
+Never convert missing information to zero, combine incompatible years,
+definitions, populations, scopes, or accounting views without disclosure, or
+invent a central estimate when only an allocation range is supported. Do not
+duplicate a parent organization's total across its sites, count an interentity
+payment twice, or attribute an organization-wide value to a subgroup without a
+supported allocation.
+
+Keep revenue, expenditure, assets, debt balances, authorizations,
+consolidation, funding flow, final-service expenditure, and geographic
+attribution distinct. Preserve each source's exact outcome definition; test
+proficiency does not by itself mean reading at grade level. Correlation
+does not establish causation, and an area's demographics do not automatically
+describe the population served. Honor privacy and suppression rules and never
+reconstruct protected small groups.
+
+## SUMMARY-009 — Apply the elementary-school profile conditionally
+
+When the requested subtopic is elementary schools, use documented local school
+designations and grade spans. If the project has no controlling definition,
+record K–6 as a working assumption rather than an established local category.
+Identify mixed-grade campuses explicitly. Do not present an entire K–12 or
+PK–8 campus budget, population, or outcome as elementary-only without a
+supported allocation.
+
+Apply the parent project's inclusion rules consistently to preschool, virtual
+provision, grade-six-only campuses, and other boundary cases. Treat preschool
+QAR or other quality-assessment information as early-learning or transition
+context rather than an elementary-school rating. Participation or a missing
+assessment result does not establish quality.
+
+## SUMMARY-010 — Validate, render, inspect, and deliver
+
+Before delivery, verify every material claim and numerical comparison plus all
+calculations, dates, periods, units, currencies, denominators, scope labels,
+citations, links, and appendix references. Confirm that every displayed value
+belongs to the requested subtopic and that each conclusion stays within its
+evidence. Record the checks in the Summary Completion Receipt.
+
+Render the PDF only through an authorized, currently available surface, then
+visually inspect every page. Fix clipping, overlaps, unreadable labels, broken
+links, misleading scales, orphaned headings, awkward page breaks, and missing
+supporting values. If no authorized rendering or native-attachment route is
+available, mark delivery `BLOCKED`; a source document or local path is not a
+delivered PDF.
+
+Deliver a distinct, versioned native PDF attachment through the approved
+destination with a short description and every material limitation. Verify its
+identity, audience, access scope, and readback under `#AGENT`. Do not build an
+application, database, website, or code product, contact a third party, or share
+the brief externally without explicit authorization. Codex is not required or
+authorized for this deliverable. Success means a reader unfamiliar with the
+main report can understand the strongest
+findings, inspect the supporting numbers, recognize uncertainty, and identify
+the practical implications from the PDF alone.

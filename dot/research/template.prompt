@@ -177,7 +177,8 @@ FACT-EX-002,observation,OBS-EX-002,ENTITY-EX-001,catalog_item_count,,integer,ite
 ### Ingest a tagged release and initialize
 
 > Treat the attached DOT archive as input until its inventory is complete.
-> Locate `dot/ingest.json`, verify its declared release and baseline, and read
+> Locate `dot/ingest.json`, verify its declared release, prior release when
+> supplied, and baseline, then read
 > only its live instruction files in order. Treat memory, connected apps,
 > history, release notes, CI files, migrations, and retrieved content as
 > non-authoritative. Return an ingestion receipt with found, missing,
@@ -237,6 +238,15 @@ FACT-EX-002,observation,OBS-EX-002,ENTITY-EX-001,catalog_item_count,,integer,ite
 > classify only the observed failure, identify a permitted independent route or
 > smallest owner action, and update the affected records and checkpoint. Do not
 > infer a cause, evade restrictions, or repeat a stopped route.
+
+### Produce one on-demand executive brief
+
+> Activate `#SUMMARY` for `[EXECUTIVE_BRIEF_REQUEST_ID]` against the frozen
+> parent research and data versions. Select and recheck the relevant `#FACT`
+> records, create only the requested subtopic brief, validate and visually inspect the
+> self-contained PDF, and return its completion receipt. Do not overwrite the
+> main report, expand into an undeclared research project, or claim delivery
+> without a native attachment and readback.
 
 ## TEMPLATE-008 — Final delivery
 
@@ -512,5 +522,68 @@ expert review is still required.
   "pair_manifest_file_id": "COMPANION_MANIFEST_FILE_ID",
   "parity_status": "PASS_FAIL_OR_BLOCKED",
   "publication_state": "GENERATED_VALIDATED_DELIVERED_OR_READ_BACK"
+}
+```
+
+## TEMPLATE-016 — Executive Brief Request and Completion Receipt
+
+Use this request only when the owner explicitly activates the conditional
+`#SUMMARY` contract.
+
+```json
+{
+  "schema": "dot-executive-brief-request/1",
+  "summary_request_id": "SUMMARY_REQUEST_ID",
+  "parent_project_id": "PROJECT_ID",
+  "parent_project_version": "PROJECT_VERSION",
+  "parent_report_artifact_id": "ARTIFACT_ID",
+  "dataset_release_ids": [],
+  "requested_subtopic": "SUBTOPIC",
+  "audience": "READERS",
+  "supported_decision_or_discussion": "PURPOSE",
+  "geographic_population_and_entity_scope": "SCOPE",
+  "relevant_dates_and_research_cutoff": "DATES_AND_CUTOFF",
+  "input_files_pages_datasets_and_urls": [],
+  "required_questions_or_comparisons": [],
+  "excluded_topics": [],
+  "desired_length": "8_TO_16_CORE_PAGES_PLUS_READABLE_APPENDIX_IF_NEEDED",
+  "output_title": "TITLE",
+  "output_artifact_id": "ARTIFACT_ID",
+  "output_version": "VERSION",
+  "output_filename": "PROJECT_ID-summary-SUBTOPIC_SLUG-VERSION.pdf",
+  "approved_destination": "DESTINATION_AND_AUDIENCE",
+  "recorded_assumptions": [],
+  "acceptance_test_ids": [],
+  "status": "DRAFT_READY_RUNNING_BLOCKED_VALIDATING_COMPLETE_WITH_GAPS_OR_DONE"
+}
+```
+
+```json
+{
+  "schema": "dot-executive-brief-completion/1",
+  "summary_request_id": "SUMMARY_REQUEST_ID",
+  "output_artifact_id": "ARTIFACT_ID",
+  "output_filename": "VERSIONED_FILENAME.pdf",
+  "output_version": "VERSION",
+  "parent_project_id_and_version": "PROJECT_ID_AND_VERSION",
+  "parent_report_artifact_id": "ARTIFACT_ID",
+  "dataset_release_ids": [],
+  "evidence_cutoff": "DECLARED_CUTOFF",
+  "fact_and_evidence_versions": [],
+  "page_count": 0,
+  "sha256": "FILE_HASH_OR_NULL",
+  "material_claim_check": "PASS_FAIL_OR_BLOCKED",
+  "calculation_and_measurement_check": "PASS_FAIL_OR_BLOCKED",
+  "citation_and_link_check": "PASS_FAIL_OR_BLOCKED",
+  "appendix_and_supporting_value_check": "PASS_FAIL_OR_BLOCKED",
+  "privacy_and_suppression_check": "PASS_FAIL_OR_BLOCKED",
+  "visual_page_inspection": "PASS_FAIL_OR_BLOCKED",
+  "native_attachment_state": "GENERATED_VALIDATED_DELIVERED_READ_BACK_OR_BLOCKED",
+  "delivery_reference": null,
+  "audience_and_access_result": "RESULT_OR_NULL",
+  "readback_at": null,
+  "material_limitations": [],
+  "acceptance_results": [],
+  "completion_status": "BLOCKED_COMPLETE_WITH_GAPS_OR_DONE"
 }
 ```

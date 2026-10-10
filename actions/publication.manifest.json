@@ -21,6 +21,7 @@
     {"source":"dot/research/internet.prompt","route":"dot/research/internet/","raw_route":"raw/dot/research/internet.prompt","title":"Internet Research","kind":"research-contract","status":"current","reviewed_on":"2026-10-09","content_type":"prompt","aliases":["dot/prompts/core/master/","dot/prompts/core/dot/","dot/prompts/core/reference/"]},
     {"source":"dot/research/data.prompt","route":"dot/research/data/","raw_route":"raw/dot/research/data.prompt","title":"Research Data","kind":"research-contract","status":"current","reviewed_on":"2026-10-09","content_type":"prompt","aliases":["dot/prompts/research/starter-data-only/"]},
     {"source":"dot/research/template.prompt","route":"dot/research/template/","raw_route":"raw/dot/research/template.prompt","title":"Research Template","kind":"research-template","status":"current","reviewed_on":"2026-10-09","content_type":"prompt","aliases":["dot/prompts/research/overview/","dot/prompts/research/template/"]},
+    {"source":"dot/research/summary.prompt","route":"dot/research/summary/","raw_route":"raw/dot/research/summary.prompt","title":"On-Demand Research Summary","kind":"research-deliverable","status":"candidate","reviewed_on":"2026-10-09","content_type":"prompt","aliases":[]},
 
     {"source":"docs/features/readme.md","route":"dot/features/","raw_route":"raw/docs/features/readme.md","title":"DOT features","kind":"feature-index","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
     {"source":"docs/history/readme.md","route":"dot/history/","raw_route":"raw/docs/history/readme.md","title":"DOT history","kind":"history","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
@@ -29,7 +30,8 @@
     {"source":"docs/history/two-lane-migration.json","route":"dot/history/two-lane-migration/data/","raw_route":"raw/docs/history/two-lane-migration.json","title":"DOT two-lane migration data","kind":"history-data","status":"current","reviewed_on":"2026-10-09","content_type":"json","aliases":[]},
     {"source":"docs/releases/readme.md","route":"dot/releases/","raw_route":"raw/docs/releases/readme.md","title":"DOT releases","kind":"release-index","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
     {"source":"docs/releases/0.0.1.md","route":"dot/releases/0.0.1/","raw_route":"raw/docs/releases/0.0.1.md","title":"0.0.1 — DOT Research Prompt System","kind":"release","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
-    {"source":"docs/releases/0.0.2.md","route":"dot/releases/0.0.2/","raw_route":"raw/docs/releases/0.0.2.md","title":"0.0.2 — DOT Agent and Research System","kind":"release","status":"candidate","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]}
+    {"source":"docs/releases/0.0.2.md","route":"dot/releases/0.0.2/","raw_route":"raw/docs/releases/0.0.2.md","title":"0.0.2 — DOT Agent and Research System","kind":"release","status":"current","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]},
+    {"source":"docs/releases/0.0.3.md","route":"dot/releases/0.0.3/","raw_route":"raw/docs/releases/0.0.3.md","title":"0.0.3 — DOT On-Demand Research Summary","kind":"release","status":"candidate","reviewed_on":"2026-10-09","content_type":"markdown","aliases":[]}
   ],
   "raw_migrations": [
     {"route":"raw/dot/agents/readme.md","historical_url":"https://github.com/devs-guide/openai/blob/0.0.1/dot/agents/readme.md","replacement":"raw/dot/agent/readme.md"},
