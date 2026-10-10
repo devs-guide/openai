@@ -239,6 +239,7 @@ def main() -> int:
         relative = path.relative_to(static_dir).as_posix()
         retired_route = "dot/" + "handoff"
         retired_raw_route = "raw/" + retired_route
+        standalone_tabs_raw = "raw/dot/agent/" + "tabs.prompt"
         if relative == "dot/prompt" or relative.startswith("dot/prompt/"):
             fail("private singular prompt path leaked into rendered Pages output")
         if relative == "raw/dot/prompt" or relative.startswith("raw/dot/prompt/"):
@@ -249,7 +250,7 @@ def main() -> int:
             fail("retired handoff path leaked into raw Pages output")
         if relative == "dot/agent/tabs" or relative.startswith("dot/agent/tabs/"):
             fail("standalone Tabs route leaked into rendered Pages output")
-        if relative == "raw/dot/agent/tabs.prompt":
+        if relative == standalone_tabs_raw:
             fail("standalone Tabs source leaked into raw Pages output")
     routes_file = static_dir / "routes.json"
     try:
