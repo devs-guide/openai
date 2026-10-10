@@ -1,13 +1,15 @@
 # #DATA — convert evidence into controlled datasets
 
-**Contract:** `dot-research-data/1`  
-**Requires:** reviewed `#INTERNET` records under an approved `#PROJECT`  
-**Purpose:** transform evidence into paired, reviewable CSV and JSON release
-artifacts before filling the reusable `#TEMPLATE` structures.
+**Contract:** `dot-research-data/2`
+**Requires:** reviewed `#INTERNET` records under an approved `#PROJECT` and
+verified persistence under `#STORAGE`
+**Purpose:** transform evidence into paired machine-readable CSV/JSON and a
+complete readable Markdown release view before filling `#TEMPLATE` structures.
 
 ## DATA-001 — Intake and applicable-file decision
 
-Start from the current Project Control Packet, reviewed research records,
+Start only from `PERSISTENTLY SAVED AND VERIFIED` versions of the current
+Project Control Packet, reviewed research records,
 acceptance matrix, and declared delivery authorization. Inventory the candidate
 inputs by stable ID and version; reject excerpts presented as complete files,
 unreviewed advisory output presented as evidence, inherited permissions, and
@@ -18,13 +20,16 @@ project. The catalog is an allowlist, not a requirement to manufacture empty
 tables or fragment every attribute. For each selected basename, record its
 purpose, “one row represents” definition, fields, logical types, primary and
 foreign keys, relationships, null rules, ordering, provenance, applicability,
-review owner, and release dependency. Produce both `.csv` and `.json`; produce
-neither form for an inapplicable basename.
+review owner, and release dependency. Produce `.csv`, `.json`, and a complete
+readable `.md` view from one logical record set; produce no form for an
+inapplicable basename.
 
-## DATA-002 — Paired-file catalog
+## DATA-002 — Release-view catalog
 
 `#DATA` owns the following 22 unique basenames and their selection rules.
 `#TEMPLATE` supplies fillable records but does not create a second catalog.
+CSV and JSON remain the canonical machine pair; Markdown is a complete readable
+companion for the same records rather than a second schema.
 
 | Order | Basename | One row represents | Primary key | Applicable when |
 |---:|---|---|---|---|
@@ -139,14 +144,17 @@ amount, period, accounting basis, reporting perimeter, reversals or netting,
 and recipient-resolution status. Keep consolidation, funding flow,
 final-service expenditure, and geographic attribution as separate views.
 
-## DATA-007 — CSV and JSON semantic parity
+## DATA-007 — CSV, JSON, and Markdown semantic parity
 
-Every selected basename produces `<basename>.csv` and `<basename>.json` from
-one logical record set. CSV contains one header and one logical row per record;
-JSON contains one top-level array with one flat object per CSV row. Both forms
-use identical field names, field sets, primary-key values, logical values, and
-null meanings. Every JSON object includes nullable keys with `null`; the CSV
-counterpart uses an empty cell only where the dictionary declares null.
+Every selected basename produces `<basename>.csv`, `<basename>.json`, and
+`<basename>.md` from one logical record set. CSV contains one header and one
+logical row per record; JSON contains one top-level array with one flat object
+per CSV row; Markdown contains every row and field in a readable table or
+repeated-record structure without truncation. All forms use identical field
+names, field sets, primary-key values, logical values, ordering, and null
+meanings. Every JSON object includes nullable keys with `null`; CSV uses an
+empty cell only where the dictionary declares null; Markdown renders an
+explicit declared null token plus its companion reason.
 
 The data dictionary declares each field as string, identifier, integer,
 decimal, precision-preserving numeric string, boolean, calendar date, partial
@@ -156,10 +164,10 @@ JSON. Dates and timestamps use declared canonical forms. Decimal comparison is
 performed with decimal semantics, never binary-float approximation; scale,
 rounding, and raw precision are documented.
 
-Use stable deterministic row ordering in both files for review, while treating
-keys rather than position as identity. CSV header order and JSON key order
-follow the dictionary. Document Unicode normalization used for matching and
-preserve meaningful original text.
+Use stable deterministic row ordering in all three files for review, while
+treating keys rather than position as identity. CSV header order and JSON key
+order follow the dictionary; Markdown field order does the same. Document
+Unicode normalization used for matching and preserve meaningful original text.
 
 ## DATA-008 — Validation, acceptance scenarios, and review
 
@@ -205,6 +213,8 @@ unchanged, removed from scope, or unresolved.
 
 A refresh rechecks scope, cutoffs, dictionary compatibility, inaccessible
 sources, document versions, URL events, aliases, entity relationships, and all
-affected validation gates. Publish only the selected paired files and approved
-documentation through the configured destination, then retain its publication
-receipt and readback result separately from dataset acceptance.
+affected validation gates. Persist and verify corrections before regenerating
+downstream views. Publish only the selected three-format views and approved
+documentation through the configured destination, register them in the
+recovery manifest and Research archive, then retain each publication receipt
+and readback result separately from dataset acceptance.

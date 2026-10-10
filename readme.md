@@ -41,13 +41,14 @@ to source editing and Git operations.
 ## Current release
 
 Release `0.0.1 — DOT Research Prompt System` is the published immutable
-migration baseline. Releases `0.0.2` through `0.0.5` establish the canonical
+migration baseline. Releases `0.0.2` through `0.0.6` establish the canonical
 Agent and Research lanes, conditional evidence-completing Summary deliverable,
-and repository-wide Release contract. Candidate `0.0.6 — Coordinated Browser
-Tabs` adds configured shared tab capacity, worker ownership, resumable queues,
-and truthful scheduled-or-event-driven blocker checks. Release records use
-bare semantic tags and GitHub-generated source archives; no binary assets are
-attached.
+repository-wide Release contract, and coordinated Browser Tabs. Candidate
+`0.0.7 — Continuous Progress and Recoverable Agent Storage` adds verified
+persistence, cron-style project health checks, `#LAZY` recovery,
+purpose-based storage locations, and immutable Research archives. Release
+records use bare semantic tags and GitHub-generated source archives; no binary
+assets are attached.
 
 ## Rights
 

@@ -1,0 +1,227 @@
+# #STORAGE and #FILES — persistence and recovery contract
+
+**Contract:** `dot-agent-storage/1`
+**Requires:** `#AGENT` and `config.storage`
+**Activation:** required for every project and artifact
+**Purpose:** preserve authorized work outside disposable execution surfaces and
+make the latest verified checkpoint recoverable.
+
+## STORAGE-001 — Authority and destinations
+
+`#STORAGE` owns persistence, integrity, recovery manifests, archive packaging,
+capacity coordination, and purpose-based locations. `#FILES` means every
+project artifact regardless of format or completion state, including evidence,
+raw and extracted data, CSV, TSV, JSON, Markdown, spreadsheets, schemas, notes,
+prompts, logs, transcripts, images, charts, diagrams, reports, PDFs, archives,
+native documents, rendered files, and work in progress.
+
+Use the approved Project destination when one is supplied. Otherwise use the
+configured `agent:storage` default after verification. A destination name is
+not proof of authorization, access, capacity, persistence, or audience. Never
+silently replace an explicitly required destination; a supplemental WIP
+location does not change the approved delivery destination.
+
+## STORAGE-002 — Treat working environments as disposable
+
+Treat the cloud VM, working root, browser, tabs, download directory, temporary
+directory, and conversation as `EPHEMERAL_UNTRUSTED` for both short- and
+long-term storage. Before substantive work, save a small nonsensitive probe to
+the selected persistent destination, reopen or download it, compare its
+contents, and record the result. Retain the probe as a registered artifact
+unless exact removal is later authorized.
+
+If the probe or readback fails, do not begin work that depends on durable
+storage. Preserve existing verified copies and report the exact failed action,
+destination, and affected project stage.
+
+## STORAGE-003 — Preserve work as it is produced
+
+Save every completed source capture, extraction, corrected record, small
+research batch, consultation exchange, and meaningful revision immediately.
+Checkpoint unfinished work at natural interruption points and before a
+handoff, risky operation, tool change, restart, or session closure. A periodic
+health check audits this behavior; it is not permission to leave completed
+work unsaved until the next interval.
+
+Preserve temporary artifacts needed to reproduce or resume work. Omit only a
+cache that can be regenerated from verified saved inputs without repeating
+research or losing evidence. An unchanged third-party repository checkout may
+remain a disposable cache when its safe URL and immutable revision are saved;
+persist every relied-upon excerpt or result when authorization permits.
+
+## STORAGE-004 — Verify checkpoints and states
+
+A checkpoint is verified only after persistence, readback, content comparison,
+and recovery-manifest registration. For an ordinary file, record and compare
+its byte length and SHA-256 digest. For a native Page or document without a
+byte-identical export, record the saved revision and verify relevant content
+through revision/content readback; never invent a checksum.
+
+Use these preservation states exactly: `LOCAL ONLY`, `SAVED BUT UNVERIFIED`,
+`PERSISTENTLY SAVED AND VERIFIED`, and `VALIDATED`. Track delivery separately
+as `NOT DELIVERED`, `DELIVERED`, or `DELIVERY ACCEPTED`. Recipient access is a
+separate observation and is never inferred from delivery acceptance. An upload
+indicator, visible filename, local path, or narrative statement does not prove
+preservation or delivery.
+
+## STORAGE-005 — Gate dependencies and handoffs
+
+Every stage uses verified persistent inputs: save evidence before analysis;
+raw data before cleaning; corrections before downstream exports; structured
+inputs before summaries or visualizations; report inputs before rendering; and
+each generated output before review or refinement. Save validation findings
+and corrected outputs as separate versions.
+
+Parallel workers hand off stable artifact IDs, versions, persistent references,
+and readback results rather than local paths or unsupported completion claims.
+If an input is not verified, stop only its dependent stage and continue
+independent authorized work.
+
+## STORAGE-006 — Preserve provenance and structure
+
+For each source record a safe canonical URL or identifier, title, retrieval
+date, purpose, access outcome, and supported records or claims. Distinguish a
+saved URL from saved source content. Remove credentials and sensitive URL
+parameters; preserve authorized snapshots when possible.
+
+For structured material retain stable IDs, relationships, definitions, units,
+periods, null meanings, confidence and review labels, source references, and
+reproducible transformation or allocation methods. Keep raw evidence separate
+from normalized data, estimates, and presentation exports. Never replace a
+missing value with zero or reconstruct lost evidence from memory as recovered
+fact.
+
+## STORAGE-007 — Maintain the recovery manifest
+
+Keep a persistently saved, versioned project recovery manifest containing:
+project and artifact IDs; filename or native-document title; format and
+version; creation/update time; persistent reference; byte length and SHA-256
+when applicable; native revision when applicable; readback method and result;
+input dependencies and versions; useful record counts; validation state and
+limitations; current work state and next action; capacity observations; and
+the latest verified checkpoint available for recovery.
+
+Version and read back the manifest itself. Avoid self-hash cycles: a current
+ordinary-file manifest may have its completed digest recorded in an existing
+authorized control record or its successor; a native manifest uses verified
+revision/content readback. Do not create a separate receipt file solely to
+record the manifest or archive digest by default.
+
+## STORAGE-008 — Preserve versions and format consistency
+
+Never overwrite or delete the only verified copy. Material changes create a
+new version while the prior checkpoint remains recoverable. Link every export
+to its common logical source version and validate identifiers, fields, record
+counts, values, ordering, and null meanings across formats. Mark partial,
+stale, incompatible, or failed exports explicitly.
+
+Keep recovered historical records distinct from newly revalidated records. A
+reconstruction is not the lost release and need not reproduce an unsupported
+historical record count. Verify archive inventories and dependencies before
+calling a bundle complete.
+
+## STORAGE-009 — Package every Research checkpoint
+
+For every completed logical `#RESEARCH` batch or interruption checkpoint,
+create an immutable ZIP successor named
+`<project-slug>.<batch-id>.research.archive.vNNNN.YYYY.MM.DD.<scope>.zip`. A
+logical batch may contain one material artifact when immediate preservation
+requires it.
+
+Include a readable `README.md`, a machine-readable internal archive manifest,
+submitted research prompts and captured visible replies, follow-ups, partial
+responses, failures, marked redactions, permitted evidence, source logs,
+schemas, dictionaries, datasets, validation results, review decisions, known
+gaps, lineage, and extraction instructions. Never include credentials,
+authentication material, private system instructions, hidden reasoning, or
+unnecessary personal information.
+
+Keep archive ID/version, dataset ID/release, schema version, and artifact
+version distinct. The internal manifest hashes payload members only. Record the
+completed ZIP byte length and SHA-256 in the recovery manifest or another
+existing authorized control record outside that ZIP.
+
+## STORAGE-010 — Verify archives and capacity
+
+Before upload, test ZIP integrity and extraction, compare every member with its
+staged original by cryptographic hash, and validate manifest completeness,
+lineage, and required format parity. After upload, retrieve the saved ZIP,
+compare its hash, extract it, and recheck member hashes. CRC success or an
+upload acknowledgement alone is insufficient. Test actual retrieval and
+extraction rather than assuming an Agent or recipient indexes ZIP contents.
+
+Before every upload record the destination's observable file count, applicable
+limit, pending uploads, available slots, and reserve state. Coordinate upload
+intents across workers and retain two free slots for successor publication and
+recovery where possible. An unknown or observed destination limit is not a
+universal product claim. At capacity, pause uploads, preserve existing verified
+copies, mark unpublished work `LOCAL ONLY`, and request the smallest capacity
+or cleanup decision.
+
+## STORAGE-011 — Provision purpose-based locations
+
+The Agent may create or reuse a persistent location or Project titled
+`agent:<term>` when no verified destination has adequate capacity, format
+support, or required separation. This rule calls either form a purpose
+location. The term must match `^[a-z][a-z0-9-]*$` and describe a concise
+lowercase action or outcome, such as `agent:pdf`, `agent:archive`,
+`agent:charts`, or `agent:transcribe`; never use a client, person, credential,
+sensitive topic, or transient incident as the term.
+
+Inventory exact and functionally matching locations before creation. Verify
+account, destination ID, access scope, purpose, formats, capacity, pending
+uploads, and existing contents; reuse a suitable verified location first. If
+an exact title exists but is inaccessible or unsuitable, record the conflict
+and use a more precise functional term rather than creating an ambiguous
+duplicate. Save and reopen a probe, then register the location persistently
+before dependent use.
+
+Functional locations are shared across projects. Separate them with stable
+project and artifact IDs, filename prefixes, and project-specific recovery
+manifests; use folders only when the destination supports them. Only the active
+Agent provisions locations. Workers submit upload intents through the shared
+registry. Creation never authorizes new recipients, sharing, publication,
+permission changes, deletion, or final delivery. A WIP file in `agent:pdf`
+remains undelivered until the approved delivery route is separately verified.
+
+## STORAGE-012 — Recover and fail safely
+
+After a crash, reset, restart, or interrupted handoff, locate the latest
+verified persistent checkpoint; reopen its recovery manifest and dependencies;
+verify their versions and content; resume from that state; and identify work
+performed afterward that cannot be recovered. Never assume a prior session's
+files still exist or substitute an older artifact without its version and
+limitations.
+
+If storage, creation, upload, readback, extraction, access, or validation
+fails, preserve verified copies and report the exact blocker and affected
+artifacts. Compression authorizes packaging, not deletion or unlinking. Before
+cleanup, identify each exact original, matching archive member and hash, slot
+savings, action, and recovery method; obtain explicit permission and
+distinguish removal of a Project reference from deletion of the underlying
+file.
+
+No artifact is complete until it and every required input have verified
+persistent copies recorded in the recovery manifest. This contract does not
+authorize new software, databases, dashboards, Codex, recurring automation,
+external communication, or expanded access.
+
+Required acceptance cases:
+
+| Case | Required result |
+|---|---|
+| `probe-failure` | A failed save or readback blocks substantive dependent work and preserves prior verified copies. |
+| `ordinary-file-integrity` | Byte length and SHA-256 match the downloaded persistent copy. |
+| `native-document-integrity` | Revision and relevant content pass readback without an invented checksum. |
+| `output-before-review` | A generated output is persistently saved and verified as unreviewed before factual, structural, or visual review. |
+| `manifest-recovery` | A restart reopens the manifest and dependencies and resumes from the latest verified checkpoint. |
+| `existing-purpose-location` | A suitable verified `agent:<term>` location is reused without creating a duplicate. |
+| `new-purpose-location` | Capacity, format, or separation need creates, probes, registers, and verifies one compliant location. |
+| `purpose-name-conflict` | An inaccessible or unsuitable exact title produces a recorded conflict and a more precise functional term. |
+| `cross-project-separation` | Shared functional storage retains distinct Project IDs, artifact IDs, prefixes, and recovery manifests. |
+| `full-capacity` | Uploads pause, verified copies remain, new work is `LOCAL ONLY`, and the smallest decision is requested. |
+| `wip-not-delivery` | A WIP artifact in `agent:pdf` is not delivered or recipient-access confirmed. |
+| `archive-integrity` | A missing member, bad hash, or extraction failure blocks upload or acceptance. |
+| `post-upload-mismatch` | A downloaded ZIP mismatch remains unverified and does not replace its predecessor. |
+| `self-hash-prevention` | Payload hashes remain internal and the completed ZIP digest is recorded externally. |
+| `cleanup-permission` | Compression alone never removes, unlinks, shares, publishes, or changes access to an artifact. |

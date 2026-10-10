@@ -1,7 +1,7 @@
 # #PROJECT — build a project around #RESEARCH
 
-**Contract:** `dot-research-project/1`  
-**Requires:** `#AGENT`  
+**Contract:** `dot-research-project/2`
+**Requires:** `#AGENT`, `#STORAGE`, and `#PROGRESS`
 **Purpose:** create, control, recover, and complete one bounded research project.
 
 ## PROJECT-001 — Establish the project
@@ -19,6 +19,10 @@ permission, scope, evidence, or acceptance:
 - supplied files, known sources, required primary sources, and signed-in sites;
 - sensitive-data and high-stakes-review restrictions;
 - authorized outputs, `#PAGE`, working directory, and delivery order;
+- persistent destination, save/reopen probe, purpose-location policy, recovery
+  manifest, archive cadence, and capacity reserve;
+- health-check branch, scheduler timezone when applicable, Project lease,
+  status cadence, and `#LAZY` recovery actions;
 - exact assigned models and collaboration requirement;
 - project-enabled `#TOOL` allowlist, if any;
 - owner-only decisions, retry budgets, status cadence, and stopping conditions; and
@@ -57,9 +61,13 @@ it. Organize working artifacts by function:
 └── deliverables/
 ```
 
-This layout is a contract, not a durability guarantee. Record files and hashes
-in the artifact map. Deliver through the configured `#PAGE` or another approved
-destination and perform readback verification.
+This layout is disposable working state, not a durability guarantee. Apply
+`#STORAGE`: verify the persistent destination before substantive work, record
+artifacts and integrity evidence in the recovery manifest, and create an
+immutable Research ZIP successor for every completed batch or interruption
+checkpoint. A functional `agent:<term>` WIP location never replaces the
+approved delivery destination. Deliver through the configured `#PAGE` or
+another approved route and perform readback verification.
 
 ## PROJECT-004 — Decompose the work
 
@@ -77,20 +85,27 @@ external findings.
 ## PROJECT-005 — Maintain recoverable state
 
 At initialization and after every research batch, material amendment, blocker,
-review event, delivery, pause, or scheduled handoff, update:
+health check, `#LAZY` recovery action, review event, delivery, pause, or
+scheduled handoff, persist and read back:
 
 - the Project Control Packet;
 - Research State Packet;
 - current rule and supersession table;
 - artifact map and record versions;
+- destination registry, recovery-manifest version, archive lineage, capacity
+  and upload-intent state;
+- health-check log, schedule or event-driven branch, Project lease, and actual
+  progress classification;
 - acceptance matrix;
 - blockers and unresolved side effects; and
 - checkpoint with the next finite action.
 
-Conversation memory and a Page are not substitutes for these records. On
-resume, reconcile the latest owner instruction, packet, checkpoint, artifact
-versions, browser/account state, and actual external state. Do not restart
-completed work or assume an expired permission remains valid.
+Conversation memory, the VM, browser state, and a Page are not substitutes for
+verified persistent records. On resume, reopen the latest recovery manifest
+and dependencies, then reconcile owner instruction, packet, checkpoint,
+artifact versions, schedule, browser/account state, and actual external state.
+Identify unrecoverable post-checkpoint work; do not restart completed work or
+assume an expired permission remains valid.
 
 ## PROJECT-006 — Changes and branches
 
@@ -104,14 +119,18 @@ trigger or a new explicit owner instruction.
 
 ## PROJECT-007 — Progress and completion
 
-Measure progress against deliverables and frozen denominators, not query count,
-elapsed time, URLs, or document volume. Classify each acceptance test as
+Measure progress against deliverables, persistent outputs, and frozen
+denominators, not query count, elapsed time, URLs, open tabs, repeated status,
+or document volume. Apply `#PROGRESS`; an unsaved output cannot establish
+progress or clear `#LAZY`. Classify each acceptance test as
 `NOT_RUN`, `PASS`, `FAIL`, `BLOCKED`, or `WAIVED_BY_OWNER`, with evidence IDs.
 
 Stop when every selected case has a supported result or bounded documented
 gap, required contradiction and fact-check work is complete, acceptance tests
-are terminal, artifacts are delivered and read back, and remaining uncertainty
-is disclosed. Use `COMPLETE_WITH_GAPS` when the agreed deliverable is complete
+are terminal, artifacts and inputs are persistently verified and registered,
+the final Research archive is read back, artifacts are delivered and read
+back, the project monitor is disabled, and remaining uncertainty is disclosed.
+Use `COMPLETE_WITH_GAPS` when the agreed deliverable is complete
 but bounded evidence gaps remain. Never call an open universe exhaustive.
 
 ## PROJECT-008 — Handoff ingestion and authority

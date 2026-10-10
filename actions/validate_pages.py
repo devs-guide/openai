@@ -92,6 +92,26 @@ def main() -> int:
         or browser_entry.get("title") != "Browser, Tabs, and tool contract"
     ):
         fail("Browser/Tabs contract publication identity is incorrect")
+    storage_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "dot/agent/storage.prompt"]
+    if len(storage_entries) != 1:
+        fail("publication manifest must contain exactly one Storage contract source")
+    storage_entry = storage_entries[0]
+    if (
+        storage_entry.get("route") != "dot/agent/storage/"
+        or storage_entry.get("raw_route") != "raw/dot/agent/storage.prompt"
+        or storage_entry.get("title") != "Storage and Files contract"
+    ):
+        fail("Storage contract publication identity is incorrect")
+    progress_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "dot/agent/progress.prompt"]
+    if len(progress_entries) != 1:
+        fail("publication manifest must contain exactly one Progress contract source")
+    progress_entry = progress_entries[0]
+    if (
+        progress_entry.get("route") != "dot/agent/progress/"
+        or progress_entry.get("raw_route") != "raw/dot/agent/progress.prompt"
+        or progress_entry.get("title") != "Progress and Lazy recovery contract"
+    ):
+        fail("Progress contract publication identity is incorrect")
     ingest_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "dot/ingest.json"]
     if len(ingest_entries) != 1:
         fail("publication manifest must contain exactly one DOT ingestion manifest")
@@ -104,16 +124,19 @@ def main() -> int:
     release_entry = release_entries[0]
     if release_entry.get("route") != "release/" or release_entry.get("raw_route") != "raw/docs/release.prompt":
         fail("Release contract rendered or raw route is incorrect")
-    candidate_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "docs/releases/0.0.6.md"]
+    predecessor_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "docs/releases/0.0.6.md"]
+    if len(predecessor_entries) != 1 or predecessor_entries[0].get("status") != "current":
+        fail("0.0.6 predecessor release record is not current")
+    candidate_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "docs/releases/0.0.7.md"]
     if len(candidate_entries) != 1:
-        fail("publication manifest must contain exactly one 0.0.6 release record")
+        fail("publication manifest must contain exactly one 0.0.7 release record")
     candidate_entry = candidate_entries[0]
     if (
-        candidate_entry.get("route") != "dot/releases/0.0.6/"
-        or candidate_entry.get("raw_route") != "raw/docs/releases/0.0.6.md"
+        candidate_entry.get("route") != "dot/releases/0.0.7/"
+        or candidate_entry.get("raw_route") != "raw/docs/releases/0.0.7.md"
         or candidate_entry.get("status") != "candidate"
     ):
-        fail("0.0.6 release record publication identity is incorrect")
+        fail("0.0.7 release record publication identity is incorrect")
     static_value = os.environ.get("STATIC_DIR", "static")
     static_dir = Path(static_value)
     if not static_dir.is_absolute():
@@ -132,8 +155,8 @@ def main() -> int:
         fail(f"source SHA is {source_record.get('source_sha')}, expected {expected_sha}")
     if source_record.get("repository") != "devs-guide/openai":
         fail("source.json repository identity is incorrect")
-    if source_record.get("release") != "0.0.6":
-        fail("source.json release identity is not 0.0.6")
+    if source_record.get("release") != "0.0.7":
+        fail("source.json release identity is not 0.0.7")
     ok(f"source marker identifies {source_record.get('source_sha')}")
 
     html_parsers: dict[Path, PageParser] = {}
@@ -165,6 +188,26 @@ def main() -> int:
             ):
                 if not any(anchor.startswith(anchor_prefix) for anchor in parser.ids):
                     fail(f"Browser/Tabs rendered anchor is missing: {anchor_prefix}")
+        if entry["source"] == "dot/agent/storage.prompt":
+            for anchor_prefix in ("storage-001", "storage-009", "storage-011", "storage-012"):
+                if not any(anchor.startswith(anchor_prefix) for anchor in parser.ids):
+                    fail(f"Storage rendered anchor is missing: {anchor_prefix}")
+        if entry["source"] == "dot/agent/progress.prompt":
+            for anchor_prefix in ("progress-001", "progress-002", "progress-004", "progress-008"):
+                if not any(anchor.startswith(anchor_prefix) for anchor in parser.ids):
+                    fail(f"Progress rendered anchor is missing: {anchor_prefix}")
+        if entry["route"].startswith("dot/agent/"):
+            if '<nav class="workflow-nav" aria-label="Agent workflow">' not in rendered:
+                fail(f"Agent workflow navigation is missing: {page.relative_to(static_dir)}")
+            agent_links = [
+                f'/{SITE_BASE}/dot/agent/contract/',
+                f'/{SITE_BASE}/dot/agent/storage/',
+                f'/{SITE_BASE}/dot/agent/progress/',
+                f'/{SITE_BASE}/dot/agent/browser/',
+            ]
+            positions = [rendered.find(f'href="{link}"') for link in agent_links]
+            if any(position < 0 for position in positions) or positions != sorted(positions):
+                fail(f"Agent workflow navigation is missing or out of order: {page.relative_to(static_dir)}")
         if entry["route"].startswith("dot/research/"):
             if '<nav class="workflow-nav" aria-label="Research workflow">' not in rendered:
                 fail(f"Research workflow navigation is missing: {page.relative_to(static_dir)}")

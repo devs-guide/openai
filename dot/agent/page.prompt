@@ -8,7 +8,8 @@ project destination.
 A `#PAGE` is a configured, human-readable workspace and delivery surface in markdown format. It
 may display project status, source links, `#FACT` records, tables, gaps, and
 artifact links. It is not automatically a durable database, complete
-transcript, machine-readable source of truth, or permission grant.
+transcript, machine-readable source of truth, verified persistent copy, or
+permission grant. Apply `#STORAGE` before relying on it as a destination.
 
 ## PAGE-002 — Required configuration
 
@@ -30,8 +31,10 @@ audience.
 
 ## PAGE-004 — Delivery verification
 
-After an update, verify the returned reference, access scope, visible content,
-artifact links, dates/versions, stable IDs, and readback. Record a publication
-receipt containing the Page/file ID, URL, content hash or version when
-available, row counts where applicable, access result, and verification time.
-
+After an update, reopen the saved revision and verify the returned reference,
+access scope, visible content, artifact links, dates/versions, stable IDs, and
+readback. Record a publication receipt containing the Page/file ID, URL,
+content hash for a byte-identical export or native revision when applicable,
+row counts, access result, and verification time. Never invent a checksum for
+a native Page; register its verified revision/content readback in the project
+recovery manifest.

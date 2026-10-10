@@ -27,16 +27,16 @@ does not republish those bodies as an archive.
 |---|---|---|
 | `dot/agents/browser.md` | `KEEP_AGENT`, `HISTORY_ONLY` | Agent browser, runtime, and history |
 | `dot/agents/computer.md` | `KEEP_AGENT`, `HISTORY_ONLY` | Agent runtime and history |
-| `dot/agents/doc.md` | `KEEP_AGENT`, `KEEP_DATA`, `KEEP_TEMPLATE` | Agent contract, Data controls, and Research templates |
-| `dot/agents/prompt.md` | `HISTORY_ONLY`, `KEEP_AGENT` | Agent browser rules and history |
+| `dot/agents/doc.md` | `KEEP_AGENT`, `KEEP_DATA`, `KEEP_TEMPLATE` | Agent, Storage, Progress, Data controls, and Research templates |
+| `dot/agents/prompt.md` | `HISTORY_ONLY`, `KEEP_AGENT` | Agent browser and Progress rules plus history |
 | `dot/agents/readme.md` | `DROP_REDUNDANT` | Agent index |
-| `dot/prompts/core/master.prompt` | `MERGE`, `KEEP_DATA` | Agent, Project, Internet, Data, and Template |
+| `dot/prompts/core/master.prompt` | `MERGE`, `KEEP_DATA` | Agent, Storage, Progress, Project, Internet, Data, and Template |
 | `dot/prompts/core/dot.prompt` | `MERGE`, `DROP_REDUNDANT` | Project and Internet |
 | `dot/prompts/core/reference.prompt` | `MERGE`, `DROP_REDUNDANT` | Project and Internet |
 | `dot/prompts/core/readme.md` | `DROP_REDUNDANT` | DOT and migration indexes |
 | `dot/prompts/research/overview.prompt` | `MERGE`, `KEEP_DATA`, `DROP_REDUNDANT` | Project, Internet, Data, and Template |
 | `dot/prompts/research/template.prompt` | `MERGE`, `KEEP_DATA`, `DROP_REDUNDANT` | Project, Internet, Data, and Template |
-| `dot/prompts/research/starter-data-only.md` | `MERGE`, `KEEP_DATA` | Agent restrictions, Data controls, and Research templates |
+| `dot/prompts/research/starter-data-only.md` | `MERGE`, `KEEP_DATA` | Agent, Storage, Progress, Data controls, and Research templates |
 | `dot/prompts/research/readme.md` | `DROP_REDUNDANT` | Research index |
 | `dot/prompts/readme.md` | `DROP_REDUNDANT` | DOT and Research indexes |
 
@@ -53,15 +53,18 @@ review as a workflow artifact.
   primary and GPT-5.6 Sol/High the initial collaborator. When that exact
   configuration is no longer accessible, use only the ordered configurations
   in `config.json`; exhausting the list blocks the dependent branch.
-- `/workspace/scratch/<project-id>/` is the working default after verification;
-  its retention remains unknown. Durable delivery requires a configured Page
-  or owner-approved destination and readback.
+- `/workspace/scratch/<project-id>/` is the ephemeral, untrusted working
+  default. Verified persistence uses `agent:storage` or an approved override,
+  recovery manifests, and readback; need-based `agent:<term>` locations remain
+  WIP storage rather than delivery.
 - `#PAGE` is an Agent-owned human-readable workspace. `#FACT` is a
   Research-owned human-facing atomic concept backed by linked assertions,
   observations, claims, and evidence records.
-- `#DATA` owns applicable-file selection, grains, paired CSV/JSON semantics,
-  validation, immutable releases, corrections, and refreshes. `#TEMPLATE`
-  owns the fillable record shapes.
+- `#PROGRESS` owns the project-wide 15-minute or event-driven health branch and
+  evidence-based `#LAZY` recovery. Browser Tabs consumes that branch.
+- `#DATA` owns applicable-file selection, grains, paired CSV/JSON machine
+  semantics, complete Markdown views, validation, immutable releases,
+  corrections, and refreshes. `#TEMPLATE` owns the fillable record shapes.
 - CAPTCHA, browser tools, video acquisition, and transcription are Agent
   mechanics. Research references those rules and owns evidence evaluation.
 

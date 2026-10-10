@@ -1,8 +1,8 @@
 {
   "schema": "dot-ingest/1",
-  "release": "0.0.6",
+  "release": "0.0.7",
   "baseline_tag": "0.0.1",
-  "prior_release_tag": "0.0.5",
+  "prior_release_tag": "0.0.6",
   "entrypoint": "dot/readme.md",
   "manifest_authority": "ROUTING_METADATA_ONLY",
   "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
@@ -15,7 +15,7 @@
       "authority_class": "AGENT_CONTRACT",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "79da8576fbf8081919b1bf125dc84a0f20a38c9861c2c8270165832700b07554"
+      "sha256": "353f602caac23f299463e0712fdfc1a1b31dc6705fa33e04c1b4845e192515a7"
     },
     {
       "order": 2,
@@ -23,7 +23,7 @@
       "authority_class": "CONFIGURATION",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "0b1e8826f39ccde43831730a9e400f3acb5df543b5e668d34050860e03b807cf"
+      "sha256": "16775929ec6f5370f9a2d2d64a860edea97e794fdd2b78f3a8afd81a0163ed61"
     },
     {
       "order": 3,
@@ -35,22 +35,38 @@
     },
     {
       "order": 4,
+      "path": "dot/agent/storage.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "8c06516359acfe43d9869cd05b2d341d8f0f0e4fe3b28051b66f7fa219813d34"
+    },
+    {
+      "order": 5,
+      "path": "dot/agent/progress.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "8e990f7072306ae1fd5ad0481f0c3a6ae74f77d069f7c8f586313a8b7c9f9c15"
+    },
+    {
+      "order": 6,
       "path": "dot/agent/browser.prompt",
       "authority_class": "CAPABILITY_MODULE",
       "activation": "REQUIRED",
       "condition": "INTERNET_RESEARCH",
-      "sha256": "4520647a59feb37fa437f176d24efb46c17e7c9de883355d83bbb576f2e88454"
+      "sha256": "fe6f8f904c908b911b8b9ca9cc7a18cc4a01371a99a89c33234c0e8f464d085b"
     },
     {
-      "order": 5,
+      "order": 7,
       "path": "dot/agent/page.prompt",
       "authority_class": "CAPABILITY_MODULE",
       "activation": "CONDITIONAL",
       "condition": "PAGE_ACTION_OR_DESTINATION",
-      "sha256": "a14951f97e003a25eaae630ad9b71334f148cc517cbb3c1961daf5c5d6fc2be9"
+      "sha256": "28c841ce66487d483b11e95e7058c61529a77a1e3ad317a3ad1dc7079e28f56d"
     },
     {
-      "order": 6,
+      "order": 8,
       "path": "dot/agent/media.prompt",
       "authority_class": "CAPABILITY_MODULE",
       "activation": "CONDITIONAL",
@@ -58,44 +74,44 @@
       "sha256": "c97e9222b8d3f81a15b7cd0c9623c0b761bfedec6161043e6dae9731c69b1161"
     },
     {
-      "order": 7,
+      "order": 9,
       "path": "dot/research/project.prompt",
       "authority_class": "RESEARCH_CONTRACT",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "2953ef338dd138df4b0e7f18b21ec31fd8d4b83a4afe08dc0b3590fb86531280"
+      "sha256": "de228442b871b5354afeb39826bc95fa89e6910b0cc8162e7168ad7166700a4d"
     },
     {
-      "order": 8,
+      "order": 10,
       "path": "dot/research/internet.prompt",
       "authority_class": "RESEARCH_CONTRACT",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "f967430fce0af678d8d35739c8fc9ce45316abad1f90cc28cc7add16db15d2c3"
+      "sha256": "f5c1684d6f7da90482fe5f150b353f3b568a1765ca7fd9bc5b7eb4c3f80052cd"
     },
     {
-      "order": 9,
+      "order": 11,
       "path": "dot/research/data.prompt",
       "authority_class": "RESEARCH_CONTRACT",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "6c067e8ca9e079a713d52aae187bc64e7a6c3b2e4a77895116c1efda520344b0"
+      "sha256": "5a36ca43469cf308c43590d1f08420ef65a491c6920090062c76e4381b0f1893"
     },
     {
-      "order": 10,
+      "order": 12,
       "path": "dot/research/template.prompt",
       "authority_class": "TEMPLATE",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "b3e4dec95bb2c37bbb47382058d84936d1c7205afcad2592351db11236799ebf"
+      "sha256": "4ab39385b747d93c775f8ec89cf543d5fff5acd5da55cf44b6267b3cbc7b10af"
     },
     {
-      "order": 11,
+      "order": 13,
       "path": "dot/research/summary.prompt",
       "authority_class": "RESEARCH_CONTRACT",
       "activation": "CONDITIONAL",
       "condition": "ON_DEMAND_SUBTOPIC_EXECUTIVE_BRIEF",
-      "sha256": "e0f44249dc4926f85f927637df81d7a61a0973f9b586a6108d0971b276ed8324"
+      "sha256": "f9ba63f3d70fb4d4b9265f3380a0d83985073cb01234484ee2b85ab83989295d"
     }
   ],
   "supporting_files": [

@@ -213,10 +213,24 @@ def main() -> int:
     if any(rules[rule_id] != "dot/agent/browser.prompt" for rule_id in expected_tabs_rules):
         fail("canonical TABS rule IDs must be owned by dot/agent/browser.prompt")
 
+    expected_storage_rules = {f"STORAGE-{number:03d}" for number in range(1, 13)}
+    observed_storage_rules = {rule_id for rule_id in rules if rule_id.startswith("STORAGE-")}
+    if observed_storage_rules != expected_storage_rules:
+        fail("canonical Storage contract must define STORAGE-001 through STORAGE-012 exactly once")
+    if any(rules[rule_id] != "dot/agent/storage.prompt" for rule_id in expected_storage_rules):
+        fail("canonical STORAGE rule IDs must be owned by dot/agent/storage.prompt")
+
+    expected_progress_rules = {f"PROGRESS-{number:03d}" for number in range(1, 9)}
+    observed_progress_rules = {rule_id for rule_id in rules if rule_id.startswith("PROGRESS-")}
+    if observed_progress_rules != expected_progress_rules:
+        fail("canonical Progress contract must define PROGRESS-001 through PROGRESS-008 exactly once")
+    if any(rules[rule_id] != "dot/agent/progress.prompt" for rule_id in expected_progress_rules):
+        fail("canonical PROGRESS rule IDs must be owned by dot/agent/progress.prompt")
+
     canonical_text = "\n".join(path.read_text(encoding="utf-8") for path in CANONICAL_PROMPTS)
     if "#RESERACH" in canonical_text:
         fail("misspelled #RESERACH remains in canonical prompts")
-    for term in ("#AGENT", "#PROJECT", "#RESEARCH", "#INTERNET", "#DATA", "#TEMPLATE", "#SUMMARY", "#PAGE", "#FACT", "#CAPTCHA", "#TOOL", "#TABS", "#VIDEO", "#TRANSCRIPTION"):
+    for term in ("#AGENT", "#STORAGE", "#FILES", "#PROGRESS", "#LAZY", "#PROJECT", "#RESEARCH", "#INTERNET", "#DATA", "#TEMPLATE", "#SUMMARY", "#PAGE", "#FACT", "#CAPTCHA", "#TOOL", "#TABS", "#VIDEO", "#TRANSCRIPTION"):
         if term not in canonical_text:
             fail(f"canonical terminology is missing {term}")
 

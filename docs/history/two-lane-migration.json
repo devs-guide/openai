@@ -17,12 +17,12 @@
     {
       "source": "dot/agents/doc.md",
       "dispositions": ["KEEP_AGENT", "KEEP_DATA", "KEEP_TEMPLATE"],
-      "targets": ["dot/agent/master.prompt", "dot/research/data.prompt", "dot/research/template.prompt"]
+      "targets": ["dot/agent/master.prompt", "dot/agent/storage.prompt", "dot/agent/progress.prompt", "dot/research/data.prompt", "dot/research/template.prompt"]
     },
     {
       "source": "dot/agents/prompt.md",
       "dispositions": ["KEEP_AGENT", "HISTORY_ONLY"],
-      "targets": ["dot/agent/browser.prompt", "docs/history/two-lane-migration.md"]
+      "targets": ["dot/agent/browser.prompt", "dot/agent/progress.prompt", "docs/history/two-lane-migration.md"]
     },
     {
       "source": "dot/agents/readme.md",
@@ -32,7 +32,7 @@
     {
       "source": "dot/prompts/core/master.prompt",
       "dispositions": ["MERGE", "KEEP_DATA"],
-      "targets": ["dot/agent/master.prompt", "dot/research/project.prompt", "dot/research/internet.prompt", "dot/research/data.prompt", "dot/research/template.prompt"]
+      "targets": ["dot/agent/master.prompt", "dot/agent/storage.prompt", "dot/agent/progress.prompt", "dot/research/project.prompt", "dot/research/internet.prompt", "dot/research/data.prompt", "dot/research/template.prompt"]
     },
     {
       "source": "dot/prompts/core/dot.prompt",
@@ -62,7 +62,7 @@
     {
       "source": "dot/prompts/research/starter-data-only.md",
       "dispositions": ["MERGE", "KEEP_DATA"],
-      "targets": ["dot/agent/master.prompt", "dot/research/data.prompt", "dot/research/template.prompt"]
+      "targets": ["dot/agent/master.prompt", "dot/agent/storage.prompt", "dot/agent/progress.prompt", "dot/research/data.prompt", "dot/research/template.prompt"]
     },
     {
       "source": "dot/prompts/research/readme.md",

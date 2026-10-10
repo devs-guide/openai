@@ -46,6 +46,7 @@ REQUIRED = {
     "docs/releases/0.0.4.md",
     "docs/releases/0.0.5.md",
     "docs/releases/0.0.6.md",
+    "docs/releases/0.0.7.md",
     "docs/releases/readme.md",
     "dot/ingest.json",
     "dot/readme.md",
@@ -55,8 +56,10 @@ REQUIRED = {
     "dot/agent/config.schema.json",
     "dot/agent/media.prompt",
     "dot/agent/page.prompt",
+    "dot/agent/progress.prompt",
     "dot/agent/readme.md",
     "dot/agent/runtime.json",
+    "dot/agent/storage.prompt",
     "dot/research/internet.prompt",
     "dot/research/data.prompt",
     "dot/research/project.prompt",
@@ -144,7 +147,7 @@ SUMMARY_SCENARIOS = {
     "explicit-source-limit": ("explicitly_source_limited", "complete_with_gaps"),
     "shared-resource-attribution": ("shared resource as exclusive to one entity",),
     "immutable-successor": ("keep those inputs immutable", "successor dataset release"),
-    "paired-export": ("either csv or json activates both paired forms",),
+    "three-format-export": ("csv, json, or markdown activates all three release views",),
     "review-independence": ("distinct self-review pass", "not independent"),
     "all-entity-coverage": (
         "reconcile the eligible entity or subject universe",
@@ -158,17 +161,49 @@ TABS_SCENARIOS = {
     "contended-slot": ("two workers requesting the final slot", "one reservation and one queued request"),
     "unknown-inventory": ("an `unknown` global count", "prevents another tab from opening"),
     "protected-tab": ("an authentication, unsaved-form, active-download, takeover, or leased tab", "not closed for capacity"),
-    "scheduled-check": ("15-minute receipt is verified", "active only after"),
+    "scheduled-check": ("15-minute receipt, timezone, project id, and next run are verified", "active only after"),
     "event-fallback": ("disclosed event-driven checks", "no automation claim"),
     "pause-or-end": ("schedule is paused or removed", "resumable state is retained"),
     "observed-cause": ("does not invent a memory, cpu, browser, or website cause",),
     "sensitive-state": ("exported records omit credentials", "sensitive authentication routes"),
     "captcha": ("actual captcha encounter follows unchanged `browser-004`",),
 }
+STORAGE_SCENARIOS = {
+    "probe-failure": ("failed save or readback", "blocks substantive dependent work"),
+    "ordinary-file-integrity": ("byte length and sha-256",),
+    "native-document-integrity": ("without an invented checksum",),
+    "output-before-review": ("persistently saved and verified as unreviewed",),
+    "manifest-recovery": ("latest verified checkpoint",),
+    "existing-purpose-location": ("reused without creating a duplicate",),
+    "new-purpose-location": ("creates, probes, registers, and verifies",),
+    "purpose-name-conflict": ("more precise functional term",),
+    "cross-project-separation": ("distinct project ids", "recovery manifests"),
+    "full-capacity": ("new work is `local only`",),
+    "wip-not-delivery": ("not delivered or recipient-access confirmed",),
+    "archive-integrity": ("missing member, bad hash, or extraction failure",),
+    "post-upload-mismatch": ("does not replace its predecessor",),
+    "self-hash-prevention": ("completed zip digest is recorded externally",),
+    "cleanup-permission": ("compression alone never removes",),
+}
+PROGRESS_SCENARIOS = {
+    "scheduled-project-check": ("id, timezone, project id, enabled state, and next run",),
+    "scheduler-unavailable": ("event-driven monitoring", "no recurring-automation claim"),
+    "disabled-schedule": ("remains disabled until explicitly authorized",),
+    "overlap-attempt": ("no duplicate research run starts",),
+    "healthy-long-task": ("`healthy_running` rather than `#lazy`",),
+    "unknown-task-state": ("`progress_unknown`", "inspected before intervention"),
+    "confirmed-lazy": ("`lazy_confirmed` and triggers recovery",),
+    "unchanged-blocker": ("not progress", "permitted alternative"),
+    "external-dependency": ("`blocked_external`", "independent useful work continues"),
+    "unsaved-output": ("cannot establish progress or completion",),
+    "pause-or-complete": ("applicable project schedule is disabled",),
+}
 INGEST_INSTRUCTIONS = (
     ("dot/agent/master.prompt", "AGENT_CONTRACT", "REQUIRED", None),
     ("dot/agent/config.json", "CONFIGURATION", "REQUIRED", None),
     ("dot/agent/runtime.json", "DATED_OBSERVATION", "REQUIRED", None),
+    ("dot/agent/storage.prompt", "CAPABILITY_MODULE", "REQUIRED", None),
+    ("dot/agent/progress.prompt", "CAPABILITY_MODULE", "REQUIRED", None),
     ("dot/agent/browser.prompt", "CAPABILITY_MODULE", "REQUIRED", "INTERNET_RESEARCH"),
     ("dot/agent/page.prompt", "CAPABILITY_MODULE", "CONDITIONAL", "PAGE_ACTION_OR_DESTINATION"),
     ("dot/agent/media.prompt", "CAPABILITY_MODULE", "CONDITIONAL", "AUDIOVISUAL_EVIDENCE"),
@@ -244,29 +279,198 @@ def validate_preserved_agent_sources() -> None:
     ok("Agent runtime, intentional BROWSER-004 behavior, Page delivery, and media distinctions are preserved")
 
 
+def validate_storage_progress_contract() -> None:
+    master = (ROOT / "dot" / "agent" / "master.prompt").read_text(encoding="utf-8")
+    storage = (ROOT / "dot" / "agent" / "storage.prompt").read_text(encoding="utf-8")
+    progress = (ROOT / "dot" / "agent" / "progress.prompt").read_text(encoding="utf-8")
+    project = (ROOT / "dot" / "research" / "project.prompt").read_text(encoding="utf-8")
+    internet = (ROOT / "dot" / "research" / "internet.prompt").read_text(encoding="utf-8")
+    template = (ROOT / "dot" / "research" / "template.prompt").read_text(encoding="utf-8")
+    summary = (ROOT / "dot" / "research" / "summary.prompt").read_text(encoding="utf-8")
+    config = json.loads((ROOT / "dot" / "agent" / "config.json").read_text(encoding="utf-8"))
+    schema = json.loads((ROOT / "dot" / "agent" / "config.schema.json").read_text(encoding="utf-8"))
+
+    if "**Contract:** `dot-agent/2`" not in master:
+        fail("Agent contract version is not dot-agent/2")
+    if "**Contract:** `dot-research-project/2`" not in project:
+        fail("Project contract version is not dot-research-project/2")
+    storage_rules = re.findall(r"^## (STORAGE-[0-9]{3})\b", storage, re.MULTILINE)
+    if storage_rules != [f"STORAGE-{number:03d}" for number in range(1, 13)]:
+        fail("Storage contract must define STORAGE-001 through STORAGE-012 in order")
+    progress_rules = re.findall(r"^## (PROGRESS-[0-9]{3})\b", progress, re.MULTILINE)
+    if progress_rules != [f"PROGRESS-{number:03d}" for number in range(1, 9)]:
+        fail("Progress contract must define PROGRESS-001 through PROGRESS-008 in order")
+
+    required_storage = {
+        "STORAGE-001": ("`#storage` owns persistence", "`agent:storage` default"),
+        "STORAGE-002": ("`ephemeral_untrusted`", "save a small nonsensitive probe", "reopen or download"),
+        "STORAGE-003": ("save every completed source capture", "periodic health check audits"),
+        "STORAGE-004": ("byte length and sha-256", "revision/content readback", "delivery accepted"),
+        "STORAGE-005": ("save evidence before analysis", "stable artifact ids"),
+        "STORAGE-006": ("safe canonical url", "never replace a missing value with zero"),
+        "STORAGE-007": ("persistently saved, versioned project recovery manifest", "avoid self-hash cycles"),
+        "STORAGE-008": ("never overwrite or delete the only verified copy", "common logical source version"),
+        "STORAGE-009": ("immutable zip successor", "submitted research prompts and captured visible replies"),
+        "STORAGE-010": ("after upload, retrieve the saved zip", "retain two free slots"),
+        "STORAGE-011": ("`agent:<term>`", "reuse a suitable verified location first", "wip file in `agent:pdf` remains undelivered"),
+        "STORAGE-012": ("latest verified persistent checkpoint", "compression authorizes packaging, not deletion"),
+    }
+    for rule_id, phrases in required_storage.items():
+        section = re.sub(r"\s+", " ", prompt_section(storage, rule_id)).lower()
+        for phrase in phrases:
+            if phrase not in section:
+                fail(f"Storage contract lacks required {rule_id} behavior: {phrase}")
+
+    required_progress = {
+        "PROGRESS-001": ("own the task through delivery", "one agent is expected per account"),
+        "PROGRESS-002": ("every 15 minutes", "*/15 * * * *", "one project-specific health check", "project lease"),
+        "PROGRESS-003": ("generated-but-unsaved file", "progress_unknown"),
+        "PROGRESS-004": ("`#lazy` is an operational recovery state", "lazy_confirmed", "elapsed time"),
+        "PROGRESS-005": ("denied file must not be retrieved", "changed condition"),
+        "PROGRESS-006": ("`prepared`, `submitted`, `answered`, and `tested`", "never treat an advisory answer as factual evidence"),
+        "PROGRESS-007": ("routine all-clear checks in the log", "cumulative captcha totals"),
+        "PROGRESS-008": ("disable or remove only its authorized health check", "recoverability from verified checkpoints"),
+    }
+    for rule_id, phrases in required_progress.items():
+        section = re.sub(r"\s+", " ", prompt_section(progress, rule_id)).lower()
+        for phrase in phrases:
+            if phrase not in section:
+                fail(f"Progress contract lacks required {rule_id} behavior: {phrase}")
+
+    for contract_name, contract_text, scenarios in (
+        ("Storage", storage, STORAGE_SCENARIOS),
+        ("Progress", progress, PROGRESS_SCENARIOS),
+    ):
+        rows = dict(re.findall(r"^\|\s*`([^`]+)`\s*\|\s*(.*?)\s*\|$", contract_text, re.MULTILINE))
+        if set(rows) != set(scenarios):
+            fail(f"{contract_name} acceptance scenarios are incomplete or contain undeclared cases")
+        for scenario_id, phrases in scenarios.items():
+            normalized = rows[scenario_id].lower()
+            for phrase in phrases:
+                if phrase not in normalized:
+                    fail(f"{contract_name} acceptance scenario lacks required behavior: {scenario_id}: {phrase}")
+
+    if config.get("schema") != "dot-agent-config/3":
+        fail("Agent configuration is not dot-agent-config/3")
+    expected_health = {
+        "scheduled_interval_minutes": 15,
+        "suggested_cron": "*/15 * * * *",
+        "timezone_required": True,
+        "scheduler_policy": "WHEN_AVAILABLE_AND_AUTHORIZED",
+        "fallback": "EVENT_DRIVEN",
+        "scope": "ACTIVE_PROJECT",
+        "project_schedule_limit": 1,
+        "overlap_policy": "INSPECT_HEALTHY_RUN",
+        "event_triggers": [
+            "TASK_START_OR_RESUME",
+            "WORKER_HANDOFF",
+            "BEFORE_RISKY_OPERATION",
+            "AFTER_CRASH_OR_TOOL_FAILURE",
+        ],
+    }
+    if config.get("progress", {}).get("health_checks") != expected_health:
+        fail("Agent health-check configuration differs from the approved cron-style branch")
+    if config.get("progress", {}).get("lazy") != {
+        "owner": "#PROGRESS",
+        "requires_observed_inactivity": True,
+        "requires_executable_authorized_action": True,
+        "elapsed_time_alone_is_sufficient": False,
+    }:
+        fail("Agent #LAZY configuration differs from the approved evidence gate")
+
+    storage_config = config.get("storage", {})
+    required_storage_config = {
+        "working_storage_class": "EPHEMERAL_UNTRUSTED",
+        "durable_destination": "agent:storage",
+        "project_override_allowed": True,
+        "verify_before_use": True,
+        "readback_required": True,
+        "native_document_integrity": "REVISION_AND_CONTENT_READBACK",
+        "recovery_manifest_required": True,
+        "version_policy": "IMMUTABLE_SUCCESSORS",
+    }
+    if any(storage_config.get(field) != value for field, value in required_storage_config.items()):
+        fail("Agent Storage defaults differ from the approved configuration")
+    if storage_config.get("file_integrity") != {"byte_count_required": True, "checksum": "SHA-256"}:
+        fail("Agent file-integrity configuration is incomplete")
+    if storage_config.get("research_archives") != {
+        "required": True,
+        "format": "ZIP",
+        "pre_upload_extraction_required": True,
+        "post_upload_download_required": True,
+        "planning_reserve_slots": 2,
+    }:
+        fail("Agent Research archive configuration is incomplete")
+    purpose = storage_config.get("purpose_locations", {})
+    if purpose != {
+        "creation_policy": "NEED_BASED_AUTOMATIC",
+        "reuse_policy": "REUSE_VERIFIED_MATCH_FIRST",
+        "destination_kinds": ["LOCATION", "PROJECT"],
+        "title_pattern": "^agent:[a-z][a-z0-9-]*$",
+        "scope": "SHARED_BY_FUNCTION_ACROSS_PROJECTS",
+        "registry_required": True,
+        "sharing_or_deletion_authorized": False,
+    }:
+        fail("Agent purpose-location configuration differs from the approved policy")
+    if storage_config.get("preservation_states") != [
+        "LOCAL ONLY", "SAVED BUT UNVERIFIED", "PERSISTENTLY SAVED AND VERIFIED", "VALIDATED"
+    ]:
+        fail("Agent preservation-state sequence is incorrect")
+    if storage_config.get("delivery_states") != ["NOT DELIVERED", "DELIVERED", "DELIVERY ACCEPTED"]:
+        fail("Agent delivery-state sequence is incorrect")
+
+    if schema.get("properties", {}).get("schema", {}).get("const") != "dot-agent-config/3":
+        fail("Agent configuration schema does not require dot-agent-config/3")
+    if not {"storage", "progress", "browser"}.issubset(schema.get("required", [])):
+        fail("Agent configuration schema does not require Storage, Progress, and Browser")
+    normalized_schema = json.dumps(schema, sort_keys=True)
+    for required in (
+        "agent:storage", "EPHEMERAL_UNTRUSTED", "*/15 * * * *",
+        "INSPECT_HEALTHY_RUN", "NEED_BASED_AUTOMATIC", "IMMUTABLE_SUCCESSORS",
+    ):
+        if required not in normalized_schema:
+            fail(f"Agent configuration schema lacks required Storage/Progress constant: {required}")
+
+    combined = re.sub(r"\s+", " ", "\n".join((master, project, internet, template, summary))).lower()
+    for required in (
+        "`#storage`", "`#files`", "`#progress`", "`#lazy`",
+        "recovery manifest", "health-check", "immutable research zip",
+    ):
+        if required not in combined:
+            fail(f"Agent and Research integration lacks required term: {required}")
+
+    prohibited = (
+        "agent:" + "edu",
+        "agent:" + "prompts",
+        "bjc:" + "health",
+        "agent:" + "bjc-heath",
+        "bcj:" + "employees",
+    )
+    canonical = (master + storage + progress + project + internet + template + summary).lower()
+    if any(value in canonical for value in prohibited):
+        fail("project-specific destination or scope entered the reusable contracts")
+    ok("Storage and Progress own verified persistence, purpose locations, cron-style checks, and #LAZY recovery")
+
+
 def validate_tabs_contract() -> None:
     master = (ROOT / "dot" / "agent" / "master.prompt").read_text(encoding="utf-8")
     browser = (ROOT / "dot" / "agent" / "browser.prompt").read_text(encoding="utf-8")
     config = json.loads((ROOT / "dot" / "agent" / "config.json").read_text(encoding="utf-8"))
     schema = json.loads((ROOT / "dot" / "agent" / "config.schema.json").read_text(encoding="utf-8"))
 
-    if config.get("schema") != "dot-agent-config/2":
-        fail("Agent configuration is not dot-agent-config/2")
+    if config.get("schema") != "dot-agent-config/3":
+        fail("Agent configuration is not dot-agent-config/3")
     expected_tabs = {
         "default_max_open": 4,
         "limit_scope": "ALL_WINDOWS_AND_WORKERS",
         "project_override_allowed": True,
-        "blocker_checks": {
-            "scheduled_interval_minutes": 15,
-            "scheduler_policy": "WHEN_AVAILABLE_AND_AUTHORIZED",
-            "fallback": "EVENT_DRIVEN",
-        },
+        "blocker_checks": {"inherit_from": "progress.health_checks"},
     }
     if config.get("browser", {}).get("tabs") != expected_tabs:
         fail("Agent Browser/Tabs defaults differ from the approved configuration")
 
-    if schema.get("properties", {}).get("schema", {}).get("const") != "dot-agent-config/2":
-        fail("Agent configuration schema does not require dot-agent-config/2")
+    if schema.get("properties", {}).get("schema", {}).get("const") != "dot-agent-config/3":
+        fail("Agent configuration schema does not require dot-agent-config/3")
     if "browser" not in schema.get("required", []):
         fail("Agent configuration schema does not require Browser configuration")
     browser_schema = schema.get("properties", {}).get("browser", {})
@@ -282,24 +486,17 @@ def validate_tabs_contract() -> None:
     if max_schema.get("type") != "integer" or max_schema.get("minimum") != 1:
         fail("Agent configuration schema does not constrain tab limits to positive integers")
     blocker_schema = tabs_schema.get("properties", {}).get("blocker_checks", {})
-    if blocker_schema.get("required") != [
-        "scheduled_interval_minutes", "scheduler_policy", "fallback"
-    ]:
-        fail("Agent configuration schema does not require every blocker-check field")
-    check_schema = blocker_schema.get("properties", {})
+    if blocker_schema.get("required") != ["inherit_from"]:
+        fail("Agent configuration schema does not link Browser checks to Progress")
     schema_constants = {
         "limit_scope": tabs_schema.get("properties", {}).get("limit_scope", {}).get("const"),
         "project_override_allowed": tabs_schema.get("properties", {}).get("project_override_allowed", {}).get("const"),
-        "scheduled_interval_minutes": check_schema.get("scheduled_interval_minutes", {}).get("const"),
-        "scheduler_policy": check_schema.get("scheduler_policy", {}).get("const"),
-        "fallback": check_schema.get("fallback", {}).get("const"),
+        "inherit_from": blocker_schema.get("properties", {}).get("inherit_from", {}).get("const"),
     }
     if schema_constants != {
         "limit_scope": "ALL_WINDOWS_AND_WORKERS",
         "project_override_allowed": True,
-        "scheduled_interval_minutes": 15,
-        "scheduler_policy": "WHEN_AVAILABLE_AND_AUTHORIZED",
-        "fallback": "EVENT_DRIVEN",
+        "inherit_from": "progress.health_checks",
     }:
         fail("Agent configuration schema does not enforce the approved Tabs branch")
 
@@ -323,7 +520,7 @@ def validate_tabs_contract() -> None:
         "TABS-002": ("one shared inventory", "only one worker may hold a tab lease", "open no additional tab"),
         "TABS-003": ("reserve capacity", "place the task in a resumable queue", "closing protected state"),
         "TABS-004": ("before reuse, handoff, or closure", "sensitive authentication routes"),
-        "TABS-005": ("apply exactly one monitoring branch", "15-minute", "event-driven checks"),
+        "TABS-005": ("single `#progress` health-check branch", "apply exactly one monitoring branch", "15-minute", "event-driven checks"),
         "TABS-006": ("require new evidence", "do not attribute a failure", "apply `browser-004`"),
         "TABS-007": ("pause or remove", "release worker leases", "final monitoring branch"),
     }
@@ -342,15 +539,16 @@ def validate_tabs_contract() -> None:
     prohibited = ("agent:" + "prompts", "gpt-5.6 sol high", "8 gb of ram", "eight cpu cores")
     if any(term in browser.lower() for term in prohibited):
         fail("stale route, model, or hardware advice entered the Browser/Tabs contract")
-    ok("Tabs configuration v2 and TABS-001 through TABS-007 define shared capacity, monitoring, and recovery")
+    ok("Tabs configuration v3 and TABS-001 through TABS-007 define shared capacity and consume the Progress monitor")
 
 
 def validate_fact_pair_example(template_text: str) -> None:
     section = prompt_section(template_text, "TEMPLATE-006")
     json_match = re.search(r"```json\n(.*?)\n```", section, re.DOTALL)
     csv_match = re.search(r"```csv\n(.*?)\n```", section, re.DOTALL)
-    if json_match is None or csv_match is None:
-        fail("Template paired release-view example is incomplete")
+    markdown_match = re.search(r"```markdown\n(.*?)\n```", section, re.DOTALL)
+    if json_match is None or csv_match is None or markdown_match is None:
+        fail("Template three-format release-view example is incomplete")
     try:
         json_rows = json.loads(json_match.group(1))
     except json.JSONDecodeError as exc:
@@ -370,7 +568,23 @@ def validate_fact_pair_example(template_text: str) -> None:
                 fail(f"Template paired example logical value differs at row {index}, field {field}")
     if not any(row.get("value") is None and row.get("null_reason") for row in json_rows):
         fail("Template paired example does not preserve null plus reason semantics")
-    ok("synthetic CSV/JSON release view preserves fields, values, ordering, and null semantics")
+
+    markdown_lines = [line for line in markdown_match.group(1).splitlines() if line.strip()]
+    if len(markdown_lines) != len(json_rows) + 2:
+        fail("Template Markdown example row count differs")
+    markdown_headers = [value.strip() for value in markdown_lines[0].strip("|").split("|")]
+    if markdown_headers != headers:
+        fail("Template Markdown example fields or order differ")
+    for index, (json_row, line) in enumerate(zip(json_rows, markdown_lines[2:]), 1):
+        values = [value.strip() for value in line.strip("|").split("|")]
+        if len(values) != len(headers):
+            fail(f"Template Markdown example field count differs at row {index}")
+        for field, markdown_value in zip(headers, values):
+            json_value = json_row[field]
+            expected = "null" if json_value is None else str(json_value).lower() if isinstance(json_value, bool) else str(json_value)
+            if markdown_value != expected:
+                fail(f"Template Markdown logical value differs at row {index}, field {field}")
+    ok("synthetic CSV/JSON/Markdown release view preserves fields, values, ordering, and null semantics")
 
 
 def validate_data_contract() -> None:
@@ -378,6 +592,9 @@ def validate_data_contract() -> None:
     template_path = ROOT / "dot" / "research" / "template.prompt"
     data_text = data_path.read_text(encoding="utf-8")
     template_text = template_path.read_text(encoding="utf-8")
+
+    if "**Contract:** `dot-research-data/2`" not in data_text:
+        fail("Data contract version is not dot-research-data/2")
 
     catalog_section = prompt_section(data_text, "DATA-002")
     catalog_rows = re.findall(
@@ -438,7 +655,16 @@ def validate_data_contract() -> None:
             fail(f"Data and Template contracts lack required term: {required}")
 
     validate_fact_pair_example(template_text)
-    ok("Data owns 22 unique paired basenames, distinct provenance layers, and all acceptance scenarios")
+    normalized_data = re.sub(r"\s+", " ", data_text).lower()
+    for required in (
+        "`<basename>.csv`, `<basename>.json`, and `<basename>.md`",
+        "csv and json remain the canonical machine pair",
+        "markdown contains every row and field",
+        "persist and verify corrections before regenerating downstream views",
+    ):
+        if required not in normalized_data:
+            fail(f"Data three-format contract lacks required behavior: {required}")
+    ok("Data owns 22 unique basenames, three-format parity, distinct provenance layers, and all acceptance scenarios")
 
 
 def validate_summary_contract() -> None:
@@ -451,8 +677,8 @@ def validate_summary_contract() -> None:
     internet = internet_path.read_text(encoding="utf-8")
     template = template_path.read_text(encoding="utf-8")
 
-    if "**Contract:** `dot-research-summary/2`" not in summary:
-        fail("Summary contract version is not dot-research-summary/2")
+    if "**Contract:** `dot-research-summary/3`" not in summary:
+        fail("Summary contract version is not dot-research-summary/3")
     observed_rules = re.findall(r"^## (SUMMARY-[0-9]{3})\b", summary, re.MULTILINE)
     expected_rules = [f"SUMMARY-{number:03d}" for number in range(1, 11)]
     if observed_rules != expected_rules:
@@ -462,6 +688,7 @@ def validate_summary_contract() -> None:
         "SUMMARY-001": (
             "only when the owner requests",
             "never rewrite, replace, rename, or overwrite the main research report",
+            "verify the persistent parent inputs",
             "keep those inputs immutable",
             "successor dataset release or proposed correction set",
         ),
@@ -528,7 +755,8 @@ def validate_summary_contract() -> None:
             "build the fact matrix",
             "distinct self-review pass",
             "sampling cannot support a claim that every requested entity was checked",
-            "requested paired exports",
+            "csv/json/markdown companions",
+            "immediately persist and read back the unreviewed draft",
             "visually inspect every page",
             "mark delivery `blocked`",
             "versioned native pdf attachment",
@@ -632,6 +860,8 @@ def validate_summary_contract() -> None:
         "privacy_and_suppression_check", "fact_check_reviewer_type",
         "fact_check_independence", "requested_export_parity_check", "visual_page_inspection",
         "native_attachment_state", "delivery_reference", "readback_at",
+        "unreviewed_draft_persistence_state", "recovery_manifest_id_and_version",
+        "archive_id_and_version", "final_progress_classification", "health_check_disposition",
         "material_limitations", "completion_status",
     }
     if not required_completion_fields.issubset(completion):
@@ -689,11 +919,15 @@ def validate_release_contract() -> None:
             "stacked releases",
             "publish each predecessor before retargeting",
             "failed check",
+            "one tracked acceptance ledger",
+            "do not create an intermediate tag, prerelease, or partial public release",
         ),
         "RELEASE-009": (
             "complete proposed body in a normal tracked markdown file",
             "create or converge a draft first",
             "read the public release back through the github api",
+            "github draft only after every canonical prompt",
+            "prohibited before that freeze",
         ),
         "RELEASE-010": (
             "supported source archives",
@@ -722,9 +956,9 @@ def validate_ingest_contract() -> None:
 
     expected_identity = {
         "schema": "dot-ingest/1",
-        "release": "0.0.6",
+        "release": "0.0.7",
         "baseline_tag": "0.0.1",
-        "prior_release_tag": "0.0.5",
+        "prior_release_tag": "0.0.6",
         "entrypoint": "dot/readme.md",
         "manifest_authority": "ROUTING_METADATA_ONLY",
         "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
@@ -817,6 +1051,7 @@ def validate_release_workflow() -> None:
         "Repository Release Contract",
         "Evidence-Completing Research Summaries",
         "Coordinated Browser Tabs",
+        "Continuous Progress and Recoverable Agent Storage",
         "release_text.py",
         "existing release is already published",
         "existing draft target differs",
@@ -826,6 +1061,26 @@ def validate_release_workflow() -> None:
     ):
         if required not in release_script:
             fail(f"release workflow lacks required safeguard: {required}")
+
+    candidate = (ROOT / "docs" / "releases" / "0.0.7.md").read_text(encoding="utf-8")
+    normalized_candidate = re.sub(r"\s+", " ", candidate).lower()
+    for required in (
+        "### edge-case acceptance ledger",
+        "every row is a release gate",
+        "progress | verified or missing scheduler",
+        "storage | failed probe/readback",
+        "provisioning | existing match",
+        "delivery | wip versus delivered",
+        "browser | four-tab capacity",
+        "research | one failed query",
+        "data | three-format parity",
+        "archives | missing member",
+        "security | credentials",
+        "lifecycle | pause, resume",
+        "repository and pages workflow `pass`",
+    ):
+        if required not in normalized_candidate:
+            fail(f"0.0.7 edge-case release ledger lacks required gate: {required}")
     ok("release text comparison is newline-tolerant, content-strict, and draft-convergent")
 
 
@@ -850,7 +1105,7 @@ def main() -> int:
             continue
         if stale_candidate in text:
             fail(f"stale candidate version remains in source: {path}")
-    ok("candidate release identity is consistently 0.0.6 and contains no stale candidate-version reference")
+    ok("candidate release identity is consistently 0.0.7 and contains no stale candidate-version reference")
 
     if any(path.startswith("static/") for path in paths):
         fail("generated static output must not be included on main")
@@ -993,6 +1248,7 @@ def main() -> int:
     ok("agent configuration preserves ordered models and browser-first tool boundaries")
 
     validate_preserved_agent_sources()
+    validate_storage_progress_contract()
     validate_tabs_contract()
     validate_data_contract()
     validate_summary_contract()

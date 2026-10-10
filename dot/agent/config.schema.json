@@ -3,9 +3,9 @@
   "$id": "https://devs-guide.github.io/openai/raw/dot/agent/config.schema.json",
   "title": "DOT agent configuration",
   "type": "object",
-  "required": ["schema", "status", "reviewed_on", "models", "execution", "tools", "browser", "storage"],
+  "required": ["schema", "status", "reviewed_on", "models", "execution", "tools", "browser", "storage", "progress"],
   "properties": {
-    "schema": {"const": "dot-agent-config/2"},
+    "schema": {"const": "dot-agent-config/3"},
     "status": {"enum": ["current", "candidate", "archived"]},
     "reviewed_on": {"type": "string", "format": "date"},
     "models": {
@@ -39,11 +39,9 @@
             "project_override_allowed": {"const": true},
             "blocker_checks": {
               "type": "object",
-              "required": ["scheduled_interval_minutes", "scheduler_policy", "fallback"],
+              "required": ["inherit_from"],
               "properties": {
-                "scheduled_interval_minutes": {"const": 15},
-                "scheduler_policy": {"const": "WHEN_AVAILABLE_AND_AUTHORIZED"},
-                "fallback": {"const": "EVENT_DRIVEN"}
+                "inherit_from": {"const": "progress.health_checks"}
               },
               "additionalProperties": false
             }
@@ -53,7 +51,106 @@
       },
       "additionalProperties": false
     },
-    "storage": {"type": "object"}
+    "storage": {
+      "type": "object",
+      "required": [
+        "working_root", "working_storage_class", "working_retention",
+        "durable_destination", "project_override_allowed", "verify_before_use",
+        "readback_required", "file_integrity", "native_document_integrity",
+        "recovery_manifest_required", "version_policy", "research_archives",
+        "purpose_locations", "preservation_states", "delivery_states"
+      ],
+      "properties": {
+        "working_root": {"const": "/workspace/scratch/<project-id>/"},
+        "working_storage_class": {"const": "EPHEMERAL_UNTRUSTED"},
+        "working_retention": {"const": "UNKNOWN"},
+        "durable_destination": {"const": "agent:storage"},
+        "project_override_allowed": {"const": true},
+        "verify_before_use": {"const": true},
+        "readback_required": {"const": true},
+        "file_integrity": {
+          "type": "object",
+          "required": ["byte_count_required", "checksum"],
+          "properties": {
+            "byte_count_required": {"const": true},
+            "checksum": {"const": "SHA-256"}
+          },
+          "additionalProperties": false
+        },
+        "native_document_integrity": {"const": "REVISION_AND_CONTENT_READBACK"},
+        "recovery_manifest_required": {"const": true},
+        "version_policy": {"const": "IMMUTABLE_SUCCESSORS"},
+        "research_archives": {
+          "type": "object",
+          "required": ["required", "format", "pre_upload_extraction_required", "post_upload_download_required", "planning_reserve_slots"],
+          "properties": {
+            "required": {"const": true},
+            "format": {"const": "ZIP"},
+            "pre_upload_extraction_required": {"const": true},
+            "post_upload_download_required": {"const": true},
+            "planning_reserve_slots": {"const": 2}
+          },
+          "additionalProperties": false
+        },
+        "purpose_locations": {
+          "type": "object",
+          "required": ["creation_policy", "reuse_policy", "destination_kinds", "title_pattern", "scope", "registry_required", "sharing_or_deletion_authorized"],
+          "properties": {
+            "creation_policy": {"const": "NEED_BASED_AUTOMATIC"},
+            "reuse_policy": {"const": "REUSE_VERIFIED_MATCH_FIRST"},
+            "destination_kinds": {"const": ["LOCATION", "PROJECT"]},
+            "title_pattern": {"const": "^agent:[a-z][a-z0-9-]*$"},
+            "scope": {"const": "SHARED_BY_FUNCTION_ACROSS_PROJECTS"},
+            "registry_required": {"const": true},
+            "sharing_or_deletion_authorized": {"const": false}
+          },
+          "additionalProperties": false
+        },
+        "preservation_states": {
+          "const": ["LOCAL ONLY", "SAVED BUT UNVERIFIED", "PERSISTENTLY SAVED AND VERIFIED", "VALIDATED"]
+        },
+        "delivery_states": {
+          "const": ["NOT DELIVERED", "DELIVERED", "DELIVERY ACCEPTED"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "progress": {
+      "type": "object",
+      "required": ["health_checks", "lazy"],
+      "properties": {
+        "health_checks": {
+          "type": "object",
+          "required": ["scheduled_interval_minutes", "suggested_cron", "timezone_required", "scheduler_policy", "fallback", "scope", "project_schedule_limit", "overlap_policy", "event_triggers"],
+          "properties": {
+            "scheduled_interval_minutes": {"const": 15},
+            "suggested_cron": {"const": "*/15 * * * *"},
+            "timezone_required": {"const": true},
+            "scheduler_policy": {"const": "WHEN_AVAILABLE_AND_AUTHORIZED"},
+            "fallback": {"const": "EVENT_DRIVEN"},
+            "scope": {"const": "ACTIVE_PROJECT"},
+            "project_schedule_limit": {"const": 1},
+            "overlap_policy": {"const": "INSPECT_HEALTHY_RUN"},
+            "event_triggers": {
+              "const": ["TASK_START_OR_RESUME", "WORKER_HANDOFF", "BEFORE_RISKY_OPERATION", "AFTER_CRASH_OR_TOOL_FAILURE"]
+            }
+          },
+          "additionalProperties": false
+        },
+        "lazy": {
+          "type": "object",
+          "required": ["owner", "requires_observed_inactivity", "requires_executable_authorized_action", "elapsed_time_alone_is_sufficient"],
+          "properties": {
+            "owner": {"const": "#PROGRESS"},
+            "requires_observed_inactivity": {"const": true},
+            "requires_executable_authorized_action": {"const": true},
+            "elapsed_time_alone_is_sufficient": {"const": false}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
   },
   "$defs": {
     "model": {

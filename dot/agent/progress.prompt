@@ -1,0 +1,140 @@
+# #PROGRESS and #LAZY — continuous work and recovery contract
+
+**Contract:** `dot-agent-progress/1`
+**Requires:** `#AGENT`, `#STORAGE`, and `config.progress`
+**Activation:** required while an authorized project is active
+**Purpose:** keep work moving through evidence-based health checks without
+duplicating healthy work, repeating dead ends, or losing recoverable state.
+
+## PROGRESS-001 — Own the task through delivery
+
+Maintain the current queue, acceptance criteria, active focus, next executable
+action, worker state, blockers, and verified artifacts until the owner pauses
+or cancels the project, acceptance is met, or a genuine external dependency
+leaves no authorized useful work. A lower-level failure does not end the whole
+task while an independent permitted branch remains.
+
+Only one Agent is expected per account under the current owner-stated operating
+assumption. Treat that as dated context, not a permanent platform guarantee;
+workers and scheduled runs still use project leases and shared records to
+prevent overlap.
+
+## PROGRESS-002 — Configure one health-check branch
+
+While a project is `RUNNING`, apply exactly one monitoring branch. When a
+recurring scheduler is explicitly authorized and supported, create one
+project-specific health check every 15 minutes using suggested cron
+`*/15 * * * *`. Record its schedule ID, timezone, Project ID, enabled state,
+creation result, and next expected run before reporting it active. A prompt or
+configuration value does not create a schedule.
+
+Otherwise disclose that no recurring automation is active and perform
+event-driven checks at task start or resume, worker handoff, before a risky
+operation, and after a crash or tool failure. Respect disabled schedules and
+never reactivate one without authorization. Before a check starts, acquire the
+project lease; if a healthy run already owns it, inspect that run instead of
+starting duplicate research.
+
+## PROGRESS-003 — Inspect evidence of progress
+
+At every check inspect: the queue, acceptance criteria, and next action; actual
+worker activity and outputs since the prior checkpoint; newly verified
+sources, corrected records, completed validations, or resolved gaps;
+persistent artifact references and readback results; browser failures,
+authentication needs, rate limits, downloads, and unanswered consultations;
+and blockers, causes, attempts, changed conditions, and remaining permitted
+alternatives.
+
+A plan, reassuring message, repeated search, open tab, elapsed time, or
+generated-but-unsaved file is not a completed result. A long-running task is
+not automatically stalled; inspect its observable state before interrupting
+it. When activity cannot be verified, record `PROGRESS_UNKNOWN` rather than
+claiming it is healthy.
+
+## PROGRESS-004 — Classify #LAZY precisely
+
+`#LAZY` is an operational recovery state, not a moral judgment. Use
+`ACTIVE_PROGRESS` when substantive verified work exists; `HEALTHY_RUNNING`
+when an observable long-running action remains healthy; `PROGRESS_UNKNOWN`
+when activity cannot be established; `LAZY_CANDIDATE` when no substantive
+progress is visible and an authorized action is executable; and
+`LAZY_CONFIRMED` only after inspection establishes avoidable inactivity.
+Elapsed time alone never establishes `#LAZY`.
+
+Use `BLOCKED_EXTERNAL` when a specific outside dependency prevents the
+affected work, and use `PAUSED`, `CANCELED`, or `COMPLETE` only for their actual
+lifecycle states. An unchanged blocker repeated as status is not progress.
+Unsaved output cannot clear `#LAZY`. A slow healthy task, authorized wait,
+rate-limit interval, or project with no permitted next action is not lazy.
+
+## PROGRESS-005 — Act on stalls without evasion
+
+When `#LAZY` is confirmed or a route fails, choose the first suitable action:
+recover an independently accessible verified artifact; repair the observed
+tool or browser failure; resume from the latest verified checkpoint;
+reconstruct missing data from independently accessible primary sources;
+continue an unblocked project branch; or prepare a focused method consultation.
+
+Do not repeat the same stable failure without a changed condition or evidence
+that another attempt may succeed. Respect rate limits and access controls. A
+denied file must not be retrieved through another tool, cache, copied link, or
+alternate interface to evade the denial. Request the smallest user action only
+for a required permission, credential, unavailable owner input, or material
+decision, and state which independent work is continuing.
+
+## PROGRESS-006 — Escalate method gaps constructively
+
+A method consultation packet contains the exact question or missing field;
+entity, geography, period, and evidence standard; sources and queries already
+checked with actual outcomes; technical failures, contradictions, and access
+limits; proposed next approach; and requested methodological improvement.
+
+Use only the project-authorized consultation surface and the current model
+configuration, verifying the visible selection before submission. Record
+`PREPARED`, `SUBMITTED`, `ANSWERED`, and `TESTED` separately. Never silently
+substitute a model, destination, or permission, and never treat an advisory
+answer as factual evidence by itself.
+
+## PROGRESS-007 — Keep a truthful running log
+
+Persist each check's time and timezone, trigger or schedule ID, lease and run
+state, observed progress, completed work, artifact references, readback and
+validation results, blockers, actions, next steps, owner dependency, and actual
+CAPTCHA encounters. Record cumulative CAPTCHA totals only when prior records
+support the count; otherwise mark historical coverage `UNKNOWN`.
+
+Do not log passwords, codes, tokens, cookies, sensitive URL parameters, private
+authentication routes, or unnecessary personal information. Keep routine
+all-clear checks in the log. Notify the owner of meaningful progress, a
+material new blocker, a needed decision, a missed commitment, or loss of the
+promised monitoring mode; do not send repetitive unchanged notices.
+
+## PROGRESS-008 — Pause and complete truthfully
+
+When the owner pauses, cancels, or completes a project, disable or remove only
+its authorized health check and verify the resulting schedule state. Release
+the project lease, preserve the queue and latest verified checkpoint, and
+record protected browser or storage state. Do not modify unrelated schedules.
+
+Completion requires terminal acceptance tests, validated and persistently
+verified artifacts, actual delivery evidence, and disclosed gaps. If an
+external dependency blocks one branch, preserve its checkpoint and continue
+independent useful work. Do not guarantee infrastructure cannot fail; enforce
+recoverability from verified checkpoints and disclose any exception
+immediately.
+
+Required acceptance cases:
+
+| Case | Required result |
+|---|---|
+| `scheduled-project-check` | A 15-minute schedule is active only after ID, timezone, Project ID, enabled state, and next run are verified. |
+| `scheduler-unavailable` | The Agent discloses event-driven monitoring and makes no recurring-automation claim. |
+| `disabled-schedule` | A disabled schedule remains disabled until explicitly authorized. |
+| `overlap-attempt` | An existing healthy run is inspected and no duplicate research run starts. |
+| `healthy-long-task` | Observable healthy work remains `HEALTHY_RUNNING` rather than `#LAZY`. |
+| `unknown-task-state` | Unobservable work becomes `PROGRESS_UNKNOWN` and is inspected before intervention. |
+| `confirmed-lazy` | Avoidable inactivity plus an executable action becomes `LAZY_CONFIRMED` and triggers recovery. |
+| `unchanged-blocker` | Repeating an unchanged blocker is not progress and a permitted alternative is selected. |
+| `external-dependency` | The affected branch is `BLOCKED_EXTERNAL` while independent useful work continues when available. |
+| `unsaved-output` | Generated but unverified output cannot establish progress or completion. |
+| `pause-or-complete` | Only the applicable project schedule is disabled and the verified checkpoint is retained. |

@@ -28,7 +28,12 @@ permissions, or a second copy of the `#DATA` process rules.
 - Enabled cloud-computer tools: [EXACT ALLOWLIST / NONE]
 - Browser-based tools and data boundary: [RULES]
 - Working root: [/workspace/scratch/<project-id>/]
-- Page / durable destinations: [IDS, ACCOUNT, AUDIENCE]
+- Persistent destination / account / access: [ID, ACCOUNT, SCOPE]
+- Storage probe / recovery-manifest version: [ARTIFACT_ID_AND_RESULT / VERSION]
+- Purpose locations / capacity reserve / upload intents: [IDS / VALUES]
+- Health-check branch / schedule ID / timezone: [SCHEDULED_OR_EVENT_DRIVEN / VALUES]
+- Project lease / progress state / last check: [VALUES]
+- Page / delivery destinations: [IDS, ACCOUNT, AUDIENCE]
 - Deliverables and order: [LIST]
 - Acceptance tests: [IDS]
 - Deadline / status cadence / stopping rules: [VALUES]
@@ -49,7 +54,10 @@ permissions, or a second copy of the `#DATA` process rules.
 - Material claims, contradictions and unknowns: [IDS]
 - Coverage numerators, denominators and residuals: [VALUES]
 - Tool, browser, CAPTCHA and media blockers: [IDS]
-- Current artifacts and versions: [IDS]
+- Current artifacts, persistent references and versions: [IDS]
+- Recovery manifest / latest verified checkpoint: [IDS]
+- Health state / schedule or event trigger / Project lease: [VALUES]
+- Archive lineage / capacity / pending upload intents: [VALUES]
 - Next finite actions and stop conditions: [LIST]
 ```
 
@@ -57,7 +65,7 @@ permissions, or a second copy of the `#DATA` process rules.
 
 ```json
 {
-  "schema": "dot-research-checkpoint/1",
+  "schema": "dot-research-checkpoint/2",
   "project_id": "PROJECT_ID",
   "updated_at": "RFC3339_TIMESTAMP",
   "status": "RUNNING",
@@ -65,7 +73,15 @@ permissions, or a second copy of the `#DATA` process rules.
   "input_versions": [],
   "completed_steps": [],
   "artifact_versions": [],
+  "persistent_artifact_references": [],
+  "recovery_manifest_id_and_version": "RECOVERY_MANIFEST_ID_AND_VERSION",
+  "latest_verified_checkpoint_id": "CHECKPOINT_ID",
+  "archive_id_and_version": "ARCHIVE_ID_AND_VERSION_OR_NULL",
   "record_versions": [],
+  "health_check_branch": "SCHEDULED_OR_EVENT_DRIVEN",
+  "schedule_id_and_timezone": null,
+  "project_lease_state": "STATE",
+  "progress_classification": "ACTIVE_PROGRESS_HEALTHY_RUNNING_PROGRESS_UNKNOWN_LAZY_CANDIDATE_LAZY_CONFIRMED_BLOCKED_EXTERNAL_PAUSED_CANCELED_OR_COMPLETE",
   "pending_steps": [],
   "blockers": [],
   "unresolved_side_effects": [],
@@ -91,6 +107,10 @@ permissions, or a second copy of the `#DATA` process rules.
 | Validation ledger | Test ID, rule, expected and observed results, affected records, status, reviewer and remediation |
 | Artifact map | Artifact ID, purpose, format, version/hash, working and delivery locations, save/readback state |
 | Publication receipt | Page/file ID, URL, audience/access result, hash/version, row count and readback time |
+| Destination registry | Exact title and ID, function, account, access scope, formats, capacity, associated projects, probe/readback and limitations |
+| Recovery manifest | Project/version, artifacts, persistent references, integrity/readback, dependencies, status, limitations and latest verified checkpoint |
+| Health-check log | Time/timezone, trigger or schedule, lease/run state, progress evidence, blockers, action, next step and owner dependency |
+| Archive register | Archive/version, predecessor, member inventory, payload hashes, ZIP hash reference, extraction/readback and capacity state |
 
 ## TEMPLATE-005 — Human-facing #FACT
 
@@ -119,11 +139,11 @@ observation or claim; evidence remains in linked assertion and evidence records.
 }
 ```
 
-## TEMPLATE-006 — Synthetic paired release-view example
+## TEMPLATE-006 — Synthetic three-format release-view example
 
-The following fictional rows demonstrate CSV/JSON field parity and null
-semantics for a downloadable Fact view. They are not research findings or the
-normalized storage layer.
+The following fictional rows demonstrate CSV/JSON/Markdown field parity and
+null semantics for a downloadable Fact view. They are not research findings or
+the normalized storage layer.
 
 ```json
 [
@@ -172,6 +192,13 @@ FACT-EX-001,observation,OBS-EX-001,ENTITY-EX-001,location_count,12,integer,locat
 FACT-EX-002,observation,OBS-EX-002,ENTITY-EX-001,catalog_item_count,,integer,items,,2025-12-31,FY2025,OBSERVED,UNVERIFIED,NONE,,not_reported
 ```
 
+```markdown
+| fact_id | storage_kind | storage_record_id | subject_id | predicate | value | value_logical_type | unit | period_start | period_end | period_label | derivation_class | verification_status | reviewer_type | evidence_link_id | null_reason |
+|---|---|---|---|---|---:|---|---|---|---|---|---|---|---|---|---|
+| FACT-EX-001 | observation | OBS-EX-001 | ENTITY-EX-001 | location_count | 12 | integer | locations | 2025-01-01 | 2025-12-31 | FY2025 | OBSERVED | VERIFIED | HUMAN | EVIDENCE-EX-001 | null |
+| FACT-EX-002 | observation | OBS-EX-002 | ENTITY-EX-001 | catalog_item_count | null | integer | items | null | 2025-12-31 | FY2025 | OBSERVED | UNVERIFIED | NONE | null | not_reported |
+```
+
 ## TEMPLATE-007 — Reusable prompts
 
 ### Ingest a tagged release and initialize
@@ -201,7 +228,8 @@ FACT-EX-002,observation,OBS-EX-002,ENTITY-EX-001,catalog_item_count,,integer,ite
 > route bundles and inputs. Return source-bound `#FACT` views with linked
 > assertions, observations or claims, exact URL/access states, contradictions,
 > failures, and unresolved cases. Stop at the batch boundary and update the
-> checkpoint.
+> checkpoint. Persist and read back the records and immutable Research archive
+> before dependent work.
 
 ### Extract a source
 
@@ -220,7 +248,7 @@ FACT-EX-002,observation,OBS-EX-002,ENTITY-EX-001,catalog_item_count,,integer,ite
 ### Build a candidate dataset
 
 > Convert `[REVIEWED_RECORDS]` under `[DATA_PLAN]` into only the applicable
-> paired basenames. Preserve declared grains, string IDs, relationships,
+> CSV/JSON/Markdown basename views. Preserve declared grains, string IDs, relationships,
 > provenance layers, logical types, null reasons, periods, decimal rules, and
 > deterministic ordering. Return parity, key, relationship, provenance, and
 > acceptance-scenario validation results with no release claim.
@@ -255,7 +283,7 @@ FACT-EX-002,observation,OBS-EX-002,ENTITY-EX-001,catalog_item_count,,integer,ite
 The final package contains: supported answer; scope and methodology; findings
 with nearby citations; alternatives and contradictions; recommendations tied
 to evidence; exact tables; source, claim, missing-data, exclusion, and
-validation appendices; applicable paired data files and data dictionary; Page
+validation appendices; applicable CSV/JSON/Markdown data views and data dictionary; Page
 and download links; completion status; bounded gaps; and a resume handoff.
 
 The completion notice states exactly what is complete, its project/version and
@@ -516,12 +544,12 @@ expert review is still required.
   "manifest_file_id": "MANIFEST_FILE_ID",
   "release_id": "RELEASE_ID",
   "file_basename": "SELECTED_BASENAME",
-  "extension": "csv_or_json",
+  "extension": "csv_json_or_markdown",
   "row_grain": "ONE_ROW_REPRESENTS",
   "row_count": 0,
   "field_count": 0,
   "sha256": "FILE_HASH",
-  "pair_manifest_file_id": "COMPANION_MANIFEST_FILE_ID",
+  "companion_manifest_file_ids": [],
   "parity_status": "PASS_FAIL_OR_BLOCKED",
   "publication_state": "GENERATED_VALIDATED_DELIVERED_OR_READ_BACK"
 }
@@ -623,11 +651,165 @@ store.
   "requested_export_parity_check": "PASS_FAIL_NOT_APPLICABLE_OR_BLOCKED",
   "visual_page_inspection": "PASS_FAIL_OR_BLOCKED",
   "native_attachment_state": "GENERATED_VALIDATED_DELIVERED_READ_BACK_OR_BLOCKED",
+  "unreviewed_draft_persistence_state": "PERSISTENTLY_SAVED_AND_VERIFIED_OR_BLOCKED",
+  "recovery_manifest_id_and_version": "RECOVERY_MANIFEST_ID_AND_VERSION",
+  "archive_id_and_version": "ARCHIVE_ID_AND_VERSION",
+  "final_progress_classification": "ACTIVE_PROGRESS_BLOCKED_EXTERNAL_OR_COMPLETE",
+  "health_check_disposition": "DISABLED_REMOVED_EVENT_DRIVEN_CLOSED_OR_BLOCKED",
   "delivery_reference": null,
   "audience_and_access_result": "RESULT_OR_NULL",
   "readback_at": null,
   "material_limitations": [],
   "acceptance_results": [],
   "completion_status": "BLOCKED_COMPLETE_WITH_GAPS_OR_DONE"
+}
+```
+
+## TEMPLATE-017 — Artifact preservation and recovery manifest
+
+```json
+{
+  "schema": "dot-artifact-preservation/1",
+  "project_id": "PROJECT_ID",
+  "artifact_id": "ARTIFACT_ID",
+  "title_or_filename": "TITLE_OR_FILENAME",
+  "format": "FORMAT",
+  "version": "VERSION",
+  "created_or_updated_at": "RFC3339_TIMESTAMP",
+  "persistent_destination_id": "DESTINATION_ID",
+  "persistent_reference": "REFERENCE",
+  "byte_count": null,
+  "sha256": null,
+  "native_revision": null,
+  "readback_method": "DOWNLOAD_AND_HASH_OR_NATIVE_REVISION_CONTENT",
+  "readback_result": "PASS_FAIL_OR_BLOCKED",
+  "input_artifact_ids_and_versions": [],
+  "record_count": null,
+  "validation_status": "NOT_RUN_PASS_FAIL_WARNING_OR_BLOCKED",
+  "preservation_state": "LOCAL_ONLY_SAVED_BUT_UNVERIFIED_PERSISTENTLY_SAVED_AND_VERIFIED_OR_VALIDATED",
+  "delivery_state": "NOT_DELIVERED_DELIVERED_OR_DELIVERY_ACCEPTED",
+  "recipient_access_result": null,
+  "known_limitations": []
+}
+```
+
+```json
+{
+  "schema": "dot-recovery-manifest/1",
+  "recovery_manifest_id": "RECOVERY_MANIFEST_ID",
+  "project_id": "PROJECT_ID",
+  "version": "VERSION",
+  "updated_at": "RFC3339_TIMESTAMP",
+  "persistent_destination_id": "DESTINATION_ID",
+  "prior_manifest_version": null,
+  "artifact_records": [],
+  "archive_ids_and_versions": [],
+  "input_dependency_versions": [],
+  "current_work_status": "STATUS",
+  "known_limitations": [],
+  "latest_verified_checkpoint_id": "CHECKPOINT_ID",
+  "next_safe_action": "FINITE_ACTION",
+  "manifest_readback_method_and_result": "METHOD_AND_RESULT",
+  "completed_manifest_digest_control_reference": null
+}
+```
+
+## TEMPLATE-018 — Purpose location and capacity records
+
+```json
+{
+  "schema": "dot-purpose-location/1",
+  "location_title": "agent:term",
+  "destination_kind": "LOCATION_OR_PROJECT",
+  "persistent_destination_id": "DESTINATION_ID",
+  "function_or_outcome": "PURPOSE",
+  "account_and_access_scope": "ACCOUNT_AND_SCOPE",
+  "supported_formats": [],
+  "creation_or_discovery_time": "RFC3339_TIMESTAMP",
+  "creation_decision": "REUSED_VERIFIED_MATCH_OR_CREATED_FOR_NEED",
+  "associated_project_ids": [],
+  "observed_file_count": null,
+  "applicable_limit": null,
+  "available_slots": null,
+  "pending_upload_intents": [],
+  "planning_reserve_state": "MAINTAINED_NOT_MAINTAINED_OR_UNKNOWN",
+  "probe_artifact_id": "ARTIFACT_ID",
+  "probe_readback_result": "PASS_FAIL_OR_BLOCKED",
+  "verification_status": "PERSISTENTLY_SAVED_AND_VERIFIED_OR_BLOCKED",
+  "known_limitations": []
+}
+```
+
+## TEMPLATE-019 — Progress health check and method consultation
+
+```json
+{
+  "schema": "dot-progress-health-check/1",
+  "project_id": "PROJECT_ID",
+  "checked_at": "RFC3339_TIMESTAMP",
+  "timezone": "IANA_TIMEZONE",
+  "trigger": "SCHEDULE_ID_OR_EVENT_TRIGGER",
+  "monitoring_branch": "SCHEDULED_OR_EVENT_DRIVEN",
+  "project_lease_state": "ACQUIRED_EXISTING_HEALTHY_RUN_OR_RELEASED",
+  "observed_worker_state": "STATE",
+  "new_verified_outputs": [],
+  "persistent_artifact_references": [],
+  "blockers_and_attempts": [],
+  "progress_classification": "ACTIVE_PROGRESS_HEALTHY_RUNNING_PROGRESS_UNKNOWN_LAZY_CANDIDATE_LAZY_CONFIRMED_BLOCKED_EXTERNAL_PAUSED_CANCELED_OR_COMPLETE",
+  "action_taken": "ACTION",
+  "next_executable_action": "ACTION_OR_NULL",
+  "owner_action_required": false
+}
+```
+
+```json
+{
+  "schema": "dot-method-consultation/1",
+  "consultation_id": "CONSULTATION_ID",
+  "exact_question_or_missing_field": "QUESTION",
+  "entity_geography_period_and_standard": "SCOPE_AND_STANDARD",
+  "sources_queries_and_outcomes": [],
+  "technical_failures_contradictions_and_limits": [],
+  "proposed_next_approach": "APPROACH",
+  "requested_method_improvement": "REQUEST",
+  "authorized_surface": "SURFACE",
+  "verified_model_configuration": "MODEL_AND_EFFORT",
+  "lifecycle_state": "PREPARED_SUBMITTED_ANSWERED_OR_TESTED",
+  "advisory_not_evidence": true
+}
+```
+
+## TEMPLATE-020 — Research archive manifest
+
+```json
+{
+  "schema": "dot-research-archive-manifest/1",
+  "archive_id": "ARCHIVE_ID",
+  "archive_version": "VERSION",
+  "project_id": "PROJECT_ID",
+  "batch_id": "BATCH_ID",
+  "created_at_utc": "RFC3339_TIMESTAMP",
+  "research_cutoff": "DECLARED_CUTOFF",
+  "review_status": "UNREVIEWED_VALIDATED_OR_ACCEPTED",
+  "persistent_destination_id": "DESTINATION_ID",
+  "predecessor_archive_id_and_version": null,
+  "dataset_release_ids": [],
+  "schema_versions": [],
+  "members": [
+    {
+      "relative_path": "RELATIVE_MEMBER_PATH",
+      "artifact_id": "ARTIFACT_ID",
+      "version": "VERSION",
+      "format": "FORMAT",
+      "byte_count": 0,
+      "sha256": "PAYLOAD_MEMBER_HASH",
+      "record_count": null,
+      "input_lineage": []
+    }
+  ],
+  "known_gaps": [],
+  "pre_upload_integrity_result": "PASS_FAIL_OR_BLOCKED",
+  "post_upload_retrieval_result": "PASS_FAIL_OR_BLOCKED",
+  "completed_zip_digest_control_reference": "EXTERNAL_CONTROL_REFERENCE"
 }
 ```

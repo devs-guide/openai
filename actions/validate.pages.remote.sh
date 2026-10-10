@@ -32,8 +32,8 @@ if record.get("repository") != "devs-guide/openai":
     raise SystemExit("unexpected repository identity")
 if record.get("source_sha") != expected:
     raise SystemExit(f"live source is {record.get('source_sha')}, expected {expected}")
-if record.get("release") != "0.0.6":
-    raise SystemExit(f"live release is {record.get('release')}, expected 0.0.6")
+if record.get("release") != "0.0.7":
+    raise SystemExit(f"live release is {record.get('release')}, expected 0.0.7")
 PY
 
   local route=""
@@ -43,6 +43,8 @@ PY
     '/dot/' \
     '/dot/ingest/' \
     '/dot/agent/' \
+    '/dot/agent/storage/' \
+    '/dot/agent/progress/' \
     '/dot/agent/browser/' \
     '/dot/research/' \
     '/dot/research/project/' \
@@ -59,10 +61,13 @@ PY
     '/dot/releases/0.0.4/' \
     '/dot/releases/0.0.5/' \
     '/dot/releases/0.0.6/' \
+    '/dot/releases/0.0.7/' \
     '/raw/docs/release.prompt' \
-    '/raw/docs/releases/0.0.6.md' \
+    '/raw/docs/releases/0.0.7.md' \
     '/raw/dot/ingest.json' \
     '/raw/dot/agent/browser.prompt' \
+    '/raw/dot/agent/storage.prompt' \
+    '/raw/dot/agent/progress.prompt' \
     '/raw/dot/agent/config.json' \
     '/raw/dot/agent/config.schema.json' \
     '/raw/dot/research/internet.prompt' \
@@ -88,7 +93,7 @@ PY
   rm -f "${raw_file}"
 
   local agent_relative=""
-  for agent_relative in browser.prompt config.json config.schema.json; do
+  for agent_relative in browser.prompt storage.prompt progress.prompt config.json config.schema.json; do
     raw_file="$(mktemp)"
     if ! curl -fsS "${BASE_URL}/raw/dot/agent/${agent_relative}" -o "${raw_file}"; then
       rm -f "${raw_file}"

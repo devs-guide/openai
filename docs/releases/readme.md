@@ -16,6 +16,9 @@ reviewed GitHub release body.
   bounded official-source gap filling, and versioned completion controls.
 - `0.0.6.md` — configured shared browser tabs, worker ownership, resumable
   queues, blocker monitoring, and recovery controls.
+- `0.0.7.md` — continuous project progress, evidence-based `#LAZY` recovery,
+  verified persistent files, purpose-based Agent storage, Research archives,
+  and three-format dataset views.
 
 Tags use bare semantic versions. Published tags are immutable; corrections use
 a later version. Compatible corrections and clarifications accumulate in the

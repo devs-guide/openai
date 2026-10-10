@@ -15,6 +15,7 @@ case "${VERSION}" in
   0.0.4) TITLE="${VERSION} — Repository Release Contract"; PRIOR_VERSION="0.0.3" ;;
   0.0.5) TITLE="${VERSION} — Evidence-Completing Research Summaries"; PRIOR_VERSION="0.0.4" ;;
   0.0.6) TITLE="${VERSION} — Coordinated Browser Tabs"; PRIOR_VERSION="0.0.5" ;;
+  0.0.7) TITLE="${VERSION} — Continuous Progress and Recoverable Agent Storage"; PRIOR_VERSION="0.0.6" ;;
   *) TITLE=""; PRIOR_VERSION="" ;;
 esac
 
