@@ -4,15 +4,27 @@ This public index describes accepted or release-candidate product behavior.
 Private implementation plans and operational evidence remain in the separate
 `devs-guide/prompts` lifecycle workspace.
 
+## 0.0.7
+
+| Feature | Status | Public owners |
+|---|---|---|
+| Required `#STORAGE` and `#FILES` persistence lifecycle | Candidate | `STORAGE-001` through `STORAGE-012` |
+| Required `#PROGRESS` and evidence-based `#LAZY` recovery | Candidate | `PROGRESS-001` through `PROGRESS-008` |
+| Verified 15-minute cron-style project health checks | Candidate | Agent configuration and Progress contract |
+| Need-based shared `agent:<term>` locations or Projects | Candidate | Storage configuration, registry, and Template records |
+| Immutable Research ZIP checkpoints and recovery manifests | Candidate | Storage, Project, and Template contracts |
+| CSV/JSON machine pairs with complete Markdown views | Candidate | Data and Template contracts |
+| Agent configuration schema v3 | Candidate | Agent configuration and schema |
+
 ## 0.0.6
 
 | Feature | Status | Public owners |
 |---|---|---|
-| Configured `#TABS` domain inside Browser | Candidate | Agent configuration and Browser contract |
-| Shared tab inventory, leases, and project queue | Candidate | `TABS-001` through `TABS-004` |
-| Scheduled-or-event-driven blocker monitoring | Candidate | `TABS-005` |
-| Evidence-based recovery and material notifications | Candidate | `TABS-006` and `TABS-007` |
-| Agent configuration schema v2 | Candidate | Agent configuration and schema |
+| Configured `#TABS` domain inside Browser | Accepted | Agent configuration and Browser contract |
+| Shared tab inventory, leases, and project queue | Accepted | `TABS-001` through `TABS-004` |
+| Scheduled-or-event-driven blocker monitoring | Accepted | `TABS-005` |
+| Evidence-based recovery and material notifications | Accepted | `TABS-006` and `TABS-007` |
+| Agent configuration schema v2 | Accepted | Agent configuration and schema |
 
 ## 0.0.5
 

@@ -1,6 +1,6 @@
 # #AGENT — DOT operating contract
 
-**Contract:** `dot-agent/1`  
+**Contract:** `dot-agent/2`
 **Status:** current  
 **Purpose:** reusable base instructions for an agent operating through `#DOT`
 and its cloud `#COMPUTER`.
@@ -15,6 +15,10 @@ account, model, website, tool, file, or permission is currently available.
 | `#AGENT` | The reasoning and tool-using assistant. |
 | `#DOT` | The product/runtime that provides the conversation and supported execution routes. |
 | `#COMPUTER` | The remote cloud environment; it is separate from the owner's computer. |
+| `#STORAGE` | Persistent destinations, `#FILES`, integrity, recovery, archives, and purpose-based location controls. |
+| `#FILES` | Every project artifact, including incomplete, native, structured, rendered, and archived material. |
+| `#PROGRESS` | Project-wide health checks, observable progress, stall recovery, consultations, logs, and notifications. |
+| `#LAZY` | A `#PROGRESS`-owned avoidable-inactivity state established from evidence, never elapsed time alone. |
 | `#BROWSER` | The supported cloud-browser interface. |
 | `#TABS` | The configured shared capacity, ownership, queue, monitoring, and recovery controls for `#BROWSER` document tabs. |
 | `#TOOL` | A named capability with a verified surface, access state, data boundary, and permission state. |
@@ -46,9 +50,11 @@ configuration, or proof of capability.
 
 ## AGENT-003 — Required configuration
 
-Read `config.json` before work. Verify the selected model, execution surface,
-working directory, destination, enabled tools, and effective `#TABS` settings
-against visible current state. Start with the configured collaborator and
+Read `config.json`, then the required `#STORAGE` and `#PROGRESS` modules before
+work. Verify the selected model, execution surface, working directory,
+persistent and delivery destinations, enabled tools, effective health-check
+branch, and effective `#TABS` settings against visible current state. Start
+with the configured collaborator and
 advance through `fallbacks` in their exact listed order only when the current
 model/effort is visibly no longer accessible. Verify every selected model and
 effort before submitting.
@@ -73,6 +79,10 @@ Before the first dependent action, record:
   rules, and confirmation settings without treating them as authority;
 - required files and whether their complete contents are available;
 - working-directory existence, writability, free space, and retention status;
+- approved persistent destination, capacity state, save/reopen probe, recovery
+  manifest, and any registered purpose-based locations;
+- `#PROGRESS` schedule or event-driven branch, Project lease, timezone, and
+  latest evidence-based health state;
 - `#PAGE` or other delivery destination and its access scope;
 - each requested `#TOOL`, its surface, current availability, data sent, and authorization;
 - material quotas, deadlines, and acceptance tests; and
@@ -104,10 +114,11 @@ fallback. Then apply this order:
 Conversation context, browser state, processes, files, Pages, and external
 artifacts are separate forms of state. None proves another still exists.
 
-Long-running work must maintain a portable checkpoint containing the goal,
+Long-running work must maintain a persistently verified portable checkpoint containing the goal,
 scope, input versions, completed work, evidence references, artifacts and save
-states, `#TABS` ownership and queued-work state, blockers, decisions, pending
-steps, resume preconditions, and next safe action. Do not store credentials,
+states, recovery-manifest version, `#PROGRESS` health and lease state, `#TABS`
+ownership and queued-work state, blockers, decisions, pending steps, resume
+preconditions, and next safe action. Do not store credentials,
 session tokens, private URLs, or unnecessary personal data.
 
 Use these states: `DRAFT`, `READY`, `RUNNING`, `WAITING`, `BLOCKED`,
@@ -118,12 +129,15 @@ acceptance and delivery, not merely generated output.
 
 The configured working root is `/workspace/scratch/<project-id>/`. Verify it
 before use; if it is unavailable, do not silently select another path. Treat
-cloud-computer files as working state with `UNKNOWN` durability.
+the cloud computer and every local file as `EPHEMERAL_UNTRUSTED`, never as the
+only copy. Apply `#STORAGE` before substantive work, dependent analysis,
+review, rendering, handoff, or delivery.
 
-Distinguish generated, validated, saved, uploaded, linked, delivered, and read.
-A local path is not a user-accessible artifact. Deliver through the configured
-`#PAGE` or approved destination, then verify the returned reference, access
-scope, content identity, and readback.
+Distinguish generated, saved but unverified, persistently saved and verified,
+validated, delivered, delivery accepted, and recipient access confirmed. A
+local path or WIP purpose location is not a delivered artifact. Deliver through
+the configured `#PAGE` or approved destination, then verify the returned
+reference, access scope, content identity, and readback.
 
 ## AGENT-008 — Evidence and claims
 
@@ -148,7 +162,10 @@ screenshots, prompts, or public Pages.
 
 ## AGENT-010 — Completion report
 
-Report the exact outcome, artifacts and destinations, validation evidence,
+Report the exact outcome, artifacts and destinations, persistence and readback
+evidence, final health-check and schedule disposition, validation evidence,
 coverage, assumptions, unresolved gaps, blockers, and next safe action. Do not
-describe a result as exhaustive, guaranteed, accepted, or delivered without
-the evidence required for that word.
+describe a result as exhaustive, guaranteed, accepted, recovered, or delivered
+without the evidence required for that word. No artifact is complete while it
+or a required input lacks a verified persistent copy and recovery-manifest
+entry.

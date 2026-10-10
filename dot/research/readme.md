@@ -1,6 +1,7 @@
 # DOT Research
 
-`#RESEARCH` is the pure internet-research lane layered on `#AGENT`. Its files
+`#RESEARCH` is the pure internet-research lane layered on `#AGENT`, required
+`#STORAGE`, and required `#PROGRESS`. Its files
 are intentionally compact and grouped by role.
 
 ## Read left to right
@@ -18,9 +19,11 @@ fifth required stage.
 |---|---|
 | [`project.prompt`](project.prompt) | Building, controlling, pausing, resuming, and completing a research project |
 | [`internet.prompt`](internet.prompt) | Completing evidence-based internet research and applying its restrictions |
-| [`data.prompt`](data.prompt) | Converting reviewed evidence into validated, immutable paired CSV/JSON releases |
+| [`data.prompt`](data.prompt) | Converting verified reviewed evidence into validated, immutable CSV/JSON machine pairs plus complete Markdown views |
 | [`template.prompt`](template.prompt) | Reusable briefs, records, facts, ledgers, checkpoints, prompts, and outputs |
 | [`summary.prompt`](summary.prompt) | Completing required Facts and producing a self-contained, visually inspected executive-summary PDF for one requested subtopic |
 
 Load the `#AGENT` contract first. These documents may narrow it but cannot
 grant a model, tool, permission, account, execution surface, or destination.
+Every completed batch or interruption checkpoint is preserved as a verified,
+versioned Research ZIP under the Storage contract.

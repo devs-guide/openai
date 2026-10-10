@@ -114,19 +114,20 @@ checkpoint, notification, or completion report.
 
 ## TABS-005 — Blocker-check branch
 
-While a long-running browser project is `RUNNING`, apply exactly one monitoring
-branch:
+While a long-running browser project is `RUNNING`, use the project's single
+`#PROGRESS` health-check branch rather than creating a second Browser schedule:
 
-1. If an authorized recurring scheduler is available, create a 15-minute
-   blocker check and verify its returned schedule identity and active state
-   before reporting that monitoring is scheduled.
+1. If an authorized recurring scheduler is available, verify the 15-minute
+   project's returned schedule identity, timezone, active state, Project ID,
+   and next run before reporting that monitoring is scheduled.
 2. Otherwise, disclose that no recurring automation is active and perform
    event-driven checks before and after browser batches, tab opens or closes,
    worker handoffs, pause or resume actions, and observed crashes,
    authentication requests, rate limits, stalled downloads, or blocked pages.
 
-Each check records its time, trigger or schedule identity, monitoring branch,
-observed tab count, effective limit, ownership conflicts, blocker, recovery
+Apply exactly one monitoring branch. Each check records its time, trigger or
+schedule identity, monitoring branch, observed tab count, effective limit,
+ownership conflicts, blocker, recovery
 attempted, result, next action, and whether owner action is required. Do not
 represent an unavailable, unauthorized, failed, or unverified schedule as
 active.
@@ -147,8 +148,9 @@ apply `BROWSER-004` without changing its permissions or behavior.
 
 ## TABS-007 — Pause, completion, and cleanup
 
-When a project pauses, ends, fails, or is canceled, pause or remove its
-recurring blocker check and verify the resulting schedule state. Save the
+When a project pauses, ends, fails, or is canceled, ask `#PROGRESS` to pause or
+remove only its project-specific recurring check and verify the resulting
+schedule state. Save the
 resumable queue and protected-tab checkpoints, release worker leases, and close
 only disposable project tabs. Completion reports state the final monitoring
 branch, tab and queue disposition, unresolved protected state, and any owner
@@ -164,7 +166,7 @@ Required acceptance cases:
 | `contended-slot` | Two workers requesting the final slot produce one reservation and one queued request. |
 | `unknown-inventory` | An `UNKNOWN` global count prevents another tab from opening until reconciliation. |
 | `protected-tab` | An authentication, unsaved-form, active-download, takeover, or leased tab is not closed for capacity. |
-| `scheduled-check` | A supported and authorized schedule is active only after its 15-minute receipt is verified. |
+| `scheduled-check` | A supported and authorized project schedule is active only after its 15-minute receipt, timezone, Project ID, and next run are verified. |
 | `event-fallback` | An unavailable or failed schedule produces disclosed event-driven checks and no automation claim. |
 | `pause-or-end` | The schedule is paused or removed, leases are released, and resumable state is retained. |
 | `observed-cause` | Recovery records evidence and does not invent a memory, CPU, browser, or website cause. |

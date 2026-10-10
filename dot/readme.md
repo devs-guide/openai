@@ -19,9 +19,9 @@ Optional deliverable: [`#SUMMARY`](research/summary.prompt) produces one
 explicitly requested, evidence-completing subtopic executive brief without
 changing the four-stage workflow or overwriting its parent report.
 
-- [`agent/`](agent/) defines the runtime, exact models, permissions, browser,
-  shared tab capacity, tools, workspace, Pages, video, and transcription
-  behavior.
+- [`agent/`](agent/) defines the runtime, exact models, permissions, verified
+  storage, continuous progress, `#LAZY` recovery, browser, shared tab capacity,
+  tools, Pages, video, and transcription behavior.
 - [`research/`](research/) builds a project around that Agent, supplies the
   pure internet-research rules, converts reviewed evidence into controlled
   datasets, and provides reusable templates.
@@ -66,12 +66,14 @@ Exact current sources are published beneath `/openai/raw/dot/`.
 | Models | Assigned collaborator followed by an explicit, accessibility-gated fallback order |
 | Execution | Cloud browser by default; existing VM tools require project opt-in |
 | Browser tabs | Four shared tabs by default across all windows and workers; an approved project may configure another positive limit |
-| Blocker checks | Verified 15-minute scheduling when available and authorized; otherwise disclosed event-driven checks |
+| Project health | Verified 15-minute cron-style scheduling when available and authorized; otherwise disclosed event-driven checks |
+| Lazy recovery | `#LAZY` requires observed avoidable inactivity plus an executable authorized action; elapsed time alone is insufficient |
 | Codex and installation | Prohibited |
-| Working files | `/workspace/scratch/<project-id>/` after verification; durability unknown |
-| Durable output | Configured Page or owner-approved destination with readback |
+| Working files | `/workspace/scratch/<project-id>/` is always ephemeral and untrusted |
+| Persistent files | Verified `agent:storage` default or approved override; need-based shared `agent:<term>` locations or Projects are permitted |
+| Research recovery | Every completed batch or interruption checkpoint uses a verified immutable ZIP successor and recovery manifest |
 | Research data | Human-facing atomic Facts backed by assertions, observations, claims, and evidence links |
-| Dataset releases | Applicable 22-basename menu with paired CSV/JSON parity, validation, immutable snapshots, and successor corrections |
+| Dataset releases | Applicable 22-basename menu with CSV/JSON machine parity, complete Markdown views, validation, immutable snapshots, and successor corrections |
 | Executive briefs | Conditional self-contained PDFs with a required Fact matrix, bounded public-source gap filling, frozen final evidence, visual inspection, and readback |
 
 ## History and compatibility
@@ -80,8 +82,10 @@ Release `0.0.2` consolidates the original prompts and dated guides. Release
 `0.0.3` adds the optional Summary deliverable without changing the core
 workflow. Release `0.0.4` adds the repository-wide Release contract. Release
 `0.0.5` makes Summary evidence-completing by default without changing the DOT
-instruction order. Candidate `0.0.6` adds coordinated, configurable `#TABS`
-behavior inside the Browser module. The
+instruction order. Release `0.0.6` adds coordinated, configurable `#TABS`
+behavior inside the Browser module. Candidate `0.0.7` adds verified Storage,
+continuous Progress and `#LAZY` recovery, purpose-based locations, and
+versioned Research archives. The
 [`two-lane migration record`](../docs/history/two-lane-migration.md) maps every
 `0.0.1` source to its current owner. Historical rendered routes redirect;
 historical raw routes identify both the immutable original and current

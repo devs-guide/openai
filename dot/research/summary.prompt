@@ -1,8 +1,8 @@
 # #SUMMARY — evidence-completing research subtopic executive brief
 
-**Contract:** `dot-research-summary/2`
+**Contract:** `dot-research-summary/3`
 **Requires:** an approved `#PROJECT`, controlled `#INTERNET` records, applicable
-`#DATA`, and the request structure in `#TEMPLATE`  
+`#DATA`, `#STORAGE`, `#PROGRESS`, and the request structure in `#TEMPLATE`
 **Activation:** conditional on an explicit request for one named subtopic  
 **Purpose:** produce a standalone, evidence-led executive-summary PDF that
 completes material Fact gaps within the approved research boundary without
@@ -16,7 +16,8 @@ default. Give the brief its own request and artifact IDs, title, version,
 filename, acceptance tests, and completion receipt. Never rewrite, replace,
 rename, or overwrite the main research report or any accepted dataset release.
 
-At activation, record the parent project version, evidence cutoff, applicable
+At activation, verify the persistent parent inputs and record the parent
+project version, evidence cutoff, applicable
 dataset release IDs, and source versions received. Keep those inputs immutable.
 Gap completion may create linked supplemental evidence and, when applicable, a
 successor dataset release or proposed correction set; it never changes the
@@ -37,13 +38,13 @@ drafting. It must identify:
 - geographic, population, entity, and time boundaries plus the research cutoff;
 - the exact reports, Pages, datasets, releases, files, and URLs supplied;
 - required facts, questions, comparisons, entity chapters and ordering;
-- topics to exclude and optional paired CSV/JSON companions;
+- topics to exclude and optional CSV/JSON/Markdown companions;
 - desired length, with 8–16 core pages plus a readable appendix as a default,
   not a quota; and
 - output title, artifact ID, version, filename, and approved destination.
 
-A request for either CSV or JSON activates both paired forms under `#DATA`;
-never create a one-format companion or a second Summary-owned data schema.
+A request for CSV, JSON, or Markdown activates all three release views under
+`#DATA`; never create a partial companion or a second Summary-owned data schema.
 
 Set `research_mode` to `PUBLIC_SOURCE_GAP_FILLING` unless the owner explicitly
 sets `EXPLICITLY_SOURCE_LIMITED`. The default mode requires completing missing
@@ -243,7 +244,8 @@ existence, or a missing assessment result does not establish quality.
 Work in this order: reconcile scope and universe; build the Fact matrix;
 complete material gaps; update and freeze controlled evidence and applicable
 data; perform claim-level and entity-level review; write the narrative;
-validate requested paired exports; generate the PDF; inspect every page;
+validate requested exports; generate the PDF; immediately persist and read
+back the unreviewed draft under `#STORAGE`; inspect every page;
 correct defects; deliver; and read back the delivered artifacts.
 
 Use an independent reviewer when one is authorized and available. Otherwise
@@ -257,20 +259,25 @@ review proves layout quality, not evidence completion.
 Before delivery, require every requested entity to be represented or explicitly
 excluded and every required matrix row to have evidence or an honest terminal
 disposition. Report coverage with explicit denominators and keep research
-coverage distinct from data or financial coverage. Optional CSV/JSON companions
-must be regenerated from the final logical records and pass `#DATA` parity;
+coverage distinct from data or financial coverage. Optional
+CSV/JSON/Markdown companions must be regenerated from the final logical
+records and pass `#DATA` parity;
 never attach stale reader text to corrected data.
 
-Render the PDF only through an authorized, currently available surface, then
-visually inspect every page. Fix clipping, overlaps, unreadable labels, broken
+Render the PDF only through an authorized, currently available surface, save
+and verify it before review, then visually inspect every page. Fix clipping,
+overlaps, unreadable labels, broken
 links, misleading scales, orphaned headings, awkward page breaks, and missing
 supporting values. If material accessible routes remain unperformed, a required
 review fails, or no authorized rendering or native-attachment route is
 available, mark delivery `BLOCKED`; a generated file or local path is not a
 delivered PDF.
 
-Deliver a distinct, versioned native PDF attachment through the approved
-destination with a short description and every material limitation. Verify its
+Save validation results and corrected PDFs as immutable successors, and apply
+`#PROGRESS` throughout long-running research and rendering; an unsaved PDF is
+not progress and cannot clear `#LAZY`. Deliver a distinct, versioned native PDF
+attachment through the approved destination with a short description and every
+material limitation. Verify its
 identity, audience, access scope, ability to open, and readback under `#AGENT`.
 Do not build an application, database, website, or code product, contact a
 third party, or share the brief externally without explicit authorization.

@@ -236,6 +236,16 @@ def render_page(entry: dict, body: str, source_sha: str, site_base: str) -> str:
     raw_url = f"/{site_base}/{entry['raw_route']}"
     breadcrumbs = breadcrumb_html(entry["route"], site_base)
     workflow_nav = ""
+    if entry["route"].startswith("dot/agent/"):
+        workflow_nav = f'''<nav class="workflow-nav" aria-label="Agent workflow">
+      <a href="/{site_base}/dot/agent/contract/">Agent</a>
+      <span aria-hidden="true">→</span>
+      <a href="/{site_base}/dot/agent/storage/">Storage</a>
+      <span aria-hidden="true">→</span>
+      <a href="/{site_base}/dot/agent/progress/">Progress</a>
+      <span aria-hidden="true">→</span>
+      <a href="/{site_base}/dot/agent/browser/">Browser</a>
+    </nav>'''
     if entry["route"].startswith("dot/research/"):
         workflow_nav = f'''<nav class="workflow-nav" aria-label="Research workflow">
       <a href="/{site_base}/dot/research/project/">Project</a>
@@ -465,7 +475,7 @@ def main() -> int:
     source_sha = os.environ.get("SOURCE_SHA", "0" * 40)
     if not re.fullmatch(r"[0-9a-f]{40}", source_sha):
         fail("SOURCE_SHA must be a lowercase 40-character commit SHA")
-    release_version = os.environ.get("RELEASE_VERSION", "0.0.6")
+    release_version = os.environ.get("RELEASE_VERSION", "0.0.7")
     if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", release_version):
         fail("RELEASE_VERSION must be a bare semantic version")
     build(manifest, entries, publish_dir.resolve(), source_sha, release_version)

@@ -122,6 +122,13 @@ Use the approved merge strategy and release commit subject. Do not publish
 from an unmerged branch, a moving reference, a dirty worktree, a failed check,
 or a candidate whose reviewed notes describe another source state.
 
+For a release that consolidates related edge cases, maintain one tracked
+acceptance ledger mapping each case to its canonical contract owner,
+configuration or schema representation, validator, result, and evidence. Do
+not create an intermediate tag, prerelease, or partial public release while an
+in-scope case remains open. A newly discovered in-scope case before publication
+joins the same candidate and restarts the affected review gates.
+
 ## RELEASE-009 — Draft, approval, and publication
 
 Store the complete proposed body in a normal tracked Markdown file. Present
@@ -133,6 +140,12 @@ converge a draft first, verify its annotated tag, target commit, title, body,
 draft and prerelease state, and asset list, then publish the same reviewed
 draft. Read the public release back through the GitHub API. An idempotent retry
 must fail closed when an existing release or tag points somewhere else.
+
+Create the GitHub draft only after every canonical prompt, configuration,
+schema, Template, publication route, acceptance-ledger case, and required check
+belongs to one frozen candidate. A tracked proposed body is not an early
+release; a tag, GitHub draft, prerelease, or public release is prohibited before
+that freeze.
 
 ## RELEASE-010 — Completion, handoff, and later changes
 
