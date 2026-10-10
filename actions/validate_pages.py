@@ -80,6 +80,8 @@ def main() -> int:
     summary_entry = summary_entries[0]
     if summary_entry.get("route") != "dot/research/summary/" or summary_entry.get("raw_route") != "raw/dot/research/summary.prompt":
         fail("Summary contract rendered or raw route is incorrect")
+    if summary_entry.get("title") != "Evidence-Completing Research Summary" or summary_entry.get("status") != "candidate":
+        fail("Summary publication identity is incorrect")
     ingest_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "dot/ingest.json"]
     if len(ingest_entries) != 1:
         fail("publication manifest must contain exactly one DOT ingestion manifest")
@@ -92,6 +94,16 @@ def main() -> int:
     release_entry = release_entries[0]
     if release_entry.get("route") != "release/" or release_entry.get("raw_route") != "raw/docs/release.prompt":
         fail("Release contract rendered or raw route is incorrect")
+    candidate_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "docs/releases/0.0.5.md"]
+    if len(candidate_entries) != 1:
+        fail("publication manifest must contain exactly one 0.0.5 release record")
+    candidate_entry = candidate_entries[0]
+    if (
+        candidate_entry.get("route") != "dot/releases/0.0.5/"
+        or candidate_entry.get("raw_route") != "raw/docs/releases/0.0.5.md"
+        or candidate_entry.get("status") != "candidate"
+    ):
+        fail("0.0.5 release record publication identity is incorrect")
     static_value = os.environ.get("STATIC_DIR", "static")
     static_dir = Path(static_value)
     if not static_dir.is_absolute():
@@ -110,8 +122,8 @@ def main() -> int:
         fail(f"source SHA is {source_record.get('source_sha')}, expected {expected_sha}")
     if source_record.get("repository") != "devs-guide/openai":
         fail("source.json repository identity is incorrect")
-    if source_record.get("release") != "0.0.4":
-        fail("source.json release identity is not 0.0.4")
+    if source_record.get("release") != "0.0.5":
+        fail("source.json release identity is not 0.0.5")
     ok(f"source marker identifies {source_record.get('source_sha')}")
 
     html_parsers: dict[Path, PageParser] = {}

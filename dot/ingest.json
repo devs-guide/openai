@@ -1,8 +1,8 @@
 {
   "schema": "dot-ingest/1",
-  "release": "0.0.4",
+  "release": "0.0.5",
   "baseline_tag": "0.0.1",
-  "prior_release_tag": "0.0.3",
+  "prior_release_tag": "0.0.4",
   "entrypoint": "dot/readme.md",
   "manifest_authority": "ROUTING_METADATA_ONLY",
   "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
@@ -63,7 +63,7 @@
       "authority_class": "RESEARCH_CONTRACT",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "2952883fcc737ead216f366202d72bef772a529b8ed90702d47636f2f4c98a5c"
+      "sha256": "2953ef338dd138df4b0e7f18b21ec31fd8d4b83a4afe08dc0b3590fb86531280"
     },
     {
       "order": 8,
@@ -71,7 +71,7 @@
       "authority_class": "RESEARCH_CONTRACT",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "1419fadb23d938221e4f6e6210fa78b4455e2a4e085b86c849b4903394ba4859"
+      "sha256": "f967430fce0af678d8d35739c8fc9ce45316abad1f90cc28cc7add16db15d2c3"
     },
     {
       "order": 9,
@@ -87,7 +87,7 @@
       "authority_class": "TEMPLATE",
       "activation": "REQUIRED",
       "condition": null,
-      "sha256": "dff4138e30e4e9134f5225db7699e0d67d205947b08ebab91f02cf5a8ff2b03c"
+      "sha256": "b3e4dec95bb2c37bbb47382058d84936d1c7205afcad2592351db11236799ebf"
     },
     {
       "order": 11,
@@ -95,7 +95,7 @@
       "authority_class": "RESEARCH_CONTRACT",
       "activation": "CONDITIONAL",
       "condition": "ON_DEMAND_SUBTOPIC_EXECUTIVE_BRIEF",
-      "sha256": "6f06355874d2cea5f0332f2678bc07a4f88ba3ae1cb47d7ac4f306acbb097b87"
+      "sha256": "e0f44249dc4926f85f927637df81d7a61a0973f9b586a6108d0971b276ed8324"
     }
   ],
   "supporting_files": [

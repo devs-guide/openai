@@ -44,6 +44,7 @@ REQUIRED = {
     "docs/releases/0.0.2.md",
     "docs/releases/0.0.3.md",
     "docs/releases/0.0.4.md",
+    "docs/releases/0.0.5.md",
     "docs/releases/readme.md",
     "dot/ingest.json",
     "dot/readme.md",
@@ -133,6 +134,24 @@ DATA_SCENARIOS = {
     "unresolved-interentity-payment": ("recipient id is null", "unresolved_entity"),
     "human-model-review": ("human", "model-assisted", "material gate"),
     "post-release-correction": ("successor release", "snapshot unchanged"),
+}
+SUMMARY_SCENARIOS = {
+    "missing-contact-resource": (
+        "names, physical or mailing addresses",
+        "public email addresses",
+        "outbound links",
+        "externally hosted resources",
+    ),
+    "blank-or-blocked-route": ("blank javascript search shell", "blocked route"),
+    "explicit-source-limit": ("explicitly_source_limited", "complete_with_gaps"),
+    "shared-resource-attribution": ("shared resource as exclusive to one entity",),
+    "immutable-successor": ("keep those inputs immutable", "successor dataset release"),
+    "paired-export": ("either csv or json activates both paired forms",),
+    "review-independence": ("distinct self-review pass", "not independent"),
+    "all-entity-coverage": (
+        "reconcile the eligible entity or subject universe",
+        "sampling cannot support a claim that every requested entity was checked",
+    ),
 }
 INGEST_INSTRUCTIONS = (
     ("dot/agent/master.prompt", "AGENT_CONTRACT", "REQUIRED", None),
@@ -312,11 +331,15 @@ def validate_data_contract() -> None:
 def validate_summary_contract() -> None:
     summary_path = ROOT / "dot" / "research" / "summary.prompt"
     project_path = ROOT / "dot" / "research" / "project.prompt"
+    internet_path = ROOT / "dot" / "research" / "internet.prompt"
     template_path = ROOT / "dot" / "research" / "template.prompt"
     summary = summary_path.read_text(encoding="utf-8")
     project = project_path.read_text(encoding="utf-8")
+    internet = internet_path.read_text(encoding="utf-8")
     template = template_path.read_text(encoding="utf-8")
 
+    if "**Contract:** `dot-research-summary/2`" not in summary:
+        fail("Summary contract version is not dot-research-summary/2")
     observed_rules = re.findall(r"^## (SUMMARY-[0-9]{3})\b", summary, re.MULTILINE)
     expected_rules = [f"SUMMARY-{number:03d}" for number in range(1, 11)]
     if observed_rules != expected_rules:
@@ -326,19 +349,32 @@ def validate_summary_contract() -> None:
         "SUMMARY-001": (
             "only when the owner requests",
             "never rewrite, replace, rename, or overwrite the main research report",
-            "freeze the parent project version",
+            "keep those inputs immutable",
+            "successor dataset release or proposed correction set",
         ),
         "SUMMARY-002": (
             "8–16 core pages",
             "ask only about omissions whose answers would materially alter",
             "approved destination",
+            "public_source_gap_filling",
+            "explicitly_source_limited",
+            "unless the owner explicitly sets",
         ),
         "SUMMARY-003": (
+            "one row for every in-scope subject and every required fact",
+            "reconcile the eligible entity or subject universe",
             "bind each material statement and comparison to controlled `#fact` records",
-            "inaccessible, missing, suppressed, conflicting, or noncomparable",
-            "new comprehensive investigation",
+            "inaccessible, missing, suppressed, conflicting, and noncomparable",
+            "not_started",
+            "bounded_negative",
+            "authorization_required",
         ),
         "SUMMARY-004": (
+            "missing material fact as unfinished research",
+            "actual navigation trail",
+            "blank javascript search shell",
+            "continue while an accessible, material route remains unperformed",
+            "explicitly_source_limited",
             "inside the pdf",
             "links provide traceability but never substitute",
             "privacy, suppression, and audience controls",
@@ -368,11 +404,18 @@ def validate_summary_contract() -> None:
             "never reconstruct protected small groups",
         ),
         "SUMMARY-009": (
+            "official identity, official linkage, successful retrieval",
+            "shared resource as exclusive to one entity",
+            "historical condition as current",
             "k–6 as a working assumption",
             "k–12 or pk–8",
             "does not establish quality",
         ),
         "SUMMARY-010": (
+            "build the fact matrix",
+            "distinct self-review pass",
+            "sampling cannot support a claim that every requested entity was checked",
+            "requested paired exports",
             "visually inspect every page",
             "mark delivery `blocked`",
             "versioned native pdf attachment",
@@ -387,62 +430,100 @@ def validate_summary_contract() -> None:
                 fail(f"Summary contract lacks required {rule_id} behavior: {phrase}")
 
     project_section = re.sub(r"\s+", " ", prompt_section(project, "PROJECT-009")).lower()
-    for phrase in ("owner requests its named output", "use `#summary`", "overwrite its parent report"):
+    for phrase in (
+        "owner requests its named output",
+        "use `#summary`",
+        "route missing facts back through `#internet` and applicable `#data`",
+        "never mutates the parent report or an accepted release",
+    ):
         if phrase not in project_section:
             fail(f"Project lacks conditional Summary control: {phrase}")
 
+    normalized_internet = re.sub(r"\s+", " ", internet).lower()
+    for phrase in (
+        "follow the relevant navigation rather than stopping at a search result or homepage",
+        "record the actual navigation trail",
+        "blank javascript search shell",
+        "a sample cannot support an all-entities claim",
+    ):
+        if phrase not in normalized_internet:
+            fail(f"Internet lacks evidence-completion behavior: {phrase}")
+
+    prohibited_advice = ("agent:" + "prompts", "gpt-5.6" + "-sol-high")
+    if any(term in (summary + project + internet).lower() for term in prohibited_advice):
+        fail("stale model or prompt-workspace advice entered the active research contracts")
+
+    summary_contracts = re.sub(r"\s+", " ", summary + project + internet + template).lower()
+    for scenario_id, phrases in SUMMARY_SCENARIOS.items():
+        for phrase in phrases:
+            if phrase not in summary_contracts:
+                fail(f"Summary acceptance scenario {scenario_id} lacks required behavior: {phrase}")
+
     template_section = prompt_section(template, "TEMPLATE-016")
     json_blocks = re.findall(r"```json\n(.*?)\n```", template_section, re.DOTALL)
-    if len(json_blocks) != 2:
-        fail("Template must define one Executive Brief Request and one Completion Receipt")
+    if len(json_blocks) != 3:
+        fail("Template must define one Executive Brief Request, Fact Matrix row, and Completion Receipt")
     try:
-        request, completion = (json.loads(block) for block in json_blocks)
+        request, matrix, completion = (json.loads(block) for block in json_blocks)
     except json.JSONDecodeError as exc:
         fail(f"Template Executive Brief record is invalid JSON: {exc}")
+    if request.get("schema") != "dot-executive-brief-request/2":
+        fail("Executive Brief Request schema is not version 2")
+    if matrix.get("schema") != "dot-summary-fact-matrix-row/1":
+        fail("Summary Fact Matrix row schema is incorrect")
+    if completion.get("schema") != "dot-executive-brief-completion/2":
+        fail("Executive Brief Completion schema is not version 2")
+
     required_request_fields = {
-        "summary_request_id",
-        "parent_project_id",
-        "parent_project_version",
-        "requested_subtopic",
-        "audience",
-        "supported_decision_or_discussion",
-        "geographic_population_and_entity_scope",
-        "relevant_dates_and_research_cutoff",
-        "input_files_pages_datasets_and_urls",
-        "required_questions_or_comparisons",
-        "excluded_topics",
-        "desired_length",
-        "output_title",
-        "output_version",
-        "output_filename",
-        "approved_destination",
-        "recorded_assumptions",
+        "summary_request_id", "parent_project_id", "parent_project_version",
+        "requested_subtopic", "audience", "supported_decision_or_discussion",
+        "geographic_population_and_entity_scope", "relevant_dates_and_research_cutoff",
+        "input_files_pages_datasets_and_urls", "research_mode", "required_fact_fields",
+        "required_questions_or_comparisons", "requested_entity_chapters_and_order",
+        "excluded_topics", "requested_data_companions", "desired_length", "output_title",
+        "output_version", "output_filename", "approved_destination", "recorded_assumptions",
         "acceptance_test_ids",
     }
     if not required_request_fields.issubset(request):
         fail("Executive Brief Request lacks required input fields")
+    if request.get("research_mode") != "PUBLIC_SOURCE_GAP_FILLING":
+        fail("Executive Brief Request does not default to public-source gap filling")
+
+    required_matrix_fields = {
+        "summary_request_id", "matrix_row_id", "subject_id", "subject_id_null_reason",
+        "inclusion_disposition", "required_fact_key", "required_grain",
+        "required_population", "required_period", "fact_id", "fact_id_null_reason",
+        "evidence_link_ids", "research_state", "coverage_disposition", "missing_reason",
+        "reviewer_type", "next_action",
+    }
+    if not required_matrix_fields.issubset(matrix):
+        fail("Summary Fact Matrix row lacks required control fields")
+    matrix_text = json.dumps(matrix, sort_keys=True)
+    for required in (
+        "NOT_STARTED", "IN_PROGRESS", "AWAITING_REVIEW", "BLOCKED", "TERMINAL",
+        "SUPPORTED", "DISPUTED", "BOUNDED_NEGATIVE", "ACCESS_BLOCKED",
+        "AUTHORIZATION_REQUIRED", "NOT_APPLICABLE", "UNRESOLVED",
+    ):
+        if required not in matrix_text:
+            fail(f"Summary Fact Matrix lacks required state or disposition: {required}")
+
     required_completion_fields = {
-        "summary_request_id",
-        "output_filename",
-        "output_version",
-        "dataset_release_ids",
-        "fact_and_evidence_versions",
-        "page_count",
-        "sha256",
-        "material_claim_check",
-        "calculation_and_measurement_check",
+        "summary_request_id", "output_filename", "output_version",
+        "initial_dataset_release_ids", "dataset_release_ids", "fact_and_evidence_versions",
+        "fact_matrix_version", "fact_matrix_sha256", "entity_denominator",
+        "matrix_expected_row_count", "matrix_terminal_row_count",
+        "matrix_blocked_row_count", "matrix_unresolved_row_count", "page_count", "sha256",
+        "gap_completion_check", "official_site_path_check", "material_claim_check",
+        "calculation_and_measurement_check", "citation_and_link_check",
         "appendix_and_supporting_value_check",
-        "privacy_and_suppression_check",
-        "visual_page_inspection",
-        "native_attachment_state",
-        "delivery_reference",
-        "readback_at",
-        "material_limitations",
-        "completion_status",
+        "privacy_and_suppression_check", "fact_check_reviewer_type",
+        "fact_check_independence", "requested_export_parity_check", "visual_page_inspection",
+        "native_attachment_state", "delivery_reference", "readback_at",
+        "material_limitations", "completion_status",
     }
     if not required_completion_fields.issubset(completion):
         fail("Executive Brief Completion Receipt lacks required validation or delivery fields")
-    ok("Summary owns one conditional, self-contained, Fact-bound executive-brief lifecycle")
+    ok("Summary owns one conditional, evidence-completing, Fact-bound executive-brief lifecycle")
 
 
 def validate_release_contract() -> None:
@@ -528,9 +609,9 @@ def validate_ingest_contract() -> None:
 
     expected_identity = {
         "schema": "dot-ingest/1",
-        "release": "0.0.4",
+        "release": "0.0.5",
         "baseline_tag": "0.0.1",
-        "prior_release_tag": "0.0.3",
+        "prior_release_tag": "0.0.4",
         "entrypoint": "dot/readme.md",
         "manifest_authority": "ROUTING_METADATA_ONLY",
         "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
@@ -621,6 +702,7 @@ def validate_release_workflow() -> None:
         "must be published before",
         "is not an ancestor of",
         "Repository Release Contract",
+        "Evidence-Completing Research Summaries",
         "release_text.py",
         "existing release is already published",
         "existing draft target differs",
@@ -654,7 +736,7 @@ def main() -> int:
             continue
         if stale_candidate in text:
             fail(f"stale candidate version remains in source: {path}")
-    ok("candidate release identity is consistently 0.0.4 and contains no stale candidate-version reference")
+    ok("candidate release identity is consistently 0.0.5 and contains no stale candidate-version reference")
 
     if any(path.startswith("static/") for path in paths):
         fail("generated static output must not be included on main")
@@ -669,6 +751,21 @@ def main() -> int:
     retired_intake_prefix = "dot/" + "handoff" + "/"
     if any(path.startswith(retired_intake_prefix) for path in paths):
         fail("retired research intake artifacts are included in current source")
+    retired_summary_draft = "dot/research/" + "brief.prompt"
+    if retired_summary_draft in path_set:
+        fail("retired Summary draft remains in current source")
+    for path in paths:
+        full = ROOT / path
+        if path == "actions/validate_repository.py" or not full.is_file():
+            continue
+        if full.suffix.lower() not in {".json", ".md", ".prompt", ".py", ".sh", ".yml", ".yaml"}:
+            continue
+        try:
+            content = full.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            continue
+        if retired_summary_draft in content:
+            fail(f"retired Summary draft is referenced by current source: {path}")
     if any(Path(path).name.lower() in {"license", "license.md", "license.txt", "copying"} for path in paths):
         fail("a license file conflicts with the selected no-license policy")
     if any(":" in Path(path).name for path in paths):

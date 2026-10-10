@@ -13,6 +13,7 @@ case "${VERSION}" in
   0.0.2) TITLE="${VERSION} — DOT Agent and Research System"; PRIOR_VERSION="0.0.1" ;;
   0.0.3) TITLE="${VERSION} — DOT On-Demand Research Summary"; PRIOR_VERSION="0.0.2" ;;
   0.0.4) TITLE="${VERSION} — Repository Release Contract"; PRIOR_VERSION="0.0.3" ;;
+  0.0.5) TITLE="${VERSION} — Evidence-Completing Research Summaries"; PRIOR_VERSION="0.0.4" ;;
   *) TITLE=""; PRIOR_VERSION="" ;;
 esac
 

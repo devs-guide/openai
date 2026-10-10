@@ -51,7 +51,7 @@ jobs:
       - name: Build static Pages tree
         env:
           PUBLISH_DIR: static
-          RELEASE_VERSION: 0.0.4
+          RELEASE_VERSION: 0.0.5
           SOURCE_SHA: ${{ env.CANDIDATE_SHA }}
         run: bash actions/www.pages.sh
 
@@ -63,7 +63,7 @@ jobs:
 
       - name: Validate release contract
         env:
-          RELEASE_VERSION: 0.0.4
+          RELEASE_VERSION: 0.0.5
         run: bash actions/validate.release.sh
 
       - name: Upload DOT migration audit

@@ -12,7 +12,7 @@ for OpenAI-related projects.
 
 A two-lane instruction package for a configured Agent, with a compact Project
 → Internet → Data → Template workflow for pure research and controlled dataset
-releases plus an optional on-demand Summary deliverable.
+releases plus an optional evidence-completing Summary deliverable.
 
 - Source: [`dot/`](dot/)
 - Documentation: [`https://devs-guide.github.io/openai/dot/`](https://devs-guide.github.io/openai/dot/)
@@ -41,13 +41,12 @@ to source editing and Git operations.
 ## Current release
 
 Release `0.0.1 — DOT Research Prompt System` is the published immutable
-migration baseline. Release `0.0.2 — DOT Agent and Research System` consolidates
-that corpus into canonical Agent and Research lanes. Release `0.0.3 — DOT
-On-Demand Research Summary` adds a conditional, evidence-bound executive-brief
-deliverable. Candidate `0.0.4 — Repository Release Contract` adds reusable
-release style, documentation, and publication safeguards for the entire
-repository. Release records use bare semantic tags and GitHub-generated source
-archives; no binary assets are attached.
+migration baseline. Releases `0.0.2` through `0.0.4` establish the canonical
+Agent and Research lanes, conditional Summary deliverable, and repository-wide
+Release contract. Candidate `0.0.5 — Evidence-Completing Research Summaries`
+adds required Fact coverage and bounded public-source gap filling before a
+Summary can be delivered. Release records use bare semantic tags and
+GitHub-generated source archives; no binary assets are attached.
 
 ## Rights
 

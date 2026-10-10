@@ -151,10 +151,16 @@ order. Give each activation its own request ID and artifact ID. Do not infer a
 request for adjacent deliverables or allow a derivative output to overwrite its
 parent report or an accepted data release.
 
-Use `#SUMMARY` for an on-demand subtopic executive brief derived from existing
-research. Freeze the parent evidence and data versions before drafting. If the
-requested output materially expands the question, population, geography,
-period, evidence universe, permission, or destination, classify and approve
-that change under PROJECT-006 before continuing. Complete the deliverable only
-when its separate acceptance tests, publication receipt, and readback are
-terminal.
+Use `#SUMMARY` for an on-demand subtopic executive brief that starts from
+existing research and completes its required material Facts inside the approved
+Project boundary. Record the immutable parent evidence and data versions, then
+route missing Facts back through `#INTERNET` and applicable `#DATA` before
+freezing the final versions used for drafting. New evidence may create a linked
+supplement, successor dataset release, or proposed correction set; it never
+mutates the parent report or an accepted release.
+
+If the requested output materially expands the question, population,
+geography, period, evidence universe, permission, or destination, classify and
+approve that change under PROJECT-006 before continuing. Complete the
+deliverable only when its Fact matrix, separate acceptance tests, publication
+receipt, and readback are terminal.
