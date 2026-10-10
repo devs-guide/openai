@@ -1,8 +1,7 @@
 # #RELEASE — Repository Release Contract
 
 Use this prompt to plan, document, review, publish, correct, and hand off a
-GitHub release for any product or feature in `devs-guide/openai`. It governs
-repository releases, not the immutable dataset releases owned by `#DATA`.
+GitHub release for any product or feature in `devs-guide/openai`.
 
 ## RELEASE-001 — Authority and activation
 
@@ -11,6 +10,9 @@ reconciliation. Record the repository, candidate version, previous published
 tag, candidate commit, included products, intended audience, and publication
 authority. A request to draft notes does not authorize a tag, merge, upload,
 publication, or external announcement.
+
+This contract governs repository releases, not the immutable dataset releases
+owned by `#DATA`.
 
 Apply repository and product contracts in their existing authority order.
 Release work may describe accepted behavior but must not silently change that
@@ -145,4 +147,3 @@ tag, commit, immutable input, entrypoint, expected identities, bootstrap
 instruction, and test boundary. Do not claim the downstream test passed until
 its own evidence exists. Later behavioral fixes, refreshed artifacts, or
 changed release inputs require a successor release.
-
