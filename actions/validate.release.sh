@@ -21,10 +21,12 @@ for heading in \
   '### Changed' \
   '### Fixed' \
   '### #COMMIT' \
-  '### Notable commits' \
   '### Assets'; do
   grep -Fqx "${heading}" "${NOTES}" || fail "release notes lack heading: ${heading}"
 done
+
+grep -Eq '^### Notable commits( since .+)?$' "${NOTES}" || \
+  fail "release notes lack a Notable commits heading"
 
 if grep -Eqi '(^|[^[:alnum:]])(TBD|TODO|PLACEHOLDER)([^[:alnum:]]|$)|`0000000`' "${NOTES}"; then
   fail "release notes contain an unresolved placeholder"
