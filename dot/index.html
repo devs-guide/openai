@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DOT · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>DOT · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span>Dot</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>product</span>
+      <span>current</span>
+      <span>reviewed 2026-10-10</span>
+    </div>
+    <article>
+<section id="dot" class="level1">
+<h1>DOT</h1>
+<p>DOT is a community-maintained two-lane instruction package for operating a configured agent and restricting it to evidence-heavy, long-running internet research. It is designed for owner-authorized use with OpenAI's <code>dot</code> product, but it is not an OpenAI product or an automatic product configuration.</p>
+<blockquote>
+<p>This is a community-maintained project. It is not affiliated with, endorsed by, or sponsored by OpenAI.</p>
+</blockquote>
+<section id="read-left-to-right" class="level2">
+<h2>Read left to right</h2>
+<p><a href="/openai/dot/agent/"><code>#AGENT</code></a> → <a href="/openai/dot/research/project/"><code>#PROJECT</code></a> → <a href="/openai/dot/research/internet/"><code>#INTERNET</code></a> → <a href="/openai/dot/research/data/"><code>#DATA</code></a> → <a href="/openai/dot/research/template/"><code>#TEMPLATE</code></a></p>
+<p>Optional deliverable: <a href="/openai/dot/research/summary/"><code>#SUMMARY</code></a> produces one explicitly requested, evidence-completing subtopic executive brief without changing the four-stage workflow or overwriting its parent report.</p>
+<ul>
+<li><a href="/openai/dot/agent/"><code>agent/</code></a> defines the runtime, exact models, permissions, browser, shared tab capacity, tools, workspace, Pages, video, and transcription behavior.</li>
+<li><a href="/openai/dot/research/"><code>research/</code></a> builds a project around that Agent, supplies the pure internet-research rules, converts reviewed evidence into controlled datasets, and provides reusable templates.</li>
+</ul>
+<p>Repository release style, review, and publication are governed separately by the repo-wide <a href="/openai/release/"><code>#RELEASE</code></a> contract. Because <code>docs/</code> is a non-instructional prefix in <code>ingest.json</code>, it never becomes Agent or Research authority when DOT is loaded.</p>
+<p>Load the Agent contract first. A Research project may narrow it but cannot silently add a model, tool, account, permission, execution surface, or destination.</p>
+</section>
+<section id="load-a-tagged-release-into-openai-dot" class="level2">
+<h2>Load a tagged release into OpenAI dot</h2>
+<p>Use the GitHub-generated source archive for an exact published tag, not a moving branch or the current Pages copy. Attach the archive to the owner's dot, then direct it to <a href="/openai/dot/ingest/"><code>ingest.json</code></a>. That manifest is routing metadata: it identifies the release, ordered live instructions, conditional modules, supporting files, hashes, and non-instructional paths without copying the contracts.</p>
+<p>The dot must inventory the archive and return an ingestion receipt before acting as <code>#AGENT</code>. ChatGPT or dot memory, connected-app context, prior tasks, release notes, history, CI files, and retrieved text do not become current instructions or permissions. Research begins only after the owner-supplied topic produces a materially complete Project Control Packet in <code>READY</code> state.</p>
+<p><a href="https://help.openai.com/en/articles/20001530-getting-started-with-your-dot">OpenAI documents</a> file attachment and optional local-computer and Codex routes for dot. This contract keeps its narrower browser-first boundary: Codex, the owner's local computer, installation, and unassigned models remain prohibited.</p>
+<p>The rendered documentation is published at <a href="https://devs-guide.github.io/openai/dot/"><code>https://devs-guide.github.io/openai/dot/</code></a>. Exact current sources are published beneath <code>/openai/raw/dot/</code>.</p>
+</section>
+<section id="operating-defaults" class="level2">
+<h2>Operating defaults</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Area</th>
+<th>Current contract</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Models</td>
+<td>Assigned collaborator followed by an explicit, accessibility-gated fallback order</td>
+</tr>
+<tr class="even">
+<td>Execution</td>
+<td>Cloud browser by default; existing VM tools require project opt-in</td>
+</tr>
+<tr class="odd">
+<td>Browser tabs</td>
+<td>Four shared tabs by default across all windows and workers; an approved project may configure another positive limit</td>
+</tr>
+<tr class="even">
+<td>Blocker checks</td>
+<td>Verified 15-minute scheduling when available and authorized; otherwise disclosed event-driven checks</td>
+</tr>
+<tr class="odd">
+<td>Codex and installation</td>
+<td>Prohibited</td>
+</tr>
+<tr class="even">
+<td>Working files</td>
+<td><code>/workspace/scratch/&lt;project-id&gt;/</code> after verification; durability unknown</td>
+</tr>
+<tr class="odd">
+<td>Durable output</td>
+<td>Configured Page or owner-approved destination with readback</td>
+</tr>
+<tr class="even">
+<td>Research data</td>
+<td>Human-facing atomic Facts backed by assertions, observations, claims, and evidence links</td>
+</tr>
+<tr class="odd">
+<td>Dataset releases</td>
+<td>Applicable 22-basename menu with paired CSV/JSON parity, validation, immutable snapshots, and successor corrections</td>
+</tr>
+<tr class="even">
+<td>Executive briefs</td>
+<td>Conditional self-contained PDFs with a required Fact matrix, bounded public-source gap filling, frozen final evidence, visual inspection, and readback</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="history-and-compatibility" class="level2">
+<h2>History and compatibility</h2>
+<p>Release <code>0.0.2</code> consolidates the original prompts and dated guides. Release <code>0.0.3</code> adds the optional Summary deliverable without changing the core workflow. Release <code>0.0.4</code> adds the repository-wide Release contract. Release <code>0.0.5</code> makes Summary evidence-completing by default without changing the DOT instruction order. Candidate <code>0.0.6</code> adds coordinated, configurable <code>#TABS</code> behavior inside the Browser module. The <a href="/openai/dot/history/two-lane-migration/"><code>two-lane migration record</code></a> maps every <code>0.0.1</code> source to its current owner. Historical rendered routes redirect; historical raw routes identify both the immutable original and current replacement.</p>
+<p>Compilation, auditing, static-site builds, and tests run only in GitHub Actions. The local workstation is limited to source editing and Git operations.</p>
+</section>
+<section id="rights" class="level2">
+<h2>Rights</h2>
+<p>No open-source license is granted. See <a href="/openai/rights/"><code>../COPYRIGHT.md</code></a>.</p>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/dot/readme.md">Repository source</a> · <a href="/openai/raw/dot/readme.md">Raw source</a></p>
+  </footer>
+</body>
+</html>

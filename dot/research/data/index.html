@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Research Data · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>Research Data · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/research/">Research</a><span aria-hidden="true">/</span>Data</nav>
+    <nav class="workflow-nav" aria-label="Research workflow">
+      <a href="/openai/dot/research/project/">Project</a>
+      <span aria-hidden="true">→</span>
+      <a href="/openai/dot/research/internet/">Internet</a>
+      <span aria-hidden="true">→</span>
+      <a href="/openai/dot/research/data/">Data</a>
+      <span aria-hidden="true">→</span>
+      <a href="/openai/dot/research/template/">Template</a>
+    </nav>
+    <nav class="deliverable-nav" aria-label="Optional Research deliverable">
+      <span>Optional deliverable:</span>
+      <a href="/openai/dot/research/summary/">Summary</a>
+    </nav>
+    <div class="document-meta" aria-label="Document status">
+      <span>research-contract</span>
+      <span>current</span>
+      <span>reviewed 2026-10-09</span>
+    </div>
+    <article>
+<section id="data--convert-evidence-into-controlled-datasets" class="level1">
+<h1>#DATA — convert evidence into controlled datasets</h1>
+<p><strong>Contract:</strong> <code>dot-research-data/1</code><br />
+<strong>Requires:</strong> reviewed <code>#INTERNET</code> records under an approved <code>#PROJECT</code><br />
+<strong>Purpose:</strong> transform evidence into paired, reviewable CSV and JSON release artifacts before filling the reusable <code>#TEMPLATE</code> structures.</p>
+<section id="data-001--intake-and-applicable-file-decision" class="level2">
+<h2>DATA-001 — Intake and applicable-file decision</h2>
+<p>Start from the current Project Control Packet, reviewed research records, acceptance matrix, and declared delivery authorization. Inventory the candidate inputs by stable ID and version; reject excerpts presented as complete files, unreviewed advisory output presented as evidence, inherited permissions, and unresolved instruction conflicts.</p>
+<p>Select the smallest set of basenames whose row grains are required by the project. The catalog is an allowlist, not a requirement to manufacture empty tables or fragment every attribute. For each selected basename, record its purpose, “one row represents” definition, fields, logical types, primary and foreign keys, relationships, null rules, ordering, provenance, applicability, review owner, and release dependency. Produce both <code>.csv</code> and <code>.json</code>; produce neither form for an inapplicable basename.</p>
+</section>
+<section id="data-002--paired-file-catalog" class="level2">
+<h2>DATA-002 — Paired-file catalog</h2>
+<p><code>#DATA</code> owns the following 22 unique basenames and their selection rules. <code>#TEMPLATE</code> supplies fillable records but does not create a second catalog.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Order</th>
+<th>Basename</th>
+<th>One row represents</th>
+<th>Primary key</th>
+<th>Applicable when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td><code>datasets</code></td>
+<td>one enduring dataset</td>
+<td><code>dataset_id</code></td>
+<td>a dataset is being released or refreshed</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td><code>releases</code></td>
+<td>one immutable dataset snapshot</td>
+<td><code>release_id</code></td>
+<td>a dataset release exists</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td><code>sources</code></td>
+<td>one source identity or publication system</td>
+<td><code>source_id</code></td>
+<td>substantive evidence has a source</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td><code>entities</code></td>
+<td>one resolved real-world subject</td>
+<td><code>entity_id</code></td>
+<td>research tracks entities or stable subjects</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td><code>geographies</code></td>
+<td>one resolved geographic unit</td>
+<td><code>geography_id</code></td>
+<td>geography affects meaning, scope, or filtering</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td><code>categories</code></td>
+<td>one controlled classification value</td>
+<td><code>category_id</code></td>
+<td>reusable classifications exist</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td><code>aliases</code></td>
+<td>one source-specific label or identifier for an entity</td>
+<td><code>alias_id</code></td>
+<td>names or external identifiers require resolution</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td><code>entity_relationships</code></td>
+<td>one typed, optionally dated relation between two entities</td>
+<td><code>entity_relationship_id</code></td>
+<td>hierarchy, membership, succession, or shared operation exists</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td><code>category_assignments</code></td>
+<td>one optionally dated entity-category association</td>
+<td><code>category_assignment_id</code></td>
+<td>entities may hold classifications by source or time</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td><code>documents</code></td>
+<td>one enduring intellectual document</td>
+<td><code>document_id</code></td>
+<td>documentary evidence is used</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td><code>document_versions</code></td>
+<td>one identifiable edition or version of a document</td>
+<td><code>document_version_id</code></td>
+<td>a document has a cited or reviewed representation</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td><code>url_occurrences</code></td>
+<td>one observed URL for one document version or source resource</td>
+<td><code>url_occurrence_id</code></td>
+<td>an online location is discovered or generated</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td><code>access_events</code></td>
+<td>one observed URL-state event at a time</td>
+<td><code>access_event_id</code></td>
+<td>discovery, return, open, review, citation, block, or generation is logged</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td><code>source_assertions</code></td>
+<td>one source-specific assertion or source row</td>
+<td><code>source_assertion_id</code></td>
+<td>a source supports substantive content</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td><code>observations</code></td>
+<td>one measured value at its exact subject, population, place, period, and assertion grain</td>
+<td><code>observation_id</code></td>
+<td>quantitative or structured facts exist</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td><code>claims</code></td>
+<td>one precisely scoped textual proposition</td>
+<td><code>claim_id</code></td>
+<td>qualitative or synthesized propositions exist</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td><code>evidence_links</code></td>
+<td>one record-to-document-version evidence location and role</td>
+<td><code>evidence_link_id</code></td>
+<td>an assertion, observation, or claim needs traceable support</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td><code>review_queue</code></td>
+<td>one unresolved issue or required decision</td>
+<td><code>review_item_id</code></td>
+<td>unresolved or reviewable items exist, including an empty released queue when required</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td><code>corrections</code></td>
+<td>one approved correction first applied in a release</td>
+<td><code>correction_id</code></td>
+<td>a release packet records corrections, including an empty log when required</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td><code>release_changes</code></td>
+<td>one row-level comparison between two releases</td>
+<td><code>release_change_id</code></td>
+<td>a refresh or corrected successor is compared with a prior release</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">21</td>
+<td><code>validation_results</code></td>
+<td>one validation check result for a release and optional file</td>
+<td><code>validation_result_id</code></td>
+<td>release validation is recorded</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">22</td>
+<td><code>manifest</code></td>
+<td>one physical file included or expected in a release</td>
+<td><code>manifest_file_id</code></td>
+<td>a release packet inventories its artifacts</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-003--grain-keys-and-cardinality" class="level2">
+<h2>DATA-003 — Grain, keys, and cardinality</h2>
+<p>Freeze each selected file's grain before defining fields. Primary keys are nonnull and unique; composite uniqueness rules are explicit; foreign keys name one target file and field. A nullable foreign key must have a companion reason or status that explains why the relationship is absent. Do not store IDs from unrelated tables in one undeclared polymorphic field.</p>
+<p>State and validate every one-to-one, one-to-many, and many-to-many relation. Use bridge records for categories and entity relations rather than packed lists or repeated child columns. Temporal relationships carry a precisely defined start, end, as-of value, or declared unknown precision as applicable. Shared sites, multiple operators, renames, splits, mergers, and successors must not be forced into permanent one-to-many assumptions.</p>
+<p>Place a value only at the grain it measures. Keep a parent total at the parent grain, and never copy it onto every child. When a Fact is not entity-centered, declare a stable subject key or a dedicated observation family rather than overloading <code>entity_id</code>.</p>
+</section>
+<section id="data-004--stable-identity-and-entity-resolution" class="level2">
+<h2>DATA-004 — Stable identity and entity resolution</h2>
+<p>Use nonsemantic string identifiers in both formats, preserve leading zeros, and never recycle a retired ID. Keep raw labels and external identifiers in <code>aliases</code>; do not merge solely on case-folded or normalized names. Record the match method, evidence, confidence, resolution status, reviewer type, and any superseding or split identity.</p>
+<p>Distinguish legal organization, fiscal or reporting unit, operator, site, program, service area, geography, and other project-defined subject types. Low-confidence matches and material duplicates remain in <code>review_queue</code> until accepted. An unresolved identity may retain a provisional stable key without silently becoming an accepted entity.</p>
+</section>
+<section id="data-005--provenance-layers-and-fact-storage" class="level2">
+<h2>DATA-005 — Provenance layers and #FACT storage</h2>
+<p>Keep these layers separately addressable: source identity; enduring document; document version; URL occurrence; access event; source assertion; observation; claim; and evidence link. One document may have many versions, one version may occur at many URLs, and one URL may have many observed events. Mirrors, redirects, archives, and canonical locations are not collapsed without evidence.</p>
+<p>Use <code>GENERATED</code>, <code>DISCOVERED</code>, <code>RETURNED</code>, <code>OPENED</code>, <code>REVIEWED</code>, <code>CITED</code>, and <code>BLOCKED</code> only for the corresponding observed URL or access state. A generated URL is not an executed query; a returned link is not opened content; an opened document is not automatically reviewed; and review does not by itself make a source cited. Unknown historical publication, discovery, access, or review times remain null with a reason instead of receiving the current timestamp.</p>
+<p><code>#FACT</code> remains the human-facing atomic research concept. Its released storage is an <code>observation</code> or <code>claim</code> linked to its <code>source_assertions</code> and exact <code>evidence_links</code>; it is not a second denormalized fact table. Evidence links use explicit nullable <code>source_assertion_id</code>, <code>observation_id</code>, and <code>claim_id</code> columns with exactly one target set, plus a <code>document_version_id</code>, locator, and evidence role.</p>
+</section>
+<section id="data-006--measurements-derivation-and-missingness" class="level2">
+<h2>DATA-006 — Measurements, derivation, and missingness</h2>
+<p>Store <code>OBSERVED</code>, <code>DERIVED</code>, and <code>INFERRED</code> as derivation classes separate from verification status, confidence, and reviewer type. Preserve a source value, label, unit, scale, currency, denominator, scope, basis, and precision before adding any standardized value. A derived value identifies its inputs and transformation; an inference states its rationale, uncertainty, and required review.</p>
+<p>Null means no value is present. Declare controlled missing reasons, including <code>not_reported</code>, <code>not_applicable</code>, <code>not_available</code>, <code>inaccessible_source</code>, <code>outside_scope</code>, <code>suppressed</code>, <code>conflicting_sources</code>, <code>unresolved_entity</code>, <code>not_yet_reviewed</code>, and <code>unknown_historical_time</code>. Never substitute zero, false, an empty string, a sentinel, or a source token such as “N/A” for null; retain meaningful source tokens in a separate raw-value field.</p>
+<p>Represent event/effective, period start/end, as-of, publication/update, access, analysis-cutoff, and release time separately. Record date precision and fiscal, academic, calendar, quarter, rolling, or custom period type without inventing a month or day. Document decimal scale, rounding, comparison method, and whether the logical value is a decimal number or a precision-preserving numeric string.</p>
+<p>For mixed-age, mixed-period, mixed-scope, or joint-service values, retain eligible and ineligible components, allocation driver, formula, residual, and conditional bounds. Do not invent a central estimate from an unknown share. For interentity payments, preserve payer, nullable recipient plus reason, amount, period, accounting basis, reporting perimeter, reversals or netting, and recipient-resolution status. Keep consolidation, funding flow, final-service expenditure, and geographic attribution as separate views.</p>
+</section>
+<section id="data-007--csv-and-json-semantic-parity" class="level2">
+<h2>DATA-007 — CSV and JSON semantic parity</h2>
+<p>Every selected basename produces <code>&lt;basename&gt;.csv</code> and <code>&lt;basename&gt;.json</code> from one logical record set. CSV contains one header and one logical row per record; JSON contains one top-level array with one flat object per CSV row. Both forms use identical field names, field sets, primary-key values, logical values, and null meanings. Every JSON object includes nullable keys with <code>null</code>; the CSV counterpart uses an empty cell only where the dictionary declares null.</p>
+<p>The data dictionary declares each field as string, identifier, integer, decimal, precision-preserving numeric string, boolean, calendar date, partial date/reporting period, timestamp, URL, or enum. IDs and postal codes are strings. Booleans are lowercase <code>true</code>/<code>false</code> in CSV and native booleans in JSON. Dates and timestamps use declared canonical forms. Decimal comparison is performed with decimal semantics, never binary-float approximation; scale, rounding, and raw precision are documented.</p>
+<p>Use stable deterministic row ordering in both files for review, while treating keys rather than position as identity. CSV header order and JSON key order follow the dictionary. Document Unicode normalization used for matching and preserve meaningful original text.</p>
+</section>
+<section id="data-008--validation-acceptance-scenarios-and-review" class="level2">
+<h2>DATA-008 — Validation, acceptance scenarios, and review</h2>
+<p>Before release, record structural, parity, primary/composite-key, foreign-key, cardinality, deduplication, hierarchy, period, unit, provenance, evidence, missingness, count-reconciliation, and source-lineage results. Spot-check every high-impact row, inference, correction, manual transcription, and low-confidence identity plus a declared sample across sources, periods, and entity types.</p>
+<p>Model-assisted review and human review are separate reviewer types with their own identity, time, scope, and evidence. A model cannot accept a material exception merely by labeling it reviewed. Each result is <code>PASS</code>, <code>FAIL</code>, <code>WARNING</code>, <code>NOT_APPLICABLE</code>, <code>BLOCKED</code>, or <code>ACCEPTED_EXCEPTION</code>; only the designated human may accept an exception classified as material or blocking.</p>
+<p>The release validation set must exercise these topic-neutral cases:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Scenario ID</th>
+<th>Required representation and expected result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>blocked-source</code></td>
+<td>A blocked access event remains uncited and does not create reviewed evidence.</td>
+</tr>
+<tr class="even">
+<td><code>discovered-unreviewed-url</code></td>
+<td>A discovered URL occurrence has no opened, reviewed, or cited state unless later events establish each one.</td>
+</tr>
+<tr class="odd">
+<td><code>temporal-many-to-many</code></td>
+<td>Two entities may share a dated relation without collapsing either identity or losing the period.</td>
+</tr>
+<tr class="even">
+<td><code>nullable-foreign-key</code></td>
+<td>A nullable foreign key stays null with a controlled reason and does not fail referential integrity.</td>
+</tr>
+<tr class="odd">
+<td><code>mixed-age-allocation</code></td>
+<td>An unknown eligible share yields disclosed bounds or scenarios and no invented central estimate.</td>
+</tr>
+<tr class="even">
+<td><code>unresolved-interentity-payment</code></td>
+<td>The payer and payment remain recorded while the recipient ID is null with <code>unresolved_entity</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>human-model-review</code></td>
+<td>Human and model-assisted review events remain distinguishable; only authorized human acceptance closes a material gate.</td>
+</tr>
+<tr class="even">
+<td><code>post-release-correction</code></td>
+<td>A correction after acceptance creates a successor release and leaves the accepted snapshot unchanged.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-009--immutable-release-correction-and-refresh" class="level2">
+<h2>DATA-009 — Immutable release, correction, and refresh</h2>
+<p>Assign a stable dataset ID and unique release ID. The release record and manifest state cutoffs, dictionary and format versions, file hashes, row counts, status, known gaps, validation outcome, and acceptance identity. A candidate becomes accepted only after blocking checks pass and the authorized human approves the packet and documented exceptions.</p>
+<p>Never mutate or overwrite an accepted release. A correction or refresh creates a new immutable release, preserves prior artifacts, records affected file, row, field, old and new logical values, reason, evidence, decision owner, and first corrected release, and marks superseded assertions without erasing their history. <code>release_changes</code> classifies rows as added, changed, superseded, unchanged, removed from scope, or unresolved.</p>
+<p>A refresh rechecks scope, cutoffs, dictionary compatibility, inaccessible sources, document versions, URL events, aliases, entity relationships, and all affected validation gates. Publish only the selected paired files and approved documentation through the configured destination, then retain its publication receipt and readback result separately from dataset acceptance.</p>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/dot/research/data.prompt">Repository source</a> · <a href="/openai/raw/dot/research/data.prompt">Raw source</a></p>
+  </footer>
+</body>
+</html>

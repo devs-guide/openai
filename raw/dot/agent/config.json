@@ -1,0 +1,86 @@
+{
+  "schema": "dot-agent-config/2",
+  "status": "current",
+  "reviewed_on": "2026-10-10",
+  "models": {
+    "policy": "ORDERED_FALLBACK",
+    "primary": {
+      "model": "GPT-6 Astra",
+      "effort": "assigned"
+    },
+    "collaborator": {
+      "model": "GPT-5.6 Sol",
+      "effort": "High"
+    },
+    "fallbacks": [
+      {
+        "model": "GPT-5.6 Sol",
+        "effort": "Extra High"
+      },
+      {
+        "model": "GPT-5.6 Sol",
+        "effort": "Max"
+      },
+      {
+        "model": "GPT-5.6 Luna",
+        "effort": "Extra High"
+      },
+      {
+        "model": "GPT-5.6 Luna",
+        "effort": "High"
+      },
+      {
+        "model": "GPT-5.6 Luna",
+        "effort": "Max"
+      },
+      {
+        "model": "GPT-6.1 Sol",
+        "effort": "Medium"
+      },
+      {
+        "model": "GPT-6.1 Sol",
+        "effort": "High"
+      }
+    ]
+  },
+  "execution": {
+    "default_surface": "cloud-browser",
+    "allowed_surfaces": [
+      "cloud-browser"
+    ],
+    "project_opt_in_surface": "existing-cloud-computer-tool",
+    "prohibited": [
+      "codex",
+      "coding-project",
+      "local-computer",
+      "software-installation",
+      "unassigned-model",
+      "access-control-bypass"
+    ]
+  },
+  "tools": {
+    "cloud_computer_default": "disabled",
+    "project_allowlist_required": true,
+    "installation_allowed": false,
+    "public_browser_tool_default": "allowed-with-data-and-side-effect-guards"
+  },
+  "browser": {
+    "tabs": {
+      "default_max_open": 4,
+      "limit_scope": "ALL_WINDOWS_AND_WORKERS",
+      "project_override_allowed": true,
+      "blocker_checks": {
+        "scheduled_interval_minutes": 15,
+        "scheduler_policy": "WHEN_AVAILABLE_AND_AUTHORIZED",
+        "fallback": "EVENT_DRIVEN"
+      }
+    }
+  },
+  "storage": {
+    "working_root": "/workspace/scratch/<project-id>/",
+    "working_retention": "UNKNOWN",
+    "durable_destination": "#PAGE_OR_OWNER_APPROVED_DESTINATION",
+    "verify_before_use": true,
+    "readback_required": true
+  }
+}

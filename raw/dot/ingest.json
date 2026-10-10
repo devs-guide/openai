@@ -1,0 +1,129 @@
+{
+  "schema": "dot-ingest/1",
+  "release": "0.0.6",
+  "baseline_tag": "0.0.1",
+  "prior_release_tag": "0.0.5",
+  "entrypoint": "dot/readme.md",
+  "manifest_authority": "ROUTING_METADATA_ONLY",
+  "rights": "OWNER_OR_SEPARATELY_AUTHORIZED_USE_ONLY",
+  "activation_gate": "PROJECT_CONTROL_PACKET_READY",
+  "topic_input": "OWNER_SUPPLIED_PROJECT_BRIEF",
+  "instruction_files": [
+    {
+      "order": 1,
+      "path": "dot/agent/master.prompt",
+      "authority_class": "AGENT_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "79da8576fbf8081919b1bf125dc84a0f20a38c9861c2c8270165832700b07554"
+    },
+    {
+      "order": 2,
+      "path": "dot/agent/config.json",
+      "authority_class": "CONFIGURATION",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "0b1e8826f39ccde43831730a9e400f3acb5df543b5e668d34050860e03b807cf"
+    },
+    {
+      "order": 3,
+      "path": "dot/agent/runtime.json",
+      "authority_class": "DATED_OBSERVATION",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "d00a0769b220929fea17fbb1dc17e5fa9c07cf3b7e4147a2ae2d55a39095743f"
+    },
+    {
+      "order": 4,
+      "path": "dot/agent/browser.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "REQUIRED",
+      "condition": "INTERNET_RESEARCH",
+      "sha256": "4520647a59feb37fa437f176d24efb46c17e7c9de883355d83bbb576f2e88454"
+    },
+    {
+      "order": 5,
+      "path": "dot/agent/page.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "CONDITIONAL",
+      "condition": "PAGE_ACTION_OR_DESTINATION",
+      "sha256": "a14951f97e003a25eaae630ad9b71334f148cc517cbb3c1961daf5c5d6fc2be9"
+    },
+    {
+      "order": 6,
+      "path": "dot/agent/media.prompt",
+      "authority_class": "CAPABILITY_MODULE",
+      "activation": "CONDITIONAL",
+      "condition": "AUDIOVISUAL_EVIDENCE",
+      "sha256": "c97e9222b8d3f81a15b7cd0c9623c0b761bfedec6161043e6dae9731c69b1161"
+    },
+    {
+      "order": 7,
+      "path": "dot/research/project.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "2953ef338dd138df4b0e7f18b21ec31fd8d4b83a4afe08dc0b3590fb86531280"
+    },
+    {
+      "order": 8,
+      "path": "dot/research/internet.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "f967430fce0af678d8d35739c8fc9ce45316abad1f90cc28cc7add16db15d2c3"
+    },
+    {
+      "order": 9,
+      "path": "dot/research/data.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "6c067e8ca9e079a713d52aae187bc64e7a6c3b2e4a77895116c1efda520344b0"
+    },
+    {
+      "order": 10,
+      "path": "dot/research/template.prompt",
+      "authority_class": "TEMPLATE",
+      "activation": "REQUIRED",
+      "condition": null,
+      "sha256": "b3e4dec95bb2c37bbb47382058d84936d1c7205afcad2592351db11236799ebf"
+    },
+    {
+      "order": 11,
+      "path": "dot/research/summary.prompt",
+      "authority_class": "RESEARCH_CONTRACT",
+      "activation": "CONDITIONAL",
+      "condition": "ON_DEMAND_SUBTOPIC_EXECUTIVE_BRIEF",
+      "sha256": "e0f44249dc4926f85f927637df81d7a61a0973f9b586a6108d0971b276ed8324"
+    }
+  ],
+  "supporting_files": [
+    {
+      "path": "dot/readme.md",
+      "role": "PRODUCT_ENTRYPOINT"
+    },
+    {
+      "path": "dot/agent/readme.md",
+      "role": "AGENT_NAVIGATION"
+    },
+    {
+      "path": "dot/agent/config.schema.json",
+      "role": "CONFIGURATION_SCHEMA"
+    },
+    {
+      "path": "dot/research/readme.md",
+      "role": "RESEARCH_NAVIGATION"
+    }
+  ],
+  "non_instruction_prefixes": [
+    ".github/",
+    "actions/",
+    "docs/",
+    "www/"
+  ],
+  "superseded_prefixes": [
+    "dot/agents/",
+    "dot/prompts/"
+  ]
+}

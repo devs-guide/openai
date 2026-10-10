@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Agent configuration · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>Agent configuration · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/agent/">Agent</a><span aria-hidden="true">/</span>Config</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>configuration</span>
+      <span>current</span>
+      <span>reviewed 2026-10-10</span>
+    </div>
+    <article>
+<pre class="source-json"><code>{
+  &quot;browser&quot;: {
+    &quot;tabs&quot;: {
+      &quot;blocker_checks&quot;: {
+        &quot;fallback&quot;: &quot;EVENT_DRIVEN&quot;,
+        &quot;scheduled_interval_minutes&quot;: 15,
+        &quot;scheduler_policy&quot;: &quot;WHEN_AVAILABLE_AND_AUTHORIZED&quot;
+      },
+      &quot;default_max_open&quot;: 4,
+      &quot;limit_scope&quot;: &quot;ALL_WINDOWS_AND_WORKERS&quot;,
+      &quot;project_override_allowed&quot;: true
+    }
+  },
+  &quot;execution&quot;: {
+    &quot;allowed_surfaces&quot;: [
+      &quot;cloud-browser&quot;
+    ],
+    &quot;default_surface&quot;: &quot;cloud-browser&quot;,
+    &quot;prohibited&quot;: [
+      &quot;codex&quot;,
+      &quot;coding-project&quot;,
+      &quot;local-computer&quot;,
+      &quot;software-installation&quot;,
+      &quot;unassigned-model&quot;,
+      &quot;access-control-bypass&quot;
+    ],
+    &quot;project_opt_in_surface&quot;: &quot;existing-cloud-computer-tool&quot;
+  },
+  &quot;models&quot;: {
+    &quot;collaborator&quot;: {
+      &quot;effort&quot;: &quot;High&quot;,
+      &quot;model&quot;: &quot;GPT-5.6 Sol&quot;
+    },
+    &quot;fallbacks&quot;: [
+      {
+        &quot;effort&quot;: &quot;Extra High&quot;,
+        &quot;model&quot;: &quot;GPT-5.6 Sol&quot;
+      },
+      {
+        &quot;effort&quot;: &quot;Max&quot;,
+        &quot;model&quot;: &quot;GPT-5.6 Sol&quot;
+      },
+      {
+        &quot;effort&quot;: &quot;Extra High&quot;,
+        &quot;model&quot;: &quot;GPT-5.6 Luna&quot;
+      },
+      {
+        &quot;effort&quot;: &quot;High&quot;,
+        &quot;model&quot;: &quot;GPT-5.6 Luna&quot;
+      },
+      {
+        &quot;effort&quot;: &quot;Max&quot;,
+        &quot;model&quot;: &quot;GPT-5.6 Luna&quot;
+      },
+      {
+        &quot;effort&quot;: &quot;Medium&quot;,
+        &quot;model&quot;: &quot;GPT-6.1 Sol&quot;
+      },
+      {
+        &quot;effort&quot;: &quot;High&quot;,
+        &quot;model&quot;: &quot;GPT-6.1 Sol&quot;
+      }
+    ],
+    &quot;policy&quot;: &quot;ORDERED_FALLBACK&quot;,
+    &quot;primary&quot;: {
+      &quot;effort&quot;: &quot;assigned&quot;,
+      &quot;model&quot;: &quot;GPT-6 Astra&quot;
+    }
+  },
+  &quot;reviewed_on&quot;: &quot;2026-10-10&quot;,
+  &quot;schema&quot;: &quot;dot-agent-config/2&quot;,
+  &quot;status&quot;: &quot;current&quot;,
+  &quot;storage&quot;: {
+    &quot;durable_destination&quot;: &quot;#PAGE_OR_OWNER_APPROVED_DESTINATION&quot;,
+    &quot;readback_required&quot;: true,
+    &quot;verify_before_use&quot;: true,
+    &quot;working_retention&quot;: &quot;UNKNOWN&quot;,
+    &quot;working_root&quot;: &quot;/workspace/scratch/&lt;project-id&gt;/&quot;
+  },
+  &quot;tools&quot;: {
+    &quot;cloud_computer_default&quot;: &quot;disabled&quot;,
+    &quot;installation_allowed&quot;: false,
+    &quot;project_allowlist_required&quot;: true,
+    &quot;public_browser_tool_default&quot;: &quot;allowed-with-data-and-side-effect-guards&quot;
+  }
+}</code></pre>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/dot/agent/config.json">Repository source</a> · <a href="/openai/raw/dot/agent/config.json">Raw source</a></p>
+  </footer>
+</body>
+</html>

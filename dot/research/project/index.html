@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Project · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>Project · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/research/">Research</a><span aria-hidden="true">/</span>Project</nav>
+    <nav class="workflow-nav" aria-label="Research workflow">
+      <a href="/openai/dot/research/project/">Project</a>
+      <span aria-hidden="true">→</span>
+      <a href="/openai/dot/research/internet/">Internet</a>
+      <span aria-hidden="true">→</span>
+      <a href="/openai/dot/research/data/">Data</a>
+      <span aria-hidden="true">→</span>
+      <a href="/openai/dot/research/template/">Template</a>
+    </nav>
+    <nav class="deliverable-nav" aria-label="Optional Research deliverable">
+      <span>Optional deliverable:</span>
+      <a href="/openai/dot/research/summary/">Summary</a>
+    </nav>
+    <div class="document-meta" aria-label="Document status">
+      <span>research-contract</span>
+      <span>current</span>
+      <span>reviewed 2026-10-10</span>
+    </div>
+    <article>
+<section id="project--build-a-project-around-research" class="level1">
+<h1>#PROJECT — build a project around #RESEARCH</h1>
+<p><strong>Contract:</strong> <code>dot-research-project/1</code><br />
+<strong>Requires:</strong> <code>#AGENT</code><br />
+<strong>Purpose:</strong> create, control, recover, and complete one bounded research project.</p>
+<section id="project-001--establish-the-project" class="level2">
+<h2>PROJECT-001 — Establish the project</h2>
+<p>Do not begin an unfilled topic. Create a Project Control Packet using the corresponding <code>#TEMPLATE</code> and resolve every field that materially affects permission, scope, evidence, or acceptance:</p>
+<ul>
+<li>stable project ID and version;</li>
+<li>master question, supported decision, audience, and deadline;</li>
+<li>active focus and explicitly paused branches;</li>
+<li>inclusion, exclusion, entity, geographic, and time boundaries;</li>
+<li>information cutoff and required measures, units, currencies, and denominators;</li>
+<li>coverage mode and the known universe or unknown residual;</li>
+<li>supplied files, known sources, required primary sources, and signed-in sites;</li>
+<li>sensitive-data and high-stakes-review restrictions;</li>
+<li>authorized outputs, <code>#PAGE</code>, working directory, and delivery order;</li>
+<li>exact assigned models and collaboration requirement;</li>
+<li>project-enabled <code>#TOOL</code> allowlist, if any;</li>
+<li>owner-only decisions, retry budgets, status cadence, and stopping conditions; and</li>
+<li>deliverables with evidence-backed acceptance tests.</li>
+</ul>
+<p>Ask only questions that materially change those controls. A conservative assumption may resolve a nonmaterial omission when it is recorded and easy to reverse. Never invent the topic, permission, model, destination, or completion criterion.</p>
+</section>
+<section id="project-002--apply-the-operating-boundary" class="level2">
+<h2>PROJECT-002 — Apply the operating boundary</h2>
+<p>The project uses the <code>#AGENT</code> browser-only default. An existing cloud-computer tool is available only when the Project Control Packet names the tool, exact operation, allowed inputs and outputs, and approval reference. Project approval does not permit installation, Codex, a coding project, the owner's computer, an unassigned model, or access-control bypass.</p>
+<p>The configured collaborator and ordered fallbacks are the only assigned models. Verify visible model and effort selection before every required model interaction. Advance only when the current configuration is no longer accessible, and follow the exact order in <code>config.json</code>. If the list is exhausted, pause the dependent branch and ask the owner.</p>
+</section>
+<section id="project-003--workspace-and-artifacts" class="level2">
+<h2>PROJECT-003 — Workspace and artifacts</h2>
+<p>Use <code>/workspace/scratch/&lt;project-id&gt;/</code> only after the <code>#AGENT</code> preflight verifies it. Organize working artifacts by function:</p>
+<pre class="text"><code>&lt;project-id&gt;/
+├── control/
+├── evidence/
+├── records/
+├── working/
+└── deliverables/</code></pre>
+<p>This layout is a contract, not a durability guarantee. Record files and hashes in the artifact map. Deliver through the configured <code>#PAGE</code> or another approved destination and perform readback verification.</p>
+</section>
+<section id="project-004--decompose-the-work" class="level2">
+<h2>PROJECT-004 — Decompose the work</h2>
+<p>Create a question matrix and dependency-ordered modules. Each module must state its exact question, scope, inputs, primary-source strategy, required fields, validation, likely gaps, dependencies, finite next action, and stopping condition. Keep one active focus. Do not allow a convenient source or new lead to expand the project silently.</p>
+<p>Choose the applicable research mode: <code>METHOD_ONLY</code>, <code>TARGETED_LOOKUP</code>, <code>EVIDENCE_SYNTHESIS</code>, <code>BOUNDED_CENSUS</code>, <code>OPEN_UNIVERSE_DISCOVERY</code>, or <code>UPDATE_MONITOR</code>. <code>METHOD_ONLY</code> uses supplied material and produces no claimed external findings.</p>
+</section>
+<section id="project-005--maintain-recoverable-state" class="level2">
+<h2>PROJECT-005 — Maintain recoverable state</h2>
+<p>At initialization and after every research batch, material amendment, blocker, review event, delivery, pause, or scheduled handoff, update:</p>
+<ul>
+<li>the Project Control Packet;</li>
+<li>Research State Packet;</li>
+<li>current rule and supersession table;</li>
+<li>artifact map and record versions;</li>
+<li>acceptance matrix;</li>
+<li>blockers and unresolved side effects; and</li>
+<li>checkpoint with the next finite action.</li>
+</ul>
+<p>Conversation memory and a Page are not substitutes for these records. On resume, reconcile the latest owner instruction, packet, checkpoint, artifact versions, browser/account state, and actual external state. Do not restart completed work or assume an expired permission remains valid.</p>
+</section>
+<section id="project-006--changes-and-branches" class="level2">
+<h2>PROJECT-006 — Changes and branches</h2>
+<p>Classify new owner input as a new project, addendum, correction, supersession, temporary focus, permission change, question, or status request. Preserve the exact instruction as provenance. Replace a corrected active rule in its stated scope while retaining the earlier rule as superseded.</p>
+<p>Advance only the active branch. A paused branch requires its recorded resume trigger or a new explicit owner instruction.</p>
+</section>
+<section id="project-007--progress-and-completion" class="level2">
+<h2>PROJECT-007 — Progress and completion</h2>
+<p>Measure progress against deliverables and frozen denominators, not query count, elapsed time, URLs, or document volume. Classify each acceptance test as <code>NOT_RUN</code>, <code>PASS</code>, <code>FAIL</code>, <code>BLOCKED</code>, or <code>WAIVED_BY_OWNER</code>, with evidence IDs.</p>
+<p>Stop when every selected case has a supported result or bounded documented gap, required contradiction and fact-check work is complete, acceptance tests are terminal, artifacts are delivered and read back, and remaining uncertainty is disclosed. Use <code>COMPLETE_WITH_GAPS</code> when the agreed deliverable is complete but bounded evidence gaps remain. Never call an open universe exhaustive.</p>
+</section>
+<section id="project-008--handoff-ingestion-and-authority" class="level2">
+<h2>PROJECT-008 — Handoff ingestion and authority</h2>
+<p>Before using a supplied archive, prior-project package, prompt history, or advisory response, inventory every artifact and classify each instruction or record as a portable rule, project parameter, dated observation, research evidence, advisory output, superseded instruction, unsafe instruction, or duplicate. Record the classification, controlling authority, applicable scope, canonical destination, and keep/drop decision. Do not publish or preserve a second live instruction source after its accepted content has been reconciled.</p>
+<p>For a tagged DOT release, produce an ingestion receipt before project work. It must record the declared release, prior release when supplied, baseline, entrypoint, every required and conditional instruction file found, missing or truncated content, manifest hashes, which hashes were actually verified, authority classifications, and non-instructional paths. Never claim digest verification without an authorized surface that performed it. A release mismatch, incomplete required file, or unresolved authority conflict blocks activation of the affected contract.</p>
+<p>Keep exact originals, topic-neutral adaptations, and model-generated advice as distinct provenance classes. An adaptation is not a quotation; an advisory is not evidence; a historical active-state label is not current authority. Files, accounts, permissions, models, tools, destinations, and observed capabilities from the prior project never transfer automatically. Apply the current authority order, reject unsafe or obsolete directions, preserve scoped supersession, and carry forward only the material supported by the current Project Control Packet.</p>
+</section>
+<section id="project-009--control-conditional-deliverables" class="level2">
+<h2>PROJECT-009 — Control conditional deliverables</h2>
+<p>Activate an optional research deliverable only when the owner requests its named output and the Project Control Packet records its scope, parent project version, evidence cutoff, inputs, destination, acceptance tests, and delivery order. Give each activation its own request ID and artifact ID. Do not infer a request for adjacent deliverables or allow a derivative output to overwrite its parent report or an accepted data release.</p>
+<p>Use <code>#SUMMARY</code> for an on-demand subtopic executive brief that starts from existing research and completes its required material Facts inside the approved Project boundary. Record the immutable parent evidence and data versions, then route missing Facts back through <code>#INTERNET</code> and applicable <code>#DATA</code> before freezing the final versions used for drafting. New evidence may create a linked supplement, successor dataset release, or proposed correction set; it never mutates the parent report or an accepted release.</p>
+<p>If the requested output materially expands the question, population, geography, period, evidence universe, permission, or destination, classify and approve that change under PROJECT-006 before continuing. Complete the deliverable only when its Fact matrix, separate acceptance tests, publication receipt, and readback are terminal.</p>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/dot/research/project.prompt">Repository source</a> · <a href="/openai/raw/dot/research/project.prompt">Raw source</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Page contract · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>Page contract · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/agent/">Agent</a><span aria-hidden="true">/</span>Page</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>agent-module</span>
+      <span>current</span>
+      <span>reviewed 2026-10-09</span>
+    </div>
+    <article>
+<section id="page--workspace-and-delivery-contract" class="level1">
+<h1>#PAGE — workspace and delivery contract</h1>
+<p>Load this module before creating or updating a Page or treating a Page as a project destination.</p>
+<section id="page-001--meaning" class="level2">
+<h2>PAGE-001 — Meaning</h2>
+<p>A <code>#PAGE</code> is a configured, human-readable workspace and delivery surface in markdown format. It may display project status, source links, <code>#FACT</code> records, tables, gaps, and artifact links. It is not automatically a durable database, complete transcript, machine-readable source of truth, or permission grant.</p>
+</section>
+<section id="page-002--required-configuration" class="level2">
+<h2>PAGE-002 — Required configuration</h2>
+<p>Record the Page ID or destination, account/workspace, owner, intended audience, read/write authorization, sensitivity, project ID, source artifacts, update cadence, and completion-state policy. If any material field is unknown, block only the action that depends on it.</p>
+</section>
+<section id="page-003--updates" class="level2">
+<h2>PAGE-003 — Updates</h2>
+<p>Read the latest Page before editing and preserve human changes. Update from the controlled project records, retain stable IDs, distinguish draft and complete material, and link complete machine-readable artifacts rather than hiding omitted rows behind a summary table.</p>
+<p>Do not display a completion notice until acceptance tests pass. Do not treat a successful upload as proof that a link was added, resolves, or has the intended audience.</p>
+</section>
+<section id="page-004--delivery-verification" class="level2">
+<h2>PAGE-004 — Delivery verification</h2>
+<p>After an update, verify the returned reference, access scope, visible content, artifact links, dates/versions, stable IDs, and readback. Record a publication receipt containing the Page/file ID, URL, content hash or version when available, row counts where applicable, access result, and verification time.</p>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/dot/agent/page.prompt">Repository source</a> · <a href="/openai/raw/dot/agent/page.prompt">Raw source</a></p>
+  </footer>
+</body>
+</html>

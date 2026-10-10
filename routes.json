@@ -1,0 +1,404 @@
+{
+  "routes": [
+    {
+      "kind": "hub",
+      "raw_route": "raw/readme.md",
+      "route": "",
+      "source": "readme.md",
+      "status": "current"
+    },
+    {
+      "kind": "policy",
+      "raw_route": "raw/COPYRIGHT.md",
+      "route": "rights/",
+      "source": "COPYRIGHT.md",
+      "status": "current"
+    },
+    {
+      "kind": "repository-contract",
+      "raw_route": "raw/docs/release.prompt",
+      "route": "release/",
+      "source": "docs/release.prompt",
+      "status": "current"
+    },
+    {
+      "kind": "product",
+      "raw_route": "raw/dot/readme.md",
+      "route": "dot/",
+      "source": "dot/readme.md",
+      "status": "current"
+    },
+    {
+      "kind": "ingestion-manifest",
+      "raw_route": "raw/dot/ingest.json",
+      "route": "dot/ingest/",
+      "source": "dot/ingest.json",
+      "status": "current"
+    },
+    {
+      "kind": "index",
+      "raw_route": "raw/dot/agent/readme.md",
+      "route": "dot/agent/",
+      "source": "dot/agent/readme.md",
+      "status": "current"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/agent/",
+      "route": "dot/agents/",
+      "source": "dot/agent/readme.md",
+      "status": "archived"
+    },
+    {
+      "kind": "agent-contract",
+      "raw_route": "raw/dot/agent/master.prompt",
+      "route": "dot/agent/contract/",
+      "source": "dot/agent/master.prompt",
+      "status": "current"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/agent/contract/",
+      "route": "dot/agents/doc/",
+      "source": "dot/agent/master.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "configuration",
+      "raw_route": "raw/dot/agent/config.json",
+      "route": "dot/agent/config/",
+      "source": "dot/agent/config.json",
+      "status": "current"
+    },
+    {
+      "kind": "schema",
+      "raw_route": "raw/dot/agent/config.schema.json",
+      "route": "dot/agent/config/schema/",
+      "source": "dot/agent/config.schema.json",
+      "status": "current"
+    },
+    {
+      "kind": "runtime-observation",
+      "raw_route": "raw/dot/agent/runtime.json",
+      "route": "dot/agent/runtime/",
+      "source": "dot/agent/runtime.json",
+      "status": "dated-evidence"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/agent/runtime/",
+      "route": "dot/agents/computer/",
+      "source": "dot/agent/runtime.json",
+      "status": "archived"
+    },
+    {
+      "kind": "agent-module",
+      "raw_route": "raw/dot/agent/browser.prompt",
+      "route": "dot/agent/browser/",
+      "source": "dot/agent/browser.prompt",
+      "status": "current"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/agent/browser/",
+      "route": "dot/agents/browser/",
+      "source": "dot/agent/browser.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/agent/browser/",
+      "route": "dot/agents/prompt/",
+      "source": "dot/agent/browser.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "agent-module",
+      "raw_route": "raw/dot/agent/page.prompt",
+      "route": "dot/agent/page/",
+      "source": "dot/agent/page.prompt",
+      "status": "current"
+    },
+    {
+      "kind": "agent-module",
+      "raw_route": "raw/dot/agent/media.prompt",
+      "route": "dot/agent/media/",
+      "source": "dot/agent/media.prompt",
+      "status": "current"
+    },
+    {
+      "kind": "index",
+      "raw_route": "raw/dot/research/readme.md",
+      "route": "dot/research/",
+      "source": "dot/research/readme.md",
+      "status": "current"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/research/",
+      "route": "dot/prompts/",
+      "source": "dot/research/readme.md",
+      "status": "archived"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/research/",
+      "route": "dot/prompts/core/",
+      "source": "dot/research/readme.md",
+      "status": "archived"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/research/",
+      "route": "dot/prompts/research/",
+      "source": "dot/research/readme.md",
+      "status": "archived"
+    },
+    {
+      "kind": "research-contract",
+      "raw_route": "raw/dot/research/project.prompt",
+      "route": "dot/research/project/",
+      "source": "dot/research/project.prompt",
+      "status": "current"
+    },
+    {
+      "kind": "research-contract",
+      "raw_route": "raw/dot/research/internet.prompt",
+      "route": "dot/research/internet/",
+      "source": "dot/research/internet.prompt",
+      "status": "current"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/research/internet/",
+      "route": "dot/prompts/core/master/",
+      "source": "dot/research/internet.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/research/internet/",
+      "route": "dot/prompts/core/dot/",
+      "source": "dot/research/internet.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/research/internet/",
+      "route": "dot/prompts/core/reference/",
+      "source": "dot/research/internet.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "research-contract",
+      "raw_route": "raw/dot/research/data.prompt",
+      "route": "dot/research/data/",
+      "source": "dot/research/data.prompt",
+      "status": "current"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/research/data/",
+      "route": "dot/prompts/research/starter-data-only/",
+      "source": "dot/research/data.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "research-template",
+      "raw_route": "raw/dot/research/template.prompt",
+      "route": "dot/research/template/",
+      "source": "dot/research/template.prompt",
+      "status": "current"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/research/template/",
+      "route": "dot/prompts/research/overview/",
+      "source": "dot/research/template.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "redirect",
+      "redirect_to": "dot/research/template/",
+      "route": "dot/prompts/research/template/",
+      "source": "dot/research/template.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "research-deliverable",
+      "raw_route": "raw/dot/research/summary.prompt",
+      "route": "dot/research/summary/",
+      "source": "dot/research/summary.prompt",
+      "status": "current"
+    },
+    {
+      "kind": "feature-index",
+      "raw_route": "raw/docs/features/readme.md",
+      "route": "dot/features/",
+      "source": "docs/features/readme.md",
+      "status": "current"
+    },
+    {
+      "kind": "history",
+      "raw_route": "raw/docs/history/readme.md",
+      "route": "dot/history/",
+      "source": "docs/history/readme.md",
+      "status": "current"
+    },
+    {
+      "kind": "history",
+      "raw_route": "raw/docs/history/initial-import.md",
+      "route": "dot/history/initial-import/",
+      "source": "docs/history/initial-import.md",
+      "status": "current"
+    },
+    {
+      "kind": "history",
+      "raw_route": "raw/docs/history/two-lane-migration.md",
+      "route": "dot/history/two-lane-migration/",
+      "source": "docs/history/two-lane-migration.md",
+      "status": "current"
+    },
+    {
+      "kind": "history-data",
+      "raw_route": "raw/docs/history/two-lane-migration.json",
+      "route": "dot/history/two-lane-migration/data/",
+      "source": "docs/history/two-lane-migration.json",
+      "status": "current"
+    },
+    {
+      "kind": "release-index",
+      "raw_route": "raw/docs/releases/readme.md",
+      "route": "dot/releases/",
+      "source": "docs/releases/readme.md",
+      "status": "current"
+    },
+    {
+      "kind": "release",
+      "raw_route": "raw/docs/releases/0.0.1.md",
+      "route": "dot/releases/0.0.1/",
+      "source": "docs/releases/0.0.1.md",
+      "status": "current"
+    },
+    {
+      "kind": "release",
+      "raw_route": "raw/docs/releases/0.0.2.md",
+      "route": "dot/releases/0.0.2/",
+      "source": "docs/releases/0.0.2.md",
+      "status": "current"
+    },
+    {
+      "kind": "release",
+      "raw_route": "raw/docs/releases/0.0.3.md",
+      "route": "dot/releases/0.0.3/",
+      "source": "docs/releases/0.0.3.md",
+      "status": "current"
+    },
+    {
+      "kind": "release",
+      "raw_route": "raw/docs/releases/0.0.4.md",
+      "route": "dot/releases/0.0.4/",
+      "source": "docs/releases/0.0.4.md",
+      "status": "current"
+    },
+    {
+      "kind": "release",
+      "raw_route": "raw/docs/releases/0.0.5.md",
+      "route": "dot/releases/0.0.5/",
+      "source": "docs/releases/0.0.5.md",
+      "status": "current"
+    },
+    {
+      "kind": "release",
+      "raw_route": "raw/docs/releases/0.0.6.md",
+      "route": "dot/releases/0.0.6/",
+      "source": "docs/releases/0.0.6.md",
+      "status": "candidate"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/agents/readme.md",
+      "redirect_to": "raw/dot/agent/readme.md",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/agents/browser.md",
+      "redirect_to": "raw/dot/agent/browser.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/agents/computer.md",
+      "redirect_to": "raw/dot/agent/runtime.json",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/agents/doc.md",
+      "redirect_to": "raw/dot/agent/master.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/agents/prompt.md",
+      "redirect_to": "raw/dot/agent/browser.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/prompts/readme.md",
+      "redirect_to": "raw/dot/research/readme.md",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/prompts/core/readme.md",
+      "redirect_to": "raw/dot/research/readme.md",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/prompts/core/master.prompt",
+      "redirect_to": "raw/dot/research/internet.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/prompts/core/dot.prompt",
+      "redirect_to": "raw/dot/research/internet.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/prompts/core/reference.prompt",
+      "redirect_to": "raw/dot/research/internet.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/prompts/research/readme.md",
+      "redirect_to": "raw/dot/research/readme.md",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/prompts/research/overview.prompt",
+      "redirect_to": "raw/dot/research/template.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/prompts/research/template.prompt",
+      "redirect_to": "raw/dot/research/template.prompt",
+      "status": "archived"
+    },
+    {
+      "kind": "raw-migration",
+      "raw_route": "raw/dot/prompts/research/starter-data-only.md",
+      "redirect_to": "raw/dot/research/data.prompt",
+      "status": "archived"
+    }
+  ],
+  "schema_version": 2
+}

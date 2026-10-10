@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="0.0.4 — Repository Release Contract · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>0.0.4 — Repository Release Contract · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/releases/">Releases</a><span aria-hidden="true">/</span>0.0.4</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>release</span>
+      <span>current</span>
+      <span>reviewed 2026-10-09</span>
+    </div>
+    <article>
+<section id="004" class="level2">
+<h2>0.0.4</h2>
+<p>The repository adds one reusable <code>#RELEASE</code> contract for planning, writing, reviewing, publishing, correcting, and handing off GitHub releases across all current and future products. Release notes now use a compact reader-focused core and add operator, interface, migration, evidence, or boundary sections only when the release actually needs them.</p>
+<p>This release also completes the publication chain needed for the first manual full-project test of the DOT Agent and Research package. The manual test remains separate from repository publication and starts from the immutable <code>0.0.4</code> source archive and <code>dot/ingest.json</code>.</p>
+<section id="scope" class="level3">
+<h3>Scope</h3>
+<ul>
+<li>Release range: <code>0.0.3..0.0.4</code>.</li>
+<li>Repository-wide contract: <code>docs/release.prompt</code>.</li>
+<li>Published entrypoints: <code>/release/</code>, <code>/raw/docs/release.prompt</code>, and the existing DOT documentation and raw-source routes.</li>
+<li>Included release identity: DOT <code>0.0.4</code>, prior release <code>0.0.3</code>, migration baseline <code>0.0.1</code>.</li>
+<li>Excluded: executing the later manual Agent research test, changing Agent models or permissions, changing <code>BROWSER-004</code>, and attaching binary assets.</li>
+</ul>
+</section>
+<section id="highlights" class="level3">
+<h3>Highlights</h3>
+<ul>
+<li>Establishes a single repository-wide release voice without turning release notes into DOT runtime instructions.</li>
+<li>Requires complete release-range review, exact commit history, explicit scope, accurate asset descriptions, and reader-focused outcomes.</li>
+<li>Uses an adaptive format: a compact required core plus conditional sections for workflows, safety, interfaces, migration, evidence, and known boundaries.</li>
+<li>Requires stacked releases to publish sequentially before dependent pull requests advance.</li>
+<li>Adds an exact immutable-archive handoff for a separate manual Agent test.</li>
+</ul>
+</section>
+<section id="added" class="level3">
+<h3>Added</h3>
+<ul>
+<li><code>docs/release.prompt</code> with <code>RELEASE-001</code> through <code>RELEASE-010</code>.</li>
+<li>Rendered and byte-exact raw Pages routes for the Release contract.</li>
+<li>Repository and Pages validation for Release ownership, structure, adaptive modules, routes, version identity, and publication safeguards.</li>
+<li>A reviewed <code>0.0.4</code> record and release-workflow identity.</li>
+</ul>
+</section>
+<section id="changed" class="level3">
+<h3>Changed</h3>
+<ul>
+<li>Extended root, feature, and release navigation to cover the repository-wide Release contract.</li>
+<li>Advanced DOT ingestion metadata to <code>0.0.4</code> while retaining <code>0.0.1</code> as the immutable baseline and <code>0.0.3</code> as the immediate predecessor.</li>
+<li>Generalized predecessor validation so every supported post-baseline release requires its predecessor's annotated tag and published GitHub Release.</li>
+<li>Extended remote Pages validation to the Release contract and <code>0.0.4</code> record.</li>
+</ul>
+</section>
+<section id="fixed" class="level3">
+<h3>Fixed</h3>
+<ul>
+<li>Prevented release narratives from treating one deployment or private operational detail as universal project behavior.</li>
+<li>Prevented optional long-form release sections from becoming mandatory filler.</li>
+<li>Required live release verification to include target commit and prerelease state in addition to title, body, tag, draft state, and assets.</li>
+<li>Rejected every obsolete candidate-version reference while preserving <code>0.0.1</code> as the first published migration baseline.</li>
+</ul>
+</section>
+<section id="safety-and-publication-model" class="level3">
+<h3>Safety and publication model</h3>
+<p>The Release contract does not authorize a merge, tag, upload, publication, external announcement, or downstream Agent task. Those actions retain their separate owner and GitHub workflow gates.</p>
+<p>Published tags and target commits are immutable. Behavioral corrections use a later version. GitHub release bodies may be corrected only through a separately reviewed exact replacement that leaves the tag, target, state, and assets unchanged.</p>
+<p>Compilation, contract auditing, Pages builds, and release verification remain GitHub Actions-only. The later full-project Agent test is manual and is not a condition for publishing this repository release.</p>
+</section>
+<section id="interfaces-and-compatibility" class="level3">
+<h3>Interfaces and compatibility</h3>
+<ul>
+<li>New canonical prompt: <code>docs/release.prompt</code>.</li>
+<li>Rendered route: <code>https://devs-guide.github.io/openai/release/</code>.</li>
+<li>Raw route: <code>https://devs-guide.github.io/openai/raw/docs/release.prompt</code>.</li>
+<li>Release workflow input remains the bare semantic version, exact 40-character <code>main</code> SHA, <code>draft</code> or <code>publish</code> mode, and exact confirmation string.</li>
+<li>DOT instruction order, conditional activation, model configuration, browser behavior, and Research workflow remain compatible with <code>0.0.3</code>.</li>
+</ul>
+</section>
+<section id="validation-evidence" class="level3">
+<h3>Validation evidence</h3>
+<p>GitHub Actions must verify repository source, prompt rule ownership, the DOT migration audit, the publication manifest, rendered and raw routes, live Pages source identity, reviewed release notes, predecessor publication, and the final GitHub release state against the same exact commit.</p>
+</section>
+<section id="known-boundaries" class="level3">
+<h3>Known boundaries</h3>
+<ul>
+<li><code>#RELEASE</code> governs GitHub repository releases; <code>#DATA</code> continues to govern immutable research dataset releases.</li>
+<li>Release documentation cannot establish that a later manual Agent test succeeded.</li>
+<li>GitHub-generated source archives are the only release assets; no generated PDF, application, database, or binary is attached.</li>
+</ul>
+</section>
+<section id="commit" class="level3">
+<h3>#COMMIT</h3>
+<p><code>release: 0.0.4 - add repository-wide release contract</code></p>
+</section>
+<section id="notable-commits-since-003" class="level3">
+<h3>Notable commits since 0.0.3</h3>
+<ul>
+<li><code>d2ad373</code> — <code>feat(release): add repository-wide release contract</code></li>
+<li><code>713af17</code> — <code>fix(ci): validate release contract scope</code></li>
+<li><code>bdf6bfb</code> — <code>fix(ci): accept scoped notable commit headings</code></li>
+</ul>
+</section>
+<section id="assets" class="level3">
+<h3>Assets</h3>
+<ul>
+<li>GitHub-generated source archives for tag <code>0.0.4</code>.</li>
+<li>Rendered release guidance, DOT documentation, and exact current raw sources through GitHub Pages.</li>
+<li>No additional binary assets.</li>
+</ul>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/docs/releases/0.0.4.md">Repository source</a> · <a href="/openai/raw/docs/releases/0.0.4.md">Raw source</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="0.0.6 — Coordinated Browser Tabs · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>0.0.6 — Coordinated Browser Tabs · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/releases/">Releases</a><span aria-hidden="true">/</span>0.0.6</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>release</span>
+      <span>candidate</span>
+      <span>reviewed 2026-10-10</span>
+    </div>
+    <article>
+<section id="006" class="level2">
+<h2>0.0.6</h2>
+<p>DOT agents now coordinate browser tabs as one shared resource instead of treating each window or worker as an independent browser. Projects start with a four-tab default, may record another approved positive limit, and preserve a resumable queue when capacity is full.</p>
+<p>Long-running browser work also gains a truthful monitoring branch: use a verified 15-minute recurring check when scheduling is available and authorized, or disclose the limitation and use event-driven checks. The release does not change model selection, research authority, or CAPTCHA behavior.</p>
+<section id="scope" class="level3">
+<h3>Scope</h3>
+<ul>
+<li>Release range: <code>0.0.5..0.0.6</code>.</li>
+<li>Product boundary: DOT Agent configuration and the Browser capability module.</li>
+<li>Published entrypoints: Agent, Browser, configuration, schema, feature, and release rendered and raw routes.</li>
+<li>Included release identity: DOT <code>0.0.6</code>, prior release <code>0.0.5</code>, migration baseline <code>0.0.1</code>.</li>
+<li>Excluded: opening real browser sessions, running a Research project, changing model selection or fallback order, changing <code>BROWSER-004</code>, and attaching generated or binary assets.</li>
+</ul>
+</section>
+<section id="highlights" class="level3">
+<h3>Highlights</h3>
+<ul>
+<li>Defines <code>#TABS</code> as the Browser-owned configuration for shared capacity, ownership, queues, monitoring, and recovery.</li>
+<li>Applies one effective limit across all Agent-controlled windows and workers, with four tabs as the configured default.</li>
+<li>Prevents capacity races and unsafe closure of authentication, unsaved-form, download, takeover, or leased tab state.</li>
+<li>Makes scheduled and event-driven blocker monitoring explicit alternatives so unavailable automation is never reported as active.</li>
+</ul>
+</section>
+<section id="added" class="level3">
+<h3>Added</h3>
+<ul>
+<li>Agent configuration schema v2 with required Browser tab defaults, shared scope, project-override policy, and blocker-check branch.</li>
+<li><code>TABS-001</code> through <code>TABS-007</code> for inventory, leases, queuing, checkpoints, monitoring, recovery, notifications, pause, and cleanup.</li>
+<li>Acceptance checks for shared-cap enforcement, worker contention, unknown inventories, protected tabs, scheduling fallback, and sensitive-state exclusion.</li>
+</ul>
+</section>
+<section id="changed" class="level3">
+<h3>Changed</h3>
+<ul>
+<li>Extended Agent preflight and portable checkpoints with the effective tab limit, inventory, ownership, queue, and monitoring mode.</li>
+<li>Updated Browser preflight to use configured tab controls while retaining its existing source, access, failure, and CAPTCHA responsibilities.</li>
+<li>Advanced ingestion, Pages, workflow, feature, and release metadata to <code>0.0.6</code>, with <code>0.0.5</code> as the immediate predecessor.</li>
+</ul>
+</section>
+<section id="fixed" class="level3">
+<h3>Fixed</h3>
+<ul>
+<li>Prevented separate workers or windows from each interpreting the tab limit as their own allowance.</li>
+<li>Prevented an unknown global inventory from being treated as unused capacity.</li>
+<li>Prevented an uncreated, unauthorized, failed, or unverified recurring check from being described as active monitoring.</li>
+<li>Prevented generic failures from being attributed to memory, CPU, the browser, or a website without observed evidence.</li>
+</ul>
+</section>
+<section id="operator-workflow-and-safety" class="level3">
+<h3>Operator workflow and safety</h3>
+<p>Before browser work, record the configured default, any approved project override, the effective shared limit, and the observable inventory. Reserve a slot before opening a tab; at capacity, safely reuse a tab or queue the work. Checkpoint useful state before handoff or closure and exclude credentials, tokens, private URLs, and sensitive authentication routes from portable logs.</p>
+<p>If an authorized recurring scheduler is available, create and verify the 15-minute check. Otherwise use the named event-driven triggers and report that no recurring automation exists. Pausing or ending the project also pauses or removes its schedule and records the final tab and queue disposition.</p>
+</section>
+<section id="interfaces-and-compatibility" class="level3">
+<h3>Interfaces and compatibility</h3>
+<ul>
+<li><code>dot-agent-config/2</code> supersedes version 1 for new <code>0.0.6</code> activations and requires <code>browser.tabs</code>.</li>
+<li><code>default_max_open</code> is <code>4</code>; an owner-approved Project Control Packet may set another positive integer for that project without changing the canonical configuration.</li>
+<li><code>limit_scope</code> is <code>ALL_WINDOWS_AND_WORKERS</code>. User-navigable document tabs and popup windows count; browser chrome and non-tab modal UI do not.</li>
+<li>Existing <code>#BROWSER</code>, <code>#TOOL</code>, and <code>#CAPTCHA</code> names remain valid. <code>#TABS</code> is embedded in <code>browser.prompt</code>, so there is no separate Tabs prompt or route.</li>
+</ul>
+</section>
+<section id="validation-evidence" class="level3">
+<h3>Validation evidence</h3>
+<p>GitHub Actions must verify configuration v2, the complete <code>TABS-001</code> through <code>TABS-007</code> rule set, shared-cap and monitoring scenarios, unique canonical clauses, exact ingestion hashes, rendered and raw Pages sources, unchanged model selection and fallback order, unchanged runtime observations, and the approved byte-exact <code>BROWSER-004</code> behavior.</p>
+</section>
+<section id="known-boundaries" class="level3">
+<h3>Known boundaries</h3>
+<ul>
+<li>The contract coordinates the browser surfaces and scheduling capabilities actually exposed to the Agent; it does not create tabs, workers, or a scheduler that the runtime does not provide.</li>
+<li>A configured project limit is an operating bound, not evidence of available memory, CPU, browser stability, or website capacity.</li>
+<li>This release defines and validates the workflow. It does not claim a later real-world browser or Research project succeeded.</li>
+</ul>
+</section>
+<section id="commit" class="level3">
+<h3>#COMMIT</h3>
+<p><code>release: 0.0.6 - coordinate browser tabs</code></p>
+</section>
+<section id="notable-commits-since-005" class="level3">
+<h3>Notable commits since 0.0.5</h3>
+<p>None beyond the release commit recorded above.</p>
+</section>
+<section id="assets" class="level3">
+<h3>Assets</h3>
+<ul>
+<li>GitHub-generated source archives for tag <code>0.0.6</code>.</li>
+<li>Rendered documentation and byte-exact current raw sources through GitHub Pages.</li>
+<li>No additional binary assets.</li>
+</ul>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/docs/releases/0.0.6.md">Repository source</a> · <a href="/openai/raw/docs/releases/0.0.6.md">Raw source</a></p>
+  </footer>
+</body>
+</html>

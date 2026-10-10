@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="0.0.1 — DOT Research Prompt System · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>0.0.1 — DOT Research Prompt System · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/releases/">Releases</a><span aria-hidden="true">/</span>0.0.1</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>release</span>
+      <span>current</span>
+      <span>reviewed 2026-10-09</span>
+    </div>
+    <article>
+<section id="001" class="level2">
+<h2>0.0.1</h2>
+<p>DOT becomes the first published product in the <code>devs-guide/openai</code> hub. This release curates the original local research prompts and agent operating guides into a stable product hierarchy, records their import provenance, and adds a deterministic documentation and release workflow.</p>
+<p>The release separates public prompt products from private lifecycle planning. Every public artifact has an extensionless documentation route and a byte-exact raw download tied to the same repository commit.</p>
+<section id="scope" class="level3">
+<h3>Scope</h3>
+<ul>
+<li>Initial release range: repository creation through the accepted <code>0.0.1</code> commit.</li>
+<li>Public product: <code>dot/</code>.</li>
+<li>Public documentation root: <code>https://devs-guide.github.io/openai/</code>.</li>
+<li>DOT documentation root: <code>https://devs-guide.github.io/openai/dot/</code>.</li>
+<li>Source and documentation only; no binary runtime or hosted application.</li>
+</ul>
+</section>
+<section id="highlights" class="level3">
+<h3>Highlights</h3>
+<ul>
+<li>Establishes an expandable OpenAI product hub with DOT as the first product.</li>
+<li>Publishes one current master prompt, retained reference variants, reusable research starters, and dated agent operating guides.</li>
+<li>Preserves original SHA-256 provenance while normalizing public paths.</li>
+<li>Generates accessible, extensionless documentation and byte-exact raw-source downloads from one reviewed manifest.</li>
+<li>Validates repository hygiene, source imports, generated links, Pages source identity, and release metadata.</li>
+<li>Keeps lifecycle context, plans, reviews, and operational evidence in the separate private <code>devs-guide/prompts</code> repository.</li>
+</ul>
+</section>
+<section id="added" class="level3">
+<h3>Added</h3>
+<ul>
+<li>Root and DOT indexes connecting products, prompts, agents, features, history, and releases.</li>
+<li><code>dot/prompts/core/</code> for the current master and retained core variants.</li>
+<li><code>dot/prompts/research/</code> for reusable research starters.</li>
+<li><code>dot/agents/</code> for browser, computer, document, and prompt operating guides.</li>
+<li>An initial-import ledger with every original path, normalized path, digest, and disposition.</li>
+<li>A JSON publication manifest, deterministic static builder, local validators, GitHub Actions, and remote Pages verification.</li>
+<li>An explicit copyright and no-license notice plus an unofficial-project disclaimer.</li>
+</ul>
+</section>
+<section id="changed" class="level3">
+<h3>Changed</h3>
+<ul>
+<li>Replaced flat source names and colon-bearing agent filenames with stable, lowercase product/project paths.</li>
+<li>Classified public artifacts as current, reference, reusable template, or dated evidence without rewriting their imported bodies.</li>
+<li>Separated rendered documentation routes from exact raw source routes.</li>
+<li>Established bare semantic tags and draft-first, human-reviewed GitHub releases.</li>
+</ul>
+</section>
+<section id="fixed" class="level3">
+<h3>Fixed</h3>
+<ul>
+<li>Removed the redundant public copy of the byte-identical master prompt while retaining both original identities in the import record.</li>
+<li>Prevented private lifecycle prompts, local symlinks, generated Pages output, credentials, and operating-system metadata from entering release source.</li>
+<li>Added commit markers and remote checks so a successful Actions build cannot be mistaken for a matching live Pages deployment.</li>
+</ul>
+</section>
+<section id="safety-and-publication-model" class="level3">
+<h3>Safety and publication model</h3>
+<p>The project is community maintained and is not affiliated with or endorsed by OpenAI. Dated capability observations remain bounded to their documented test windows, while owner policies remain instructions rather than platform facts.</p>
+<p>The public repository grants no open-source license. Generated output is built from the reviewed manifest, deployed only from <code>main</code> to an orphan <code>www</code> branch, and checked against the exact source commit. Published tags are immutable; corrections use a later release.</p>
+<p>Compilation, builds, and tests run only in GitHub Actions. The local workstation is not a validation environment.</p>
+</section>
+<section id="commit" class="level3">
+<h3>#COMMIT</h3>
+<p><code>release: 0.0.1 - publish DOT research prompt system</code></p>
+</section>
+<section id="notable-commits" class="level3">
+<h3>Notable commits</h3>
+<ul>
+<li><code>a3a5a56</code> — <code>chore(repository): establish OpenAI guide structure</code></li>
+<li><code>c8650e0</code> — <code>docs(dot): curate initial DOT source set</code></li>
+<li><code>ea226a7</code> — <code>ci(pages): publish tiered documentation</code></li>
+<li><code>a99e695</code> — <code>fix(pages): scope private prompt path check</code></li>
+<li><code>80b3a90</code> — <code>ci(actions): update Node 24 actions</code></li>
+</ul>
+</section>
+<section id="assets" class="level3">
+<h3>Assets</h3>
+<ul>
+<li>GitHub-generated source archives for tag <code>0.0.1</code>.</li>
+<li>Rendered documentation and exact raw-source downloads through GitHub Pages.</li>
+<li>No additional binary assets.</li>
+</ul>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/docs/releases/0.0.1.md">Repository source</a> · <a href="/openai/raw/docs/releases/0.0.1.md">Raw source</a></p>
+  </footer>
+</body>
+</html>

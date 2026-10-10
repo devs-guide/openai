@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DOT Agent · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>DOT Agent · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span>Agent</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>index</span>
+      <span>current</span>
+      <span>reviewed 2026-10-10</span>
+    </div>
+    <article>
+<section id="dot-agent" class="level1">
+<h1>DOT Agent</h1>
+<p><code>#AGENT</code> is the stable operating lane for DOT. It defines the runtime, permissions, models, browser, storage, Pages, tools, and media behavior that a project may use. It does not define a research topic or contain research findings.</p>
+<section id="read-left-to-right" class="level2">
+<h2>Read left to right</h2>
+<p><a href="/openai/dot/agent/contract/"><code>master.prompt</code></a> → <a href="/openai/dot/agent/config/"><code>config.json</code></a> → <a href="/openai/dot/agent/runtime/"><code>runtime.json</code></a> → capability module</p>
+<table>
+<thead>
+<tr class="header">
+<th>Capability module</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="/openai/dot/agent/browser/"><code>browser.prompt</code></a></td>
+<td><code>#BROWSER</code>, configured <code>#TABS</code>, <code>#CAPTCHA</code>, and browser-based <code>#TOOL</code> behavior</td>
+</tr>
+<tr class="even">
+<td><a href="/openai/dot/agent/page/"><code>page.prompt</code></a></td>
+<td><code>#PAGE</code>, saving, delivery, and readback verification</td>
+</tr>
+<tr class="odd">
+<td><a href="/openai/dot/agent/media/"><code>media.prompt</code></a></td>
+<td><code>#VIDEO</code>, captions, audio, and <code>#TRANSCRIPTION</code></td>
+</tr>
+</tbody>
+</table>
+<p>Load only the capability modules needed by the active project. A project may narrow this lane but may not silently expand its permissions, models, tools, accounts, or destinations.</p>
+<p><code>#TABS</code> is not a separate capability module. It is the Browser-owned shared capacity and recovery configuration in <code>config.json</code>; its canonical rules live inside <code>browser.prompt</code> and apply whenever that module is loaded.</p>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/dot/agent/readme.md">Repository source</a> · <a href="/openai/raw/dot/agent/readme.md">Raw source</a></p>
+  </footer>
+</body>
+</html>

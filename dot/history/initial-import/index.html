@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Initial DOT source import · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>Initial DOT source import · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/history/">History</a><span aria-hidden="true">/</span>Initial Import</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>history</span>
+      <span>current</span>
+      <span>reviewed 2026-10-09</span>
+    </div>
+    <article>
+<section id="initial-dot-source-import" class="level1">
+<h1>Initial DOT source import</h1>
+<blockquote>
+<p>This ledger describes release <code>0.0.1</code>. Release <code>0.0.2</code> removes these paths from the current tree after mapping their contents in the <a href="/openai/dot/history/two-lane-migration/">two-lane migration record</a>. Exact bodies and hashes remain recoverable from the immutable <code>0.0.1</code> tag.</p>
+</blockquote>
+<p>The local pre-Git inventory was captured on 2026-10-09 before the first public repository commit. The import normalizes path names while preserving document bodies. SHA-256 values below identify the original bytes.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Original path under <code>dot/</code></th>
+<th>Public path</th>
+<th>SHA-256</th>
+<th>Disposition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>DOT2_Research_Starter_Template_Data_Only-3337709cc6ad4942af0f034cc222bf0c.md</code></td>
+<td><code>dot/prompts/research/starter-data-only.md</code></td>
+<td><code>24ef3d27e7b67998a28549a9d47ccfabcffa3923099d2b34b1398336beb0859c</code></td>
+<td>Renamed; body preserved</td>
+</tr>
+<tr class="even">
+<td><code>agent:browser.md</code></td>
+<td><code>dot/agents/browser.md</code></td>
+<td><code>297014149ac362021c662234105ed07af443020f41d393bbb1329e56b7893f46</code></td>
+<td>Renamed; body preserved</td>
+</tr>
+<tr class="odd">
+<td><code>agent:computer.md</code></td>
+<td><code>dot/agents/computer.md</code></td>
+<td><code>e99bbb77b535ce9e0facf71580e8c0b688d41b7868663e4728d068f47bc0cfce</code></td>
+<td>Renamed; body preserved</td>
+</tr>
+<tr class="even">
+<td><code>agent:doc.md</code></td>
+<td><code>dot/agents/doc.md</code></td>
+<td><code>1626ba65462a5a45bbcf713014879c01e28a1cd4b029d02314e1083b7d99bc5a</code></td>
+<td>Renamed; body preserved</td>
+</tr>
+<tr class="odd">
+<td><code>agent:prompt.md</code></td>
+<td><code>dot/agents/prompt.md</code></td>
+<td><code>33506dab7b718bbac5b3a42fcf4bcf1f7667488b1d9f7b829e814ea53dfa5763</code></td>
+<td>Renamed; body preserved</td>
+</tr>
+<tr class="even">
+<td><code>dot.master.00.prompt</code></td>
+<td><code>dot/prompts/core/master.prompt</code></td>
+<td><code>1d36de2ed42fe33e041e174a9622efcbf0a1b74c26caf2d5fe8a3a44b229ac92</code></td>
+<td>Byte-identical duplicate; not published separately</td>
+</tr>
+<tr class="odd">
+<td><code>dot.master.01.prompt</code></td>
+<td><code>dot/prompts/core/master.prompt</code></td>
+<td><code>1d36de2ed42fe33e041e174a9622efcbf0a1b74c26caf2d5fe8a3a44b229ac92</code></td>
+<td>Canonical imported master; body preserved</td>
+</tr>
+<tr class="even">
+<td><code>dot.prompt</code></td>
+<td><code>dot/prompts/core/dot.prompt</code></td>
+<td><code>298149b369b45ccb3fcf716a8169a3f778a9703f3a25a58394c8cca27108840d</code></td>
+<td>Renamed; body preserved</td>
+</tr>
+<tr class="odd">
+<td><code>dot.ref.prompt</code></td>
+<td><code>dot/prompts/core/reference.prompt</code></td>
+<td><code>92c31f665fde3b1866922ebd60d53ab744020459f5bcde61c836b785832f72fb</code></td>
+<td>Renamed; body preserved</td>
+</tr>
+<tr class="even">
+<td><code>dot.research.readme.prompt</code></td>
+<td><code>dot/prompts/research/overview.prompt</code></td>
+<td><code>14e72f0bde82bd365af5356419ba162006c9fa5640392b2dcf971f8f7877ea48</code></td>
+<td>Renamed; body preserved</td>
+</tr>
+<tr class="odd">
+<td><code>dot.research.template.prompt</code></td>
+<td><code>dot/prompts/research/template.prompt</code></td>
+<td><code>5ea4f8ec916d5a17a7c7b1f0a400e44320d2e4dbfe5acf40f930db2613dcfca5</code></td>
+<td>Renamed; body preserved</td>
+</tr>
+</tbody>
+</table>
+<p>The local <code>dot.master.00.prompt</code> file remains ignored as a recoverable copy. It is excluded from commits, Pages, and release archives because its bytes are already represented by the canonical master artifact.</p>
+<p>Credential, private-path, and repository hygiene scans run in GitHub Actions on the exact publication candidate. Human content review remains a separate release gate.</p>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/docs/history/initial-import.md">Repository source</a> · <a href="/openai/raw/docs/history/initial-import.md">Raw source</a></p>
+  </footer>
+</body>
+</html>

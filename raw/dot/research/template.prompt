@@ -1,0 +1,633 @@
+# #TEMPLATE — reusable #RESEARCH structures
+
+**Contract:** `dot-research-template/1`  
+**Purpose:** canonical fillable structures; examples are not findings,
+permissions, or a second copy of the `#DATA` process rules.
+
+## TEMPLATE-001 — Project Control Packet
+
+```markdown
+# PROJECT CONTROL PACKET
+
+- Project ID: [STABLE_ID]
+- Version / updated: [VERSION / TIMESTAMP / TIME_ZONE]
+- Status: [DRAFT / READY / RUNNING / WAITING / BLOCKED / VALIDATING / COMPLETE_WITH_GAPS / DONE]
+- Master question: [QUESTION]
+- Decision and audience: [DECISION / AUDIENCE]
+- Active focus: [ONE_BRANCH]
+- Paused branches and resume triggers: [LIST / NONE]
+- Mode: [METHOD_ONLY / TARGETED_LOOKUP / EVIDENCE_SYNTHESIS / BOUNDED_CENSUS / OPEN_UNIVERSE_DISCOVERY / UPDATE_MONITOR]
+- Inclusions / exclusions: [BOUNDARIES]
+- Entities / geography / period / cutoff: [SCOPE]
+- Coverage mode / denominator / unknown residual: [DEFINITION]
+- Required measures, units and dimensions: [LIST]
+- Inputs and known sources: [VERSIONED REFERENCES]
+- Required primary and signed-in sources: [LIST / NONE]
+- Sensitive-data and expert-review boundaries: [RULES]
+- Assigned primary / collaborator model: [EXACT VISIBLE CONFIGURATION]
+- Enabled cloud-computer tools: [EXACT ALLOWLIST / NONE]
+- Browser-based tools and data boundary: [RULES]
+- Working root: [/workspace/scratch/<project-id>/]
+- Page / durable destinations: [IDS, ACCOUNT, AUDIENCE]
+- Deliverables and order: [LIST]
+- Acceptance tests: [IDS]
+- Deadline / status cadence / stopping rules: [VALUES]
+- Owner-only decisions: [LIST]
+- Current blocker / checkpoint / next action: [IDS / ACTION]
+```
+
+## TEMPLATE-002 — Research State Packet
+
+```markdown
+# RESEARCH STATE PACKET
+
+- Project and packet version: [IDS]
+- Active question and module: [IDS]
+- Last verified source / Fact / query: [IDS]
+- Completed route bundles: [IDS]
+- Current entities and provisional identities: [IDS]
+- Material claims, contradictions and unknowns: [IDS]
+- Coverage numerators, denominators and residuals: [VALUES]
+- Tool, browser, CAPTCHA and media blockers: [IDS]
+- Current artifacts and versions: [IDS]
+- Next finite actions and stop conditions: [LIST]
+```
+
+## TEMPLATE-003 — Checkpoint
+
+```json
+{
+  "schema": "dot-research-checkpoint/1",
+  "project_id": "PROJECT_ID",
+  "updated_at": "RFC3339_TIMESTAMP",
+  "status": "RUNNING",
+  "goal_and_scope": "CURRENT_SCOPE",
+  "input_versions": [],
+  "completed_steps": [],
+  "artifact_versions": [],
+  "record_versions": [],
+  "pending_steps": [],
+  "blockers": [],
+  "unresolved_side_effects": [],
+  "decisions_and_assumptions": [],
+  "approval_references": [],
+  "resume_preconditions": [],
+  "next_safe_action": "FINITE_ACTION"
+}
+```
+
+## TEMPLATE-004 — Research record catalog
+
+| Record | Minimum contents |
+|---|---|
+| Entity and relationship register | Stable IDs, exact aliases, subject types, roles, dated endpoints, match evidence, resolution and reviewer type |
+| Query log | Query ID, route bundle, engine/tool, exact query, parameters, time, execution state, result and next step |
+| URL and access log | URL-occurrence ID, exact URL, generated/discovered/returned/opened/reviewed/cited/blocked event, time, result and linked IDs |
+| Source and document register | Source, document and version IDs, issuer, title, dates/precision, URL occurrences, limitations, capture and hash |
+| Assertion, observation and claim ledgers | Atomic wording or measure, subject, context, derivation class, verification status, reviewer type and lineage |
+| Missing-data register | Subject/field, controlled reason, searches, sources, access issue, estimate decision and next step |
+| Exclusion register | Candidate, scope/status, decision, evidence, reason and review date |
+| CAPTCHA register | Host/route, time, state, attempts, outcome, impact and permitted next step |
+| Validation ledger | Test ID, rule, expected and observed results, affected records, status, reviewer and remediation |
+| Artifact map | Artifact ID, purpose, format, version/hash, working and delivery locations, save/readback state |
+| Publication receipt | Page/file ID, URL, audience/access result, hash/version, row count and readback time |
+
+## TEMPLATE-005 — Human-facing #FACT
+
+A `#FACT` is one atomic display record backed by normalized storage, not an
+additional release table. `storage_kind` and `storage_record_id` point to one
+observation or claim; evidence remains in linked assertion and evidence records.
+
+```json
+{
+  "fact_id": "FACT-0001",
+  "storage_kind": "OBSERVATION_OR_CLAIM",
+  "storage_record_id": "OBSERVATION_OR_CLAIM_ID",
+  "subject_id": "STABLE_SUBJECT_ID",
+  "predicate": "MEASURE_OR_PRECISE_PROPOSITION",
+  "value": null,
+  "value_logical_type": "DECLARED_TYPE",
+  "unit": null,
+  "period_start": null,
+  "period_end": null,
+  "period_label": null,
+  "derivation_class": "OBSERVED_DERIVED_OR_INFERRED",
+  "verification_status": "VERIFIED_PARTIALLY_VERIFIED_DISPUTED_OR_UNVERIFIED",
+  "reviewer_type": "HUMAN_MODEL_ASSISTED_OR_NONE",
+  "evidence_link_id": null,
+  "null_reason": "REQUIRED_WHEN_VALUE_OR_REQUIRED_REFERENCE_IS_NULL"
+}
+```
+
+## TEMPLATE-006 — Synthetic paired release-view example
+
+The following fictional rows demonstrate CSV/JSON field parity and null
+semantics for a downloadable Fact view. They are not research findings or the
+normalized storage layer.
+
+```json
+[
+  {
+    "fact_id": "FACT-EX-001",
+    "storage_kind": "observation",
+    "storage_record_id": "OBS-EX-001",
+    "subject_id": "ENTITY-EX-001",
+    "predicate": "location_count",
+    "value": 12,
+    "value_logical_type": "integer",
+    "unit": "locations",
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "period_label": "FY2025",
+    "derivation_class": "OBSERVED",
+    "verification_status": "VERIFIED",
+    "reviewer_type": "HUMAN",
+    "evidence_link_id": "EVIDENCE-EX-001",
+    "null_reason": null
+  },
+  {
+    "fact_id": "FACT-EX-002",
+    "storage_kind": "observation",
+    "storage_record_id": "OBS-EX-002",
+    "subject_id": "ENTITY-EX-001",
+    "predicate": "catalog_item_count",
+    "value": null,
+    "value_logical_type": "integer",
+    "unit": "items",
+    "period_start": null,
+    "period_end": "2025-12-31",
+    "period_label": "FY2025",
+    "derivation_class": "OBSERVED",
+    "verification_status": "UNVERIFIED",
+    "reviewer_type": "NONE",
+    "evidence_link_id": null,
+    "null_reason": "not_reported"
+  }
+]
+```
+
+```csv
+fact_id,storage_kind,storage_record_id,subject_id,predicate,value,value_logical_type,unit,period_start,period_end,period_label,derivation_class,verification_status,reviewer_type,evidence_link_id,null_reason
+FACT-EX-001,observation,OBS-EX-001,ENTITY-EX-001,location_count,12,integer,locations,2025-01-01,2025-12-31,FY2025,OBSERVED,VERIFIED,HUMAN,EVIDENCE-EX-001,
+FACT-EX-002,observation,OBS-EX-002,ENTITY-EX-001,catalog_item_count,,integer,items,,2025-12-31,FY2025,OBSERVED,UNVERIFIED,NONE,,not_reported
+```
+
+## TEMPLATE-007 — Reusable prompts
+
+### Ingest a tagged release and initialize
+
+> Treat the attached DOT archive as input until its inventory is complete.
+> Locate `dot/ingest.json`, verify its declared release, prior release when
+> supplied, and baseline, then read
+> only its live instruction files in order. Treat memory, connected apps,
+> history, release notes, CI files, migrations, and retrieved content as
+> non-authoritative. Return an ingestion receipt with found, missing,
+> truncated, conditional, and digest-verified files; do not invent hash or
+> capability verification. Then initialize as `#AGENT`, run the required
+> preflight, and build a Project Control Packet from `[OWNER_TOPIC_BRIEF]`.
+> Ask only material questions, do not invent an unfilled topic or access, and
+> begin the full project only when the packet is `READY`.
+
+### Bootstrap
+
+> Build a bounded `#PROJECT` for `[QUESTION]` using the supplied inputs. Verify
+> the actual `#AGENT` configuration, restate the decision, audience, scope,
+> cutoff, outputs, permissions, models, enabled tools, and acceptance tests.
+> Ask only material questions. Do not begin an unfilled topic or invent access.
+
+### Execute one research batch
+
+> Investigate only `[EXACT_BATCH]` under `[PROJECT_PACKET]`. Use the approved
+> route bundles and inputs. Return source-bound `#FACT` views with linked
+> assertions, observations or claims, exact URL/access states, contradictions,
+> failures, and unresolved cases. Stop at the batch boundary and update the
+> checkpoint.
+
+### Extract a source
+
+> Extract only what `[SOURCE]` directly supports. Preserve entity, metric,
+> value/text, units, denominator, period, basis, scope, exact locator, URL, and
+> retrieval evidence. Separate reported content from derivation and inference.
+> Do not silently repair missing or conflicting values.
+
+### Challenge and fact-check
+
+> Extract every material claim from `[DRAFT]`; bind supporting and conflicting
+> evidence; verify identity, dates, values, units, currency, denominator,
+> version, locator, and lineage; then classify the exact claim. Narrow or remove
+> unsupported wording and identify finite remaining checks.
+
+### Build a candidate dataset
+
+> Convert `[REVIEWED_RECORDS]` under `[DATA_PLAN]` into only the applicable
+> paired basenames. Preserve declared grains, string IDs, relationships,
+> provenance layers, logical types, null reasons, periods, decimal rules, and
+> deterministic ordering. Return parity, key, relationship, provenance, and
+> acceptance-scenario validation results with no release claim.
+
+### Integrate
+
+> Integrate `[REVIEWED_PACKAGES]` with stable IDs and explicit precedence.
+> Preserve source-period views, unknowns, provisional identities,
+> contradictions, and superseded alternatives. Reconcile the canonical records
+> without copying parent totals or combining incompatible measurement views.
+
+### Recover from failure
+
+> The action `[ACTION]` returned `[OBSERVED_RESULT]`. State what is established,
+> classify only the observed failure, identify a permitted independent route or
+> smallest owner action, and update the affected records and checkpoint. Do not
+> infer a cause, evade restrictions, or repeat a stopped route.
+
+### Produce one on-demand executive brief
+
+> Activate `#SUMMARY` for `[EXECUTIVE_BRIEF_REQUEST_ID]` against the frozen
+> parent research and data versions. Build the required Fact matrix, complete
+> missing material Facts through `#INTERNET` and applicable `#DATA` inside the
+> approved scope, then freeze the final evidence versions. Create only the
+> requested subtopic brief, validate and visually inspect the self-contained
+> PDF, and return its completion receipt. Do not overwrite the main report,
+> expand into an undeclared research project, or claim delivery without a
+> native attachment and readback.
+
+## TEMPLATE-008 — Final delivery
+
+The final package contains: supported answer; scope and methodology; findings
+with nearby citations; alternatives and contradictions; recommendations tied
+to evidence; exact tables; source, claim, missing-data, exclusion, and
+validation appendices; applicable paired data files and data dictionary; Page
+and download links; completion status; bounded gaps; and a resume handoff.
+
+The completion notice states exactly what is complete, its project/version and
+date, destinations, readback result, remaining gaps, and whether qualified
+expert review is still required.
+
+## TEMPLATE-009 — Dataset and release records
+
+```json
+{
+  "dataset_id": "DATASET_ID",
+  "title": "DATASET_TITLE",
+  "scope": "CONTROLLED_SCOPE",
+  "owner": "OWNER_ID_OR_ROLE",
+  "lifecycle_status": "ACTIVE_SUPERSEDED_OR_RETIRED",
+  "created_in_release_id": "RELEASE_ID"
+}
+```
+
+```json
+{
+  "release_id": "RELEASE_ID",
+  "dataset_id": "DATASET_ID",
+  "release_label": "VERSION_LABEL",
+  "release_status": "CANDIDATE_ACCEPTED_OR_SUPERSEDED",
+  "released_at": null,
+  "coverage_cutoff": "DECLARED_CUTOFF",
+  "source_cutoff": "DECLARED_CUTOFF",
+  "dictionary_version": "DICTIONARY_VERSION",
+  "format_version": "FORMAT_VERSION",
+  "prior_release_id": null,
+  "prior_release_id_null_reason": "initial_release",
+  "acceptance_reviewer_type": "HUMAN",
+  "acceptance_reference": null,
+  "known_gap_summary": null
+}
+```
+
+## TEMPLATE-010 — Data-dictionary field record
+
+| Attribute | Fillable value |
+|---|---|
+| File basename / field name | `[BASENAME]` / `[EXACT_FIELD]` |
+| Business label / definition | `[LABEL]` / `[ONE_MEANING_AT_DECLARED_GRAIN]` |
+| Logical type / required | `[TYPE]` / `[TRUE_OR_FALSE]` |
+| Null meaning / companion reason | `[MEANING]` / `[FIELD_OR_NOT_APPLICABLE]` |
+| Allowed values or range | `[ENUM_RANGE_OR_PATTERN]` |
+| Unit, scale, currency, denominator | `[VALUES_OR_NOT_APPLICABLE]` |
+| Date or period semantics | `[EFFECTIVE_AS_OF_INTERVAL_PUBLICATION_ACCESS_OR_RELEASE]` |
+| Key role / reference / cardinality | `[ROLE]` / `[TARGET]` / `[CARDINALITY]` |
+| Source and derivation class | `[OBSERVED_DERIVED_INFERRED_METADATA_OR_MIXED]` |
+| Standardization and provenance | `[RULE]` / `[REQUIRED_LINK]` |
+| Introduced / deprecated | `[VERSION]` / `[VERSION_AND_REPLACEMENT_OR_NULL]` |
+
+## TEMPLATE-011 — Entity, alias, and relationship records
+
+```json
+{
+  "entity_id": "ENTITY_ID",
+  "entity_type": "DECLARED_TYPE",
+  "preferred_label": "LABEL",
+  "identity_status": "ACCEPTED_PROVISIONAL_SUPERSEDED_OR_RETIRED",
+  "reviewer_type": "HUMAN_MODEL_ASSISTED_OR_NONE"
+}
+```
+
+```json
+{
+  "alias_id": "ALIAS_ID",
+  "entity_id": "ENTITY_ID_OR_NULL",
+  "entity_id_null_reason": null,
+  "source_id": "SOURCE_ID",
+  "exact_label_or_identifier": "SOURCE_VALUE",
+  "match_method": "METHOD",
+  "match_confidence": "DECLARED_CONFIDENCE",
+  "resolution_status": "STATUS"
+}
+```
+
+```json
+{
+  "entity_relationship_id": "RELATIONSHIP_ID",
+  "from_entity_id": "ENTITY_ID",
+  "to_entity_id": "ENTITY_ID",
+  "relationship_type": "CONTROLLED_TYPE",
+  "period_start": null,
+  "period_end": null,
+  "period_precision": "DECLARED_PRECISION",
+  "source_assertion_id": "ASSERTION_ID"
+}
+```
+
+## TEMPLATE-012 — Source, document, version, URL, and access records
+
+```json
+{
+  "source_id": "SOURCE_ID",
+  "publisher": "PUBLISHER",
+  "source_class": "CONTROLLED_CLASS",
+  "canonical_location": null,
+  "coverage_and_limitations": "SCOPED_TEXT"
+}
+```
+
+```json
+{
+  "document_id": "DOCUMENT_ID",
+  "source_id": "SOURCE_ID",
+  "enduring_title": "TITLE",
+  "document_type": "CONTROLLED_TYPE"
+}
+```
+
+```json
+{
+  "document_version_id": "DOCUMENT_VERSION_ID",
+  "document_id": "DOCUMENT_ID",
+  "version_label": null,
+  "publication_date": null,
+  "publication_date_precision": "UNKNOWN_YEAR_MONTH_OR_DAY",
+  "content_hash": null,
+  "generated_by_workflow": false
+}
+```
+
+```json
+{
+  "url_occurrence_id": "URL_OCCURRENCE_ID",
+  "document_version_id": "DOCUMENT_VERSION_ID_OR_NULL",
+  "document_version_id_null_reason": null,
+  "url": "ABSOLUTE_URL",
+  "url_role": "CANONICAL_MIRROR_REDIRECT_ARCHIVE_OR_OTHER"
+}
+```
+
+```json
+{
+  "access_event_id": "ACCESS_EVENT_ID",
+  "url_occurrence_id": "URL_OCCURRENCE_ID",
+  "event_kind": "GENERATED_DISCOVERED_RETURNED_OPENED_REVIEWED_CITED_OR_BLOCKED",
+  "observed_at": "RFC3339_TIMESTAMP",
+  "result": "OBSERVED_RESULT",
+  "reviewer_type": "HUMAN_MODEL_ASSISTED_OR_NONE"
+}
+```
+
+## TEMPLATE-013 — Assertion, observation, claim, and evidence records
+
+```json
+{
+  "source_assertion_id": "ASSERTION_ID",
+  "source_id": "SOURCE_ID",
+  "document_version_id": "DOCUMENT_VERSION_ID_OR_NULL",
+  "exact_or_faithful_content": "SOURCE_BOUND_CONTENT",
+  "assertion_status": "CURRENT_CONFLICTING_SUPERSEDED_OR_OTHER"
+}
+```
+
+```json
+{
+  "observation_id": "OBSERVATION_ID",
+  "subject_id": "STABLE_SUBJECT_ID",
+  "measure": "MEASURE",
+  "raw_value": "SOURCE_TOKEN_OR_NULL",
+  "value": null,
+  "logical_type": "DECLARED_TYPE",
+  "unit_and_scale": "DECLARED_UNIT",
+  "period_start": null,
+  "period_end": null,
+  "period_type": "DECLARED_TYPE",
+  "source_assertion_id": "ASSERTION_ID",
+  "derivation_class": "OBSERVED_DERIVED_OR_INFERRED",
+  "verification_status": "STATUS",
+  "reviewer_type": "HUMAN_MODEL_ASSISTED_OR_NONE",
+  "null_reason": "CONTROLLED_REASON_OR_NULL"
+}
+```
+
+```json
+{
+  "claim_id": "CLAIM_ID",
+  "subject_id": "STABLE_SUBJECT_ID",
+  "proposition": "PRECISE_TEXT",
+  "source_assertion_id": "ASSERTION_ID",
+  "derivation_class": "OBSERVED_DERIVED_OR_INFERRED",
+  "verification_status": "STATUS",
+  "reviewer_type": "HUMAN_MODEL_ASSISTED_OR_NONE"
+}
+```
+
+```json
+{
+  "evidence_link_id": "EVIDENCE_LINK_ID",
+  "target_kind": "SOURCE_ASSERTION_OBSERVATION_OR_CLAIM",
+  "source_assertion_id": "ASSERTION_ID_OR_NULL",
+  "observation_id": "OBSERVATION_ID_OR_NULL",
+  "claim_id": "CLAIM_ID_OR_NULL",
+  "document_version_id": "DOCUMENT_VERSION_ID",
+  "printed_page": null,
+  "pdf_page": null,
+  "table_figure_section_row_column": "NARROWEST_LOCATOR",
+  "evidence_role": "SUPPORTS_CONTRADICTS_CONTEXT_OR_OTHER"
+}
+```
+
+## TEMPLATE-014 — Review, correction, and validation records
+
+```json
+{
+  "review_item_id": "REVIEW_ITEM_ID",
+  "release_id": "RELEASE_ID",
+  "affected_file": "BASENAME",
+  "affected_row_id": "ROW_ID_OR_NULL",
+  "affected_row_id_null_reason": null,
+  "issue_type": "IDENTITY_CONFLICT_INFERENCE_MISSINGNESS_EXCEPTION_OR_OTHER",
+  "status": "OPEN_ACCEPTED_REJECTED_DEFERRED_OR_BLOCKED",
+  "reviewer_type": "HUMAN_MODEL_ASSISTED_OR_NONE",
+  "decision_reference": null
+}
+```
+
+```json
+{
+  "correction_id": "CORRECTION_ID",
+  "prior_release_id": "ACCEPTED_RELEASE_ID",
+  "first_corrected_release_id": "SUCCESSOR_RELEASE_ID",
+  "affected_file": "BASENAME",
+  "affected_row_id": "ROW_ID",
+  "affected_field": "FIELD_NAME",
+  "old_logical_value": null,
+  "new_logical_value": null,
+  "reason": "REASON",
+  "evidence_link_id": "EVIDENCE_LINK_ID",
+  "decision_owner": "HUMAN_REVIEWER_ID_OR_ROLE"
+}
+```
+
+```json
+{
+  "validation_result_id": "VALIDATION_RESULT_ID",
+  "release_id": "RELEASE_ID",
+  "file_basename": null,
+  "check_name": "CHECK_NAME",
+  "expected_rule": "RULE",
+  "observed_result": "RESULT",
+  "discrepancy_count": 0,
+  "severity": "MATERIAL_NONBLOCKING_OR_INFORMATIONAL",
+  "status": "PASS_FAIL_WARNING_NOT_APPLICABLE_BLOCKED_OR_ACCEPTED_EXCEPTION",
+  "reviewer_type": "HUMAN_MODEL_ASSISTED_OR_NONE",
+  "disposition": "DISPOSITION"
+}
+```
+
+## TEMPLATE-015 — Manifest file record
+
+```json
+{
+  "manifest_file_id": "MANIFEST_FILE_ID",
+  "release_id": "RELEASE_ID",
+  "file_basename": "SELECTED_BASENAME",
+  "extension": "csv_or_json",
+  "row_grain": "ONE_ROW_REPRESENTS",
+  "row_count": 0,
+  "field_count": 0,
+  "sha256": "FILE_HASH",
+  "pair_manifest_file_id": "COMPANION_MANIFEST_FILE_ID",
+  "parity_status": "PASS_FAIL_OR_BLOCKED",
+  "publication_state": "GENERATED_VALIDATED_DELIVERED_OR_READ_BACK"
+}
+```
+
+## TEMPLATE-016 — Executive Brief Request, Fact Matrix, and Completion Receipt
+
+Use this request only when the owner explicitly activates the conditional
+`#SUMMARY` contract. The Fact Matrix is a Summary control view over canonical
+Facts and evidence; it is not a new `#DATA` basename or a competing evidence
+store.
+
+```json
+{
+  "schema": "dot-executive-brief-request/2",
+  "summary_request_id": "SUMMARY_REQUEST_ID",
+  "parent_project_id": "PROJECT_ID",
+  "parent_project_version": "PROJECT_VERSION",
+  "parent_report_artifact_id": "ARTIFACT_ID",
+  "dataset_release_ids": [],
+  "research_mode": "PUBLIC_SOURCE_GAP_FILLING",
+  "requested_subtopic": "SUBTOPIC",
+  "audience": "READERS",
+  "supported_decision_or_discussion": "PURPOSE",
+  "geographic_population_and_entity_scope": "SCOPE",
+  "relevant_dates_and_research_cutoff": "DATES_AND_CUTOFF",
+  "input_files_pages_datasets_and_urls": [],
+  "required_fact_fields": [],
+  "required_questions_or_comparisons": [],
+  "requested_entity_chapters_and_order": [],
+  "excluded_topics": [],
+  "requested_data_companions": [],
+  "desired_length": "8_TO_16_CORE_PAGES_PLUS_READABLE_APPENDIX_IF_NEEDED",
+  "output_title": "TITLE",
+  "output_artifact_id": "ARTIFACT_ID",
+  "output_version": "VERSION",
+  "output_filename": "PROJECT_ID-summary-SUBTOPIC_SLUG-VERSION.pdf",
+  "approved_destination": "DESTINATION_AND_AUDIENCE",
+  "recorded_assumptions": [],
+  "acceptance_test_ids": [],
+  "status": "DRAFT_READY_RUNNING_BLOCKED_VALIDATING_COMPLETE_WITH_GAPS_OR_DONE"
+}
+```
+
+```json
+{
+  "schema": "dot-summary-fact-matrix-row/1",
+  "summary_request_id": "SUMMARY_REQUEST_ID",
+  "matrix_row_id": "MATRIX_ROW_ID",
+  "subject_id": null,
+  "subject_id_null_reason": "REQUIRED_FOR_A_NONENTITY_SUBJECT_OR_UNRESOLVED_IDENTITY",
+  "inclusion_disposition": "INCLUDED_EXCLUDED_OR_UNRESOLVED",
+  "required_fact_key": "CONTROLLED_FIELD_OR_QUESTION_KEY",
+  "required_grain": "SUBJECT_ENTITY_SITE_PROGRAM_OR_OTHER_GRAIN",
+  "required_population": "POPULATION_OR_NOT_APPLICABLE",
+  "required_period": "PERIOD_OR_NOT_APPLICABLE",
+  "fact_id": null,
+  "fact_id_null_reason": "REQUIRED_WHEN_NO_CONTROLLED_FACT_IS_LINKED",
+  "evidence_link_ids": [],
+  "research_state": "NOT_STARTED_IN_PROGRESS_AWAITING_REVIEW_BLOCKED_OR_TERMINAL",
+  "coverage_disposition": "SUPPORTED_DISPUTED_BOUNDED_NEGATIVE_ACCESS_BLOCKED_AUTHORIZATION_REQUIRED_NOT_APPLICABLE_OR_UNRESOLVED",
+  "missing_reason": "CONTROLLED_REASON_OR_NULL",
+  "reviewer_type": "HUMAN_MODEL_ASSISTED_OR_NONE",
+  "next_action": "FINITE_ACTION_OR_NULL"
+}
+```
+
+```json
+{
+  "schema": "dot-executive-brief-completion/2",
+  "summary_request_id": "SUMMARY_REQUEST_ID",
+  "output_artifact_id": "ARTIFACT_ID",
+  "output_filename": "VERSIONED_FILENAME.pdf",
+  "output_version": "VERSION",
+  "parent_project_id_and_version": "PROJECT_ID_AND_VERSION",
+  "parent_report_artifact_id": "ARTIFACT_ID",
+  "initial_dataset_release_ids": [],
+  "dataset_release_ids": [],
+  "evidence_cutoff": "DECLARED_CUTOFF",
+  "fact_and_evidence_versions": [],
+  "fact_matrix_version": "VERSION",
+  "fact_matrix_sha256": "FILE_HASH_OR_NULL",
+  "entity_denominator": 0,
+  "matrix_expected_row_count": 0,
+  "matrix_terminal_row_count": 0,
+  "matrix_blocked_row_count": 0,
+  "matrix_unresolved_row_count": 0,
+  "page_count": 0,
+  "sha256": "FILE_HASH_OR_NULL",
+  "gap_completion_check": "PASS_FAIL_OR_BLOCKED",
+  "official_site_path_check": "PASS_FAIL_NOT_APPLICABLE_OR_BLOCKED",
+  "material_claim_check": "PASS_FAIL_OR_BLOCKED",
+  "calculation_and_measurement_check": "PASS_FAIL_OR_BLOCKED",
+  "citation_and_link_check": "PASS_FAIL_OR_BLOCKED",
+  "appendix_and_supporting_value_check": "PASS_FAIL_OR_BLOCKED",
+  "privacy_and_suppression_check": "PASS_FAIL_OR_BLOCKED",
+  "fact_check_reviewer_type": "HUMAN_MODEL_ASSISTED_OR_NONE",
+  "fact_check_independence": "INDEPENDENT_SELF_REVIEW_OR_NOT_PERFORMED",
+  "requested_export_parity_check": "PASS_FAIL_NOT_APPLICABLE_OR_BLOCKED",
+  "visual_page_inspection": "PASS_FAIL_OR_BLOCKED",
+  "native_attachment_state": "GENERATED_VALIDATED_DELIVERED_READ_BACK_OR_BLOCKED",
+  "delivery_reference": null,
+  "audience_and_access_result": "RESULT_OR_NULL",
+  "readback_at": null,
+  "material_limitations": [],
+  "acceptance_results": [],
+  "completion_status": "BLOCKED_COMPLETE_WITH_GAPS_OR_DONE"
+}
+```

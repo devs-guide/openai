@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Agent runtime observations · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>Agent runtime observations · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/agent/">Agent</a><span aria-hidden="true">/</span>Runtime</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>runtime-observation</span>
+      <span>dated-evidence</span>
+      <span>reviewed 2026-10-09</span>
+    </div>
+    <article>
+<pre class="source-json"><code>{
+  &quot;computer&quot;: {
+    &quot;architecture&quot;: {
+      &quot;state&quot;: &quot;OBSERVED&quot;,
+      &quot;value&quot;: &quot;x86_64&quot;
+    },
+    &quot;background_runtime_guarantee&quot;: {
+      &quot;state&quot;: &quot;UNKNOWN&quot;,
+      &quot;value&quot;: null
+    },
+    &quot;filesystem_retention&quot;: {
+      &quot;state&quot;: &quot;UNKNOWN&quot;,
+      &quot;value&quot;: null
+    },
+    &quot;gpu&quot;: {
+      &quot;state&quot;: &quot;UNKNOWN&quot;,
+      &quot;value&quot;: null
+    },
+    &quot;operating_system&quot;: {
+      &quot;state&quot;: &quot;OBSERVED&quot;,
+      &quot;value&quot;: &quot;Debian GNU/Linux 13 (trixie)&quot;
+    },
+    &quot;reported_ram_bytes&quot;: {
+      &quot;guaranteed_usable&quot;: &quot;UNKNOWN&quot;,
+      &quot;state&quot;: &quot;OBSERVED&quot;,
+      &quot;value&quot;: 10451464192
+    },
+    &quot;swap_bytes&quot;: {
+      &quot;state&quot;: &quot;OBSERVED&quot;,
+      &quot;value&quot;: 0
+    },
+    &quot;visible_cpus&quot;: {
+      &quot;guaranteed_quota&quot;: &quot;UNKNOWN&quot;,
+      &quot;state&quot;: &quot;OBSERVED&quot;,
+      &quot;value&quot;: 9
+    },
+    &quot;workspace_free_bytes&quot;: {
+      &quot;state&quot;: &quot;OBSERVED&quot;,
+      &quot;value&quot;: 31880318976
+    },
+    &quot;workspace_total_bytes&quot;: {
+      &quot;state&quot;: &quot;OBSERVED&quot;,
+      &quot;value&quot;: 33770192896
+    }
+  },
+  &quot;observed_at&quot;: &quot;2026-10-08T18:54:17Z/2026-10-08T20:11:00Z&quot;,
+  &quot;observed_runtimes&quot;: {
+    &quot;bash&quot;: &quot;5.2.37&quot;,
+    &quot;git&quot;: &quot;2.52.0&quot;,
+    &quot;node&quot;: &quot;24.19.0&quot;,
+    &quot;npm&quot;: &quot;11.9.0&quot;,
+    &quot;openjdk&quot;: &quot;21.0.12.1&quot;,
+    &quot;python&quot;: &quot;3.12.14&quot;
+  },
+  &quot;revalidate_before_use&quot;: true,
+  &quot;schema&quot;: &quot;dot-runtime-observations/1&quot;,
+  &quot;source&quot;: &quot;release-0.0.1 agent guides; includes explicitly labeled user-supplied observations&quot;,
+  &quot;status&quot;: &quot;dated-observation&quot;,
+  &quot;unknown_limits&quot;: [
+    &quot;context capacity&quot;,
+    &quot;response limit&quot;,
+    &quot;tool rate limits&quot;,
+    &quot;account quotas&quot;,
+    &quot;maximum process duration&quot;,
+    &quot;session lifetime&quot;,
+    &quot;idle timeout&quot;,
+    &quot;restart policy&quot;,
+    &quot;durable storage capacity&quot;,
+    &quot;browser tab limit&quot;,
+    &quot;upload and download limits&quot;,
+    &quot;outbound bandwidth&quot;
+  ],
+  &quot;workspace_entries&quot;: {
+    &quot;/workspace/.agents&quot;: &quot;listed; consumer and write policy UNKNOWN&quot;,
+    &quot;/workspace/.codex&quot;: &quot;listed; not authorized for this contract&quot;,
+    &quot;/workspace/.git&quot;: &quot;listed; role UNKNOWN&quot;,
+    &quot;/workspace/library-files&quot;: &quot;listed; retention and scope UNKNOWN&quot;,
+    &quot;/workspace/scratch&quot;: &quot;configured working-root parent; verify before use&quot;,
+    &quot;/workspace/shared&quot;: &quot;listed; audience and durability UNKNOWN&quot;
+  }
+}</code></pre>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/dot/agent/runtime.json">Repository source</a> · <a href="/openai/raw/dot/agent/runtime.json">Raw source</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,280 @@
+# #SUMMARY — evidence-completing research subtopic executive brief
+
+**Contract:** `dot-research-summary/2`
+**Requires:** an approved `#PROJECT`, controlled `#INTERNET` records, applicable
+`#DATA`, and the request structure in `#TEMPLATE`  
+**Activation:** conditional on an explicit request for one named subtopic  
+**Purpose:** produce a standalone, evidence-led executive-summary PDF that
+completes material Fact gaps within the approved research boundary without
+replacing or silently expanding the parent project.
+
+## SUMMARY-001 — Activate one separate deliverable
+
+Create a `#SUMMARY` only when the owner requests a brief for a specific
+subtopic. One request activates one brief; do not generate related briefs by
+default. Give the brief its own request and artifact IDs, title, version,
+filename, acceptance tests, and completion receipt. Never rewrite, replace,
+rename, or overwrite the main research report or any accepted dataset release.
+
+At activation, record the parent project version, evidence cutoff, applicable
+dataset release IDs, and source versions received. Keep those inputs immutable.
+Gap completion may create linked supplemental evidence and, when applicable, a
+successor dataset release or proposed correction set; it never changes the
+frozen parent. Freeze the final Fact, evidence, and data versions before
+drafting the reader-facing brief.
+
+A request that materially changes the main question, population, geography,
+period, evidence universe, permission, or destination remains a project
+amendment or new project under `#PROJECT`, not quiet Summary work.
+
+## SUMMARY-002 — Resolve the request and research mode
+
+Complete the Executive Brief Request in `#TEMPLATE` before research or
+drafting. It must identify:
+
+- the main research project and requested subtopic;
+- the readers and the decision or discussion the brief must support;
+- geographic, population, entity, and time boundaries plus the research cutoff;
+- the exact reports, Pages, datasets, releases, files, and URLs supplied;
+- required facts, questions, comparisons, entity chapters and ordering;
+- topics to exclude and optional paired CSV/JSON companions;
+- desired length, with 8–16 core pages plus a readable appendix as a default,
+  not a quota; and
+- output title, artifact ID, version, filename, and approved destination.
+
+A request for either CSV or JSON activates both paired forms under `#DATA`;
+never create a one-format companion or a second Summary-owned data schema.
+
+Set `research_mode` to `PUBLIC_SOURCE_GAP_FILLING` unless the owner explicitly
+sets `EXPLICITLY_SOURCE_LIMITED`. The default mode requires completing missing
+material Facts through authorized public research inside the approved Project
+boundary. Source-limited mode forbids that expansion and requires gaps to stay
+visible. It never permits a source-limited brief to claim comprehensive
+coverage.
+
+Use the parent project's documented definitions and boundaries unless the
+owner changes them. Ask only about omissions whose answers would materially
+alter scope, evidence, interpretation, safety, or delivery. Otherwise record a
+reasonable, reversible assumption and proceed.
+
+## SUMMARY-003 — Build the required Fact matrix
+
+Before design or narrative writing, create the Summary Fact Matrix in
+`#TEMPLATE`: one row for every in-scope subject and every required fact. First
+reconcile the eligible entity or subject universe against the Project's
+discovery sources. Give every candidate an included, excluded, or unresolved
+disposition; never claim comprehensive coverage from a convenient directory or
+the entities already present in a report.
+
+Each matrix row records its subject, required field, grain, population, period,
+linked `#FACT` and evidence IDs, research state, coverage disposition, reviewer
+type, missing reason, and next concrete action. Keep research state distinct
+from derivation, verification, and missingness:
+
+- `NOT_STARTED`, `IN_PROGRESS`, `AWAITING_REVIEW`, `BLOCKED`, or `TERMINAL` is
+  the work state;
+- `SUPPORTED`, `DISPUTED`, `BOUNDED_NEGATIVE`, `ACCESS_BLOCKED`,
+  `AUTHORIZATION_REQUIRED`, `NOT_APPLICABLE`, or `UNRESOLVED` is the coverage
+  disposition; and
+- `#INTERNET` and `#DATA` continue to own derivation class, verification
+  status, reviewer type, access events, and controlled missing reasons.
+
+Inventory the existing evidence for each row. Establish the question answered,
+subject and entity grain, population, geography, period, unit, denominator,
+source version, access state, and verification status. Bind each material
+statement and comparison to controlled `#FACT` records and their assertions,
+observations or claims, and evidence links. A prior report does not verify its
+own claims. Preserve inaccessible, missing, suppressed, conflicting, and
+noncomparable states until research supports a narrower disposition.
+
+## SUMMARY-004 — Complete material gaps and embed the evidence
+
+In `PUBLIC_SOURCE_GAP_FILLING` mode, treat a missing material Fact as unfinished
+research, not proof that the fact is unavailable. For each nonterminal matrix
+row, execute the applicable `#INTERNET` routes. Establish the official site and
+inspect relevant desktop or mobile navigation, menus, submenus, footers,
+internal search, sitemaps, buttons, embedded resources, finite document
+indexes, linked PDFs, and pertinent parent, vendor, branch, or external
+resource links. Use unrestricted web discovery and a distinct document/PDF
+route with exact names, aliases, former names, municipalities, parent
+organizations, and topic synonyms where relevant.
+
+Required Facts may include names, physical or mailing addresses, public email
+addresses, outbound links, and externally hosted resources when the approved
+request needs them. Their apparent simplicity never permits skipping the same
+identity, navigation, evidence, privacy, and verification controls.
+
+Record performed queries and the actual navigation trail. A homepage, search
+snippet, generated URL, loading page, blank JavaScript search shell, or blocked
+route is not a completed search and cannot establish absence. Opening a landing
+page is not reviewing its linked documents. Continue while an accessible,
+material route remains unperformed. Stop one row only when evidence supports
+it, relevant accessible routes support a bounded negative finding, a documented
+barrier blocks the next action, authorization is required, or the field is not
+applicable. Do not demand impossible proof of absence or use elapsed time,
+query count, or a worker's completion label as evidence of completion.
+
+In `EXPLICITLY_SOURCE_LIMITED` mode, recheck the named material only. Mark
+unsupported rows honestly, narrow conclusions, and use `COMPLETE_WITH_GAPS` or
+`BLOCKED` as required. In either mode, place the evidence needed to understand
+the conclusions inside the PDF: actual values, readable charts or concise
+tables, definitions, dates, periods, units, currencies, denominators, scope
+labels, and source notes. Links provide traceability but never substitute for
+the evidence on the page. Include only rows allowed by the Project's privacy,
+suppression, and audience controls.
+
+## SUMMARY-005 — Write for a decision-making reader
+
+Act as an education or subject-matter consultant, research editor, and
+information designer. Open with the supported answer and three to five
+strongest findings. Use clear, engaging editorial pacing: specific
+evidence-led headlines, meaningful numbers, short explanations, and memorable
+takeaways. Explain technical terms on first use. Edutainment means strong
+narrative pacing and memorable explanation, not lower evidence standards. The
+voice may be lively and approachable, but it must not become sensational,
+promotional, or speculative and must not imply affiliation with TED or another
+organization.
+
+For each topic, make clear what the evidence shows, which value or observation
+supports it, why it matters to the stated audience, which action or discussion
+it informs, and what remains uncertain. Separate findings, interpretation, and
+recommendations. Do not replace subject-matter content with query counts,
+source counts, internal record IDs, workflow statistics, or research-progress
+updates, and do not fill requested entity chapters with interchangeable
+boilerplate when entity-specific Facts exist.
+
+## SUMMARY-006 — Use a self-contained, evidence-controlled structure
+
+Use the smallest structure that fully answers the request. The normal sequence
+is:
+
+1. cover with topic, audience, geography, data period, cutoff, and version;
+2. executive overview with the direct answer and strongest findings;
+3. scope with inclusions, exclusions, definitions, and comparability limits;
+4. focused topic or requested entity chapters with evidence, interpretation,
+   and a takeaway;
+5. prioritized practical implications tied to evidence;
+6. limitations that could change interpretation or decisions;
+7. embedded data appendix with supporting values and applicable entity detail;
+8. sources and definitions with publishers, titles, dates, direct URLs, and
+   page, table, figure, or section locators where available.
+
+When supporting rows do not fit comfortably in the narrative, add a legible
+embedded data appendix and point to it from the relevant finding. Do not hide
+essential values in a Page, dashboard, spreadsheet, application, database, or
+external link, and do not shrink text or tables to force them into the core
+pages. Adjust length to the evidence and audience; do not add filler to reach
+the default range. Preserve one main idea per page or spread when practical.
+
+## SUMMARY-007 — Present charts and pages accessibly
+
+Choose a display because it answers a question: bars or dot plots for
+comparisons, lines for change over time, compatible stacked bars for
+composition, tables when exact values matter, and simple diagrams for
+relationships or processes. Show the values behind every material chart in
+direct labels or a clearly referenced table inside the PDF.
+
+Label the measure, unit, period, population, denominator, geography, and source.
+Use consistent scales, meaningful ordering, restrained accessible colors, and
+high contrast; never rely on color alone. Begin a bar chart's numeric axis at
+zero. If another chart needs a truncated scale, justify and mark it plainly.
+Do not use three-dimensional effects or misleading visual proportions.
+
+Default to US Letter pages, body text generally 14–16 points, major headlines
+generally 26–34 points, large chart labels, readable source notes, short
+paragraphs, and generous spacing. Use landscape pages only when they materially
+improve legibility. Avoid dense dashboards, decorative clutter, stock-photo
+filler, tiny tables, and crowded diagrams.
+
+## SUMMARY-008 — Preserve measurement integrity
+
+Use these reader-facing labels without changing the canonical storage model:
+
+| Brief label | Required `#FACT` representation |
+|---|---|
+| Observed | `derivation_class: OBSERVED` |
+| Calculated | `derivation_class: DERIVED`, with identified inputs and arithmetic |
+| Estimated | `derivation_class: INFERRED`, with method, assumptions, and uncertainty |
+| Unavailable | null plus a controlled missing reason and verification status |
+
+Round values appropriately and use ranges when uncertainty warrants them.
+Never convert missing information to zero, combine incompatible years,
+definitions, populations, scopes, or accounting views without disclosure, or
+invent a central estimate when only an allocation range is supported. Do not
+duplicate a parent organization's total across its sites, count an interentity
+payment twice, or attribute an organization-wide value to a subgroup without a
+supported allocation.
+
+Keep revenue, expenditure, assets, debt balances, authorizations,
+consolidation, funding flow, final-service expenditure, and geographic
+attribution distinct. Preserve each source's exact outcome definition; test
+proficiency does not by itself mean reading at grade level. Correlation does
+not establish causation, and an area's demographics do not automatically
+describe the population served. Honor privacy and suppression rules and never
+reconstruct protected small groups.
+
+## SUMMARY-009 — Preserve entity and source meaning
+
+Verify the exact organization, reporting unit, campus, site, branch, program,
+jurisdiction, population, and period for every material Fact. Keep official
+identity, official linkage, successful retrieval, public search functionality,
+login requirements, service evidence, physical presence, and inventory
+completeness as different claims. Do not treat a shared resource as exclusive
+to one entity, a parent policy as automatically implemented at a child site, a
+historical condition as current, a planned event as completed, a staff listing
+as proof of a dedicated service, or a URL that loads as proof that its function
+works. Preserve useful verified positives even when another field is unknown.
+
+When the requested subtopic is elementary schools, use documented local school
+designations and grade spans. If the project has no controlling definition,
+record K–6 as a working assumption rather than an established local category.
+Identify mixed-grade campuses explicitly. Do not present an entire K–12 or
+PK–8 campus budget, population, service, inventory, or outcome as
+elementary-only without a supported allocation.
+
+Apply the parent project's inclusion rules consistently to preschool, virtual
+provision, grade-six-only campuses, and other boundary cases. Treat preschool
+QAR or other quality-assessment information as early-learning or transition
+context rather than an elementary-school rating. Participation, page
+existence, or a missing assessment result does not establish quality.
+
+## SUMMARY-010 — Review, render, inspect, and deliver
+
+Work in this order: reconcile scope and universe; build the Fact matrix;
+complete material gaps; update and freeze controlled evidence and applicable
+data; perform claim-level and entity-level review; write the narrative;
+validate requested paired exports; generate the PDF; inspect every page;
+correct defects; deliver; and read back the delivered artifacts.
+
+Use an independent reviewer when one is authorized and available. Otherwise
+perform a distinct self-review pass and disclose that it was not independent.
+For every material claim, verify wording, identity, date, value, unit, currency,
+denominator, population, scope, version, locator, lineage, contradictions, and
+calculation inputs. Sampling cannot support a claim that every requested entity
+was checked. A checksum proves file integrity, not factual accuracy; a visual
+review proves layout quality, not evidence completion.
+
+Before delivery, require every requested entity to be represented or explicitly
+excluded and every required matrix row to have evidence or an honest terminal
+disposition. Report coverage with explicit denominators and keep research
+coverage distinct from data or financial coverage. Optional CSV/JSON companions
+must be regenerated from the final logical records and pass `#DATA` parity;
+never attach stale reader text to corrected data.
+
+Render the PDF only through an authorized, currently available surface, then
+visually inspect every page. Fix clipping, overlaps, unreadable labels, broken
+links, misleading scales, orphaned headings, awkward page breaks, and missing
+supporting values. If material accessible routes remain unperformed, a required
+review fails, or no authorized rendering or native-attachment route is
+available, mark delivery `BLOCKED`; a generated file or local path is not a
+delivered PDF.
+
+Deliver a distinct, versioned native PDF attachment through the approved
+destination with a short description and every material limitation. Verify its
+identity, audience, access scope, ability to open, and readback under `#AGENT`.
+Do not build an application, database, website, or code product, contact a
+third party, or share the brief externally without explicit authorization.
+Codex is not required or authorized for this deliverable. Success means a
+reader unfamiliar with the main report can understand the strongest findings,
+inspect the supporting numbers, recognize uncertainty, and identify the
+practical implications from the PDF alone.

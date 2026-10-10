@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="0.0.3 — DOT On-Demand Research Summary · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>0.0.3 — DOT On-Demand Research Summary · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/releases/">Releases</a><span aria-hidden="true">/</span>0.0.3</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>release</span>
+      <span>current</span>
+      <span>reviewed 2026-10-09</span>
+    </div>
+    <article>
+<section id="003" class="level2">
+<h2>0.0.3</h2>
+<p>DOT adds a conditional <code>#SUMMARY</code> contract for creating one standalone, reader-focused executive brief from an existing Research project and its controlled <code>#FACT</code> records. The core <code>#PROJECT</code> → <code>#INTERNET</code> → <code>#DATA</code> → <code>#TEMPLATE</code> workflow remains unchanged.</p>
+<section id="scope" class="level3">
+<h3>Scope</h3>
+<ul>
+<li>Public product: <code>dot/</code>.</li>
+<li>Prior release: immutable tag <code>0.0.2</code>.</li>
+<li>Current Research source: <code>dot/research/</code>.</li>
+<li>Documentation root: <code>https://devs-guide.github.io/openai/dot/</code>.</li>
+<li>Source and documentation only; generated research PDFs are runtime deliverables and are not repository or GitHub release assets.</li>
+</ul>
+</section>
+<section id="highlights" class="level3">
+<h3>Highlights</h3>
+<ul>
+<li>Adds an on-demand subtopic executive brief without making Summary a required Research stage.</li>
+<li>Binds material prose, charts, tables, calculations, and estimates to controlled Facts and evidence links.</li>
+<li>Requires the essential supporting numbers, definitions, and source notes to appear inside the PDF.</li>
+<li>Defines an engaging education/editorial style that remains evidence-led, accessible, and free of hype or implied organizational affiliation.</li>
+<li>Requires native PDF delivery, visual inspection of every page, and readback.</li>
+</ul>
+</section>
+<section id="added" class="level3">
+<h3>Added</h3>
+<ul>
+<li><code>dot/research/summary.prompt</code> with <code>SUMMARY-001</code> through <code>SUMMARY-010</code>.</li>
+<li>A conditional Summary entry in the tagged-release ingestion manifest.</li>
+<li>An Executive Brief Request and Completion Receipt in the Template contract.</li>
+<li>Project controls for explicitly activated derivative deliverables.</li>
+<li>Rendered and raw Pages routes for the Summary contract.</li>
+<li>GitHub validation for Summary ownership, activation, request fields, evidence-class mapping, rendering boundaries, and publication routes.</li>
+</ul>
+</section>
+<section id="changed" class="level3">
+<h3>Changed</h3>
+<ul>
+<li>Extended Research navigation with Summary as an optional deliverable while retaining the four-stage Project → Internet → Data → Template sequence.</li>
+<li>Advanced the candidate ingestion and publication identity to <code>0.0.3</code> while preserving <code>0.0.1</code> as the migration baseline and <code>0.0.2</code> as the immediate prior release.</li>
+<li>Extended feature and release indexes with the executive-brief lifecycle.</li>
+</ul>
+</section>
+<section id="fixed" class="level3">
+<h3>Fixed</h3>
+<ul>
+<li>Prevented derived briefs from silently overwriting the main report or an accepted dataset release.</li>
+<li>Reconciled reader-facing Observed, Calculated, Estimated, and Unavailable labels with the existing derivation, verification, and null-reason model.</li>
+<li>Prevented links, dashboards, or external spreadsheets from substituting for evidence that must be readable inside a delivered brief.</li>
+<li>Required unavailable rendering or native-attachment routes to block delivery instead of producing a false completion claim.</li>
+</ul>
+</section>
+<section id="safety-and-publication-model" class="level3">
+<h3>Safety and publication model</h3>
+<p>The project remains community maintained and is not affiliated with or endorsed by OpenAI. Summary does not authorize new research scope, tools, accounts, destinations, contact with third parties, or external sharing.</p>
+<p>The browser-first Agent boundary remains unchanged. Codex, software installation, coding projects, local-computer execution, unassigned models, and access-control bypasses remain prohibited by the distributed contract. Privacy and suppression rules override the desire for a self-contained appendix.</p>
+<p>Compilation, contract auditing, site builds, and tests run only in GitHub Actions. The local workstation is not a validation environment.</p>
+</section>
+<section id="commit" class="level3">
+<h3>#COMMIT</h3>
+<p><code>release: 0.0.3 - add on-demand research summaries</code></p>
+</section>
+<section id="notable-commits" class="level3">
+<h3>Notable commits</h3>
+<ul>
+<li>The reviewed release commit is selected by its exact 40-character SHA during workflow dispatch and preserved by the immutable annotated <code>0.0.3</code> tag.</li>
+<li>The release workflow requires the published <code>0.0.2</code> release before it may create or publish <code>0.0.3</code>.</li>
+<li>Pages publication and live-route validation must represent the same commit.</li>
+</ul>
+</section>
+<section id="assets" class="level3">
+<h3>Assets</h3>
+<ul>
+<li>GitHub-generated source archives for tag <code>0.0.3</code>.</li>
+<li>Rendered documentation and exact current raw sources through GitHub Pages.</li>
+<li>No additional binary assets.</li>
+</ul>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/docs/releases/0.0.3.md">Repository source</a> · <a href="/openai/raw/docs/releases/0.0.3.md">Raw source</a></p>
+  </footer>
+</body>
+</html>

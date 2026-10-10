@@ -1,0 +1,78 @@
+{
+  "schema": "dot-two-lane-migration/1",
+  "baseline_tag": "0.0.1",
+  "release": "0.0.2",
+  "unresolved_conflicts": [],
+  "sources": [
+    {
+      "source": "dot/agents/browser.md",
+      "dispositions": ["KEEP_AGENT", "HISTORY_ONLY"],
+      "targets": ["dot/agent/browser.prompt", "dot/agent/runtime.json", "docs/history/two-lane-migration.md"]
+    },
+    {
+      "source": "dot/agents/computer.md",
+      "dispositions": ["KEEP_AGENT", "HISTORY_ONLY"],
+      "targets": ["dot/agent/runtime.json", "docs/history/two-lane-migration.md"]
+    },
+    {
+      "source": "dot/agents/doc.md",
+      "dispositions": ["KEEP_AGENT", "KEEP_DATA", "KEEP_TEMPLATE"],
+      "targets": ["dot/agent/master.prompt", "dot/research/data.prompt", "dot/research/template.prompt"]
+    },
+    {
+      "source": "dot/agents/prompt.md",
+      "dispositions": ["KEEP_AGENT", "HISTORY_ONLY"],
+      "targets": ["dot/agent/browser.prompt", "docs/history/two-lane-migration.md"]
+    },
+    {
+      "source": "dot/agents/readme.md",
+      "dispositions": ["DROP_REDUNDANT"],
+      "targets": ["dot/agent/readme.md"]
+    },
+    {
+      "source": "dot/prompts/core/master.prompt",
+      "dispositions": ["MERGE", "KEEP_DATA"],
+      "targets": ["dot/agent/master.prompt", "dot/research/project.prompt", "dot/research/internet.prompt", "dot/research/data.prompt", "dot/research/template.prompt"]
+    },
+    {
+      "source": "dot/prompts/core/dot.prompt",
+      "dispositions": ["MERGE", "DROP_REDUNDANT"],
+      "targets": ["dot/research/project.prompt", "dot/research/internet.prompt"]
+    },
+    {
+      "source": "dot/prompts/core/reference.prompt",
+      "dispositions": ["MERGE", "DROP_REDUNDANT"],
+      "targets": ["dot/research/project.prompt", "dot/research/internet.prompt"]
+    },
+    {
+      "source": "dot/prompts/core/readme.md",
+      "dispositions": ["DROP_REDUNDANT"],
+      "targets": ["dot/readme.md", "docs/history/two-lane-migration.md"]
+    },
+    {
+      "source": "dot/prompts/research/overview.prompt",
+      "dispositions": ["MERGE", "KEEP_DATA", "DROP_REDUNDANT"],
+      "targets": ["dot/research/project.prompt", "dot/research/internet.prompt", "dot/research/data.prompt", "dot/research/template.prompt"]
+    },
+    {
+      "source": "dot/prompts/research/template.prompt",
+      "dispositions": ["MERGE", "KEEP_DATA", "DROP_REDUNDANT"],
+      "targets": ["dot/research/project.prompt", "dot/research/internet.prompt", "dot/research/data.prompt", "dot/research/template.prompt"]
+    },
+    {
+      "source": "dot/prompts/research/starter-data-only.md",
+      "dispositions": ["MERGE", "KEEP_DATA"],
+      "targets": ["dot/agent/master.prompt", "dot/research/data.prompt", "dot/research/template.prompt"]
+    },
+    {
+      "source": "dot/prompts/research/readme.md",
+      "dispositions": ["DROP_REDUNDANT"],
+      "targets": ["dot/research/readme.md"]
+    },
+    {
+      "source": "dot/prompts/readme.md",
+      "dispositions": ["DROP_REDUNDANT"],
+      "targets": ["dot/readme.md", "dot/research/readme.md"]
+    }
+  ]
+}

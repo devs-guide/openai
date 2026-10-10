@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Agent configuration schema · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>Agent configuration schema · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/agent/">Agent</a><span aria-hidden="true">/</span><a href="/openai/dot/agent/config/">Config</a><span aria-hidden="true">/</span>Schema</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>schema</span>
+      <span>current</span>
+      <span>reviewed 2026-10-10</span>
+    </div>
+    <article>
+<pre class="source-json"><code>{
+  &quot;$defs&quot;: {
+    &quot;model&quot;: {
+      &quot;additionalProperties&quot;: false,
+      &quot;properties&quot;: {
+        &quot;effort&quot;: {
+          &quot;minLength&quot;: 1,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;model&quot;: {
+          &quot;minLength&quot;: 1,
+          &quot;type&quot;: &quot;string&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;model&quot;,
+        &quot;effort&quot;
+      ],
+      &quot;type&quot;: &quot;object&quot;
+    }
+  },
+  &quot;$id&quot;: &quot;https://devs-guide.github.io/openai/raw/dot/agent/config.schema.json&quot;,
+  &quot;$schema&quot;: &quot;https://json-schema.org/draft/2020-12/schema&quot;,
+  &quot;additionalProperties&quot;: false,
+  &quot;properties&quot;: {
+    &quot;browser&quot;: {
+      &quot;additionalProperties&quot;: false,
+      &quot;properties&quot;: {
+        &quot;tabs&quot;: {
+          &quot;additionalProperties&quot;: false,
+          &quot;properties&quot;: {
+            &quot;blocker_checks&quot;: {
+              &quot;additionalProperties&quot;: false,
+              &quot;properties&quot;: {
+                &quot;fallback&quot;: {
+                  &quot;const&quot;: &quot;EVENT_DRIVEN&quot;
+                },
+                &quot;scheduled_interval_minutes&quot;: {
+                  &quot;const&quot;: 15
+                },
+                &quot;scheduler_policy&quot;: {
+                  &quot;const&quot;: &quot;WHEN_AVAILABLE_AND_AUTHORIZED&quot;
+                }
+              },
+              &quot;required&quot;: [
+                &quot;scheduled_interval_minutes&quot;,
+                &quot;scheduler_policy&quot;,
+                &quot;fallback&quot;
+              ],
+              &quot;type&quot;: &quot;object&quot;
+            },
+            &quot;default_max_open&quot;: {
+              &quot;minimum&quot;: 1,
+              &quot;type&quot;: &quot;integer&quot;
+            },
+            &quot;limit_scope&quot;: {
+              &quot;const&quot;: &quot;ALL_WINDOWS_AND_WORKERS&quot;
+            },
+            &quot;project_override_allowed&quot;: {
+              &quot;const&quot;: true
+            }
+          },
+          &quot;required&quot;: [
+            &quot;default_max_open&quot;,
+            &quot;limit_scope&quot;,
+            &quot;project_override_allowed&quot;,
+            &quot;blocker_checks&quot;
+          ],
+          &quot;type&quot;: &quot;object&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;tabs&quot;
+      ],
+      &quot;type&quot;: &quot;object&quot;
+    },
+    &quot;execution&quot;: {
+      &quot;type&quot;: &quot;object&quot;
+    },
+    &quot;models&quot;: {
+      &quot;additionalProperties&quot;: false,
+      &quot;properties&quot;: {
+        &quot;collaborator&quot;: {
+          &quot;$ref&quot;: &quot;#/$defs/model&quot;
+        },
+        &quot;fallbacks&quot;: {
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/$defs/model&quot;
+          },
+          &quot;maxItems&quot;: 7,
+          &quot;minItems&quot;: 7,
+          &quot;type&quot;: &quot;array&quot;
+        },
+        &quot;policy&quot;: {
+          &quot;const&quot;: &quot;ORDERED_FALLBACK&quot;
+        },
+        &quot;primary&quot;: {
+          &quot;$ref&quot;: &quot;#/$defs/model&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;policy&quot;,
+        &quot;primary&quot;,
+        &quot;collaborator&quot;,
+        &quot;fallbacks&quot;
+      ],
+      &quot;type&quot;: &quot;object&quot;
+    },
+    &quot;reviewed_on&quot;: {
+      &quot;format&quot;: &quot;date&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;schema&quot;: {
+      &quot;const&quot;: &quot;dot-agent-config/2&quot;
+    },
+    &quot;status&quot;: {
+      &quot;enum&quot;: [
+        &quot;current&quot;,
+        &quot;candidate&quot;,
+        &quot;archived&quot;
+      ]
+    },
+    &quot;storage&quot;: {
+      &quot;type&quot;: &quot;object&quot;
+    },
+    &quot;tools&quot;: {
+      &quot;type&quot;: &quot;object&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;schema&quot;,
+    &quot;status&quot;,
+    &quot;reviewed_on&quot;,
+    &quot;models&quot;,
+    &quot;execution&quot;,
+    &quot;tools&quot;,
+    &quot;browser&quot;,
+    &quot;storage&quot;
+  ],
+  &quot;title&quot;: &quot;DOT agent configuration&quot;,
+  &quot;type&quot;: &quot;object&quot;
+}</code></pre>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/dot/agent/config.schema.json">Repository source</a> · <a href="/openai/raw/dot/agent/config.schema.json">Raw source</a></p>
+  </footer>
+</body>
+</html>

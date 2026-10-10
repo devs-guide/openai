@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DOT two-lane migration data · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>DOT two-lane migration data · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/history/">History</a><span aria-hidden="true">/</span><a href="/openai/dot/history/two-lane-migration/">Two Lane Migration</a><span aria-hidden="true">/</span>Data</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>history-data</span>
+      <span>current</span>
+      <span>reviewed 2026-10-09</span>
+    </div>
+    <article>
+<pre class="source-json"><code>{
+  &quot;baseline_tag&quot;: &quot;0.0.1&quot;,
+  &quot;release&quot;: &quot;0.0.2&quot;,
+  &quot;schema&quot;: &quot;dot-two-lane-migration/1&quot;,
+  &quot;sources&quot;: [
+    {
+      &quot;dispositions&quot;: [
+        &quot;KEEP_AGENT&quot;,
+        &quot;HISTORY_ONLY&quot;
+      ],
+      &quot;source&quot;: &quot;dot/agents/browser.md&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/agent/browser.prompt&quot;,
+        &quot;dot/agent/runtime.json&quot;,
+        &quot;docs/history/two-lane-migration.md&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;KEEP_AGENT&quot;,
+        &quot;HISTORY_ONLY&quot;
+      ],
+      &quot;source&quot;: &quot;dot/agents/computer.md&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/agent/runtime.json&quot;,
+        &quot;docs/history/two-lane-migration.md&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;KEEP_AGENT&quot;,
+        &quot;KEEP_DATA&quot;,
+        &quot;KEEP_TEMPLATE&quot;
+      ],
+      &quot;source&quot;: &quot;dot/agents/doc.md&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/agent/master.prompt&quot;,
+        &quot;dot/research/data.prompt&quot;,
+        &quot;dot/research/template.prompt&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;KEEP_AGENT&quot;,
+        &quot;HISTORY_ONLY&quot;
+      ],
+      &quot;source&quot;: &quot;dot/agents/prompt.md&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/agent/browser.prompt&quot;,
+        &quot;docs/history/two-lane-migration.md&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;DROP_REDUNDANT&quot;
+      ],
+      &quot;source&quot;: &quot;dot/agents/readme.md&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/agent/readme.md&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;MERGE&quot;,
+        &quot;KEEP_DATA&quot;
+      ],
+      &quot;source&quot;: &quot;dot/prompts/core/master.prompt&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/agent/master.prompt&quot;,
+        &quot;dot/research/project.prompt&quot;,
+        &quot;dot/research/internet.prompt&quot;,
+        &quot;dot/research/data.prompt&quot;,
+        &quot;dot/research/template.prompt&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;MERGE&quot;,
+        &quot;DROP_REDUNDANT&quot;
+      ],
+      &quot;source&quot;: &quot;dot/prompts/core/dot.prompt&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/research/project.prompt&quot;,
+        &quot;dot/research/internet.prompt&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;MERGE&quot;,
+        &quot;DROP_REDUNDANT&quot;
+      ],
+      &quot;source&quot;: &quot;dot/prompts/core/reference.prompt&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/research/project.prompt&quot;,
+        &quot;dot/research/internet.prompt&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;DROP_REDUNDANT&quot;
+      ],
+      &quot;source&quot;: &quot;dot/prompts/core/readme.md&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/readme.md&quot;,
+        &quot;docs/history/two-lane-migration.md&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;MERGE&quot;,
+        &quot;KEEP_DATA&quot;,
+        &quot;DROP_REDUNDANT&quot;
+      ],
+      &quot;source&quot;: &quot;dot/prompts/research/overview.prompt&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/research/project.prompt&quot;,
+        &quot;dot/research/internet.prompt&quot;,
+        &quot;dot/research/data.prompt&quot;,
+        &quot;dot/research/template.prompt&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;MERGE&quot;,
+        &quot;KEEP_DATA&quot;,
+        &quot;DROP_REDUNDANT&quot;
+      ],
+      &quot;source&quot;: &quot;dot/prompts/research/template.prompt&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/research/project.prompt&quot;,
+        &quot;dot/research/internet.prompt&quot;,
+        &quot;dot/research/data.prompt&quot;,
+        &quot;dot/research/template.prompt&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;MERGE&quot;,
+        &quot;KEEP_DATA&quot;
+      ],
+      &quot;source&quot;: &quot;dot/prompts/research/starter-data-only.md&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/agent/master.prompt&quot;,
+        &quot;dot/research/data.prompt&quot;,
+        &quot;dot/research/template.prompt&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;DROP_REDUNDANT&quot;
+      ],
+      &quot;source&quot;: &quot;dot/prompts/research/readme.md&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/research/readme.md&quot;
+      ]
+    },
+    {
+      &quot;dispositions&quot;: [
+        &quot;DROP_REDUNDANT&quot;
+      ],
+      &quot;source&quot;: &quot;dot/prompts/readme.md&quot;,
+      &quot;targets&quot;: [
+        &quot;dot/readme.md&quot;,
+        &quot;dot/research/readme.md&quot;
+      ]
+    }
+  ],
+  &quot;unresolved_conflicts&quot;: []
+}</code></pre>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/docs/history/two-lane-migration.json">Repository source</a> · <a href="/openai/raw/docs/history/two-lane-migration.json">Raw source</a></p>
+  </footer>
+</body>
+</html>

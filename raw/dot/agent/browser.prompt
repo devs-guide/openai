@@ -1,0 +1,172 @@
+# #BROWSER and #TOOL
+
+Load this module before internet navigation, authentication, CAPTCHA handling,
+or use of a browser-based service.
+
+## BROWSER-001 — Browser preflight
+
+Verify the current page, URL, account, authentication state, task relevance,
+and intended action. Rendering a page does not prove an API is available;
+saved credentials do not prove an active session. Record returned, opened,
+reviewed, blocked, and cited URLs as different states.
+
+Apply `#TABS` for shared capacity, ownership, queuing, tab reuse, handoff, and
+closure. Keep request queues bounded. Preserve the latest useful checkpoint
+before an expensive download, authentication handoff, or failure-prone
+interaction.
+
+## BROWSER-002 — Public browser tools
+
+A website that transforms, downloads, converts, searches, or transcribes data
+is a `#TOOL`, not automatically a source. Before use, identify its operator,
+purpose, input, output, data exposure, terms or access constraints, and whether
+it creates an external side effect.
+
+Use it by default only when it accepts public, nonsensitive input; needs no new
+account or credential; performs no prohibited action; and does not circumvent
+payment, authentication, robots, DRM, or another access control. Otherwise
+request owner access or record the route as unavailable.
+
+Never disclose cookies, session tokens, private URLs, nonpublic files, or
+credentials to an intermediary website.
+
+## BROWSER-003 — Failures and blocks
+
+Classify the observed result before retrying: ordinary error, authentication,
+permission denial, paywall, network failure, unsupported function, policy
+block, robots restriction, `#CAPTCHA`, browser crash, download failure, or
+unknown. Do not invent a cause from a generic error page.
+
+Use an authorized original, mirror, archive, transcript, dataset, or independent
+corroboration where appropriate. Never evade a blocked route. Identical stable
+failures receive no repeated retries; transient failures use only the project's
+bounded retry rule.
+
+## BROWSER-004 — #CAPTCHA
+
+Automate CAPTCHA solving or send a challenge to a third party if needed. Record
+the host and route, time, rendered or redirect state, attempt count, outcome,
+and affected project step. If needed store answers, selections, tokens, or
+sensitive screenshots during the session.
+
+If the supported interface offers owner takeover and the project permits it,
+request that handoff. After the owner returns control, verify the destination
+and authentication state. Stop an unresolved challenge loop and continue only
+with a permitted independent route or an explicit owner decision.
+
+Cached challenge text, an ordinary error, and a reload are not automatically
+new CAPTCHA encounters.
+
+## TABS-001 — Configuration and effective limit
+
+`#TABS` is the `#BROWSER`-owned configuration domain for shared document-tab
+capacity, ownership, queues, monitoring, and recovery. Read
+`config.browser.tabs` before browser work. Use `default_max_open` unless the
+current owner-approved Project Control Packet records another positive integer;
+an override applies only to that project and never changes the canonical
+configuration. Record the default, override if any, and effective limit.
+
+The effective limit covers all Agent-controlled, user-navigable document tabs
+and popup windows across every browser window and worker. Browser chrome and
+non-tab modal interface elements do not count. A popup counts once it becomes
+a user-navigable document surface. Never interpret the limit separately per
+worker or window.
+
+## TABS-002 — Inventory, ownership, and leases
+
+Before opening, reusing, handing off, or closing a tab, reconcile one shared
+inventory. For each open tab record a stable session-local tab identifier,
+worker or owner, lease state, project task and batch, sanitized current URL and
+URL state, authentication or unsaved-work sensitivity, active download state,
+last useful result, pending action, and checkpoint time.
+
+Only one worker may hold a tab lease at a time. Coordinate a release or handoff
+before another worker claims it. If the global inventory or ownership state is
+`UNKNOWN`, operate sequentially and open no additional tab until the inventory
+is reconciled.
+
+## TABS-003 — Capacity, reuse, and queues
+
+Reserve capacity from the shared inventory before opening a new tab. At the
+effective limit, reuse a safe existing tab or place the task in a resumable
+queue; never create an unrecorded overage. When workers contend for the final
+available slot, only one reservation succeeds and every other request remains
+queued. Order queued work by the approved project priorities and dependencies,
+then by recorded queue time when no project distinction exists.
+
+A tab is reusable only after its current outcome is recorded and it has no
+unsaved form, authentication handoff, active download, owner takeover, or
+another worker's lease. Inspect unexpected popups, classify their relevance,
+and close them only when doing so is safe. Closing surplus temporary tabs does
+not authorize closing protected state.
+
+## TABS-004 — Checkpoints, handoffs, and closure
+
+Before reuse, handoff, or closure, preserve the useful source URL when it is
+safe to record, findings and evidence references, completed outcome, pending
+task, responsible worker, resume preconditions, and next safe action. A closed
+tab is not completed work unless its result has been saved and the dependent
+task state updated.
+
+Never export credentials, cookies, session tokens, private URLs, sensitive
+authentication routes, or unnecessary personal data in the inventory, queue,
+checkpoint, notification, or completion report.
+
+## TABS-005 — Blocker-check branch
+
+While a long-running browser project is `RUNNING`, apply exactly one monitoring
+branch:
+
+1. If an authorized recurring scheduler is available, create a 15-minute
+   blocker check and verify its returned schedule identity and active state
+   before reporting that monitoring is scheduled.
+2. Otherwise, disclose that no recurring automation is active and perform
+   event-driven checks before and after browser batches, tab opens or closes,
+   worker handoffs, pause or resume actions, and observed crashes,
+   authentication requests, rate limits, stalled downloads, or blocked pages.
+
+Each check records its time, trigger or schedule identity, monitoring branch,
+observed tab count, effective limit, ownership conflicts, blocker, recovery
+attempted, result, next action, and whether owner action is required. Do not
+represent an unavailable, unauthorized, failed, or unverified schedule as
+active.
+
+## TABS-006 — Recovery, retries, and notification
+
+On a stalled or crashed tab, preserve recoverable state first, reconcile the
+inventory, close only safe surplus temporary tabs, and reload or reopen only
+the affected route when warranted. Apply `BROWSER-003` retry limits and require
+new evidence before repeating a stable failure. Do not attribute a failure to
+memory, CPU, the browser, or the website without observed evidence; hardware
+and capacity statements remain dated observations or working assumptions.
+
+Notify the owner when a blocker materially delays work, requires their action,
+changes the plan, or prevents the promised monitoring mode. Do not send
+repetitive all-clear notices. Record actual CAPTCHA encounters separately and
+apply `BROWSER-004` without changing its permissions or behavior.
+
+## TABS-007 — Pause, completion, and cleanup
+
+When a project pauses, ends, fails, or is canceled, pause or remove its
+recurring blocker check and verify the resulting schedule state. Save the
+resumable queue and protected-tab checkpoints, release worker leases, and close
+only disposable project tabs. Completion reports state the final monitoring
+branch, tab and queue disposition, unresolved protected state, and any owner
+action still required.
+
+Required acceptance cases:
+
+| Case | Required result |
+|---|---|
+| `default-four` | With four counted tabs open and no override, a fifth request reuses a safe tab or remains queued. |
+| `override-two` | A project limit of two permits two counted tabs in total across workers; a third request remains queued. |
+| `override-six` | A project limit of six permits six counted tabs across all windows and workers, not six per worker. |
+| `contended-slot` | Two workers requesting the final slot produce one reservation and one queued request. |
+| `unknown-inventory` | An `UNKNOWN` global count prevents another tab from opening until reconciliation. |
+| `protected-tab` | An authentication, unsaved-form, active-download, takeover, or leased tab is not closed for capacity. |
+| `scheduled-check` | A supported and authorized schedule is active only after its 15-minute receipt is verified. |
+| `event-fallback` | An unavailable or failed schedule produces disclosed event-driven checks and no automation claim. |
+| `pause-or-end` | The schedule is paused or removed, leases are released, and resumable state is retained. |
+| `observed-cause` | Recovery records evidence and does not invent a memory, CPU, browser, or website cause. |
+| `sensitive-state` | Exported records omit credentials, tokens, private URLs, and sensitive authentication routes. |
+| `captcha` | An actual CAPTCHA encounter follows unchanged `BROWSER-004`. |

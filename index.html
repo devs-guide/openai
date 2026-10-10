@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="devs-guide/openai · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>devs-guide/openai · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>hub</span>
+      <span>current</span>
+      <span>reviewed 2026-10-10</span>
+    </div>
+    <article>
+<section id="devs-guideopenai" class="level1">
+<h1>devs-guide/openai</h1>
+<p>Community-maintained documentation, prompt artifacts, and supporting examples for OpenAI-related projects.</p>
+<blockquote>
+<p>This repository is not affiliated with, endorsed by, or sponsored by OpenAI. OpenAI product names and trademarks belong to their respective owners.</p>
+</blockquote>
+<section id="products" class="level2">
+<h2>Products</h2>
+<section id="dot" class="level3">
+<h3><a href="/openai/dot/">DOT</a></h3>
+<p>A two-lane instruction package for a configured Agent, with a compact Project → Internet → Data → Template workflow for pure research and controlled dataset releases plus an optional evidence-completing Summary deliverable.</p>
+<ul>
+<li>Source: <a href="/openai/dot/"><code>dot/</code></a></li>
+<li>Documentation: <a href="https://devs-guide.github.io/openai/dot/"><code>https://devs-guide.github.io/openai/dot/</code></a></li>
+<li>Features: <a href="/openai/dot/features/"><code>docs/features/</code></a></li>
+<li>History: <a href="/openai/dot/history/"><code>docs/history/</code></a></li>
+<li>Releases: <a href="/openai/dot/releases/"><code>docs/releases/</code></a></li>
+</ul>
+<p>Repository releases use the reusable <a href="/openai/release/"><code>#RELEASE</code></a> contract for reader-focused notes, exact review gates, immutable tags, and verified publication across every product in this repository.</p>
+<p>Future products should add a product directory with its own <code>readme.md</code> and create <code>docs/</code>, <code>prompts/</code>, <code>examples/</code>, <code>config/</code>, <code>src/</code>, or <code>tests/</code> only when accepted content exists.</p>
+</section>
+</section>
+<section id="publication-model" class="level2">
+<h2>Publication model</h2>
+<p>Repository Markdown, prompt, and JSON files are the source of truth. A validated, manifest-driven build renders extensionless documentation and exact raw-source downloads to the orphan <code>www</code> branch for GitHub Pages. Generated <code>static/</code> output is never tracked on <code>main</code>.</p>
+<p>All compilation, builds, and tests run in GitHub Actions. Local work is limited to source editing and Git operations.</p>
+</section>
+<section id="current-release" class="level2">
+<h2>Current release</h2>
+<p>Release <code>0.0.1 — DOT Research Prompt System</code> is the published immutable migration baseline. Releases <code>0.0.2</code> through <code>0.0.5</code> establish the canonical Agent and Research lanes, conditional evidence-completing Summary deliverable, and repository-wide Release contract. Candidate <code>0.0.6 — Coordinated Browser Tabs</code> adds configured shared tab capacity, worker ownership, resumable queues, and truthful scheduled-or-event-driven blocker checks. Release records use bare semantic tags and GitHub-generated source archives; no binary assets are attached.</p>
+</section>
+<section id="rights" class="level2">
+<h2>Rights</h2>
+<p>This repository does not provide an open-source license. See <a href="/openai/rights/"><code>COPYRIGHT.md</code></a> before using or redistributing its contents.</p>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/readme.md">Repository source</a> · <a href="/openai/raw/readme.md">Raw source</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="0.0.5 — Evidence-Completing Research Summaries · community-maintained devs-guide/openai documentation">
+  <meta name="source-commit" content="53da18a2f8bd5387e595b505c44f619bf75ef9ca">
+  <title>0.0.5 — Evidence-Completing Research Summaries · devs-guide/openai</title>
+  <link rel="stylesheet" href="/openai/assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/openai/">devs-guide/openai</a>
+      <nav aria-label="Primary">
+        <a href="/openai/release/">Release</a>
+        <a href="/openai/dot/">DOT</a>
+        <a href="/openai/dot/agent/">Agent</a>
+        <a href="/openai/dot/research/">Research</a>
+        <a href="/openai/dot/features/">Features</a>
+        <a href="/openai/dot/history/">History</a>
+        <a href="/openai/dot/releases/">Releases</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/openai/">Home</a><span aria-hidden="true">/</span><a href="/openai/dot/">Dot</a><span aria-hidden="true">/</span><a href="/openai/dot/releases/">Releases</a><span aria-hidden="true">/</span>0.0.5</nav>
+    
+    <div class="document-meta" aria-label="Document status">
+      <span>release</span>
+      <span>current</span>
+      <span>reviewed 2026-10-10</span>
+    </div>
+    <article>
+<section id="005" class="level2">
+<h2>0.0.5</h2>
+<p>DOT summaries now complete the material evidence they need instead of merely reformatting whichever Facts were already easy to find. Each requested brief starts with a required Fact matrix, follows relevant public-source paths inside the approved Project boundary, and cannot claim broad coverage while obvious official-site or document routes remain unchecked.</p>
+<p>The change preserves the separate, reader-focused PDF deliverable and the four-stage Research workflow. Missing evidence returns through Internet and applicable Data controls, while parent reports and accepted dataset releases remain immutable.</p>
+<section id="scope" class="level3">
+<h3>Scope</h3>
+<ul>
+<li>Release range: <code>0.0.4..0.0.5</code>.</li>
+<li>Product boundary: DOT's conditional Summary deliverable and the Project, Internet, Data, and Template controls it uses.</li>
+<li>Published entrypoints: the existing Summary rendered and raw routes, updated Research documentation, and this release record.</li>
+<li>Included release identity: DOT <code>0.0.5</code>, prior release <code>0.0.4</code>, migration baseline <code>0.0.1</code>.</li>
+<li>Excluded: executing a real research brief, changing Agent models or permissions, changing <code>BROWSER-004</code>, and attaching generated PDFs or other binary assets.</li>
+</ul>
+</section>
+<section id="highlights" class="level3">
+<h3>Highlights</h3>
+<ul>
+<li>Makes bounded public-source gap filling the default for a requested Summary; source-limited synthesis now requires an explicit request.</li>
+<li>Requires one matrix row per in-scope subject and required fact before design or narrative writing begins.</li>
+<li>Requires direct official-site navigation, linked-document review, distinct web and PDF discovery, and honest terminal states for unresolved facts.</li>
+<li>Keeps new evidence traceable without mutating the frozen parent report or an accepted dataset release.</li>
+</ul>
+</section>
+<section id="added" class="level3">
+<h3>Added</h3>
+<ul>
+<li>A reusable Summary Fact Matrix row with separate work state, coverage disposition, Fact references, evidence references, missingness, reviewer, and next-action fields.</li>
+<li>Version 2 Executive Brief Request and Completion Receipt structures covering research mode, required facts, entity chapters, evidence-completion gates, coverage denominators, review independence, and optional export parity.</li>
+<li>Acceptance checks for official navigation, JavaScript search shells, all-entity claims, immutable corrections, and stale Summary drafts.</li>
+</ul>
+</section>
+<section id="changed" class="level3">
+<h3>Changed</h3>
+<ul>
+<li>Advanced the Summary contract to <code>dot-research-summary/2</code> while retaining <code>SUMMARY-001</code> through <code>SUMMARY-010</code> as its stable public rule IDs.</li>
+<li>Clarified that Summary work may return missing Facts through Internet and applicable Data processing inside the approved Project boundary.</li>
+<li>Generalized the original education example into reusable entity, source, shared-resource, historical-state, and site-function safeguards while preserving the existing elementary-school compatibility rules.</li>
+<li>Advanced ingestion, Pages, workflow, feature, and release metadata to <code>0.0.5</code>, with <code>0.0.4</code> as the immediate predecessor.</li>
+</ul>
+</section>
+<section id="fixed" class="level3">
+<h3>Fixed</h3>
+<ul>
+<li>Prevented a Summary from treating a blank field, homepage, search snippet, loading URL, inaccessible route, or unexecuted JavaScript search as evidence that a fact does not exist.</li>
+<li>Prevented attractive formatting, limitations prose, source counts, or a worker's completion label from hiding unfinished material research.</li>
+<li>Prevented sampling from supporting a claim that every requested entity was checked.</li>
+<li>Prevented newly discovered Facts from silently changing an accepted parent dataset or leaving requested machine-readable companions out of sync.</li>
+</ul>
+</section>
+<section id="interfaces-and-compatibility" class="level3">
+<h3>Interfaces and compatibility</h3>
+<ul>
+<li><code>dot-research-summary/2</code> supersedes version 1 for new Summary activations.</li>
+<li><code>dot-executive-brief-request/2</code> defaults <code>research_mode</code> to <code>PUBLIC_SOURCE_GAP_FILLING</code>; <code>EXPLICITLY_SOURCE_LIMITED</code> remains available when the owner deliberately restricts source use.</li>
+<li><code>dot-summary-fact-matrix-row/1</code> is a control view over canonical Facts and evidence. It is not a new Data basename or competing evidence store.</li>
+<li><code>dot-executive-brief-completion/2</code> records matrix coverage, final evidence and dataset versions, review independence, export parity, rendering, delivery, and readback.</li>
+<li>Historical version 1 requests and completion receipts remain historical records and are not reinterpreted.</li>
+</ul>
+</section>
+<section id="validation-evidence" class="level3">
+<h3>Validation evidence</h3>
+<p>GitHub Actions must verify canonical Summary rule ownership, the new JSON structures and enumerations, official-site evidence-completion clauses, Project scope gates, Data immutability, paired export parity, absence of the retired draft, exact ingestion hashes, rendered and raw Pages routes, release identity, and unchanged Agent configuration and <code>BROWSER-004</code> behavior.</p>
+</section>
+<section id="known-boundaries" class="level3">
+<h3>Known boundaries</h3>
+<ul>
+<li>Gap completion stays within the approved Project scope and permissions. A material change to population, geography, period, evidence universe, destination, or access still requires an approved amendment.</li>
+<li>A documented barrier or bounded negative search may produce <code>COMPLETE_WITH_GAPS</code>; the contract does not demand impossible proof of absence or authorize bypassing access controls.</li>
+<li>This release defines and validates the workflow. It does not claim that a later real-world Summary project succeeded.</li>
+</ul>
+</section>
+<section id="commit" class="level3">
+<h3>#COMMIT</h3>
+<p><code>release: 0.0.5 - make research summaries evidence-completing</code></p>
+</section>
+<section id="notable-commits-since-004" class="level3">
+<h3>Notable commits since 0.0.4</h3>
+<p>None beyond the release commit recorded above.</p>
+</section>
+<section id="assets" class="level3">
+<h3>Assets</h3>
+<ul>
+<li>GitHub-generated source archives for tag <code>0.0.5</code>.</li>
+<li>Rendered documentation and byte-exact current raw sources through GitHub Pages.</li>
+<li>No additional binary assets. Generated Summary PDFs remain research deliverables and are not repository release assets.</li>
+</ul>
+</section>
+</section>
+
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Community maintained; not affiliated with or endorsed by OpenAI.</p>
+    <p><a href="https://github.com/devs-guide/openai/blob/53da18a2f8bd5387e595b505c44f619bf75ef9ca/docs/releases/0.0.5.md">Repository source</a> · <a href="/openai/raw/docs/releases/0.0.5.md">Raw source</a></p>
+  </footer>
+</body>
+</html>
