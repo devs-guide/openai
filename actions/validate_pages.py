@@ -74,6 +74,12 @@ def main() -> int:
     data_entry = data_entries[0]
     if data_entry.get("route") != "dot/research/data/" or data_entry.get("raw_route") != "raw/dot/research/data.prompt":
         fail("Data contract rendered or raw route is incorrect")
+    summary_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "dot/research/summary.prompt"]
+    if len(summary_entries) != 1:
+        fail("publication manifest must contain exactly one Summary contract source")
+    summary_entry = summary_entries[0]
+    if summary_entry.get("route") != "dot/research/summary/" or summary_entry.get("raw_route") != "raw/dot/research/summary.prompt":
+        fail("Summary contract rendered or raw route is incorrect")
     ingest_entries = [entry for entry in MANIFEST["entries"] if entry.get("source") == "dot/ingest.json"]
     if len(ingest_entries) != 1:
         fail("publication manifest must contain exactly one DOT ingestion manifest")
@@ -98,6 +104,8 @@ def main() -> int:
         fail(f"source SHA is {source_record.get('source_sha')}, expected {expected_sha}")
     if source_record.get("repository") != "devs-guide/openai":
         fail("source.json repository identity is incorrect")
+    if source_record.get("release") != "0.0.3":
+        fail("source.json release identity is not 0.0.3")
     ok(f"source marker identifies {source_record.get('source_sha')}")
 
     html_parsers: dict[Path, PageParser] = {}
@@ -130,6 +138,10 @@ def main() -> int:
             positions = [rendered.find(f'href="{link}"') for link in workflow_links]
             if any(position < 0 for position in positions) or positions != sorted(positions):
                 fail(f"four-stage Research navigation is missing or out of order: {page.relative_to(static_dir)}")
+            if '<nav class="deliverable-nav" aria-label="Optional Research deliverable">' not in rendered:
+                fail(f"optional Research deliverable navigation is missing: {page.relative_to(static_dir)}")
+            if f'href="/{SITE_BASE}/dot/research/summary/"' not in rendered:
+                fail(f"Summary navigation link is missing: {page.relative_to(static_dir)}")
     ok("every manifest entry has matching rendered and byte-exact raw output")
 
     for entry in MANIFEST["entries"]:

@@ -15,6 +15,10 @@ but it is not an OpenAI product or an automatic product configuration.
 [`#DATA`](research/data.prompt) →
 [`#TEMPLATE`](research/template.prompt)
 
+Optional deliverable: [`#SUMMARY`](research/summary.prompt) produces one
+explicitly requested, evidence-bound subtopic executive brief without changing
+the four-stage workflow or overwriting its parent report.
+
 - [`agent/`](agent/) defines the runtime, exact models, permissions, browser,
   tools, workspace, Pages, video, and transcription behavior.
 - [`research/`](research/) builds a project around that Agent, supplies the
@@ -60,10 +64,13 @@ Exact current sources are published beneath `/openai/raw/dot/`.
 | Durable output | Configured Page or owner-approved destination with readback |
 | Research data | Human-facing atomic Facts backed by assertions, observations, claims, and evidence links |
 | Dataset releases | Applicable 22-basename menu with paired CSV/JSON parity, validation, immutable snapshots, and successor corrections |
+| Executive briefs | Conditional self-contained PDF summaries bound to frozen parent research, controlled Facts, visual inspection, and readback |
 
 ## History and compatibility
 
-Release `0.0.2` consolidates the original prompts and dated guides. The
+Release `0.0.2` consolidates the original prompts and dated guides. Candidate
+`0.0.3` adds the optional Summary deliverable without changing the core
+workflow. The
 [`two-lane migration record`](../docs/history/two-lane-migration.md) maps every
 `0.0.1` source to its current owner. Historical rendered routes redirect;
 historical raw routes identify both the immutable original and current

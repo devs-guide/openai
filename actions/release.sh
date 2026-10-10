@@ -11,6 +11,7 @@ NOTES="${ROOT}/docs/releases/${VERSION}.md"
 case "${VERSION}" in
   0.0.1) TITLE="${VERSION} — DOT Research Prompt System" ;;
   0.0.2) TITLE="${VERSION} — DOT Agent and Research System" ;;
+  0.0.3) TITLE="${VERSION} — DOT On-Demand Research Summary" ;;
   *) TITLE="${VERSION} — DOT" ;;
 esac
 
@@ -30,6 +31,17 @@ cd "${ROOT}"
 [[ "$(git rev-parse HEAD)" == "${SOURCE_SHA}" ]] || fail "checkout does not match SOURCE_SHA"
 remote_main="$(git ls-remote --exit-code --heads origin refs/heads/main | awk 'NR == 1 {print $1}')"
 [[ "${remote_main}" == "${SOURCE_SHA}" ]] || fail "main is ${remote_main:-missing}, expected ${SOURCE_SHA}"
+
+if [[ "${VERSION}" == "0.0.3" ]]; then
+  git rev-parse --verify "refs/tags/0.0.2^{tag}" >/dev/null || \
+    fail "0.0.2 must be published before 0.0.3: annotated tag is missing"
+  prior_metadata="$(gh release view 0.0.2 --repo "${REPOSITORY}" --json isDraft,tagName)" || \
+    fail "0.0.2 must be published before 0.0.3: GitHub release is missing"
+  [[ "$(jq -r '.tagName' <<<"${prior_metadata}")" == "0.0.2" ]] || \
+    fail "0.0.2 must be published before 0.0.3: release tag differs"
+  [[ "$(jq -r '.isDraft' <<<"${prior_metadata}")" == "false" ]] || \
+    fail "0.0.2 must be published before 0.0.3: release remains a draft"
+fi
 
 EXPECTED_SOURCE_SHA="${SOURCE_SHA}" bash actions/validate.pages.remote.sh
 

@@ -245,6 +245,10 @@ def render_page(entry: dict, body: str, source_sha: str, site_base: str) -> str:
       <a href="/{site_base}/dot/research/data/">Data</a>
       <span aria-hidden="true">→</span>
       <a href="/{site_base}/dot/research/template/">Template</a>
+    </nav>
+    <nav class="deliverable-nav" aria-label="Optional Research deliverable">
+      <span>Optional deliverable:</span>
+      <a href="/{site_base}/dot/research/summary/">Summary</a>
     </nav>'''
     return f"""<!doctype html>
 <html lang="en">
@@ -460,7 +464,7 @@ def main() -> int:
     source_sha = os.environ.get("SOURCE_SHA", "0" * 40)
     if not re.fullmatch(r"[0-9a-f]{40}", source_sha):
         fail("SOURCE_SHA must be a lowercase 40-character commit SHA")
-    release_version = os.environ.get("RELEASE_VERSION", "0.0.2")
+    release_version = os.environ.get("RELEASE_VERSION", "0.0.3")
     if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", release_version):
         fail("RELEASE_VERSION must be a bare semantic version")
     build(manifest, entries, publish_dir.resolve(), source_sha, release_version)
